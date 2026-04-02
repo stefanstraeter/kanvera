@@ -1,0 +1,78 @@
+# ------------------------------------------------------------
+# macOS System Files
+# ------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ------------------------------------------------------------
+# Node.js / JavaScript Projects
+# ------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build output
+dist/
+build/
+out/
+coverage/
+.cache/
+.next/
+.nuxt/
+.svelte-kit/
+.vite/
+
+# ------------------------------------------------------------
+# Editor / IDE Files
+# ------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# ------------------------------------------------------------
+# Logs & Temp Files
+# ------------------------------------------------------------
+*.log
+*.tmp
+*.temp
+*.bak
+
+# ------------------------------------------------------------
+# OS & Miscellaneous
+# ------------------------------------------------------------
+Desktop.ini
+Thumbs.db
+$RECYCLE.BIN/
+
+# ------------------------------------------------------------
+# Optional: Ignore Compiled Assets
+# ------------------------------------------------------------
+*.min.js
+*.min.css
+*.map
+
+# ------------------------------------------------------------
+# Optional: Images or Assets Cache
+# ------------------------------------------------------------
+__MACOSX/
+*.orig
+wichtiges.md
