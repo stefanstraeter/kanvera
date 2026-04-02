@@ -1,0 +1,42 @@
+/* styles/base/layout.css */
+
+.l-app {
+  display: flex; /* Flexbox für das Haupt-Split-Layout (Sidebar | Main) */
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--bg-page);
+}
+
+.l-sidebar {
+  width: var(--sidebar-width);
+  height: 100%;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--color-lines-dark);
+  flex-shrink: 0; /* Verhindert, dass die Sidebar schrumpft */
+  transition: width var(--transition);
+}
+
+.l-main-view {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Nimmt den restlichen Platz ein */
+  overflow: hidden;
+}
+
+.l-header {
+  height: var(--header-height);
+  background-color: var(--bg-app-bar);
+  border-bottom: 1px solid var(--color-lines-light);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--spacing-lg);
+  z-index: var(--z-dropdown);
+}
+
+.l-content {
+  flex-grow: 1;
+  overflow-x: auto; /* Erlaubt horizontales Scrollen der Kanban-Spalten */
+  overflow-y: auto; /* Erlaubt vertikales Scrollen innerhalb der Spalten */
+  padding: var(--spacing-lg);
+}

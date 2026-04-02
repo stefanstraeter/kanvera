@@ -1,0 +1,31 @@
+/* styles/components/sidebar.css */
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  margin-right: 1.5rem; /* Abstand zum rechten Rand für den Pillen-Look */
+  padding-left: var(--spacing-lg);
+  border-radius: var(--radius-pill);
+  color: var(--color-medium-grey);
+  text-decoration: none;
+  font-size: var(--fs-m);
+  font-weight: var(--fw-bold);
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+}
+
+.nav-item:hover {
+  background-color: var(--color-main-hover);
+  color: var(--color-main);
+}
+
+.nav-item--active {
+  background-color: var(--color-main);
+  color: var(--color-white);
+}
+
+.nav-item__icon {
+  margin-right: var(--spacing-md);
+}
