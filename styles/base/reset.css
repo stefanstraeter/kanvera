@@ -2,6 +2,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  overflow-wrap: anywhere;
 }
 
 body,
@@ -33,6 +34,9 @@ ol[role="list"] {
 body {
   min-height: 100vh;
   line-height: 1.5;
+  font-family: var(--font-primary);
+  background-color: var(--bg-page);
+  color: var(--color-text-main);
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -68,8 +72,12 @@ h3,
 h4,
 h5,
 h6,
-p {
-  overflow-wrap: break-word;
+p,
+span,
+div,
+li,
+label {
+  overflow-wrap: anywhere;
 }
 
 html {
