@@ -1,16 +1,33 @@
-/* styles/components/sidebar.css */
+.sidebar__logo-ctn {
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.sidebar__logo {
+  width: 10rem;
+  height: auto;
+}
+
+.sidebar__nav {
+  flex-grow: 1;
+}
+
+.sidebar__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs); /* Nutzt dein 4px Spacing */
+}
 
 .nav-item {
   display: flex;
   align-items: center;
   height: 3rem;
-  margin-right: 1.5rem; /* Abstand zum rechten Rand für den Pillen-Look */
-  padding-left: var(--spacing-lg);
-  border-radius: var(--radius-pill);
+  margin-right: 1.5rem;
+  padding-left: var(--space-lg);
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
   color: var(--color-medium-grey);
   text-decoration: none;
-  font-size: var(--fs-m);
-  font-weight: var(--fw-bold);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-medium);
   transition:
     background-color var(--transition),
     color var(--transition);
@@ -27,5 +44,15 @@
 }
 
 .nav-item__icon {
-  margin-right: var(--spacing-md);
+  width: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: var(--space-md);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.nav-item--active .nav-item__icon {
+  color: var(--color-white);
 }
