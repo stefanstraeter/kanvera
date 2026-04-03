@@ -1,40 +1,41 @@
 .l-app {
-  display: flex;
+  display: grid;
   height: 100vh;
   width: 100%;
-  background-color: var(--bg-page);
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: var(--header-height) 1fr;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar content";
 }
 
 .l-sidebar {
-  display: flex;
-  flex-direction: column;
-  width: var(--sidebar-width);
-  height: 100%;
+  grid-area: sidebar;
   background-color: var(--bg-sidebar);
   border-right: 1px solid var(--color-lines-dark);
-  flex-shrink: 0;
-}
-
-.l-main-view {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  min-width: 0;
-  overflow: hidden;
 }
 
 .l-header {
+  grid-area: header;
+  background-color: var(--bg-page);
   height: var(--header-height);
-  background-color: var(--bg-app-bar);
-  border-bottom: 1px solid var(--color-lines-light);
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-lines-light);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  backdrop-filter: blur(8px);
   padding: 0 var(--space-lg);
-  flex-shrink: 0;
+  position: sticky;
+  z-index: var(--z-sticky);
+  top: 0;
 }
 
 .l-content {
-  flex-grow: 1;
+  grid-area: content;
+  background-color: var(--bg-page);
   overflow: auto;
   padding: var(--space-lg);
 }
