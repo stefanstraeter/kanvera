@@ -1,18 +1,25 @@
-<header class="header">
-  <h1 class="header__title heading-l">Board Name</h1>
+<h1 class="header__title heading-l" id="js-header-title"></h1>
 
-  <div class="header__actions">
-    <button class="button-primary">+ Add New Task</button>
+<div class="header__actions">
+  <button class="button-primary">+ Add New Task</button>
 
-    <div class="menu-dropdown">
-      <button class="menu-dropdown__trigger" id="js-menu-trigger">
-        <img src="assets/icons/icon-vertical-ellipsis.svg" alt="More Options" />
-      </button>
+  <div class="header__user">
+    <div class="user-avatar">JD</div>
+  </div>
 
-      <div class="menu-dropdown__content" id="js-menu-content">
+  <div class="menu-dropdown">
+    <button class="menu-dropdown__trigger" id="js-menu-trigger" aria-label="Settings">
+      <img src="assets/icons/icon-vertical-ellipsis.svg" alt="" />
+    </button>
+
+    <div class="menu-dropdown__content" id="js-menu-content">
+      <div class="menu-dropdown__group">
+        <span class="menu-dropdown__label">Account</span>
         <a href="privacy.html" class="menu-dropdown__link">Privacy Policy</a>
         <a href="legal.html" class="menu-dropdown__link">Legal Notice</a>
       </div>
+      <hr class="menu-dropdown__divider" />
+      <a href="logout.html" class="menu-dropdown__link menu-dropdown__link--danger">Logout</a>
     </div>
   </div>
-</header>
+</div>
