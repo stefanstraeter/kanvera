@@ -14,7 +14,7 @@
 .sidebar__list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xs); /* Nutzt dein 4px Spacing */
+  gap: var(--space-2xs);
 }
 
 .nav-item {
