@@ -1,0 +1,69 @@
+/* ----------- Base ----------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-normal);
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color var(--transition),
+    transform 0.1s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  gap: 0.5rem;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+/* ----------- Sizes -------------- */
+.btn--l {
+  height: 3rem;
+  padding: 0 1.5rem;
+}
+
+.btn--s {
+  height: 2.5rem;
+  padding: 0 1.25rem;
+  font-size: var(--font-size-s);
+}
+
+/* ----------- Colors -----------*/
+.btn--primary {
+  background-color: var(--color-main);
+  color: var(--color-white);
+}
+.btn--primary:hover {
+  background-color: var(--color-main-hover);
+}
+
+.btn--secondary {
+  background-color: rgba(99, 95, 199, 0.1); /* Helles Lila-Transparent */
+  color: var(--color-main);
+}
+.btn--secondary:hover {
+  background-color: rgba(99, 95, 199, 0.25);
+}
+
+.btn--destructive {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+}
+.btn--destructive:hover {
+  background-color: var(--color-danger-hover);
+}
+
+/* ----------- Utilities --------------*/
+.btn--full {
+  width: 100%;
+}
+
+.u-min-w-11 {
+  min-width: 11rem;
+}
