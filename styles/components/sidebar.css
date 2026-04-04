@@ -1,10 +1,13 @@
-.sidebar__logo-ctn {
-  padding: var(--space-xl) var(--space-lg);
+.sidebar__header {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-lg);
 }
 
 .sidebar__logo {
-  width: 10rem;
-  height: auto;
+  height: 1.5rem;
+  width: auto;
 }
 
 .sidebar__nav {
