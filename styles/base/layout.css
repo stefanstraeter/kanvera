@@ -1,7 +1,8 @@
 .l-app {
   display: grid;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
+  overflow: hidden;
   grid-template-columns: var(--sidebar-width) 1fr;
   grid-template-rows: var(--header-height) 1fr;
   grid-template-areas:
@@ -12,22 +13,21 @@
 .l-sidebar {
   grid-area: sidebar;
   background-color: var(--bg-sidebar);
-  border-right: 1px solid var(--color-lines-dark);
+  border-radius: var(--radius-sidebar);
+  margin: var(--space-md);
   display: flex;
   flex-direction: column;
 }
 
 .l-header {
   grid-area: header;
-  background-color: var(--bg-page);
   height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-lines-light);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
   backdrop-filter: blur(8px);
-  padding: 0 var(--space-lg);
+  padding: 0 var(--space-xl);
+  margin-top: var(--space-md);
   position: sticky;
   z-index: var(--z-sticky);
   top: 0;
@@ -35,7 +35,6 @@
 
 .l-content {
   grid-area: content;
-  background-color: var(--bg-page);
   overflow: auto;
   padding: var(--space-lg);
 }
