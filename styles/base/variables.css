@@ -58,6 +58,7 @@
   /* ----------- Layout & Spacing ----------- */
   --sidebar-width: 18.75rem;
   --header-height: 5rem;
+  --action-item-height: 3rem;
 
   --space-2xs: 0.25rem;
   --space-xs: 0.5rem;
@@ -70,6 +71,7 @@
 
   /* ----------- Interactive & Accents ----------- */
   --radius-pill: 6.25rem;
+  --radius-sidebar: 1.5rem;
   --radius-card: 0.5rem;
   --radius-modal: 0.375rem;
 
