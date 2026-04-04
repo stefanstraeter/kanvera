@@ -1,8 +1,9 @@
 export class Header {
     constructor() {
-
         this.templatePath = './templates/header.html';
         this.titleId = 'js-header-title';
+        this.actionTextId = 'js-header-action-text';
+        this.actionBtnId = 'js-header-action';
     }
 
     async render(anchorId) {
@@ -15,17 +16,21 @@ export class Header {
             anchor.innerHTML = html;
 
             this.updateTitle();
+            this.updateActionButton();
             this.initDropdown();
         } catch (err) {
-            console.error("Header konnte nicht geladen werden:", err);
         }
+    }
+
+    getCurrentPath() {
+        return window.location.pathname.toLowerCase();
     }
 
     updateTitle() {
         const titleElement = document.getElementById(this.titleId);
         if (!titleElement) return;
 
-        const path = window.location.pathname.toLowerCase();
+        const path = this.getCurrentPath();
 
         if (path.includes('pulse')) {
             titleElement.textContent = 'Daily Standup';
@@ -36,8 +41,27 @@ export class Header {
         } else if (path.includes('board')) {
             titleElement.textContent = 'Development Sprint';
         } else {
-
             titleElement.textContent = 'Kanvera Dev-Flow';
+        }
+    }
+
+    updateActionButton() {
+        const actionText = document.getElementById(this.actionTextId);
+        const actionBtn = document.getElementById(this.actionBtnId);
+        if (!actionText || !actionBtn) return;
+
+        const path = this.getCurrentPath();
+
+        if (path.includes('pulse')) {
+            actionBtn.style.display = 'none';
+        } else if (path.includes('team')) {
+            actionText.textContent = 'Add Member';
+        } else if (path.includes('board')) {
+            actionText.textContent = 'Add Task';
+        } else if (path.includes('add-task')) {
+            actionText.textContent = 'Add Task';
+        } else {
+            actionText.textContent = 'Quick Action';
         }
     }
 
