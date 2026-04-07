@@ -30,6 +30,9 @@
   /* ----------- Typography ----------- */
   --font-primary: "Outfit", sans-serif;
 
+  --color-text-main: #201f23;
+  --color-text-heading: #1a1a1d;
+
   --font-size-xl: 1.5rem;
   --line-height-xl: 1.875rem;
   --font-weight-bold: 700;
@@ -43,13 +46,11 @@
   --font-size-s: 0.75rem;
   --letter-spacing-s: 0.15rem;
 
-  --font-size-body-l: 0.8125rem;
+  --font-size-body-l: 0.875rem;
   --line-height-body-l: 1.4375rem;
-  --font-weight-medium: 500;
 
   --font-size-body-m: 0.75rem;
   --line-height-body-m: 0.9375rem;
-  --font-weight-medium: 500;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
