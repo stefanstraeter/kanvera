@@ -1,4 +1,4 @@
-/* ----------- Sidebar Base -------------- */
+/* -------------- Sidebar Base -------------- */
 .l-sidebar {
   background-color: var(--bg-sidebar);
   border-radius: var(--radius-sidebar);
@@ -8,7 +8,7 @@
   transition: all var(--transition);
 }
 
-/* ----------- Sidebar Logo Area -------------- */
+/* -------------- Sidebar Logo Area -------------- */
 .sidebar__header {
   height: var(--header-height);
   display: flex;
@@ -21,7 +21,7 @@
   width: auto;
 }
 
-/* ----------- Sidebar Navigation -------------- */
+/* -------------- Sidebar Navigation -------------- */
 .sidebar__nav {
   flex-grow: 1;
 }
@@ -32,7 +32,7 @@
   gap: var(--space-2xs);
 }
 
-/* ----------- Nav Items -------------- */
+/* -------------- Nav Items -------------- */
 .nav-item {
   display: flex;
   align-items: center;
@@ -73,7 +73,7 @@
   color: var(--bg-page);
 }
 
-/* ----------- Mobile Navigation (Tab Bar) -------------- */
+/* -------------- Mobile Navigation (Tab Bar) -------------- */
 @media (max-width: 950px) {
   .l-sidebar {
     background-color: transparent;
