@@ -1,9 +1,33 @@
 /* ----------- Header Layout -------------- */
+.l-header {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(8px);
+  padding: 0 var(--space-xl);
+  margin-top: var(--space-md);
+  position: sticky;
+  z-index: var(--z-sticky);
+  top: 0;
+}
+
 .header__actions {
   display: flex;
   align-items: center;
   gap: var(--space-md);
   min-width: fit-content;
+  flex-shrink: 0;
+}
+
+/* ----------- Typography ----------- */
+.header__title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
+  min-width: 0;
+  margin-right: var(--space-md);
 }
 
 /* ----------- User Avatar ----------- */
@@ -35,7 +59,7 @@
   transform: scale(0.96);
 }
 
-/* ----------- Dropdown Container ----------- */
+/* ----------- Dropdown Menu ----------- */
 .menu-dropdown {
   position: relative;
   display: flex;
@@ -52,8 +76,6 @@
   transition:
     background-color var(--transition),
     transform 0.1s ease;
-  user-select: none;
-  -webkit-user-select: none;
 }
 
 .menu-dropdown__trigger:hover {
@@ -64,7 +86,6 @@
   transform: scale(0.96);
 }
 
-/* ----------- Dropdown Content ----------- */
 .menu-dropdown__content {
   display: none;
   position: absolute;
@@ -84,7 +105,7 @@
   animation: fadeIn 0.2s ease-out;
 }
 
-/* ----------- Dropdown Label & Links ----------- */
+/* ----------- Dropdown Items ----------- */
 .menu-dropdown__label {
   display: block;
   padding: var(--space-xs) var(--space-md);
@@ -119,11 +140,6 @@
   color: var(--color-danger);
 }
 
-.menu-dropdown__link--danger:hover {
-  background-color: #fff5f5;
-  color: var(--color-danger-hover);
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -132,5 +148,29 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ----------- Mobile Header  ----------- */
+@media (max-width: 950px) {
+  .l-header {
+    padding: 0 var(--space-md);
+    margin-top: 0;
+  }
+
+  .btn--l.u-min-w-11 {
+    min-width: 3rem;
+    width: 3rem;
+    padding: 0;
+  }
+
+  .btn-text {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .header__title {
+    font-size: var(--font-size-m);
   }
 }
