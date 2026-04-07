@@ -23,7 +23,6 @@ export class Navbar {
         const links = document.querySelectorAll('.nav-item');
 
         links.forEach(link => {
-            // Wir prüfen, ob der href im aktuellen Pfad enthalten ist
             if (currentPath.includes(link.getAttribute('href'))) {
                 link.classList.add('nav-item--active');
             }
