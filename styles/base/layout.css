@@ -22,8 +22,21 @@
 
 .l-content {
   grid-area: content;
+
+  /* Ermöglicht Scrollen in beide Richtungen */
   overflow: auto;
+
+  /* Kanban-Spalten nebeneinander */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start; /* Spalten fangen oben an und strecken sich nicht unnötig */
+
+  gap: var(--space-lg);
   padding: var(--space-lg);
+
+  /* Verhindert, dass der Container kollabiert */
+  min-height: 0;
+  min-width: 0;
 }
 
 /* ----------- Responsive Layout -------------- */
