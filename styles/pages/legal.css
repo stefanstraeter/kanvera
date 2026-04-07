@@ -1,10 +1,9 @@
-/* -------------- Privacy & Imprint -------------- */
+/* -------------- Privacy & Imprint View -------------- */
+
 .legal-view {
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: var(--space-xl);
-  font-family: var(--font-primary);
 }
 
 .legal-view__section {
@@ -13,12 +12,6 @@
 }
 
 .legal-view__label {
-  font-size: var(--font-size-s);
-  line-height: var(--line-height-m);
-  color: var(--color-medium-grey);
-  text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-s);
-  font-weight: var(--font-weight-bold);
   margin-bottom: var(--space-sm);
 }
 
@@ -28,36 +21,34 @@
   gap: var(--space-xs);
 }
 
-.legal-view__text {
-  font-size: var(--font-size-body-l);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-body-l);
-}
-
-.legal-view__text strong {
-  font-weight: var(--font-weight-bold);
-}
-
+/* -------------- Specific Text Styles -------------- */
 .legal-view__text--italic {
   font-style: italic;
   color: var(--color-main);
 }
 
-.legal-view__text--bold {
-  font-weight: var(--font-weight-bold);
+.legal-view__link {
+  color: var(--color-main);
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition);
 }
 
+.legal-view__link:hover {
+  color: var(--color-main-hover);
+  text-decoration: underline;
+}
+
+/* -------------- Custom List Styling -------------- */
 .legal-view__list {
   padding-left: 1.25rem;
   display: flex;
   flex-direction: column;
-  list-style: none;
+  gap: var(--space-2xs);
 }
 
 .legal-view__list li {
-  font-size: var(--font-size-body-l);
-  line-height: var(--line-height-body-l);
   position: relative;
+  font-size: var(--font-size-body-l);
 }
 
 .legal-view__list li::before {
@@ -68,25 +59,9 @@
   font-weight: var(--font-weight-bold);
 }
 
-.legal-view__link {
-  color: var(--color-main);
-  text-decoration: none;
-  font-weight: var(--font-weight-medium);
-  transition: color var(--transition);
-}
-
-.legal-view__link:hover {
-  color: var(--color-main-hover);
-  text-decoration: underline;
-}
-
 /* -------------- Responsive Layout -------------- */
 @media (max-width: 950px) {
   .legal-view {
-    padding-bottom: calc(5rem + var(--space-2xl));
-  }
-
-  .legal-view__label {
-    margin-bottom: var(--space-sm);
+    padding-bottom: calc(var(--action-item-height-mobile) + var(--space-3xl));
   }
 }
