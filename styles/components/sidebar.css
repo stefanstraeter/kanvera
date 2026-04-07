@@ -2,13 +2,12 @@
 .l-sidebar {
   background-color: var(--bg-sidebar);
   border-radius: var(--radius-sidebar);
-  margin: var(--space-md);
   display: flex;
   flex-direction: column;
   transition: all var(--transition);
 }
 
-/* -------------- Sidebar Logo Area -------------- */
+/* -------------- Sidebar Logo -------------- */
 .sidebar__header {
   height: var(--header-height);
   display: flex;
@@ -118,7 +117,7 @@
     background: none !important;
     margin: 0;
     padding: 0.5rem;
-    font-size: var(--font-size-body-m);
+    font-size: var(--font-size-body-l);
     color: var(--color-medium-grey);
     border-radius: 0;
     gap: 0.25rem;
