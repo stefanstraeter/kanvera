@@ -102,9 +102,9 @@
 
   .sidebar__list {
     flex-direction: row;
+    padding: 0 var(--space-md);
     width: 100%;
-    justify-content: space-around;
-    padding: 0 1rem;
+    justify-content: space-between;
     gap: 0;
   }
 
