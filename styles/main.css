@@ -1,3 +1,4 @@
+/* -------------- Main Styles -------------- */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
 
 @import url("./base/variables.css");
@@ -10,3 +11,4 @@
 @import url("./components/buttons.css");
 
 @import url("./pages/board.css");
+@import url("./pages/legal.css");
