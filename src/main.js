@@ -6,7 +6,6 @@ async function initLayout() {
     const navbar = new Navbar();
     const header = new Header();
 
-    // Wir laden beide parallel für beste Performance
     await Promise.all([
         navbar.render('js-sidebar-anchor'),
         header.render('js-header-anchor')
@@ -15,6 +14,5 @@ async function initLayout() {
     console.log("Layout erfolgreich geladen.");
 }
 
-// Globaler Startschuss
 initLayout();
 
