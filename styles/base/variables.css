@@ -2,9 +2,15 @@
   --color-main: #635fc7;
   --color-main-hover: #a9a3ff;
 
-  /* ----------- Functional Colors ----------- */
-  --color-danger: #ea5555;
-  --color-danger-hover: #ff9898;
+  /* ----------- Buttons ----------- */
+  --color-btn-main: #635fc7;
+  --color-btn-main-hover: #a9a3ff;
+  --color-btn-secondary: #efeff9;
+  --color-btn-secondary-hover: #d8d7f1;
+  --color-btn-danger: #ea5555;
+  --color-btn-danger-hover: #ff9898;
+  --color-btn-main-text: #f8f5f0;
+  --color-btn-secondary-text: #635fc7;
 
   /* ----------- Surface & Backgrounds ----------- */
   --bg-page: #f8f5f0;
@@ -33,33 +39,28 @@
   --color-text-main: #201f23;
   --color-text-heading: #1a1a1d;
 
-  --font-size-xl: 1.5rem;
-  --line-height-xl: 1.875rem;
-  --font-weight-bold: 700;
-
-  --font-size-l: 1.125rem;
-  --line-height-l: 1.4375rem;
-
-  --font-size-m: 1rem;
-  --line-height-m: 1.1875rem;
-
-  --font-size-s: 0.75rem;
-  --letter-spacing-s: 0.15rem;
-
-  --font-size-body-l: 0.875rem;
-  --line-height-body-l: 1.4375rem;
-
-  --font-size-body-m: 0.75rem;
-  --line-height-body-m: 0.9375rem;
-
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
+
+  --line-height-heading: 1.2;
+  --line-height-body: 1.5;
+
+  --font-size-2xl: 2rem; /* 32px */
+  --font-size-xl: 1.5rem; /* 24px */
+  --font-size-l: 1.125rem; /* 18px */
+  --font-size-m: 1rem; /* 16px */
+  --font-size-s: 0.75rem; /* 12px */
+  --letter-spacing-s: 0.15rem; /* Für Subheadings / Labels */
+
+  --font-size-body-l: 0.875rem; /* 14px */
+  --font-size-body-m: 0.75rem; /* 12px */
 
   /* ----------- Layout & Spacing ----------- */
   --sidebar-width: 18.75rem;
   --header-height: 5rem;
   --action-item-height: 3rem;
+  --action-item-height-mobile: 2.4rem;
 
   --space-2xs: 0.25rem;
   --space-xs: 0.5rem;
