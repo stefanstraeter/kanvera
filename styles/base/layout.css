@@ -1,3 +1,4 @@
+/* ----------- App Shell Layout -------------- */
 .l-app {
   display: grid;
   height: 100dvh;
@@ -10,31 +11,28 @@
     "sidebar content";
 }
 
+/* ----------- Layout Areas -------------- */
 .l-sidebar {
   grid-area: sidebar;
-  background-color: var(--bg-sidebar);
-  border-radius: var(--radius-sidebar);
-  margin: var(--space-md);
-  display: flex;
-  flex-direction: column;
 }
 
 .l-header {
   grid-area: header;
-  height: var(--header-height);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  backdrop-filter: blur(8px);
-  padding: 0 var(--space-xl);
-  margin-top: var(--space-md);
-  position: sticky;
-  z-index: var(--z-sticky);
-  top: 0;
 }
 
 .l-content {
   grid-area: content;
   overflow: auto;
   padding: var(--space-lg);
+}
+
+/* ----------- Responsive Layout -------------- */
+@media (max-width: 950px) {
+  .l-app {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--header-height) 1fr;
+    grid-template-areas:
+      "header"
+      "content";
+  }
 }
