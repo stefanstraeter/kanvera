@@ -4,6 +4,8 @@
   height: 100dvh;
   width: 100%;
   overflow: hidden;
+  gap: var(--space-lg);
+  padding: var(--space-md);
   grid-template-columns: var(--sidebar-width) 1fr;
   grid-template-rows: var(--header-height) 1fr;
   grid-template-areas:
@@ -22,19 +24,11 @@
 
 .l-content {
   grid-area: content;
-
-  /* Ermöglicht Scrollen in beide Richtungen */
   overflow: auto;
-
-  /* Kanban-Spalten nebeneinander */
   display: flex;
   flex-direction: row;
-  align-items: flex-start; /* Spalten fangen oben an und strecken sich nicht unnötig */
-
+  align-items: flex-start;
   gap: var(--space-lg);
-  padding: var(--space-lg);
-
-  /* Verhindert, dass der Container kollabiert */
   min-height: 0;
   min-width: 0;
 }
@@ -42,10 +36,15 @@
 /* ----------- Responsive Layout -------------- */
 @media (max-width: 950px) {
   .l-app {
+    padding: 0;
+    gap: 0;
     grid-template-columns: 1fr;
     grid-template-rows: var(--header-height) 1fr;
     grid-template-areas:
       "header"
       "content";
+  }
+  .l-content {
+    padding: 0 var(--space-md);
   }
 }
