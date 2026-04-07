@@ -1,11 +1,10 @@
-/* ----------- Header Layout -------------- */
+/* -------------- Header Layout -------------- */
 .l-header {
   height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  backdrop-filter: blur(8px);
-  padding: 0 var(--space-xl);
+  padding: 0 var(--space-lg);
   margin-top: var(--space-md);
   position: sticky;
   z-index: var(--z-sticky);
@@ -20,7 +19,7 @@
   flex-shrink: 0;
 }
 
-/* ----------- Typography ----------- */
+/* -------------- Typography -------------- */
 .header__title {
   white-space: nowrap;
   overflow: hidden;
@@ -30,7 +29,7 @@
   margin-right: var(--space-md);
 }
 
-/* ----------- User Avatar ----------- */
+/* -------------- User Avatar -------------- */
 .user-avatar {
   width: var(--action-item-height);
   height: var(--action-item-height);
@@ -59,7 +58,7 @@
   transform: scale(0.96);
 }
 
-/* ----------- Dropdown Menu ----------- */
+/* -------------- Dropdown Menu -------------- */
 .menu-dropdown {
   position: relative;
   display: flex;
@@ -105,7 +104,7 @@
   animation: fadeIn 0.2s ease-out;
 }
 
-/* ----------- Dropdown Items ----------- */
+/* -------------- Dropdown Items -------------- */
 .menu-dropdown__label {
   display: block;
   padding: var(--space-xs) var(--space-md);
@@ -119,7 +118,6 @@
   display: block;
   padding: var(--space-sm) var(--space-md);
   text-decoration: none;
-  color: var(--color-black);
   font-size: var(--font-size-body-l);
   transition: all var(--transition);
 }
@@ -151,7 +149,7 @@
   }
 }
 
-/* ----------- Mobile Header  ----------- */
+/* -------------- Mobile Header  -------------- */
 @media (max-width: 950px) {
   .l-header {
     padding: 0 var(--space-md);
