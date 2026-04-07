@@ -1,4 +1,4 @@
-/* ----------- Base ----------- */
+/* -------------- Base -------------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -22,7 +22,7 @@
   transform: scale(0.96);
 }
 
-/* ----------- Sizes -------------- */
+/* -------------- Sizes -------------- */
 .btn--l {
   height: 3rem;
   padding: 0 1.5rem;
@@ -34,7 +34,7 @@
   font-size: var(--font-size-s);
 }
 
-/* ----------- Colors -----------*/
+/* -------------- Colors -------------- */
 .btn--primary {
   background-color: var(--color-main);
   color: var(--color-white);
@@ -44,7 +44,7 @@
 }
 
 .btn--secondary {
-  background-color: rgba(99, 95, 199, 0.1); /* Helles Lila-Transparent */
+  background-color: rgba(99, 95, 199, 0.1);
   color: var(--color-main);
 }
 .btn--secondary:hover {
@@ -59,7 +59,7 @@
   background-color: var(--color-danger-hover);
 }
 
-/* ----------- Utilities --------------*/
+/* -------------- Utilities-------------- */
 .btn--full {
   width: 100%;
 }
