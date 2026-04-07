@@ -1,3 +1,5 @@
+/* -------------- Base Styles -------------- */
+
 *,
 *::before,
 *::after {
@@ -36,7 +38,7 @@ body {
   line-height: 1.5;
   font-family: var(--font-primary);
   background-color: var(--bg-page);
-  color: var(--color-black);
+  color: var(--color-text-main);
   margin: 0;
   overflow: hidden;
   text-rendering: optimizeSpeed;
