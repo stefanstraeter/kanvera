@@ -40,6 +40,10 @@ export class Header {
             titleElement.textContent = 'Create New Issue';
         } else if (path.includes('board')) {
             titleElement.textContent = 'Development Sprint';
+        } else if (path.includes('legal')) {
+            titleElement.textContent = 'Legal Notice';
+        } else if (path.includes('privacy')) {
+            titleElement.textContent = 'Privacy Policy';
         } else {
             titleElement.textContent = 'Kanvera Dev-Flow';
         }
@@ -61,7 +65,7 @@ export class Header {
         } else if (path.includes('add-task')) {
             actionText.textContent = 'Add Task';
         } else {
-            actionText.textContent = 'Quick Action';
+            actionBtn.style.display = 'none';
         }
     }
 
