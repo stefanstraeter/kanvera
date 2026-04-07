@@ -1,3 +1,14 @@
+/* ----------- Sidebar Base -------------- */
+.l-sidebar {
+  background-color: var(--bg-sidebar);
+  border-radius: var(--radius-sidebar);
+  margin: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition);
+}
+
+/* ----------- Sidebar Logo Area -------------- */
 .sidebar__header {
   height: var(--header-height);
   display: flex;
@@ -10,6 +21,7 @@
   width: auto;
 }
 
+/* ----------- Sidebar Navigation -------------- */
 .sidebar__nav {
   flex-grow: 1;
 }
@@ -20,6 +32,7 @@
   gap: var(--space-2xs);
 }
 
+/* ----------- Nav Items -------------- */
 .nav-item {
   display: flex;
   align-items: center;
@@ -58,4 +71,86 @@
 
 .nav-item--active .nav-item__icon {
   color: var(--color-white);
+}
+
+/* ----------- Mobile Navigation (Tab Bar) -------------- */
+@media (max-width: 950px) {
+  .l-sidebar {
+    background-color: transparent;
+    margin: 0;
+    height: 0;
+  }
+
+  .sidebar__header {
+    display: none;
+  }
+
+  .sidebar__nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 5rem;
+    background-color: var(--bg-sidebar);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: var(--z-fixed);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .sidebar__list {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    padding: 0 1rem;
+    gap: 0;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    background: none !important;
+    margin: 0;
+    padding: 0.5rem;
+    font-size: var(--font-size-body-m);
+    color: var(--color-medium-grey);
+    border-radius: 0;
+    gap: 0.25rem;
+    text-align: center;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    transition:
+      color 0.15s ease-in-out,
+      opacity 0.1s ease-in-out;
+  }
+
+  .nav-item:hover {
+    color: var(--color-medium-grey);
+  }
+
+  .nav-item--active {
+    color: var(--color-white) !important;
+  }
+
+  .nav-item__icon {
+    margin-right: 0;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: inherit;
+    transition: color inherit;
+  }
+
+  .nav-item:active {
+    opacity: 0.5;
+    transition: opacity 0.05s ease;
+  }
 }
