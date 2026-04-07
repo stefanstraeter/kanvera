@@ -69,6 +69,10 @@
   --space-2xl: 3rem;
   --space-3xl: 4rem;
 
+  /* ----------- Breakpoints ----------- */
+  --breakpoint-md: 900px;
+  --breakpoint-lg: 1100px;
+
   /* ----------- Interactive & Accents ----------- */
   --radius-pill: 6.25rem;
   --radius-sidebar: 1.5rem;
