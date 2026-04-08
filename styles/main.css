@@ -9,6 +9,7 @@
 @import url("./components/sidebar.css");
 @import url("./components/header.css");
 @import url("./components/buttons.css");
+@import url("./components/scrollbar.css");
 
 @import url("./pages/board.css");
 @import url("./pages/legal.css");
