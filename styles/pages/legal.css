@@ -1,57 +1,65 @@
-/* -------------- Privacy & Imprint View -------------- */
-.legal-view {
+/* -------------- Article View (Help, Legal, Privacy) -------------- */
+.article-view {
   display: flex;
   flex-direction: column;
   gap: var(--space-2xl);
 }
 
-.legal-view__section {
+.article-view__section {
   display: flex;
   flex-direction: column;
 }
 
-.legal-view__label {
+.article-view__label {
   margin-bottom: var(--space-sm);
 }
 
-.legal-view__content {
+.article-view__content {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
 }
 
 /* -------------- Specific Text Styles -------------- */
-.legal-view__text--highlight {
+.article-view__text {
+  font-size: var(--font-size-body-l);
+  line-height: 1.5;
+  color: var(--color-text-main);
+  margin-bottom: var(--space-xs);
+}
+
+.article-view__text--highlight {
   font-style: italic;
   font-weight: var(--font-weight-medium);
   color: var(--color-main);
 }
 
-.legal-view__link {
+.article-view__link {
   color: var(--color-main);
   font-weight: var(--font-weight-medium);
+  text-decoration: none;
   transition: color var(--transition);
 }
 
-.legal-view__link:hover {
+.article-view__link:hover {
   color: var(--color-main-hover);
   text-decoration: underline;
 }
 
 /* -------------- Custom List Styling -------------- */
-.legal-view__list {
+.article-view__list {
   padding-left: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xs);
+  gap: var(--space-xs);
+  margin: var(--space-sm) 0;
 }
 
-.legal-view__list li {
+.article-view__list li {
   position: relative;
-  font-size: var(--font-size-body-l);
+  list-style: none;
 }
 
-.legal-view__list li::before {
+.article-view__list li::before {
   content: "•";
   color: var(--color-main);
   position: absolute;
@@ -61,7 +69,7 @@
 
 /* -------------- Responsive Layout -------------- */
 @media (max-width: 950px) {
-  .legal-view {
-    padding-bottom: calc(var(--action-item-height-mobile) + var(--space-3xl));
+  .article-view {
+    padding-bottom: calc(5rem + var(--space-xl));
   }
 }
