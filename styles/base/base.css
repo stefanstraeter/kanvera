@@ -36,7 +36,7 @@ body {
   min-height: 100dvh;
   margin: 0;
   overflow: hidden;
-  line-height: var(--line-height-body, 1.5);
+  line-height: var(--line-height-body);
   font-family: var(--font-primary);
   font-size: var(--font-size-body-l);
   background-color: var(--bg-app-body);
