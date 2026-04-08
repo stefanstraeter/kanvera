@@ -10,8 +10,6 @@ async function initLayout() {
         navbar.render('js-sidebar-anchor'),
         header.render('js-header-anchor')
     ]);
-
-    console.log("Layout erfolgreich geladen.");
 }
 
 initLayout();
