@@ -44,7 +44,10 @@ export class Header {
             titleElement.textContent = 'Legal Notice';
         } else if (path.includes('privacy')) {
             titleElement.textContent = 'Privacy Policy';
-        } else {
+        } else if (path.includes('help')) {
+            titleElement.textContent = 'Help & Guide';
+        }
+        else {
             titleElement.textContent = 'Kanvera Dev-Flow';
         }
     }

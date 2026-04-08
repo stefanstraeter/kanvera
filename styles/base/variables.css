@@ -111,12 +111,12 @@
   --bg-app-sidebar: var(--color-dark-grey);
   --bg-app-card: var(--color-dark-grey);
 
-  --color-text-main: var(--color-white);
-  --color-text-heading: var(--color-white);
-  --color-text-inverse: var(--color-white);
+  --color-text-main: var(--color-beige);
+  --color-text-heading: var(--color-beige);
+  --color-text-inverse: var(--color-beige);
   --color-lines: var(--color-lines-dark);
 
-  --color-btn-secondary-bg: var(--color-white);
-  --color-btn-secondary-hover: var(--color-white);
+  --color-btn-secondary-bg: var(--color-main-hover);
+  --color-btn-secondary-hover: var(--color-beige);
   --color-btn-secondary-text: var(--color-main);
 }
