@@ -11,7 +11,7 @@
   --color-dark-grey: #2b2c37;
   --color-very-dark-grey: #20212c;
   --color-anthracite: #201f23;
-  --color-lines-light: #e4ebfa;
+  --color-lines-light: #d2d9e6;
   --color-lines-dark: #3d3f4e;
   --color-danger: #ea5555;
   --color-danger-hover: #ff9898;
@@ -93,7 +93,8 @@
 
   --transition: 200ms ease-in-out;
   --shadow-card: 0px 4px 6px rgba(54, 78, 126, 0.1);
-  --shadow-modal: 0px 10px 20px rgba(0, 0, 0, 0.25);
+  --shadow-modal: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  --shadow-sidebar: 0px 10px 20px rgba(0, 0, 0, 0.1);
 
   /* ----------- Stacking Order ----------- */
   --z-below: -1;
