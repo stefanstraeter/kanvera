@@ -82,6 +82,10 @@ export class Header {
                 content.classList.toggle('is-active');
             });
 
+            content.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
             document.addEventListener('click', () => {
                 content.classList.remove('is-active');
             });
