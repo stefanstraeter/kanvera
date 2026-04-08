@@ -7,6 +7,12 @@
 
     <link rel="stylesheet" href="./styles/main.css" />
 
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      })();
+    </script>
     <script type="module" src="./src/main.js"></script>
   </head>
   <body class="l-app">
