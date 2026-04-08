@@ -24,6 +24,7 @@
 
 .l-content {
   grid-area: content;
+  background-color: var(--bg-app-content);
   overflow: auto;
   display: flex;
   flex-direction: row;
@@ -44,7 +45,14 @@
       "header"
       "content";
   }
+
+  .l-header {
+    grid-area: header;
+  }
+
   .l-content {
-    padding: 0 var(--space-md);
+    grid-area: content;
+    padding: var(--space-md);
+    padding-bottom: calc(5rem + var(--space-xl));
   }
 }

@@ -34,13 +34,16 @@ ol[role="list"] {
 
 body {
   min-height: 100dvh;
+  margin: 0;
+  overflow: hidden;
   line-height: var(--line-height-body, 1.5);
   font-family: var(--font-primary);
   font-size: var(--font-size-body-l);
-  background-color: var(--bg-page);
+  background-color: var(--bg-app-body);
   color: var(--color-text-main);
-  margin: 0;
-  overflow: hidden;
+  transition:
+    background-color var(--transition),
+    color var(--transition);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

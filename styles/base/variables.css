@@ -1,43 +1,53 @@
 :root {
+  /* ----------- Color Palette ----------- */
   --color-main: #635fc7;
   --color-main-hover: #a9a3ff;
 
-  /* ----------- Buttons ----------- */
-  --color-btn-main: #635fc7;
-  --color-btn-main-hover: #a9a3ff;
-  --color-btn-secondary: #efeff9;
-  --color-btn-secondary-hover: #d8d7f1;
-  --color-btn-danger: #ea5555;
-  --color-btn-danger-hover: #ff9898;
-  --color-btn-main-text: #f8f5f0;
-  --color-btn-secondary-text: #635fc7;
-
-  /* ----------- Surface & Backgrounds ----------- */
-  --bg-page: #f8f5f0;
-  --bg-sidebar: #201f23;
-  --bg-card: #ffffff;
-  --bg-very-dark-grey: #20212c;
-  --bg-dark-grey: #2b2c37;
-
-  /* ----------- Neutrals & Lines ----------- */
-  --color-black: #000112;
   --color-white: #ffffff;
-  --color-medium-grey: #828fa3;
+  --color-beige: #f8f5f0;
+  --color-very-light-grey: #efeff9;
+  --color-light-grey: #c6c6d8;
+  --color-medium-grey: #798598;
+  --color-dark-grey: #2b2c37;
+  --color-very-dark-grey: #20212c;
+  --color-anthracite: #201f23;
   --color-lines-light: #e4ebfa;
   --color-lines-dark: #3d3f4e;
-  --color-light-grey-bg: #f4f7fd;
+  --color-danger: #ea5555;
+  --color-danger-hover: #ff9898;
 
-  /* ----------- Status Colors  ----------- */
   --status-todo: #49c4e5;
   --status-doing: #8471f2;
   --status-await-feedback: #cda561;
   --status-done: #67e2ae;
 
+  /* ----------- Light Mode (Default) ----------- */
+  --bg-app-body: var(--color-beige);
+  --bg-app-sidebar: var(--color-light-grey);
+  --bg-app-header: transparent;
+  --bg-app-content: transparent;
+  --bg-app-card: var(--color-white);
+
+  --color-text-heading: var(--color-anthracite);
+  --color-text-main: var(--color-anthracite);
+  --color-text-inverse: var(--color-anthracite);
+  --color-lines: var(--color-lines-light);
+
+  --color-btn-secondary-bg: var(--color-very-light-grey);
+  --color-btn-secondary-hover: var(--color-light-grey);
+  --color-btn-secondary-text: var(--color-main);
+
+  /* ----------- Buttons ----------- */
+  --color-btn-main-bg: var(--color-main);
+  --color-btn-main-hover: var(--color-main-hover);
+  --color-btn-main-text: var(--color-white);
+
+  --color-btn-danger-bg: var(--color-danger);
+  --color-btn-danger-hover: var(--color-danger-hover);
+  --color-btn-danger-text: var(--color-white);
+
   /* ----------- Typography ----------- */
   --font-primary: "Outfit", sans-serif;
-
-  --color-text-main: #201f23;
-  --color-text-heading: #1a1a1d;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -46,15 +56,15 @@
   --line-height-heading: 1.2;
   --line-height-body: 1.5;
 
-  --font-size-2xl: 2rem; /* 32px */
-  --font-size-xl: 1.5rem; /* 24px */
-  --font-size-l: 1.125rem; /* 18px */
-  --font-size-m: 1rem; /* 16px */
-  --font-size-s: 0.75rem; /* 12px */
-  --letter-spacing-s: 0.15rem; /* Für Subheadings / Labels */
+  --font-size-2xl: 2rem;
+  --font-size-xl: 1.5rem;
+  --font-size-l: 1.125rem;
+  --font-size-m: 1rem;
+  --font-size-s: 0.75rem;
+  --letter-spacing-s: 0.15rem;
 
-  --font-size-body-l: 0.9375rem; /* 16px */
-  --font-size-body-m: 0.75rem; /* 12px */
+  --font-size-body-l: 0.9375rem;
+  --font-size-body-m: 0.75rem;
 
   /* ----------- Layout & Spacing ----------- */
   --sidebar-width: 18.75rem;
@@ -93,4 +103,20 @@
   --z-dropdown: 300;
   --z-modal: 400;
   --z-popover: 500;
+}
+
+/* ----------- Dark MODE ----------- */
+[data-theme="dark"] {
+  --bg-app-body: var(--color-very-dark-grey);
+  --bg-app-sidebar: var(--color-dark-grey);
+  --bg-app-card: var(--color-dark-grey);
+
+  --color-text-main: var(--color-white);
+  --color-text-heading: var(--color-white);
+  --color-text-inverse: var(--color-white);
+  --color-lines: var(--color-lines-dark);
+
+  --color-btn-secondary-bg: var(--color-white);
+  --color-btn-secondary-hover: var(--color-white);
+  --color-btn-secondary-text: var(--color-main);
 }

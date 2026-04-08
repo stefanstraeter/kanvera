@@ -7,6 +7,8 @@
   position: sticky;
   z-index: var(--z-sticky);
   top: 0;
+  color: var(--color-text-main);
+  background-color: var(--bg-app-header);
 }
 
 .header__actions {
@@ -32,7 +34,7 @@
   width: var(--action-item-height);
   height: var(--action-item-height);
   background-color: var(--color-main);
-  color: var(--bg-page);
+  color: var(--color-white);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,7 +74,7 @@
 }
 
 .menu-dropdown__trigger:hover {
-  background-color: var(--color-lines-light);
+  background-color: var(--color-btn-secondary-bg);
 }
 
 .menu-dropdown__content {
@@ -80,10 +82,11 @@
   position: absolute;
   top: calc(100% + var(--space-sm));
   right: 0;
-  width: 12rem;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-lines-light);
-  border-radius: var(--radius-card);
+  width: 14rem;
+  background-color: var(--bg-app-card);
+  border: 1px solid var(--color-lines);
+  color: var(--color-text-main);
+  border-radius: var(--radius-sidebar);
   box-shadow: var(--shadow-modal);
   z-index: var(--z-dropdown);
   padding: var(--space-xs) 0;
@@ -113,7 +116,7 @@
 
 .menu-dropdown__divider {
   border: 0;
-  border-top: 1px solid var(--color-lines-light);
+  border-top: 1px solid var(--color-lines);
   margin: var(--space-xs) 0;
 }
 
@@ -132,10 +135,37 @@
   }
 }
 
+/* -------------- Dropdown Theme Toggle -------------- */
+.menu-dropdown__theme-toggle {
+  padding: var(--space-xs) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.theme-switch--dropdown {
+  background-color: var(--bg-app-body);
+  margin: var(--space-md);
+  height: 2.5rem;
+  border-radius: var(--radius-sidebar);
+}
+
+.menu-dropdown__theme-toggle {
+  display: none;
+}
+
 /* -------------- Tablet Header  -------------- */
 @media (max-width: 950px) {
   .l-header {
     padding: 0 var(--space-md);
+  }
+
+  .menu-dropdown__theme-toggle {
+    display: block;
+  }
+
+  .menu-dropdown__theme-toggle + .menu-dropdown__divider {
+    display: block;
   }
 }
 

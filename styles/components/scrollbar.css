@@ -1,0 +1,24 @@
+/* -------------- Custom Scrollbar -------------- */
+.l-content::-webkit-scrollbar {
+  width: 0.6rem;
+}
+
+.l-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.l-content::-webkit-scrollbar-thumb {
+  background-color: var(--color-medium-grey);
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.l-content::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-main);
+}
+
+.l-content {
+  scrollbar-color: var(--color-medium-grey) transparent;
+  scrollbar-width: thin;
+}

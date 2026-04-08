@@ -1,9 +1,8 @@
 /* -------------- Privacy & Imprint View -------------- */
-
 .legal-view {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  gap: var(--space-2xl);
 }
 
 .legal-view__section {

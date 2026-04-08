@@ -1,13 +1,14 @@
 /* -------------- Sidebar Base -------------- */
 .l-sidebar {
-  background-color: var(--bg-sidebar);
-  border-radius: var(--radius-sidebar);
+  grid-area: sidebar;
+  background-color: var(--bg-app-sidebar);
   display: flex;
   flex-direction: column;
-  transition: all var(--transition);
+  border-radius: var(--radius-sidebar);
+  white-space: nowrap;
 }
 
-/* -------------- Sidebar Logo -------------- */
+/* -------------- Sidebar Header -------------- */
 .sidebar__header {
   height: var(--header-height);
   display: flex;
@@ -31,7 +32,7 @@
   gap: var(--space-2xs);
 }
 
-/* -------------- Nav Items -------------- */
+/* -------------- Navigation Items -------------- */
 .nav-item {
   display: flex;
   align-items: center;
@@ -55,7 +56,7 @@
 
 .nav-item--active {
   background-color: var(--color-main);
-  color: var(--bg-page);
+  color: var(--color-white);
 }
 
 .nav-item__icon {
@@ -69,34 +70,111 @@
 }
 
 .nav-item--active .nav-item__icon {
-  color: var(--bg-page);
+  color: var(--color-white);
+}
+
+/* -------------- Sidebar Footer -------------- */
+.sidebar__footer {
+  padding: var(--space-xl) 0;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* -------------- Theme Switch -------------- */
+.theme-switch {
+  background-color: var(--bg-app-body);
+  margin: 0 var(--space-lg);
+  height: 3rem;
+  border-radius: var(--radius-sidebar);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+
+.theme-switch__icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 2.5rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-main);
+  transition: background-color 0.4s;
+  border-radius: var(--radius-sidebar);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 0.875rem;
+  width: 0.875rem;
+  left: 0.1875rem;
+  bottom: 0.1875rem;
+  background-color: var(--color-white);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+.switch:hover .slider {
+  background-color: var(--color-main-hover);
 }
 
 /* -------------- Mobile Navigation (Tab Bar) -------------- */
 @media (max-width: 950px) {
   .l-sidebar {
+    display: block;
+    grid-area: none;
     background-color: transparent;
-    margin: 0;
     height: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    pointer-events: none;
   }
 
-  .sidebar__header {
-    display: none;
+  .sidebar__header,
+  .sidebar__footer {
+    display: none !important;
   }
 
   .sidebar__nav {
+    display: flex;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     height: 5rem;
-    background-color: var(--bg-sidebar);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: var(--bg-app-sidebar);
     z-index: var(--z-fixed);
-    backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: auto;
+    border-top: 1px solid var(--color-lines);
     padding-bottom: env(safe-area-inset-bottom);
   }
 
@@ -105,6 +183,7 @@
     padding: 0 var(--space-md);
     width: 100%;
     justify-content: space-between;
+    align-items: center;
     gap: 0;
   }
 
@@ -130,12 +209,12 @@
       opacity 0.1s ease-in-out;
   }
 
-  .nav-item:hover {
-    color: var(--color-medium-grey);
+  .nav-item--active {
+    color: var(--color-main);
   }
 
-  .nav-item--active {
-    color: var(--bg-page);
+  .nav-item--active .nav-item__icon {
+    color: var(--color-main);
   }
 
   .nav-item__icon {

@@ -57,7 +57,7 @@
 
 /* -------------- Colors -------------- */
 .btn--primary {
-  background-color: var(--color-btn-main);
+  background-color: var(--color-btn-main-bg);
   color: var(--color-btn-main-text);
 }
 
@@ -66,7 +66,7 @@
 }
 
 .btn--secondary {
-  background-color: var(--color-btn-secondary);
+  background-color: var(--color-btn-secondary-bg);
   color: var(--color-btn-secondary-text);
 }
 
@@ -75,12 +75,12 @@
 }
 
 .btn--destructive {
-  background-color: var(--color-danger);
-  color: var(--color-white);
+  background-color: var(--color-btn-danger-bg);
+  color: var(--color-btn-danger-text);
 }
 
 .btn--destructive:hover {
-  background-color: var(--color-danger-hover);
+  background-color: var(--color-btn-danger-hover);
 }
 
 /* -------------- Utilities -------------- */
