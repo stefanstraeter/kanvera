@@ -1,0 +1,75 @@
+/* -------------- Article View (Help, Legal, Privacy) -------------- */
+.article-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.article-view__section {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-view__label {
+  margin-bottom: var(--space-sm);
+}
+
+.article-view__content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* -------------- Specific Text Styles -------------- */
+.article-view__text {
+  font-size: var(--font-size-body-l);
+  line-height: 1.5;
+  color: var(--color-text-main);
+  margin-bottom: var(--space-xs);
+}
+
+.article-view__text--highlight {
+  font-style: italic;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-main);
+}
+
+.article-view__link {
+  color: var(--color-main);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.article-view__link:hover {
+  color: var(--color-main-hover);
+  text-decoration: underline;
+}
+
+/* -------------- Custom List Styling -------------- */
+.article-view__list {
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin: var(--space-sm) 0;
+}
+
+.article-view__list li {
+  position: relative;
+  list-style: none;
+}
+
+.article-view__list li::before {
+  content: "•";
+  color: var(--color-main);
+  position: absolute;
+  left: -1.25rem;
+  font-weight: var(--font-weight-bold);
+}
+
+/* -------------- Responsive Layout -------------- */
+@media (max-width: 950px) {
+  .article-view {
+    padding-bottom: calc(5rem + var(--space-xl));
+  }
+}
