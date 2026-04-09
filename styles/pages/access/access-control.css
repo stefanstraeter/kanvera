@@ -1,0 +1,38 @@
+.gateway__header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.gateway__title {
+  display: inline-block;
+  position: relative;
+  padding-bottom: var(--space-xs);
+}
+
+.gateway__title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  background-color: var(--color-main);
+  border-radius: var(--radius-pill);
+}
+
+.gateway__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.field-wrapper {
+  margin-bottom: var(--space-sm);
+}
+
+.gateway__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
