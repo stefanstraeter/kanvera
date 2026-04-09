@@ -1,16 +1,32 @@
-// src/main.js
 import { Navbar } from './components/layout/navbar.js';
 import { Header } from './components/layout/header.js';
+import { initThemeListeners } from './utils/theme.js';
 
-async function initLayout() {
-    const navbar = new Navbar();
-    const header = new Header();
+async function init() {
+    initThemeListeners();
 
-    await Promise.all([
-        navbar.render('js-sidebar-anchor'),
-        header.render('js-header-anchor')
-    ]);
+    const registerBtn = document.getElementById('toSignupHeader');
+    const authSlider = document.getElementById('authSlider');
+
+    if (registerBtn && authSlider) {
+        registerBtn.addEventListener('click', () => {
+            authSlider.classList.add('slide-to-signup');
+        });
+    }
+
+    const sidebarAnchor = document.getElementById('js-sidebar-anchor');
+    const headerAnchor = document.getElementById('js-header-anchor');
+
+    if (sidebarAnchor || headerAnchor) {
+        const navbar = new Navbar();
+        const header = new Header();
+
+        const promises = [];
+        if (sidebarAnchor) promises.push(navbar.render('js-sidebar-anchor'));
+        if (headerAnchor) promises.push(header.render('js-header-anchor'));
+
+        await Promise.all(promises);
+    }
 }
 
-initLayout();
-
+document.addEventListener('DOMContentLoaded', init);
