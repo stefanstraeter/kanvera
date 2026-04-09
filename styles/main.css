@@ -1,15 +1,26 @@
 /* -------------- Main Styles -------------- */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
 
+/* Base & Variables */
 @import url("./base/variables.css");
 @import url("./base/typography.css");
 @import url("./base/base.css");
 @import url("./base/layout.css");
 
-@import url("./components/sidebar.css");
-@import url("./components/header.css");
-@import url("./components/buttons.css");
-@import url("./components/scrollbar.css");
+/* UI */
+@import url("./ui/buttons.css");
+@import url("./ui/inputs.css");
+@import url("./ui/theme-switch.css");
+@import url("./ui/form-feedback.css");
+@import url("./ui/scrollbar.css");
 
-@import url("./pages/board.css");
-@import url("./pages/legal.css");
+/* Layout */
+@import url("./layout/header.css");
+@import url("./layout/sidebar.css");
+
+/* Pages */
+@import url("./pages/access/access-layout.css");
+@import url("./pages/access/access-gateway.css");
+@import url("./pages/access/access-control.css");
+@import url("./pages/access/access-utility.css");
+@import url("./pages/legal/legal.css");
