@@ -12,7 +12,7 @@
 }
 
 [data-theme="dark"] .field-group {
-  background-color: var(--color-very-dark-grey);
+  background-color: var(--color-dark-grey);
 }
 
 .field-group:focus-within {
