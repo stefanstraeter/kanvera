@@ -25,3 +25,10 @@
 .slide-to-signup {
   transform: translateX(-50%);
 }
+
+.gateway__back {
+  cursor: pointer;
+  color: var(--color-main);
+  font-size: 1.2rem;
+  margin-right: var(--space-md);
+}

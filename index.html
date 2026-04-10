@@ -76,6 +76,55 @@
               </div>
             </form>
           </div>
+          <div class="view-wrapper" id="signupWrapper">
+            <form class="gateway__form" id="signupForm">
+              <div class="gateway__header">
+                <i class="fa-solid fa-arrow-left gateway__back" id="toLoginArrow"></i>
+                <h2 class="gateway__title heading-2xl">Sign Up</h2>
+              </div>
+
+              <div class="field-wrapper">
+                <div class="field-group">
+                  <input type="text" id="signupName" class="field-input" placeholder="Name" />
+                  <i class="fa-regular fa-user field-icon"></i>
+                </div>
+                <div class="error-msg">Name is required</div>
+              </div>
+
+              <div class="field-wrapper">
+                <div class="field-group">
+                  <input type="email" id="signupEmail" class="field-input" placeholder="Email" />
+                  <i class="fa-regular fa-envelope field-icon"></i>
+                </div>
+                <div class="error-msg">Email is required</div>
+              </div>
+
+              <div class="field-wrapper">
+                <div class="field-group">
+                  <input type="password" id="signupPassword" class="field-input" placeholder="Password" />
+                  <i class="fa-solid fa-lock field-icon"></i>
+                </div>
+                <div class="error-msg">Password is required</div>
+              </div>
+
+              <div class="field-wrapper">
+                <div class="field-group">
+                  <input type="password" id="signupConfirmPassword" class="field-input" placeholder="Confirm Password" />
+                  <i class="fa-solid fa-lock field-icon"></i>
+                </div>
+                <div class="error-msg">Passwords do not match</div>
+              </div>
+
+              <div class="policy-check">
+                <input type="checkbox" id="policy" required />
+                <label for="policy">I accept the <a href="privacy.html" class="link" target="_blank">Privacy Policy</a></label>
+              </div>
+
+              <div class="gateway__actions">
+                <button type="submit" class="btn btn--s btn--primary btn--full">Register</button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
     </main>

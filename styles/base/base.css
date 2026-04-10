@@ -127,6 +127,18 @@ a {
   transition: color var(--transition);
 }
 
+.link {
+  color: var(--color-main);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.link:hover {
+  color: var(--color-main-hover);
+  text-decoration: underline;
+}
+
 html {
   scroll-behavior: smooth;
 }

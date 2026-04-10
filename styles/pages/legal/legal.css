@@ -33,18 +33,6 @@
   color: var(--color-main);
 }
 
-.article-view__link {
-  color: var(--color-main);
-  font-weight: var(--font-weight-medium);
-  text-decoration: none;
-  transition: color var(--transition);
-}
-
-.article-view__link:hover {
-  color: var(--color-main-hover);
-  text-decoration: underline;
-}
-
 /* -------------- Custom List Styling -------------- */
 .article-view__list {
   padding-left: 1.25rem;
