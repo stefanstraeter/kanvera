@@ -1,4 +1,6 @@
-/* -------------- Field Container -------------- */
+/* ==========================================================================
+   FIELD COMPONENT
+   ========================================================================== */
 .field-group {
   display: flex;
   align-items: center;
@@ -19,12 +21,15 @@
   border-color: var(--color-main);
 }
 
-/* -------------- Field Input -------------- */
+/* ==========================================================================
+   FIELD INPUT
+   ========================================================================== */
 .field-input {
   flex: 1;
   height: 100%;
   border: none;
   outline: none;
+  min-width: 0;
   font-family: var(--font-primary);
   font-size: var(--font-size-m);
   color: var(--color-text-main);
@@ -48,7 +53,9 @@
   color: var(--color-medium-grey);
 }
 
-/* -------------- Field Icons -------------- */
+/* ==========================================================================
+   FIELD ICON
+   ========================================================================== */
 .field-icon {
   color: var(--color-medium-grey);
   font-size: 1rem;
