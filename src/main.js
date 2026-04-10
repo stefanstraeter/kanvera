@@ -1,7 +1,7 @@
 import { Navbar } from './components/layout/navbar.js';
 import { Header } from './components/layout/header.js';
 import { initThemeListeners } from './utils/theme.js';
-import { initPasswordToggles, initSliderLogic } from './pages/access/access-utils.js';
+import { initPasswordToggles, initSliderLogic, initDropdownLogic } from './pages/access/access-utils.js';
 import { initSignInLogic } from './pages/access/sign-in.js';
 
 async function init() {
@@ -11,6 +11,10 @@ async function init() {
         initSliderLogic();
         initPasswordToggles();
         initSignInLogic();
+    }
+
+    if (document.getElementById('js-menu-trigger')) {
+        initDropdownLogic();
     }
 
     await initLayout();
