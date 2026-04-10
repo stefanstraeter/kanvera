@@ -1,4 +1,6 @@
-/* -------------- Theme Switch Base -------------- */
+/* ==========================================================================
+   THEME SWITCH
+   ========================================================================== */
 .theme-switch {
   display: flex;
   align-items: center;
@@ -66,7 +68,9 @@ input:checked + .slider:before {
   flex-shrink: 0;
 }
 
-/* -------------- Theme Switch Dropdown -------------- */
+/* ==========================================================================
+   THEME SWITCH DROPDOWN (HEADER)
+   ========================================================================== */
 .theme-switch--dropdown {
   background-color: var(--bg-app-body);
   height: 2.5rem;
