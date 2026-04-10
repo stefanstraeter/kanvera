@@ -2,8 +2,11 @@
 
 function adjustCardHeight(gateway, wrapper) {
     if (wrapper && gateway) {
-        const height = wrapper.getBoundingClientRect().height;
-        gateway.style.height = `${height}px`;
+
+        const contentHeight = wrapper.getBoundingClientRect().height;
+        const offset = window.innerWidth < 600 ? 10 : 0;
+
+        gateway.style.height = `${contentHeight + offset}px`;
     }
 }
 
@@ -44,6 +47,25 @@ function setupInitialState(gateway, loginWrapper) {
     }, 50);
 }
 
+function closeMenu(content) {
+    content.classList.remove('is-active');
+}
+
+function toggleMenu(e, content) {
+    e.stopPropagation();
+    content.classList.toggle('is-active');
+}
+
+export function initDropdownLogic() {
+    const trigger = document.getElementById('js-menu-trigger');
+    const content = document.getElementById('js-menu-content');
+
+    if (!trigger || !content) return;
+
+    trigger.addEventListener('click', (e) => toggleMenu(e, content));
+    content.addEventListener('click', (e) => e.stopPropagation());
+    document.addEventListener('click', () => closeMenu(content));
+}
 
 export function initSliderLogic() {
     const gateway = document.querySelector(".gateway");
