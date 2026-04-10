@@ -1,9 +1,11 @@
+/* ==========================================================================
+   GATEWAY COMPONENT
+   ========================================================================== */
 .gateway {
   width: 100%;
   max-width: 35rem;
   background-color: var(--bg-app-card);
   border-radius: var(--radius-sidebar);
-  box-shadow: var(--shadow-modal);
   border: 1px solid var(--color-lines);
   overflow: hidden;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -27,4 +29,13 @@
   padding: var(--space-2xl) var(--space-3xl);
   box-sizing: border-box;
   height: auto;
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 600px) {
+  .view-wrapper {
+    padding: var(--space-xl) var(--space-lg);
+  }
 }
