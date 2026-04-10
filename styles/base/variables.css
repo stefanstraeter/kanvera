@@ -1,5 +1,7 @@
 :root {
-  /* ----------- Color Palette ----------- */
+  /* ==========================================================================
+   COLOR PALETTE
+   ========================================================================== */
   --color-main: #635fc7;
   --color-main-hover: #a9a3ff;
 
@@ -21,7 +23,9 @@
   --status-await-feedback: #cda561;
   --status-done: #67e2ae;
 
-  /* ----------- Light Mode (Default) ----------- */
+  /* ==========================================================================
+   LIGHT MODE (DEFAULT)
+   ========================================================================== */
   --bg-app-body: var(--color-beige);
   --bg-app-sidebar: var(--color-light-grey);
   --bg-app-header: transparent;
@@ -37,7 +41,9 @@
   --color-btn-secondary-hover: var(--color-light-grey);
   --color-btn-secondary-text: var(--color-main);
 
-  /* ----------- Buttons ----------- */
+  /* ==========================================================================
+     BUTTONS
+     ========================================================================== */
   --color-btn-main-bg: var(--color-main);
   --color-btn-main-hover: var(--color-main-hover);
   --color-btn-main-text: var(--color-white);
@@ -46,7 +52,9 @@
   --color-btn-danger-hover: var(--color-danger-hover);
   --color-btn-danger-text: var(--color-white);
 
-  /* ----------- Typography ----------- */
+  /* ==========================================================================
+     TYPOGRAPHY
+     ========================================================================== */
   --font-primary: "Outfit", sans-serif;
 
   --font-weight-regular: 400;
@@ -66,7 +74,9 @@
   --font-size-body-l: 0.9375rem;
   --font-size-body-m: 0.75rem;
 
-  /* ----------- Layout & Spacing ----------- */
+  /* ==========================================================================
+     LAYOUT & SPACING
+     ========================================================================== */
   --sidebar-width: 18.75rem;
   --header-height: 5rem;
   --action-item-height: 3rem;
@@ -81,11 +91,15 @@
   --space-2xl: 3rem;
   --space-3xl: 4rem;
 
-  /* ----------- Breakpoints ----------- */
+  /* ==========================================================================
+     BREAKPOINTS
+     ========================================================================== */
   --breakpoint-md: 900px;
   --breakpoint-lg: 1100px;
 
-  /* ----------- Interactive & Accents ----------- */
+  /* ==========================================================================
+     INTERACTIVE & ACCENTS
+     ========================================================================== */
   --radius-pill: 6.25rem;
   --radius-sidebar: 1.5rem;
   --radius-card: 0.5rem;
@@ -96,7 +110,9 @@
   --shadow-modal: 0px 10px 20px rgba(0, 0, 0, 0.1);
   --shadow-sidebar: 0px 10px 20px rgba(0, 0, 0, 0.1);
 
-  /* ----------- Stacking Order ----------- */
+  /* ==========================================================================
+     STACKING ORDER
+     ========================================================================== */
   --z-below: -1;
   --z-default: 1;
   --z-sticky: 100;
@@ -106,7 +122,9 @@
   --z-popover: 500;
 }
 
-/* ----------- Dark MODE ----------- */
+/* ==========================================================================
+     DARK MODE
+     ========================================================================== */
 [data-theme="dark"] {
   --bg-app-body: var(--color-very-dark-grey);
   --bg-app-sidebar: var(--color-dark-grey);
