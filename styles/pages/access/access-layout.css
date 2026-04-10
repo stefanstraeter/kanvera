@@ -1,7 +1,10 @@
+/* ==========================================================================
+   LAYOUT AREAS
+   ========================================================================== */
 .access-viewport {
   min-height: 100dvh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
   background-color: var(--bg-app-body);
   padding: var(--space-md);
   overflow-y: auto;
@@ -22,11 +25,23 @@
 }
 
 .access-logo {
-  height: 1.5rem;
+  height: 1.8rem;
   width: auto;
   transition: filter var(--transition);
 }
 
+.access-main {
+  width: 100%;
+  max-width: 35rem;
+  margin-top: var(--header-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ==========================================================================
+   COMPONENTS & NAVIGATION
+   ========================================================================== */
 .access-nav-group {
   display: flex;
   align-items: center;
@@ -35,29 +50,39 @@
 
 .access-nav-text {
   color: var(--color-medium-grey);
-  font-size: var(--font-size-body-m);
+  font-size: var(--font-size-body-l);
   font-weight: 500;
 }
 
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
 .u-invisible {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
 
-/* Mobile Anpassung */
+.access-cta-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+
 @media (max-width: 768px) {
   .access-header {
     padding: 0 var(--space-md);
   }
 
+  .access-nav-group > .theme-switch {
+    display: none;
+  }
+
   .hide-mobile {
     display: none;
   }
-}
-
-.access-main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
 }
