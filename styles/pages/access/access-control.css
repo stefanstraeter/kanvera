@@ -1,3 +1,6 @@
+/* ==========================================================================
+   GATEWAY CONTROLS & ELEMENTS
+   ========================================================================== */
 .gateway__header {
   position: relative;
   display: flex;
@@ -23,27 +26,6 @@
   border-radius: var(--radius-pill);
 }
 
-.gateway__form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-
-.field-wrapper {
-  margin-bottom: var(--space-sm);
-}
-
-.gateway__actions {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-lg);
-  margin-top: var(--space-lg);
-}
-
-.slide-to-signup {
-  transform: translateX(-50%);
-}
-
 .gateway__back {
   position: absolute;
   left: var(--space-sm);
@@ -61,6 +43,46 @@
   transform: scale(1.1);
 }
 
+.gateway__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.field-wrapper {
+  margin-bottom: var(--space-sm);
+}
+
 .policy-check {
   text-align: center;
+}
+
+.gateway__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-top: var(--space-xs);
+}
+
+/* ==========================================================================
+   ANIMATION & STATE CLASSES
+   ========================================================================== */
+.slide-to-signup {
+  transform: translateX(-50%);
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 600px) {
+  .gateway__actions {
+    flex-direction: column;
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-xs);
+    gap: var(--space-md);
+  }
+
+  .view-wrapper {
+    padding: var(--space-lg) var(--space-md);
+  }
 }
