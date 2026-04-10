@@ -1,19 +1,23 @@
 import { Navbar } from './components/layout/navbar.js';
 import { Header } from './components/layout/header.js';
 import { initThemeListeners } from './utils/theme.js';
+import { initPasswordToggles, initSliderLogic } from './pages/access/access-utils.js';
+import { initSignInLogic } from './pages/access/sign-in.js';
 
 async function init() {
     initThemeListeners();
 
-    const registerBtn = document.getElementById('toSignupHeader');
-    const authSlider = document.getElementById('authSlider');
-
-    if (registerBtn && authSlider) {
-        registerBtn.addEventListener('click', () => {
-            authSlider.classList.add('slide-to-signup');
-        });
+    if (document.getElementById('gatewaySlider')) {
+        initSliderLogic();
+        initPasswordToggles();
+        initSignInLogic();
     }
 
+    await initLayout();
+}
+
+
+async function initLayout() {
     const sidebarAnchor = document.getElementById('js-sidebar-anchor');
     const headerAnchor = document.getElementById('js-header-anchor');
 
