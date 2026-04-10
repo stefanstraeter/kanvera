@@ -1,4 +1,6 @@
-/* -------------- Main Styles -------------- */
+/* ==========================================================================
+   MAIN STYLESHEET
+   ========================================================================== */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
 
 /* Base & Variables */
@@ -13,6 +15,7 @@
 @import url("./ui/theme-switch.css");
 @import url("./ui/form-feedback.css");
 @import url("./ui/scrollbar.css");
+@import url("./ui/components.css");
 
 /* Layout */
 @import url("./layout/header.css");
@@ -22,5 +25,4 @@
 @import url("./pages/access/access-layout.css");
 @import url("./pages/access/access-gateway.css");
 @import url("./pages/access/access-control.css");
-@import url("./pages/access/access-utility.css");
 @import url("./pages/legal/legal.css");
