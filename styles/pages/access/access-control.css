@@ -1,5 +1,8 @@
 .gateway__header {
-  text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: var(--space-lg);
 }
 
@@ -35,4 +38,29 @@
   justify-content: center;
   gap: var(--space-lg);
   margin-top: var(--space-lg);
+}
+
+.slide-to-signup {
+  transform: translateX(-50%);
+}
+
+.gateway__back {
+  position: absolute;
+  left: var(--space-sm);
+  color: var(--color-main);
+  font-size: 1.2rem;
+  padding: var(--space-xs);
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.gateway__back:hover {
+  transform: scale(1.1);
+}
+
+.policy-check {
+  text-align: center;
 }
