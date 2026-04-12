@@ -23,7 +23,6 @@ function toggleHeaderElements(show) {
     }
 }
 
-
 function slideTo(slider, view) {
     if (!slider) return;
 
@@ -67,6 +66,36 @@ export function initDropdownLogic() {
     document.addEventListener('click', () => closeMenu(content));
 }
 
+/**
+ * Toggles Font Awesome classes and input type
+ */
+function togglePasswordVisibility(input, icon) {
+    const isPassword = input.type === 'password';
+
+    input.type = isPassword ? 'text' : 'password';
+    icon.classList.toggle('fa-eye');
+    icon.classList.toggle('fa-eye-slash');
+
+}
+
+export function initPasswordToggles() {
+    const passwordFields = document.querySelectorAll('input[type="password"]');
+
+    passwordFields.forEach(input => {
+        const group = input.closest('.field-group');
+        const icon = group?.querySelector('.field-icon');
+
+        if (!input || !icon) return;
+
+        icon.style.cursor = 'pointer';
+
+        icon.addEventListener('click', () => {
+            togglePasswordVisibility(input, icon);
+        });
+    });
+}
+
+
 export function initSliderLogic() {
     const gateway = document.querySelector(".gateway");
     const slider = document.getElementById('gatewaySlider');
@@ -86,8 +115,4 @@ export function initSliderLogic() {
         slideTo(slider, 'login');
         adjustCardHeight(gateway, loginWrapper);
     });
-}
-
-export function initPasswordToggles() {
-    console.log("Passwort-Toggle Skelett geladen");
 }
