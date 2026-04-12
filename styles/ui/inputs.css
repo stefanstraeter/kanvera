@@ -21,6 +21,10 @@
   border-color: var(--color-main);
 }
 
+.field-wrapper.has-error .field-group {
+  border-color: var(--color-danger);
+}
+
 /* ==========================================================================
    FIELD INPUT
    ========================================================================== */
@@ -61,4 +65,8 @@
   font-size: 1rem;
   width: 1.25rem;
   text-align: center;
+}
+
+.field-icon:hover {
+  color: var(--color-main);
 }
