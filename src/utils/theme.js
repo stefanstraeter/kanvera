@@ -1,4 +1,8 @@
-
+/**
+ * @description Updates the logos based on the current theme.   
+ * @param {*} theme - The current theme ('light' or 'dark').
+ * @returns {void}
+ */
 function updateLogos(theme) {
     const logos = document.querySelectorAll('.sidebar__logo, .access-logo');
 
@@ -11,7 +15,12 @@ function updateLogos(theme) {
     });
 }
 
+/**
+ * @description Synchronizes the state of all theme toggle elements (checkboxes) to match the current theme.
+ * @param {*} theme - The current theme ('light' or 'dark').
+ * @returns {void}
 
+ */
 function syncToggles(theme) {
     const toggles = document.querySelectorAll('#theme-toggle, #theme-toggle-dropdown');
 
@@ -24,7 +33,12 @@ function syncToggles(theme) {
     });
 }
 
-
+/**
+ * @description Applies the specified theme to the application by setting a data attribute on the document root, updating logos, and synchronizing toggle states. If no theme is provided, it retrieves the theme from localStorage or defaults to 'light'.
+ * @returns {void}
+ * @export
+ * @param {*} [theme=null]
+ */
 export function applyTheme(theme = null) {
     const activeTheme = theme || localStorage.getItem('theme') || 'light';
 
