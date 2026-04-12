@@ -6,8 +6,10 @@ import { initSignInLogic } from './pages/access/sign-in.js';
 
 async function init() {
     initThemeListeners();
+    await initLayout();
 
     if (document.getElementById('gatewaySlider')) {
+        console.log("Slider gefunden, lade Logik...");
         initSliderLogic();
         initPasswordToggles();
         initSignInLogic();
@@ -16,8 +18,6 @@ async function init() {
     if (document.getElementById('js-menu-trigger')) {
         initDropdownLogic();
     }
-
-    await initLayout();
 }
 
 
