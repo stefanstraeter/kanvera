@@ -81,7 +81,7 @@
       <section class="gateway">
         <div class="gateway__stage" id="gatewaySlider">
           <div class="view-wrapper" id="loginWrapper">
-            <form class="gateway__form" id="loginForm">
+            <form class="gateway__form" id="loginForm" novalidate>
               <div class="gateway__header">
                 <h2 class="gateway__title heading-2xl">Hey there!</h2>
               </div>
@@ -91,15 +91,15 @@
                   <input type="email" id="loginEmail" class="field-input" placeholder="Email" />
                   <i class="fa-regular fa-envelope field-icon"></i>
                 </div>
-                <div class="error-msg">Email is required</div>
+                <div class="error-msg"></div>
               </div>
 
               <div class="field-wrapper">
                 <div class="field-group">
                   <input type="password" id="loginPassword" class="field-input" placeholder="Password" />
-                  <i class="fa-solid fa-lock field-icon"></i>
+                  <i class="fa-solid fa-eye-slash field-icon"></i>
                 </div>
-                <div class="error-msg">Password is required</div>
+                <div class="error-msg"></div>
               </div>
 
               <div class="gateway__actions">
@@ -109,7 +109,7 @@
             </form>
           </div>
           <div class="view-wrapper" id="signupWrapper">
-            <form class="gateway__form" id="signupForm">
+            <form class="gateway__form" id="signupForm" novalidate>
               <div class="gateway__header">
                 <i class="fa-solid fa-arrow-left gateway__back" id="toLoginArrow"></i>
                 <h2 class="gateway__title heading-2xl">Get on board!</h2>
@@ -120,7 +120,7 @@
                   <input type="text" id="signupName" class="field-input" placeholder="Name" />
                   <i class="fa-regular fa-user field-icon"></i>
                 </div>
-                <div class="error-msg">Name is required</div>
+                <div class="error-msg"></div>
               </div>
 
               <div class="field-wrapper">
@@ -128,28 +128,36 @@
                   <input type="email" id="signupEmail" class="field-input" placeholder="Email" />
                   <i class="fa-regular fa-envelope field-icon"></i>
                 </div>
-                <div class="error-msg">Email is required</div>
+                <div class="error-msg"></div>
               </div>
 
               <div class="field-wrapper">
                 <div class="field-group">
                   <input type="password" id="signupPassword" class="field-input" placeholder="Password" />
-                  <i class="fa-solid fa-lock field-icon"></i>
+                  <i class="fa-solid fa-eye-slash field-icon"></i>
                 </div>
-                <div class="error-msg">Password is required</div>
+                <div class="error-msg"></div>
               </div>
 
               <div class="field-wrapper">
                 <div class="field-group">
                   <input type="password" id="signupConfirmPassword" class="field-input" placeholder="Confirm Password" />
-                  <i class="fa-solid fa-lock field-icon"></i>
+                  <i class="fa-solid fa-eye-slash field-icon"></i>
                 </div>
-                <div class="error-msg">Passwords do not match</div>
+                <div class="error-msg"></div>
               </div>
 
-              <div class="policy-check">
-                <input type="checkbox" id="policy" required />
-                <label for="policy">I accept the <a href="privacy.html" class="link" target="_blank">Privacy Policy</a></label>
+              <div class="field-wrapper privacy-wrapper">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="policy" class="policy-input" name="policy" hidden />
+
+                  <label for="policy" class="policy-label">
+                    <i class="fa-regular fa-square icon-unchecked"></i>
+                    <i class="fa-solid fa-square-check icon-checked"></i>
+                    <span class="policy-text"> I accept the <a href="privacy.html" target="_blank" class="link">Privacy Policy</a> </span>
+                  </label>
+                </div>
+                <div class="error-msg txt-center"></div>
               </div>
 
               <div class="gateway__actions">
