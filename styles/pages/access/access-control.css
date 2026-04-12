@@ -65,10 +65,52 @@
 }
 
 /* ==========================================================================
+   POLICY CHECKBOX
+   ========================================================================== */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.policy-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  user-select: none;
+}
+
+.icon-checked {
+  display: none;
+  color: var(--color-main);
+}
+
+.icon-unchecked {
+  color: var(--color-medium-grey);
+}
+
+.policy-input:checked + .policy-label .icon-checked {
+  display: inline-block;
+}
+
+.policy-input:checked + .policy-label .icon-unchecked {
+  display: none;
+}
+
+/* ==========================================================================
    ANIMATION & STATE CLASSES
    ========================================================================== */
 .slide-to-signup {
   transform: translateX(-50%);
+}
+
+/* ==========================================================================
+   UTILITY CLASSES
+   ========================================================================== */
+.txt-center {
+  text-align: center;
 }
 
 /* ==========================================================================
