@@ -8,10 +8,10 @@
 }
 
 .theme-switch--box {
-  background-color: var(--bg-app-body);
+  background-color: var(--bg-theme-switch);
   padding: 0 var(--space-lg);
   height: 3rem;
-  border-radius: var(--radius-sidebar);
+  border-radius: var(--radius-theme-switch);
   justify-content: center;
   margin: 0 var(--space-lg);
 }
@@ -72,9 +72,9 @@ input:checked + .slider:before {
    THEME SWITCH DROPDOWN (HEADER)
    ========================================================================== */
 .theme-switch--dropdown {
-  background-color: var(--bg-app-body);
+  background-color: var(--bg-theme-switch);
   height: 2.5rem;
   padding: 0 var(--space-md);
-  border-radius: var(--radius-sidebar);
+  border-radius: var(--radius-theme-switch);
   justify-content: center;
 }

@@ -31,6 +31,7 @@
   --bg-app-header: transparent;
   --bg-app-content: transparent;
   --bg-app-card: var(--color-white);
+  --bg-theme-switch: var(--color-light-grey);
 
   --color-text-heading: var(--color-anthracite);
   --color-text-main: var(--color-anthracite);
@@ -104,6 +105,7 @@
   --radius-sidebar: 1.5rem;
   --radius-card: 0.5rem;
   --radius-modal: 0.375rem;
+  --radius-theme-switch: 1.5rem;
 
   --transition: 200ms ease-in-out;
   --shadow-card: 0px 4px 6px rgba(54, 78, 126, 0.1);
@@ -129,6 +131,7 @@
   --bg-app-body: var(--color-very-dark-grey);
   --bg-app-sidebar: var(--color-dark-grey);
   --bg-app-card: var(--color-dark-grey);
+  --bg-theme-switch: var(--color-dark-grey);
 
   --color-text-main: var(--color-beige);
   --color-text-heading: var(--color-beige);
