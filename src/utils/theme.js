@@ -1,6 +1,8 @@
+// src/utils/theme.js
+
 /**
  * @description Updates the logos based on the current theme.   
- * @param {*} theme - The current theme ('light' or 'dark').
+ * @param {string} theme - The current theme ('light' or 'dark').
  * @returns {void}
  */
 function updateLogos(theme) {
@@ -15,9 +17,10 @@ function updateLogos(theme) {
     });
 }
 
+
 /**
  * @description Synchronizes the state of all theme toggle elements (checkboxes) to match the current theme.
- * @param {*} theme - The current theme ('light' or 'dark').
+ * @param {string} theme - The current theme ('light' or 'dark').
  * @returns {void}
 
  */
@@ -33,11 +36,12 @@ function syncToggles(theme) {
     });
 }
 
+
 /**
- * @description Applies the specified theme to the application by setting a data attribute on the document root, updating logos, and synchronizing toggle states. If no theme is provided, it retrieves the theme from localStorage or defaults to 'light'.
+ * @description Applies the specified theme to the application by setting a data attribute on the document root, updating logos, and synchronizing toggle states. 
  * @returns {void}
  * @export
- * @param {*} [theme=null]
+ * @param {string} [theme=null] - The theme to apply ('light' or 'dark'). 
  */
 export function applyTheme(theme = null) {
     const activeTheme = theme || localStorage.getItem('theme') || 'light';
@@ -50,6 +54,10 @@ export function applyTheme(theme = null) {
 }
 
 
+/**
+ * @description Initializes event listeners for theme toggle elements and applies the current theme on page load. 
+ * @export
+ */
 export function initThemeListeners() {
     document.addEventListener('change', (event) => {
         const element = event.target;
