@@ -1,4 +1,18 @@
+// src/components/layout/header.js
+
+import { performLogout, getCurrentUser, getInitials } from '../../services/auth-logic.js';
+
+
+/**
+ * @description Header component responsible for rendering the header and managing the dropdown menu and logout functionality.
+ * @export
+ * @class Header
+ */
 export class Header {
+
+    /* ==========================================================================
+       LIFECYCLE & INITIALIZATION
+       ========================================================================== */
     constructor() {
         this.templatePath = './templates/header.html';
         this.titleId = 'js-header-title';
@@ -6,6 +20,12 @@ export class Header {
         this.actionBtnId = 'js-header-action';
     }
 
+    /**
+     * @description Renders the header by fetching the HTML template, inserting it into the specified anchor element, and initializing the header's dynamic content and dropdown functionality. It also updates the header title and action button based on the current page.
+     * @param {string} anchorId - The ID of the anchor element where the header will be rendered.
+     * @return {void} 
+     * @memberof Header
+     */
     async render(anchorId) {
         const anchor = document.getElementById(anchorId);
         if (!anchor) return;
@@ -17,15 +37,30 @@ export class Header {
 
             this.updateTitle();
             this.updateActionButton();
+            this.updateUserAvatar();
             this.initDropdown();
         } catch (err) {
+            console.error('Error loading header template:', err);
         }
     }
 
+    /* ==========================================================================
+       UI & CONTENT UPDATES
+       ========================================================================== */
+    /**
+     * @description Gets the current URL path to determine which page the user is on. ion button accordingly.
+     * @return {string} - The current URL path in lowercase.
+     * @memberof Header
+     */
     getCurrentPath() {
         return window.location.pathname.toLowerCase();
     }
 
+    /**
+     * @description Updates the header title based on the current page by checking the URL path and setting the appropriate title text.
+     * @return {void} 
+     * @memberof Header
+     */
     updateTitle() {
         const titleElement = document.getElementById(this.titleId);
         if (!titleElement) return;
@@ -52,6 +87,11 @@ export class Header {
         }
     }
 
+    /**
+     * @description Updates the action button in the header based on the current page. 
+     * @return {void} 
+     * @memberof Header
+     */
     updateActionButton() {
         const actionText = document.getElementById(this.actionTextId);
         const actionBtn = document.getElementById(this.actionBtnId);
@@ -72,18 +112,34 @@ export class Header {
         }
     }
 
+    /* ==========================================================================
+       INTERACTIVE ELEMENTS (Events)
+       ========================================================================== */
+    /**
+     * @description Initializes the dropdown menu for the user avatar in the header, including event listeners for opening/closing the menu and handling logout functionality.
+     * @memberof Header
+     */
     initDropdown() {
         const trigger = document.getElementById('js-menu-trigger');
         const content = document.getElementById('js-menu-content');
+        const logoutLink = document.getElementById('logoutLink');
 
         if (trigger && content) {
-            trigger.addEventListener('click', (e) => {
-                e.stopPropagation();
+            trigger.addEventListener('click', (event) => {
+                event.stopPropagation();
                 content.classList.toggle('is-active');
             });
 
-            content.addEventListener('click', (e) => {
-                e.stopPropagation();
+            if (logoutLink) {
+                logoutLink.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    performLogout();
+                    window.location.href = 'index.html';
+                });
+            }
+
+            content.addEventListener('click', (event) => {
+                event.stopPropagation();
             });
 
             document.addEventListener('click', () => {
@@ -91,4 +147,25 @@ export class Header {
             });
         }
     }
+
+    /* ==========================================================================
+       USER AVATAR
+       ========================================================================== */
+    /**
+      * @description Updates the user avatar in the header based on the current user's initials.
+      * @return {void} 
+      * @memberof Header
+      */
+    updateUserAvatar() {
+        const avatarBtn = document.getElementById('js-menu-trigger');
+        if (!avatarBtn) return;
+
+        const user = getCurrentUser();
+        if (user && user.name) {
+            avatarBtn.textContent = getInitials(user.name);
+        } else {
+            avatarBtn.textContent = "G";
+        }
+    }
+
 }
