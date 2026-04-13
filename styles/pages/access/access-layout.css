@@ -23,12 +23,6 @@
   z-index: 100;
 }
 
-.access-logo {
-  height: 1.8rem;
-  width: auto;
-  transition: filter var(--transition);
-}
-
 .access-main {
   width: 100%;
   max-width: 35rem;
@@ -51,6 +45,27 @@
   color: var(--color-medium-grey);
   font-size: var(--font-size-body-l);
   font-weight: 500;
+}
+
+/* ==========================================================================
+   HEADER LOGO 
+   ========================================================================== */
+.header__logo-img {
+  height: 1.8rem;
+  width: auto;
+  opacity: 0;
+  transform: translateY(10px) scale(0.95);
+  filter: blur(4px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1),
+    filter 0.6s ease;
+}
+
+.header__logo-img--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
 }
 
 /* ==========================================================================
