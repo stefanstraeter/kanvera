@@ -1,6 +1,8 @@
 // access-utils.js
 
-
+/* ==========================================================================
+   DROPDOWN & NAVIGATION UI
+   ========================================================================== */
 /**
  * @description Toggles the visibility of header elements based on the provided flag
  * @param {boolean} show - Indicates whether to show or hide the header elements
@@ -18,7 +20,6 @@ function toggleHeaderElements(show) {
     }
 }
 
-
 /**
  * @description Closes the dropdown menu by removing the 'is-active' class from the content element
  * @param {HTMLElement} content - The dropdown content element
@@ -26,7 +27,6 @@ function toggleHeaderElements(show) {
 function closeMenu(content) {
     content.classList.remove('is-active');
 }
-
 
 /**
  * @description Toggles the dropdown menu visibility by adding or removing the 'is-active' class on the content element, and stops event propagation to prevent unintended side effects
@@ -37,7 +37,6 @@ function toggleMenu(event, content) {
     event.stopPropagation();
     content.classList.toggle('is-active');
 }
-
 
 /**
  * @description Initializes the dropdown menu logic by setting up event listeners for the trigger, content, and document to handle opening and closing of the menu
@@ -55,7 +54,9 @@ export function initDropdownLogic() {
     document.addEventListener('click', () => closeMenu(content));
 }
 
-
+/* ==========================================================================
+   PASSWORD VISIBILITY TOGGLE
+   ========================================================================== */
 /**
  * @description Toggles Font Awesome classes and input type for password visibility
  * @param {HTMLInputElement} input - The password input element
@@ -69,7 +70,6 @@ function togglePasswordVisibility(input, icon) {
     icon.classList.toggle('fa-eye-slash');
 
 }
-
 
 /**
  * @description Initializes the password visibility toggle functionality by adding click event listeners to all password input fields and their associated icons
@@ -92,7 +92,9 @@ export function initPasswordToggles() {
     });
 }
 
-
+/* ==========================================================================
+   GATEWAY SLIDER & CARD LOGIC
+   ========================================================================== */
 /**
  * @description Adjusts the height of the gateway element based on the height of the wrapper element
  * @param {*} gateway - The gateway element whose height needs to be adjusted
@@ -107,7 +109,6 @@ function adjustCardHeight(gateway, wrapper) {
         gateway.style.height = `${contentHeight + offset}px`;
     }
 }
-
 
 /**
  * @description Sets up the initial state of the gateway slider by disabling transitions, adjusting height, and then re-enabling transitions for smooth sliding effect
@@ -125,7 +126,6 @@ function setupInitialState(gateway, loginWrapper) {
         gateway.style.transition = 'height 0.4s ease-in-out';
     }, 50);
 }
-
 
 /**
  * @description Slides the gateway slider to the specified view (signup or login) and toggles header elements accordingly
@@ -145,7 +145,9 @@ function slideTo(slider, view) {
     }
 }
 
-
+/* ==========================================================================
+   INITIALIZATION & EXPORT
+   ========================================================================== */
 /**
  * @description Initializes the slider logic for the gateway by setting up event listeners for navigation buttons and adjusting the card height accordingly
  * @export
