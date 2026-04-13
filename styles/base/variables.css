@@ -3,20 +3,23 @@
    COLOR PALETTE
    ========================================================================== */
   --color-main: #635fc7;
-  --color-main-hover: #a9a3ff;
+  --color-main-hover: #9791ee;
 
   --color-white: #ffffff;
-  --color-beige: #f8f5f0;
+  --color-ghost-white: #eaeff8;
+  --color-beige: #f5f1ea;
   --color-very-light-grey: #efeff9;
-  --color-light-grey: #d8d7f1;
+  --color-light-grey: #deddf3;
   --color-medium-grey: #828fa3;
+  --color-greyish-violett: #c6c3e7;
   --color-dark-grey: #2b2c37;
   --color-very-dark-grey: #20212c;
   --color-anthracite: #201f23;
-  --color-lines-light: #b3b7de;
+  --color-lines-light: #cacde7;
   --color-lines-dark: #3d3f4e;
   --color-danger: #ea5555;
   --color-danger-hover: #ff9898;
+  --color-focus: #635fc7;
 
   --status-todo: #49c4e5;
   --status-doing: #8471f2;
@@ -26,20 +29,21 @@
   /* ==========================================================================
    LIGHT MODE (DEFAULT)
    ========================================================================== */
-  --bg-app-body: var(--color-beige);
-  --bg-app-sidebar: var(--color-light-grey);
+  --bg-app-body: var(--color-ghost-white);
+  --bg-app-sidebar: var(--color-white);
   --bg-app-header: transparent;
   --bg-app-content: transparent;
   --bg-app-card: var(--color-white);
-  --bg-theme-switch: var(--color-light-grey);
+  --bg-theme-switch: var(--color-white);
+  --bg-input: var(--color-white);
 
   --color-text-heading: var(--color-anthracite);
   --color-text-main: var(--color-anthracite);
   --color-text-inverse: var(--color-anthracite);
   --color-lines: var(--color-lines-light);
 
-  --color-btn-secondary-bg: var(--color-very-light-grey);
-  --color-btn-secondary-hover: var(--color-light-grey);
+  --color-btn-secondary-bg: var(--color-main-hover);
+  --color-btn-secondary-hover: var(--color-greyish-violett);
   --color-btn-secondary-text: var(--color-main);
 
   /* ==========================================================================
@@ -103,14 +107,16 @@
      ========================================================================== */
   --radius-pill: 6.25rem;
   --radius-sidebar: 1.5rem;
-  --radius-card: 0.5rem;
+  --radius-card: 1rem;
   --radius-modal: 0.375rem;
   --radius-theme-switch: 1.5rem;
+  --radius-input: 0.75rem;
 
   --transition: 200ms ease-in-out;
-  --shadow-card: 0px 4px 6px rgba(54, 78, 126, 0.1);
-  --shadow-modal: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 2px 4px rgba(54, 78, 126, 0.05), --shadow-modal: 0px 10px 20px rgba(0, 0, 0, 0.1);
   --shadow-sidebar: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  --shadow-modal: 0 20px 50px rgba(0, 0, 0, 0.15);
+  --background-overlay: rgba(0, 0, 0, 0.5);
 
   /* ==========================================================================
      STACKING ORDER
@@ -132,6 +138,7 @@
   --bg-app-sidebar: var(--color-dark-grey);
   --bg-app-card: var(--color-dark-grey);
   --bg-theme-switch: var(--color-dark-grey);
+  --bg-input: var(--color-dark-grey);
 
   --color-text-main: var(--color-beige);
   --color-text-heading: var(--color-beige);
@@ -141,4 +148,10 @@
   --color-btn-secondary-bg: var(--color-main-hover);
   --color-btn-secondary-hover: var(--color-beige);
   --color-btn-secondary-text: var(--color-main);
+
+  --color-lines: var(--color-lines-dark);
+
+  --shadow-modal: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0px 4px 6px rgba(54, 78, 126, 0.1);
+  --shadow-sidebar: 0px 10px 20px rgba(126, 126, 126, 0.1);
 }
