@@ -36,7 +36,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--color-main);
+  background-color: var(--color-main-hover);
   transition: background-color 0.4s;
   border-radius: var(--radius-pill);
 }

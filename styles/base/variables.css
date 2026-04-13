@@ -42,8 +42,8 @@
   --color-text-inverse: var(--color-anthracite);
   --color-lines: var(--color-lines-light);
 
-  --color-btn-secondary-bg: var(--color-main-hover);
-  --color-btn-secondary-hover: var(--color-greyish-violett);
+  --color-btn-secondary-bg: var(--color-greyish-violett);
+  --color-btn-secondary-hover: var(--color-main-hover);
   --color-btn-secondary-text: var(--color-main);
 
   /* ==========================================================================
@@ -113,11 +113,12 @@
   --radius-input: 0.75rem;
 
   --transition: 200ms ease-in-out;
-  --shadow-card: 0 2px 4px rgba(54, 78, 126, 0.05), --shadow-modal: 0px 10px 20px rgba(0, 0, 0, 0.1);
-  --shadow-sidebar: 0px 10px 20px rgba(0, 0, 0, 0.1);
-  --shadow-modal: 0 20px 50px rgba(0, 0, 0, 0.15);
-  --background-overlay: rgba(0, 0, 0, 0.5);
 
+  --shadow-sidebar: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 4px 6px rgba(54, 78, 126, 0.1);
+  --shadow-modal: 0px 10px 20px rgba(0, 0, 0, 0.1);
+
+  --background-overlay: rgba(0, 0, 0, 0.5);
   /* ==========================================================================
      STACKING ORDER
      ========================================================================== */
@@ -149,9 +150,7 @@
   --color-btn-secondary-hover: var(--color-beige);
   --color-btn-secondary-text: var(--color-main);
 
-  --color-lines: var(--color-lines-dark);
-
+  --shadow-sidebar: 0 10px 30px rgba(0, 0, 0, 0.4);
   --shadow-modal: 0 10px 30px rgba(0, 0, 0, 0.4);
-  --shadow-card: 0px 4px 6px rgba(54, 78, 126, 0.1);
-  --shadow-sidebar: 0px 10px 20px rgba(126, 126, 126, 0.1);
+  --shadow-card: 0 4px 6px rgba(54, 78, 126, 0.1);
 }
