@@ -5,6 +5,9 @@ import { AUTH_ERRORS } from '../../utils/constants.js';
 import { checkIfEmailExists, createNewUser } from '../../services/auth-logic.js';
 
 
+/* ==========================================================================
+   FORM VALIDATION & DATA
+   ========================================================================== */
 /**
  * @description Validates the signup form inputs and toggles error states accordingly
  * @return {boolean} - Returns true if all inputs are valid, false otherwise
@@ -31,7 +34,6 @@ function isSignupFormValid() {
     return isNameOk && isEmailOk && isPassOk && isMatch && isPolicyOk;
 }
 
-
 /**
  * @description Gets data from the form inputs and returns it as an object
  * @return {Object} - Returns an object containing the name, email, and password from the signup form inputs
@@ -44,7 +46,9 @@ function getFormData() {
     };
 }
 
-
+/* ==========================================================================
+   UI FEEDBACK & OVERLAYS
+   ========================================================================== */
 /**
  * @description Activates or deactivates the submit button (UI feedback)
  * @param {boolean} isPending - Indicates whether the form submission is in progress
@@ -54,11 +58,9 @@ function setLoadingState(isPending, event) {
     const btn = event.submitter;
     if (btn) {
         btn.disabled = isPending;
-        // Optional: Hier könntest du auch den Text ändern oder einen Spinner zeigen
         btn.style.opacity = isPending ? "0.5" : "1";
     }
 }
-
 
 /**
  * @description Displays a success message to the user and redirects to the login page after a short delay
@@ -78,7 +80,9 @@ function showSuccessMessage() {
     }
 }
 
-
+/* ==========================================================================
+   SIGNUP CORE LOGIC (Export)
+   ========================================================================== */
 /**
  * @description Handles the signup form submission by validating inputs, checking for existing email, creating a new user, and providing feedback to the user.
  * @export
