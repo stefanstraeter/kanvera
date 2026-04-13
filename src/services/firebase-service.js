@@ -1,7 +1,12 @@
 // src/services/firebase-service.js
 
+/** * The base URL for the Firebase Realtime Database. 
+ */
 const BASE_URL = "https://join-7c944-default-rtdb.europe-west1.firebasedatabase.app/";
 
+/* ==========================================================================
+   FIREBASE API ACTIONS
+   ========================================================================== */
 /**
  * Fetches data from the Firebase Realtime Database.
  * @param {string} [path=""] The path in the database to fetch data from.
@@ -36,6 +41,7 @@ export async function postData(path, data) {
         return await response.json();
     } catch (error) {
         console.error("Error loading data:", error);
+        return null;
     }
 }
 
