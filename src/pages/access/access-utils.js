@@ -1,15 +1,10 @@
 // access-utils.js
 
-function adjustCardHeight(gateway, wrapper) {
-    if (wrapper && gateway) {
 
-        const contentHeight = wrapper.getBoundingClientRect().height;
-        const offset = window.innerWidth < 600 ? 10 : 0;
-
-        gateway.style.height = `${contentHeight + offset}px`;
-    }
-}
-
+/**
+ * @description Toggles the visibility of header elements based on the provided flag
+ * @param {boolean} show - Indicates whether to show or hide the header elements
+ */
 function toggleHeaderElements(show) {
     const navText = document.querySelector('.access-nav-text');
     const toSignupBtn = document.getElementById('toSignupBtn');
@@ -23,51 +18,48 @@ function toggleHeaderElements(show) {
     }
 }
 
-function slideTo(slider, view) {
-    if (!slider) return;
 
-    if (view === 'signup') {
-        slider.style.transform = 'translateX(-50%)';
-        toggleHeaderElements(false);
-    } else {
-        slider.style.transform = 'translateX(0%)';
-        toggleHeaderElements(true);
-    }
-}
-
-function setupInitialState(gateway, loginWrapper) {
-    if (!gateway || !loginWrapper) return;
-
-    gateway.style.transition = 'none';
-    adjustCardHeight(gateway, loginWrapper);
-
-    setTimeout(() => {
-        gateway.style.transition = 'height 0.4s ease-in-out';
-    }, 50);
-}
-
+/**
+ * @description Closes the dropdown menu by removing the 'is-active' class from the content element
+ * @param {HTMLElement} content - The dropdown content element
+ */
 function closeMenu(content) {
     content.classList.remove('is-active');
 }
 
-function toggleMenu(e, content) {
-    e.stopPropagation();
+
+/**
+ * @description Toggles the dropdown menu visibility by adding or removing the 'is-active' class on the content element, and stops event propagation to prevent unintended side effects
+ * @param {Event} event - The event object
+ * @param {HTMLElement} content - The dropdown content element
+ */
+function toggleMenu(event, content) {
+    event.stopPropagation();
     content.classList.toggle('is-active');
 }
 
+
+/**
+ * @description Initializes the dropdown menu logic by setting up event listeners for the trigger, content, and document to handle opening and closing of the menu
+ * @export
+ * @return {void} 
+ */
 export function initDropdownLogic() {
     const trigger = document.getElementById('js-menu-trigger');
     const content = document.getElementById('js-menu-content');
 
     if (!trigger || !content) return;
 
-    trigger.addEventListener('click', (e) => toggleMenu(e, content));
-    content.addEventListener('click', (e) => e.stopPropagation());
+    trigger.addEventListener('click', (event) => toggleMenu(event, content));
+    content.addEventListener('click', (event) => event.stopPropagation());
     document.addEventListener('click', () => closeMenu(content));
 }
 
+
 /**
- * Toggles Font Awesome classes and input type
+ * @description Toggles Font Awesome classes and input type for password visibility
+ * @param {HTMLInputElement} input - The password input element
+ * @param {HTMLElement} icon - The icon element used to toggle visibility
  */
 function togglePasswordVisibility(input, icon) {
     const isPassword = input.type === 'password';
@@ -78,6 +70,11 @@ function togglePasswordVisibility(input, icon) {
 
 }
 
+
+/**
+ * @description Initializes the password visibility toggle functionality by adding click event listeners to all password input fields and their associated icons
+ * @export
+ */
 export function initPasswordToggles() {
     const passwordFields = document.querySelectorAll('input[type="password"]');
 
@@ -96,6 +93,63 @@ export function initPasswordToggles() {
 }
 
 
+/**
+ * @description Adjusts the height of the gateway element based on the height of the wrapper element
+ * @param {*} gateway - The gateway element whose height needs to be adjusted
+ * @param {*} wrapper - The wrapper element used to calculate the height
+ */
+function adjustCardHeight(gateway, wrapper) {
+    if (wrapper && gateway) {
+
+        const contentHeight = wrapper.getBoundingClientRect().height;
+        const offset = window.innerWidth < 600 ? 10 : 0;
+
+        gateway.style.height = `${contentHeight + offset}px`;
+    }
+}
+
+
+/**
+ * @description Sets up the initial state of the gateway slider by disabling transitions, adjusting height, and then re-enabling transitions for smooth sliding effect
+ * @param {HTMLElement} gateway - The gateway element
+ * @param {HTMLElement} loginWrapper - The login wrapper element
+ * @return {void}
+ */
+function setupInitialState(gateway, loginWrapper) {
+    if (!gateway || !loginWrapper) return;
+
+    gateway.style.transition = 'none';
+    adjustCardHeight(gateway, loginWrapper);
+
+    setTimeout(() => {
+        gateway.style.transition = 'height 0.4s ease-in-out';
+    }, 50);
+}
+
+
+/**
+ * @description Slides the gateway slider to the specified view (signup or login) and toggles header elements accordingly
+ * @param {HTMLElement} slider - The slider element to be moved
+ * @param {string} view - The target view ('signup' or 'login')
+ * @return {void}
+ */
+function slideTo(slider, view) {
+    if (!slider) return;
+
+    if (view === 'signup') {
+        slider.style.transform = 'translateX(-50%)';
+        toggleHeaderElements(false);
+    } else {
+        slider.style.transform = 'translateX(0%)';
+        toggleHeaderElements(true);
+    }
+}
+
+
+/**
+ * @description Initializes the slider logic for the gateway by setting up event listeners for navigation buttons and adjusting the card height accordingly
+ * @export
+ */
 export function initSliderLogic() {
     const gateway = document.querySelector(".gateway");
     const slider = document.getElementById('gatewaySlider');
