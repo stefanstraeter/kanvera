@@ -16,6 +16,7 @@
 @import url("./ui/form-feedback.css");
 @import url("./ui/scrollbar.css");
 @import url("./ui/components.css");
+@import url("./ui/splash-screen.css");
 
 /* Layout */
 @import url("./layout/header.css");
