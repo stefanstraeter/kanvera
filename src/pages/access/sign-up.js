@@ -2,6 +2,8 @@
 
 import { validateNotEmpty, validateEmailFormat, validateMinLength, toggleError } from '../../utils/input-validation.js';
 import { AUTH_ERRORS } from '../../utils/constants.js';
+import { checkIfEmailExists, createNewUser } from '../../services/auth-logic.js';
+
 
 /**
  * @description Validates the signup form inputs and toggles error states accordingly
@@ -31,27 +33,83 @@ function isSignupFormValid() {
 
 
 /**
- * @description Handles the signup form submission, validates the inputs, and prepares data for Firebase authentication
+ * @description Gets data from the form inputs and returns it as an object
+ * @return {Object} - Returns an object containing the name, email, and password from the signup form inputs
+ */
+function getFormData() {
+    return {
+        name: document.getElementById('signupName').value.trim(),
+        email: document.getElementById('signupEmail').value.trim(),
+        password: document.getElementById('signupPassword').value
+    };
+}
+
+
+/**
+ * @description Activates or deactivates the submit button (UI feedback)
+ * @param {boolean} isPending - Indicates whether the form submission is in progress
+ * @param {Event} event - The form submission event
+ */
+function setLoadingState(isPending, event) {
+    const btn = event.submitter;
+    if (btn) {
+        btn.disabled = isPending;
+        // Optional: Hier könntest du auch den Text ändern oder einen Spinner zeigen
+        btn.style.opacity = isPending ? "0.5" : "1";
+    }
+}
+
+
+/**
+ * @description Displays a success message to the user and redirects to the login page after a short delay
+ */
+function showSuccessMessage() {
+    const overlay = document.getElementById('successOverlay');
+
+    if (overlay) {
+        overlay.classList.add('show');
+
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 2500);
+    } else {
+        alert("Signup successful!");
+        window.location.href = "index.html";
+    }
+}
+
+
+/**
+ * @description Handles the signup form submission by validating inputs, checking for existing email, creating a new user, and providing feedback to the user.
  * @export
- * @param {Event} event - The event object from the form submission
- * @return {Promise<void>} - A promise that resolves when the signup process is complete
+ * @param {Event} event - The form submission event
+ * @return {Promise<void>} - Returns a promise that resolves when the signup process is complete
  */
 export async function handleSignup(event) {
     event.preventDefault();
 
-    const isValid = isSignupFormValid();
+    if (!isSignupFormValid()) return;
 
-    if (!isValid) {
-        console.log("Validierung fehlgeschlagen.");
-        return;
+    setLoadingState(true, event);
+    const newUser = getFormData();
+
+    try {
+        const emailExists = await checkIfEmailExists(newUser.email);
+
+        if (emailExists) {
+            const emailInput = document.getElementById('signupEmail');
+            toggleError(emailInput, false, AUTH_ERRORS.EMAIL_EXISTS);
+            setLoadingState(false, event);
+            return;
+        }
+
+        await createNewUser(newUser);
+        showSuccessMessage();
+
+    } catch (error) {
+        console.error("Signup Error:", error);
+        setLoadingState(false, event);
     }
-
-    console.log("Signup-Daten okay, jetzt Firebase...");
-
-    // Hier kannst du die Daten für Firebase sammeln
-    const name = document.getElementById('signupName').value;
-    const email = document.getElementById('signupEmail').value;
-    const password = document.getElementById('signupPassword').value;
-
-    // ... hier kommt später der Firebase-Call hin
 }
+
+
