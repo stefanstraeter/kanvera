@@ -6,6 +6,10 @@ import { handleSignup } from './sign-up.js';
 import { loginAsUser, loginAsGuest } from '../../services/auth-logic.js';
 
 
+/* ==========================================================================
+   INITIALIZATION
+   ========================================================================== */
+
 /**
  * @description Initalizes the sign-in page logic by setting up event listeners for form submissions and live input validations
  * @export
@@ -24,7 +28,9 @@ export function initSignInLogic() {
     }
 }
 
-
+/* ==========================================================================
+   LIVE VALIDATION SETUP
+   ========================================================================== */
 /**
  * @description Sets up live validation for all relevant input fields on the sign-in and sign-up forms by attaching event listeners that validate the input values in real-time and display error messages as needed.
  */
@@ -48,19 +54,9 @@ function setupAllLiveValidations() {
     if (policyCheckbox) attachLiveValidation(policyCheckbox, (val) => val, AUTH_ERRORS.POLICY);
 }
 
-
-/**
- * @description Handles the guest login process by pre-filling the login form with guest credentials and then programmatically triggering the login process, ultimately redirecting the user to the main application page if successful.
- */
-async function handleGuestLogin() {
-    document.getElementById('loginEmail').value = "guest@mail.com";
-    document.getElementById('loginPassword').value = "********";
-
-    loginAsGuest();
-    window.location.href = "pulse.html";
-}
-
-
+/* ==========================================================================
+   FORM SUBMISSION HANDLING
+   ========================================================================== */
 /**
  * @description Handles the login form submission by validating input fields and attempting to log in the user.
  * @param {Event} event - The form submission event.
@@ -80,11 +76,21 @@ async function handleLoginSubmit(event) {
     if (isEmailValid && isPassValid) {
         const user = await loginAsUser(emailInput.value, passwordInput.value);
 
-        if (!user) {
-            toggleError(emailInput, false, AUTH_ERRORS.INVALID_AUTH);
-        } else {
+        if (user) {
             window.location.href = "pulse.html";
+        } else {
+            toggleError(emailInput, false, AUTH_ERRORS.INVALID_AUTH);
         }
     }
 }
 
+/**
+ * @description Handles the guest login process by pre-filling the login form with guest credentials and then programmatically triggering the login process, ultimately redirecting the user to the main application page if successful.
+ */
+async function handleGuestLogin() {
+    document.getElementById('loginEmail').value = "guest@mail.com";
+    document.getElementById('loginPassword').value = "********";
+
+    loginAsGuest();
+    window.location.href = "pulse.html";
+}
