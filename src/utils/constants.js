@@ -10,6 +10,7 @@ export const AUTH_ERRORS = {
     PASSWORD_SIGNUP: "At least 8 characters.",
     PASSWORD_CONFIRM: "Passwords do not match.",
     INVALID_AUTH: "Invalid email or password.",
-    POLICY: "Please accept the privacy policy."
+    POLICY: "Please accept the privacy policy.",
+    EMAIL_EXISTS: "This email is already registered."
 };
 
