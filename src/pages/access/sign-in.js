@@ -3,6 +3,7 @@
 import { validateNotEmpty, validateEmailFormat, validateMinLength, toggleError, attachLiveValidation } from '../../utils/input-validation.js';
 import { AUTH_ERRORS } from '../../utils/constants.js';
 import { handleSignup } from './sign-up.js';
+import { loginUser } from '../../services/auth-logic.js';
 
 /**
  * @description Initalizes the sign-in page logic by setting up event listeners for form submissions and live input validations
@@ -60,13 +61,12 @@ async function handleLoginSubmit(event) {
     toggleError(passwordInput, isPassValid, AUTH_ERRORS.PASSWORD_LOGIN);
 
     if (isEmailValid && isPassValid) {
-        // 2. Server-Check (Firebase)
-        const success = await loginUser(emailInput.value, passwordInput.value);
+        const user = await loginUser(emailInput.value, passwordInput.value);
 
-        if (!success) {
+        if (!user) {
             toggleError(emailInput, false, AUTH_ERRORS.INVALID_AUTH);
         } else {
-            // Login erfolgreich -> Weiterleitung
+            window.location.href = "pulse.html";
         }
     }
 }
