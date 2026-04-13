@@ -36,7 +36,7 @@ export async function createNewUser(userData) {
  * @param {string} password - The password of the user attempting to log in.
  * @return {Promise<Object|null>} - Returns the user data (excluding the password) if authentication is successful, or null if it fails.
  */
-export async function loginUser(email, password) {
+export async function loginAsUser(email, password) {
     const allUsers = await getData("users");
     if (!allUsers) return null;
 
@@ -57,4 +57,20 @@ export async function loginUser(email, password) {
     }
 
     return null;
+}
+
+
+/**
+ * @description Logs in a guest user by creating a temporary user object with predefined guest credentials and storing it in the session storage. This allows users to access the application without creating an account, while still maintaining a consistent user experience. The guest user is identified by a specific flag (isGuest) to differentiate it from regular users.
+ * @export
+ * @return {Object} - Returns the guest user data.
+ */
+export function loginAsGuest() {
+    const guestUser = {
+        name: "Guest",
+        email: "guest@mail.com",
+        isGuest: true
+    };
+    sessionStorage.setItem('loggedInUser', JSON.stringify(guestUser));
+    return guestUser;
 }
