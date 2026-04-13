@@ -1,5 +1,8 @@
 // src/utils/input-validation.js
 
+/* ==========================================================================
+   PURE VALIDATION LOGIC 
+   ========================================================================== */
 /**
  * @description Validates that the input value is not empty (after trimming whitespace)
  * @export
@@ -9,7 +12,6 @@
 export function validateNotEmpty(value) {
     return value.trim().length > 0;
 }
-
 
 /**
  * @description Validates that the input value is a valid email format
@@ -22,7 +24,6 @@ export function validateEmailFormat(email) {
     return pattern.test(email);
 }
 
-
 /**
  * @description Validates that the input value meets a minimum length requirement
  * @export
@@ -34,6 +35,19 @@ export function validateMinLength(value, min) {
     return value.length >= min;
 }
 
+/* ==========================================================================
+   DOM UTILITIES (UI-Updates)
+   ========================================================================== */
+/**
+* @description Get the value of an input element, handling different input types
+* @param {HTMLElement} inputElement - The input element to get the value from
+* @return {string|boolean} - The value of the input element, or its checked state for checkboxes
+*/
+function getInputValue(inputElement) {
+    return inputElement.type === 'checkbox'
+        ? inputElement.checked
+        : inputElement.value;
+}
 
 /**
  * @description Toggles error state on the input element and displays an error message if provided
@@ -63,19 +77,9 @@ export function toggleError(inputElement, isValid, message = "") {
     }
 }
 
-
-/**
- * @description Get the value of an input element, handling different input types
- * @param {HTMLElement} inputElement - The input element to get the value from
- * @return {string|boolean} - The value of the input element, or its checked state for checkboxes
- */
-function getInputValue(inputElement) {
-    return inputElement.type === 'checkbox'
-        ? inputElement.checked
-        : inputElement.value;
-}
-
-
+/* ==========================================================================
+   INTERACTIVE VALIDATION (Event-Listener)
+   ========================================================================== */
 /**
  * @description Attach live validation to an input element, providing immediate feedback as the user interacts with it. For text inputs, validation occurs on both 'input' and 'blur' events, while for checkboxes, validation occurs on 'change' events.
  * @export
@@ -95,7 +99,6 @@ export function attachLiveValidation(inputElement, validationFn, errorMessage) {
             toggleError(inputElement, true);
         }
     });
-
 
     if (inputElement.type !== 'checkbox') {
         inputElement.addEventListener('blur', () => {
