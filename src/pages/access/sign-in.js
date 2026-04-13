@@ -3,7 +3,8 @@
 import { validateNotEmpty, validateEmailFormat, validateMinLength, toggleError, attachLiveValidation } from '../../utils/input-validation.js';
 import { AUTH_ERRORS } from '../../utils/constants.js';
 import { handleSignup } from './sign-up.js';
-import { loginUser } from '../../services/auth-logic.js';
+import { loginAsUser, loginAsGuest } from '../../services/auth-logic.js';
+
 
 /**
  * @description Initalizes the sign-in page logic by setting up event listeners for form submissions and live input validations
@@ -12,11 +13,15 @@ import { loginUser } from '../../services/auth-logic.js';
 export function initSignInLogic() {
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
+    const guestBtn = document.getElementById('guestBtn');
 
     setupAllLiveValidations();
 
     if (loginForm) loginForm.addEventListener('submit', handleLoginSubmit);
     if (signupForm) signupForm.addEventListener('submit', handleSignup);
+    if (guestBtn) {
+        guestBtn.addEventListener('click', handleGuestLogin);
+    }
 }
 
 
@@ -45,6 +50,18 @@ function setupAllLiveValidations() {
 
 
 /**
+ * @description Handles the guest login process by pre-filling the login form with guest credentials and then programmatically triggering the login process, ultimately redirecting the user to the main application page if successful.
+ */
+async function handleGuestLogin() {
+    document.getElementById('loginEmail').value = "guest@mail.com";
+    document.getElementById('loginPassword').value = "********";
+
+    loginAsGuest();
+    window.location.href = "pulse.html";
+}
+
+
+/**
  * @description Handles the login form submission by validating input fields and attempting to log in the user.
  * @param {Event} event - The form submission event.
  */
@@ -61,7 +78,7 @@ async function handleLoginSubmit(event) {
     toggleError(passwordInput, isPassValid, AUTH_ERRORS.PASSWORD_LOGIN);
 
     if (isEmailValid && isPassValid) {
-        const user = await loginUser(emailInput.value, passwordInput.value);
+        const user = await loginAsUser(emailInput.value, passwordInput.value);
 
         if (!user) {
             toggleError(emailInput, false, AUTH_ERRORS.INVALID_AUTH);
@@ -70,3 +87,4 @@ async function handleLoginSubmit(event) {
         }
     }
 }
+
