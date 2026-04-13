@@ -63,12 +63,10 @@ export function initThemeListeners() {
         const element = event.target;
 
         if (element.id === 'theme-toggle' || element.id === 'theme-toggle-dropdown') {
-
             const newTheme = element.checked ? 'dark' : 'light';
 
             applyTheme(newTheme);
         }
     });
-
     applyTheme();
 }
