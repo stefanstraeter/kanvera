@@ -1,12 +1,15 @@
 // src/utils/theme.js
 
+/* ==========================================================================
+   THEME UI HELPERS
+   ========================================================================== */
 /**
  * @description Updates the logos based on the current theme.   
  * @param {string} theme - The current theme ('light' or 'dark').
  * @returns {void}
  */
 function updateLogos(theme) {
-    const logos = document.querySelectorAll('.sidebar__logo, .access-logo');
+    const logos = document.querySelectorAll('.sidebar__logo, .access-logo, .header__logo-img, #headerLogoFinal');
 
     logos.forEach(logo => {
         if (theme === 'dark') {
@@ -16,7 +19,6 @@ function updateLogos(theme) {
         }
     });
 }
-
 
 /**
  * @description Synchronizes the state of all theme toggle elements (checkboxes) to match the current theme.
@@ -36,7 +38,9 @@ function syncToggles(theme) {
     });
 }
 
-
+/* ==========================================================================
+   THEME CORE LOGIC (Export)
+   ========================================================================== */
 /**
  * @description Applies the specified theme to the application by setting a data attribute on the document root, updating logos, and synchronizing toggle states. 
  * @returns {void}
@@ -52,7 +56,6 @@ export function applyTheme(theme = null) {
     updateLogos(activeTheme);
     syncToggles(activeTheme);
 }
-
 
 /**
  * @description Initializes event listeners for theme toggle elements and applies the current theme on page load. 
