@@ -5,20 +5,16 @@
   display: flex;
   align-items: center;
   height: 3rem;
-  background-color: var(--color-white);
+  background-color: var(--bg-input);
   border: 1px solid var(--color-lines);
-  border-radius: var(--radius-card);
+  border-radius: var(--radius-input);
   padding: 0 var(--space-md);
   transition: border-color var(--transition);
   gap: var(--space-sm);
 }
 
-[data-theme="dark"] .field-group {
-  background-color: var(--color-dark-grey);
-}
-
 .field-group:focus-within {
-  border-color: var(--color-main);
+  border-color: var(--color-focus);
 }
 
 .field-wrapper.has-error .field-group {
@@ -38,7 +34,7 @@
   font-size: var(--font-size-m);
   color: var(--color-text-main);
   background: transparent;
-  caret-color: var(--color-main);
+  caret-color: var(--color-focus);
 }
 
 .field-input::placeholder {
