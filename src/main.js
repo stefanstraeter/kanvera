@@ -1,15 +1,21 @@
+// src/main.js
+
+import { initSplashScreen } from './utils/splash-screen.js';
 import { Navbar } from './components/layout/navbar.js';
 import { Header } from './components/layout/header.js';
 import { initThemeListeners } from './utils/theme.js';
 import { initPasswordToggles, initSliderLogic, initDropdownLogic } from './pages/access/access-utils.js';
 import { initSignInLogic } from './pages/access/sign-in.js';
 
+/* ==========================================================================
+   APP INITIALIZATION
+   ========================================================================== */
 async function init() {
     initThemeListeners();
 
 
     if (document.getElementById('gatewaySlider')) {
-        console.log("Slider gefunden, lade Logik...");
+        initSplashScreen();
         initSliderLogic();
         initPasswordToggles();
         initSignInLogic();
@@ -22,7 +28,9 @@ async function init() {
     await initLayout();
 }
 
-
+/* ==========================================================================
+   LAYOUT RENDERING
+   ========================================================================== */
 async function initLayout() {
     const sidebarAnchor = document.getElementById('js-sidebar-anchor');
     const headerAnchor = document.getElementById('js-header-anchor');
@@ -39,4 +47,7 @@ async function initLayout() {
     }
 }
 
+/* ==========================================================================
+   DOM READY EVENT
+   ========================================================================== */
 document.addEventListener('DOMContentLoaded', init);
