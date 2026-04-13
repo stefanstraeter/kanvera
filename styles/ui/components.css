@@ -1,8 +1,6 @@
 /* ==========================================================================
-   COMPONENT: DROPDOWN
-   Basis-System für Menüs (Index & Board)
+   DROPDOWN MENU
    ========================================================================== */
-
 .menu-dropdown {
   position: relative;
   display: flex;
@@ -18,7 +16,6 @@
 /* ==========================================================================
    TRIGGER & CONTENT
    ========================================================================== */
-
 .menu-dropdown__trigger {
   padding: var(--space-xs);
   border-radius: var(--radius-modal);
@@ -53,9 +50,8 @@
 }
 
 /* ==========================================================================
-   DROPDOWN ITEMS (Links, Labels, Divider)
+   DROPDOWN ITEMS
    ========================================================================== */
-
 .menu-dropdown__group {
   display: flex;
   flex-direction: column;
@@ -96,7 +92,6 @@
 /* ==========================================================================
    DROPDOWN THEME TOGGLE
    ========================================================================== */
-
 .menu-dropdown__theme-toggle {
   display: none;
   padding: var(--space-sm) var(--space-sm) 0 var(--space-sm);
@@ -120,7 +115,6 @@
 /* ==========================================================================
    ANIMATIONS
    ========================================================================== */
-
 @keyframes dropdownFadeIn {
   from {
     opacity: 0;
