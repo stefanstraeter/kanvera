@@ -14,3 +14,23 @@ export const AUTH_ERRORS = {
     EMAIL_EXISTS: "This email is already registered."
 };
 
+/** 
+ * @description Default guest user data used for guest login functionality.
+ */
+export const GUEST_LOGIN_DATA = {
+    name: "Guest",
+    email: "guest@mail.com",
+    password: "********"
+};
+
+
+/** 
+ * @description Default UI button text used for various authentication actions.
+ */
+export const UI_BUTTON_TEXT = {
+    LOGIN_PENDING: "Logging in...",
+    LOGIN_DEFAULT: "Sign In",
+    SIGNUP_PENDING: "Creating account...",
+    SIGNUP_DEFAULT: "Sign Up",
+    GUEST_DEFAULT: "Guest Sign In"
+};
