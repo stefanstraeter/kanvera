@@ -13,7 +13,6 @@ import { initSignInLogic } from './pages/access/sign-in.js';
 async function init() {
     initThemeListeners();
 
-
     if (document.getElementById('gatewaySlider')) {
         initSplashScreen();
         initSliderLogic();
