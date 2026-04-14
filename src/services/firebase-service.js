@@ -12,7 +12,7 @@ const BASE_URL = "https://join-7c944-default-rtdb.europe-west1.firebasedatabase.
  * @param {string} [path=""] The path in the database to fetch data from.
  * @return {Promise<null|any>} The fetched data as a JSON object, or null if an error occurred.
  */
-export async function getData(path = "") {
+export async function fetchData(path = "") {
     try {
         let response = await fetch(BASE_URL + path + ".json");
         let responseToJson = await response.json();
