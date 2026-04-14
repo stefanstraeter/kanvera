@@ -21,10 +21,10 @@
   --color-danger-hover: #ff9898;
   --color-focus: #635fc7;
 
-  --status-todo: #49c4e5;
-  --status-doing: #8471f2;
-  --status-await-feedback: #cda561;
-  --status-done: #67e2ae;
+  --status-todo: #635fc7;
+  --status-doing: #f5a560;
+  --status-await-feedback: #ea7564;
+  --status-done: #62c4b7;
 
   /* ==========================================================================
    LIGHT MODE (DEFAULT)
@@ -69,6 +69,7 @@
   --line-height-heading: 1.2;
   --line-height-body: 1.5;
 
+  --font-size-3xl: 3rem;
   --font-size-2xl: 2rem;
   --font-size-xl: 1.5rem;
   --font-size-l: 1.125rem;
@@ -116,6 +117,7 @@
 
   --shadow-sidebar: 0px 10px 20px rgba(0, 0, 0, 0.1);
   --shadow-card: 0 4px 6px rgba(54, 78, 126, 0.1);
+  --shadow-card-hover: 0 12px 24px rgba(0, 0, 0, 0.15);
   --shadow-modal: 0px 10px 20px rgba(0, 0, 0, 0.1);
 
   --background-overlay: rgba(0, 0, 0, 0.5);
