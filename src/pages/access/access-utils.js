@@ -150,7 +150,6 @@ function slideTo(slider, view) {
 /* ==========================================================================
    UI FEEDBACK
    ========================================================================== */
-
 /**
  * @description Toggles the loading state of a button
  * @export

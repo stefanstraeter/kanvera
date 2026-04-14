@@ -1,7 +1,6 @@
 /** 
- * @description A collection of error messages related to authentication processes, such as login and signup.
- * 
-*/
+ * @description A collection of error messages related to authentication processes.
+ */
 export const AUTH_ERRORS = {
     NAME: "Your name is required.",
     EMAIL_LOGIN: "Please enter your email.",
@@ -22,7 +21,6 @@ export const GUEST_LOGIN_DATA = {
     email: "guest@mail.com",
     password: "********"
 };
-
 
 /** 
  * @description Default UI button text used for various authentication actions.
