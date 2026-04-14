@@ -1,8 +1,9 @@
 // src/pages/access/sign-up.js
 
 import { validateNotEmpty, validateEmailFormat, validateMinLength, toggleError } from '../../utils/input-validation.js';
-import { AUTH_ERRORS } from '../../utils/constants.js';
+import { AUTH_ERRORS, UI_BUTTON_TEXT } from '../../utils/constants.js';
 import { checkIfEmailExists, createNewUser } from '../../services/auth-logic.js';
+import { setLoadingStateBtn } from './access-utils.js';
 
 
 /* ==========================================================================
@@ -12,7 +13,7 @@ import { checkIfEmailExists, createNewUser } from '../../services/auth-logic.js'
  * @description Validates the signup form inputs and toggles error states accordingly
  * @return {boolean} - Returns true if all inputs are valid, false otherwise
  */
-function isSignupFormValid() {
+function isSignUpFormValid() {
     const nameInput = document.getElementById('signupName');
     const emailInput = document.getElementById('signupEmail');
     const passInput = document.getElementById('signupPassword');
@@ -47,21 +48,8 @@ function getFormData() {
 }
 
 /* ==========================================================================
-   UI FEEDBACK & OVERLAYS
+   UI OVERLAYS
    ========================================================================== */
-/**
- * @description Activates or deactivates the submit button (UI feedback)
- * @param {boolean} isPending - Indicates whether the form submission is in progress
- * @param {Event} event - The form submission event
- */
-function setLoadingState(isPending, event) {
-    const btn = event.submitter;
-    if (btn) {
-        btn.disabled = isPending;
-        btn.style.opacity = isPending ? "0.5" : "1";
-    }
-}
-
 /**
  * @description Displays a success message to the user and redirects to the login page after a short delay
  */
@@ -70,7 +58,6 @@ function showSuccessMessage() {
 
     if (overlay) {
         overlay.classList.add('show');
-
         setTimeout(() => {
             window.location.href = "index.html";
         }, 2500);
@@ -81,38 +68,36 @@ function showSuccessMessage() {
 }
 
 /* ==========================================================================
-   SIGNUP CORE LOGIC (Export)
+   SIGN UP CORE LOGIC (Export)
    ========================================================================== */
 /**
- * @description Handles the signup form submission by validating inputs, checking for existing email, creating a new user, and providing feedback to the user.
+ * @description Handles the sign-up form submission by validating inputs, checking for existing email, creating a new user, and providing feedback to the user.
  * @export
  * @param {Event} event - The form submission event
- * @return {Promise<void>} - Returns a promise that resolves when the signup process is complete
+ * @return {Promise<void>} - Returns a promise that resolves when the sign-up process is complete
  */
-export async function handleSignup(event) {
+export async function handleSignUp(event) {
     event.preventDefault();
+    if (!isSignUpFormValid()) return;
 
-    if (!isSignupFormValid()) return;
-
-    setLoadingState(true, event);
+    const signupBtn = event.submitter;
+    setLoadingStateBtn(signupBtn, true, UI_BUTTON_TEXT.SIGNUP_PENDING, UI_BUTTON_TEXT.SIGNUP_DEFAULT);
     const newUser = getFormData();
 
     try {
         const emailExists = await checkIfEmailExists(newUser.email);
-
         if (emailExists) {
             const emailInput = document.getElementById('signupEmail');
             toggleError(emailInput, false, AUTH_ERRORS.EMAIL_EXISTS);
-            setLoadingState(false, event);
+            setLoadingStateBtn(signupBtn, false, "", UI_BUTTON_TEXT.SIGNUP_DEFAULT);
             return;
         }
-
         await createNewUser(newUser);
         showSuccessMessage();
 
     } catch (error) {
         console.error("Signup Error:", error);
-        setLoadingState(false, event);
+        setLoadingStateBtn(signupBtn, false, "", UI_BUTTON_TEXT.SIGNUP_DEFAULT);
     }
 }
 
