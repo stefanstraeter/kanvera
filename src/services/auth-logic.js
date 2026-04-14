@@ -1,6 +1,6 @@
 // src/services/auth-logic.js
 
-import { getData, postData } from './firebase-service.js';
+import { fetchData, postData } from './firebase-service.js';
 import { GUEST_LOGIN_DATA } from '../utils/constants.js';
 
 
@@ -36,7 +36,7 @@ export function getInitials(name) {
  * @return {Promise<Object|null>} - Returns the user data (excluding the password) if authentication is successful, or null if it fails.
  */
 export async function signInAsUser(email, password) {
-    const allUsers = await getData("users");
+    const allUsers = await fetchData("users");
     if (!allUsers) return null;
 
     const userList = Object.entries(allUsers).map(([id, data]) => ({
@@ -81,7 +81,7 @@ export function signInAsGuest() {
  * @return {Promise<boolean>} - Returns true if the email exists, false otherwise.
  */
 export async function checkIfEmailExists(email) {
-    const allUsers = await getData("users");
+    const allUsers = await fetchData("users");
     if (!allUsers) return false;
 
     const userList = Object.values(allUsers);
