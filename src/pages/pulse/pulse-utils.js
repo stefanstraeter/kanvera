@@ -2,6 +2,15 @@
 
 import { GREETING_MESSAGES } from '../../utils/constants.js';
 
+/* ==========================================================================
+    UI TEXT FORMATTING
+   ========================================================================== */
+/**
+ * @description Get the greeting configuration based on the current time and user information
+ * @export
+ * @param {Object} user - The user object containing user information
+ * @return {Object} - The greeting configuration object
+ */
 export function getGreetingConfig(user) {
     const hour = new Date().getHours();
     let config;
@@ -19,6 +28,15 @@ export function getGreetingConfig(user) {
     };
 }
 
+/* ==========================================================================
+    DATE & TIME UTILITIES
+   ========================================================================== */
+/**
+ * @description Format a date string into a readable format
+ * @export
+ * @param {string} dateString - The date string to format
+ * @return {string} - The formatted date string
+ */
 export function formatDeadline(dateString) {
     if (!dateString) return "No upcoming deadline";
 
