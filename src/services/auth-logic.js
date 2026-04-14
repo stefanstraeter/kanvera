@@ -1,6 +1,7 @@
 // src/services/auth-logic.js
 
 import { getData, postData } from './firebase-service.js';
+import { GUEST_LOGIN_DATA } from '../utils/constants.js';
 
 
 /* ==========================================================================
@@ -25,16 +26,16 @@ export function getInitials(name) {
 
 
 /* ==========================================================================
-   LOGIN LOGIC
+   SIGN IN LOGIC (USER & GUEST)
    ========================================================================== */
 /**
- * @description Logs in a user by checking the provided email and password against the database. 
+ * @description Signs in a user by checking the provided email and password against the database. 
  * @export
- * @param {string} email - The email address of the user attempting to log in.
- * @param {string} password - The password of the user attempting to log in.
+ * @param {string} email - The email address of the user attempting to sign in.
+ * @param {string} password - The password of the user attempting to sign in.
  * @return {Promise<Object|null>} - Returns the user data (excluding the password) if authentication is successful, or null if it fails.
  */
-export async function loginAsUser(email, password) {
+export async function signInAsUser(email, password) {
     const allUsers = await getData("users");
     if (!allUsers) return null;
 
@@ -58,23 +59,21 @@ export async function loginAsUser(email, password) {
 }
 
 /**
- * @description Logs in a guest user by creating a temporary user object with predefined guest credentials and storing it in the session storage. 
+ * @description Signs in a guest user by creating a temporary user object with predefined guest credentials and storing it in the session storage. 
  * @export
  * @return {Object} - Returns the guest user data.
  */
-export function loginAsGuest() {
-    const guestUser = {
-        name: "Guest",
-        email: "guest@mail.com",
+export function signInAsGuest() {
+    sessionStorage.setItem('loggedInUser', JSON.stringify({
+        name: GUEST_LOGIN_DATA.name,
+        email: GUEST_LOGIN_DATA.email,
         isGuest: true
-    };
-    sessionStorage.setItem('loggedInUser', JSON.stringify(guestUser));
-    return guestUser;
+    }));
 }
 
 
 /* ==========================================================================
-   SIGNUP LOGIC
+   SIGN UP LOGIC
    ========================================================================== */
 /**
  * @description Checks if a given email already exists in the database. This is used during the signup process to prevent duplicate accounts. 
