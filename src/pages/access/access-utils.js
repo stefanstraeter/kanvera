@@ -1,5 +1,7 @@
 // access-utils.js
 
+import { UI_BUTTON_TEXT } from '../../utils/constants.js';
+
 /* ==========================================================================
    DROPDOWN & NAVIGATION UI
    ========================================================================== */
@@ -143,6 +145,32 @@ function slideTo(slider, view) {
         slider.style.transform = 'translateX(0%)';
         toggleHeaderElements(true);
     }
+}
+
+/* ==========================================================================
+   UI FEEDBACK
+   ========================================================================== */
+
+/**
+ * @description Toggles the loading state of a button
+ * @export
+ * @param {HTMLElement} btn - The button element to be toggled
+ * @param {boolean} isPending - Loading state
+ * @param {string} [loadingText=UI_BUTTON_TEXT.LOGIN_PENDING] - Text to show during loading
+ * @param {string} [originalText=UI_BUTTON_TEXT.LOGIN_DEFAULT] - Text to show after loading
+ * @return {void} 
+ */
+export function setLoadingStateBtn(
+    btn,
+    isPending,
+    loadingText = UI_BUTTON_TEXT.LOGIN_PENDING,
+    originalText = UI_BUTTON_TEXT.LOGIN_DEFAULT
+) {
+    if (!btn) return;
+    btn.disabled = isPending;
+    btn.innerText = isPending ? loadingText : originalText;
+    btn.style.opacity = isPending ? "0.5" : "1";
+    btn.style.cursor = isPending ? "not-allowed" : "pointer";
 }
 
 /* ==========================================================================
