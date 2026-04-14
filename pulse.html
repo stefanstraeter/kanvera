@@ -21,6 +21,63 @@
   <body class="l-app">
     <aside class="l-sidebar" id="js-sidebar-anchor"></aside>
     <header class="l-header" id="js-header-anchor"></header>
-    <main class="l-content" id="js-content-anchor"></main>
+    <main class="l-content" id="js-content-anchor">
+      <div class="pulse-wrapper">
+        <header class="pulse-header">
+          <div class="pulse-greet">
+            <h2 class="heading-xl">
+              <span id="greetingTitle">Start your day</span><span id="greetingSymbol">,</span>
+              <span id="pulseUserName" class="color-main">User</span>
+            </h2>
+            <p class="color-medium-grey" id="greetingSubline">Ready to tackle your tasks?</p>
+          </div>
+        </header>
+
+        <main class="pulse-content">
+          <div class="pulse-row pulse-row--main">
+            <div class="pulse-card pulse-card--hero">
+              <div class="pulse-stats">
+                <span class="pulse-number" id="totalTasks">0</span>
+                <span class="pulse-label">Tasks in Board</span>
+              </div>
+            </div>
+
+            <div class="pulse-card pulse-card--urgent">
+              <div class="urgent-info">
+                <div class="urgent-badge">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                  <span class="pulse-number" id="urgentCount">0</span>
+                </div>
+                <span class="pulse-label">Urgent Tasks</span>
+              </div>
+              <div class="pulse-divider"></div>
+              <div class="urgent-deadline">
+                <span class="deadline-date" id="nextDeadline">Upcoming</span>
+                <span class="pulse-label">Deadline</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pulse-row pulse-row--stats">
+            <div class="pulse-card pulse-card--status status-todo">
+              <span class="pulse-number" id="countTodo">0</span>
+              <span class="pulse-label">Let's get started</span>
+            </div>
+            <div class="pulse-card pulse-card--status status-doing">
+              <span class="pulse-number" id="countDoing">0</span>
+              <span class="pulse-label">Currently working</span>
+            </div>
+            <div class="pulse-card pulse-card--status status-await">
+              <span class="pulse-number" id="countAwait">0</span>
+              <span class="pulse-label">Waiting for others</span>
+            </div>
+            <div class="pulse-card pulse-card--status status-done">
+              <span class="pulse-number" id="countDone">0</span>
+              <span class="pulse-label">Celebrated success</span>
+            </div>
+          </div>
+        </main>
+      </div>
+    </main>
   </body>
 </html>
