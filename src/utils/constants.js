@@ -32,3 +32,25 @@ export const UI_BUTTON_TEXT = {
     SIGNUP_DEFAULT: "Sign Up",
     GUEST_DEFAULT: "Guest Sign In"
 };
+
+/** 
+ * @description Predefined greeting messages based on the time of day for the Pulse dashboard.
+ */
+export const GREETING_MESSAGES = {
+    MORNING: {
+        title: "Start your day",
+        subline: "Ready to tackle your tasks?"
+    },
+    AFTERNOON: {
+        title: "Stay in the flow",
+        subline: "You're making great progress!"
+    },
+    EVENING: {
+        title: "Finish strong",
+        subline: "Let's check what's left for today."
+    },
+    NIGHT: {
+        title: "Night owl mode",
+        subline: "Still working? Don't forget to rest!"
+    }
+};
