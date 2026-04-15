@@ -29,13 +29,9 @@
 .l-content {
   grid-area: content;
   background-color: var(--bg-app-content);
-  overflow: auto;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: var(--space-lg);
+  overflow-y: auto;
+  display: block;
   min-height: 0;
-  min-width: 0;
 }
 
 /* ==========================================================================
