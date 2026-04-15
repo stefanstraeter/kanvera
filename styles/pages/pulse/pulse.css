@@ -157,10 +157,6 @@
     padding: var(--space-m);
     margin: 0 auto;
   }
-
-  .pulse-row--main {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 450px) {
