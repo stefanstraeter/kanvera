@@ -19,11 +19,10 @@ export function getInitials(name) {
     const initials = parts.map(part => part.charAt(0).toUpperCase());
 
     if (initials.length > 1) {
-        return initials[0] + initials[initials.length - 1]; // Vorname + Nachname
+        return initials[0] + initials[initials.length - 1];
     }
-    return initials[0]; // Nur Vorname
+    return initials[0];
 }
-
 
 /* ==========================================================================
    SIGN IN LOGIC (USER & GUEST)
