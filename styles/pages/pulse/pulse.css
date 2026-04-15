@@ -23,7 +23,7 @@
 }
 
 /* ==========================================================================
-   GRID SYSTEM 
+   PULSE GRID SYSTEM 
    ========================================================================== */
 .pulse-row {
   display: grid;
@@ -40,7 +40,7 @@
 }
 
 /* ==========================================================================
-   BASE CARD STYLING
+   PULSE CARD STYLING - BASE
    ========================================================================== */
 .pulse-card {
   background-color: var(--bg-app-card);
@@ -52,11 +52,13 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid var(--color-lines);
   width: 100%;
   min-width: 0;
   cursor: pointer;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 
 .pulse-card:hover {
@@ -92,7 +94,7 @@
 }
 
 /* ==========================================================================
-   URGENT CARD SPECIALS
+   PULSE CARD STYLING - URGENT 
    ========================================================================== */
 .pulse-card--urgent {
   flex-direction: row;
@@ -145,7 +147,6 @@
 /* ==========================================================================
    RESPONSIVE OVERRIDES
    ========================================================================== */
-
 @media (max-width: 1200px) {
   .pulse-row--stats {
     grid-template-columns: repeat(2, 1fr);
