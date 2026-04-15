@@ -12,6 +12,7 @@
   color: var(--color-text-main);
   background-color: var(--bg-app-header);
   padding: var(--space-xl);
+  min-width: 0;
 }
 
 .header__actions {
@@ -29,8 +30,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  flex-shrink: 1;
   min-width: 0;
+  flex: 0 1 auto;
   margin-right: var(--space-md);
 }
 
@@ -70,14 +71,5 @@
 @media (max-width: 950px) {
   .l-header {
     padding: 0 var(--space-md);
-  }
-}
-
-/* ==========================================================================
-   MOBILE HEADER
-   ========================================================================== */
-@media (max-width: 500px) {
-  .header__title {
-    font-size: var(--font-size-l);
   }
 }
