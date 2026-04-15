@@ -4,7 +4,7 @@ import { initDataService, getPulseStats } from '../../services/data-service.js';
 import { getGreetingConfig, formatDeadline } from './pulse-utils.js';
 
 /* ==========================================================================
-    RENDERING UTILITIES (USER GREETING AND STATS)
+    RENDERING GREETING AND STATS
    ========================================================================== */
 /**
  * @description Render the greeting section of the Pulse page based on user information and time of day

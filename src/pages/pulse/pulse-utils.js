@@ -3,7 +3,7 @@
 import { GREETING_MESSAGES } from '../../utils/constants.js';
 
 /* ==========================================================================
-    UI TEXT FORMATTING
+   GREETING CONFIGURATION
    ========================================================================== */
 /**
  * @description Get the greeting configuration based on the current time and user information
@@ -29,7 +29,7 @@ export function getGreetingConfig(user) {
 }
 
 /* ==========================================================================
-    DATE & TIME UTILITIES
+    DATE & TIME FORMATTING
    ========================================================================== */
 /**
  * @description Format a date string into a readable format

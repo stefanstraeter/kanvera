@@ -29,7 +29,7 @@ export function initSignInLogic() {
 }
 
 /* ==========================================================================
-   LIVE VALIDATION SETUP
+   LIVE VALIDATION
    ========================================================================== */
 /**
  * @description Sets up live validation for all relevant input fields on the sign-in and sign-up forms by attaching event listeners that validate the input values in real-time and display error messages as needed.

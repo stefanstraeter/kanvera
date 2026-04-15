@@ -45,7 +45,7 @@ async function runExitSequence(elements) {
 }
 
 /* ==========================================================================
-   SPLASH SCREEN INITIALIZATION (EXPORT)
+   INITIALIZATION
    ========================================================================== */
 /**
  * @description Initialize the splash screen sequence.

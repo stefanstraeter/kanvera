@@ -10,7 +10,7 @@ import { getCurrentUser } from '../../services/auth-logic.js';
  */
 export class Navbar {
     /* ==========================================================================
-       LIFECYCLE & RENDERING
+       INITIALIZATION & RENDERING
        ========================================================================== */
     constructor() {
         this.templatePath = './templates/sidebar.html';
@@ -42,7 +42,7 @@ export class Navbar {
     }
 
     /* ==========================================================================
-       NAVIGATION LOGIC
+       NAVIGATION HIGHLIGHTING
        ========================================================================== */
     /**
      * @description Highlights the active link in the navbar based on the current URL path.

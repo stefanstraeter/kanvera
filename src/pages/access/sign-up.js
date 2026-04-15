@@ -48,7 +48,7 @@ function getFormData() {
 }
 
 /* ==========================================================================
-   UI OVERLAYS
+   OVERLAYS SUCCESS MESSAGE
    ========================================================================== */
 /**
  * @description Displays a success message to the user and redirects to the login page after a short delay
@@ -68,7 +68,7 @@ function showSuccessMessage() {
 }
 
 /* ==========================================================================
-   SIGN UP CORE LOGIC (Export)
+   SIGN UP LOGIC
    ========================================================================== */
 /**
  * @description Handles the sign-up form submission by validating inputs, checking for existing email, creating a new user, and providing feedback to the user.

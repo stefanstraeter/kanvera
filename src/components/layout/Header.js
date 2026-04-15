@@ -9,7 +9,7 @@ import { performLogout, getCurrentUser, getInitials } from '../../services/auth-
  */
 export class Header {
     /* ==========================================================================
-       LIFECYCLE & INITIALIZATION
+       INITIALIZATION
        ========================================================================== */
     constructor() {
         this.templatePath = './templates/header.html';
@@ -44,7 +44,7 @@ export class Header {
     }
 
     /* ==========================================================================
-       UI & CONTENT UPDATES
+       UPDATING HEADER CONTENT
        ========================================================================== */
     /**
      * @description Gets the current URL path to determine which page the user is on. ion button accordingly.
@@ -112,7 +112,7 @@ export class Header {
     }
 
     /* ==========================================================================
-       INTERACTIVE ELEMENTS (Events)
+       DROPDOWN MENU
        ========================================================================== */
     /**
      * @description Initializes the dropdown menu for the user avatar in the header, including event listeners for opening/closing the menu and handling logout functionality.

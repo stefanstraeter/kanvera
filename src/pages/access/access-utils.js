@@ -3,7 +3,7 @@
 import { UI_BUTTON_TEXT } from '../../utils/constants.js';
 
 /* ==========================================================================
-   DROPDOWN & NAVIGATION UI
+   HEADER ELEMENTS TOGGLE
    ========================================================================== */
 /**
  * @description Toggles the visibility of header elements based on the provided flag
@@ -95,7 +95,7 @@ export function initPasswordToggles() {
 }
 
 /* ==========================================================================
-   GATEWAY SLIDER & CARD LOGIC
+   GATEWAY SLIDER & CARD HEIGHT ADJUSTMENT
    ========================================================================== */
 /**
  * @description Adjusts the height of the gateway element based on the height of the wrapper element
@@ -148,7 +148,7 @@ function slideTo(slider, view) {
 }
 
 /* ==========================================================================
-   UI FEEDBACK
+   BUTTON LOADING STATE
    ========================================================================== */
 /**
  * @description Toggles the loading state of a button
@@ -173,7 +173,7 @@ export function setLoadingStateBtn(
 }
 
 /* ==========================================================================
-   INITIALIZATION & EXPORT
+   INITIALIZATION OF GATEWAY LOGIC
    ========================================================================== */
 /**
  * @description Initializes the slider logic for the gateway by setting up event listeners for navigation buttons and adjusting the card height accordingly

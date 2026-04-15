@@ -25,7 +25,7 @@ export function getInitials(name) {
 }
 
 /* ==========================================================================
-   SIGN IN LOGIC (USER & GUEST)
+   SIGN IN LOGIC - USER & GUEST
    ========================================================================== */
 /**
  * @description Signs in a user by checking the provided email and password against the database. 

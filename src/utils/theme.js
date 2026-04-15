@@ -39,7 +39,7 @@ function syncToggles(theme) {
 }
 
 /* ==========================================================================
-   THEME CORE LOGIC (Export)
+   THEME CORE LOGIC
    ========================================================================== */
 /**
  * @description Applies the specified theme to the application by setting a data attribute on the document root, updating logos, and synchronizing toggle states. 
