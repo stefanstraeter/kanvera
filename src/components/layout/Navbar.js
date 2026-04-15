@@ -1,6 +1,7 @@
 // src/components/layout/navbar.js
 
 import { applyTheme } from '../../utils/theme.js';
+import { getCurrentUser } from '../../services/auth-logic.js';
 
 /**
  * @description Navbar component responsible for rendering the sidebar navigation and highlighting the active link based on the current URL path. 
@@ -25,12 +26,18 @@ export class Navbar {
 
         try {
             const response = await fetch(this.templatePath);
-            const html = await response.text();
+            let html = await response.text();
+            const user = getCurrentUser();
+
+            if (!user) {
+                html = this.getGuestNavbarTemplate(html);
+            }
             anchor.innerHTML = html;
 
             this.highlightActiveLink();
             applyTheme();
         } catch (error) {
+            console.error('Error rendering navbar:', error);
         }
     }
 
@@ -51,5 +58,26 @@ export class Navbar {
                 link.classList.add('nav-item--active');
             }
         });
+    }
+
+    /* ==========================================================================
+       GUEST NAVBAR TEMPLATE
+       ========================================================================== */
+    getGuestNavbarTemplate(html) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const navList = doc.querySelector('.sidebar__list');
+
+        if (navList) {
+            navList.innerHTML = `
+                <li class="sidebar__item ">
+                    <a href="index.html" class="nav-item">
+                        <span class="nav-item__icon"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
+                        To Sign Up
+                    </a>
+                </li>
+            `;
+        }
+        return doc.body.innerHTML;
     }
 }
