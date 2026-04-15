@@ -36,7 +36,7 @@ export function validateMinLength(value, min) {
 }
 
 /* ==========================================================================
-   DOM UTILITIES (UI-Updates)
+   DOM UTILITIES (UI-UPDATE)
    ========================================================================== */
 /**
 * @description Get the value of an input element, handling different input types
@@ -78,7 +78,7 @@ export function toggleError(inputElement, isValid, message = "") {
 }
 
 /* ==========================================================================
-   INTERACTIVE VALIDATION (Event-Listener)
+   INTERACTIVE VALIDATION (EVENT-LISTENERS)
    ========================================================================== */
 /**
  * @description Attach live validation to an input element, providing immediate feedback as the user interacts with it. For text inputs, validation occurs on both 'input' and 'blur' events, while for checkboxes, validation occurs on 'change' events.

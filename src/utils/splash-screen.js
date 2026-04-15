@@ -20,7 +20,7 @@ function getTargetLogoSrc() {
 }
 
 /* ==========================================================================
-   ANIMATION SEQUENCE logic
+   ANIMATION SEQUENCE
    ========================================================================== */
 /**
  * @description Run the exit sequence for the splash screen.
@@ -45,7 +45,7 @@ async function runExitSequence(elements) {
 }
 
 /* ==========================================================================
-   SPLASH SCREEN INITIALIZATION (Export)
+   SPLASH SCREEN INITIALIZATION (EXPORT)
    ========================================================================== */
 /**
  * @description Initialize the splash screen sequence.
