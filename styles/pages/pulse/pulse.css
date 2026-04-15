@@ -4,6 +4,7 @@
 .pulse-wrapper {
   padding: var(--space-xl);
   animation: fadeIn 0.6s ease-out;
+  max-width: 56rem;
 }
 
 @keyframes fadeIn {
@@ -44,7 +45,7 @@
 .pulse-card {
   background-color: var(--bg-app-card);
   border-radius: var(--radius-card);
-  padding: var(--space-lg);
+  padding: var(--space-md);
   box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
@@ -95,16 +96,15 @@
    ========================================================================== */
 .pulse-card--urgent {
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
+  padding: var(--space-md);
   background: #833ab4;
   background: -webkit-linear-gradient(157deg, rgba(131, 58, 180, 1) 0%, rgba(255, 61, 36, 0.74) 100%);
   background: -moz-linear-gradient(157deg, rgba(131, 58, 180, 1) 0%, rgba(255, 61, 36, 0.74) 100%);
   background: linear-gradient(157deg, rgba(131, 58, 180, 1) 0%, rgba(255, 61, 36, 0.74) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#833AB4", endColorstr="#FF3D24", GradientType=0);
-
   color: var(--color-white);
-  padding: var(--space-xl);
 }
 
 .urgent-info {
