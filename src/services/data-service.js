@@ -6,31 +6,34 @@ const STORE_KEY = "kanvera_data";
 
 let state = {
     tasks: {},
-    contacts: {},
+    team: {},
     users: {}
 };
 
 /* ==========================================================================
-   DATA MANAGEMENT (PUBLIC API)
+   DATA MANAGEMENT - PUBLIC API
    ========================================================================== */
 /**
- * @description Fetches the latest data for tasks, contacts, and users from the backend and updates the state and cache.
+ * @description Fetches the latest data for tasks, team, and users from the backend and updates the state and cache.
  * @export
  */
 export async function refreshAllData() {
-    const [tasks, contacts, users] = await Promise.all([
+    const [tasks, team, users] = await Promise.all([
         fetchData("tasks"),
-        fetchData("contacts"),
+        fetchData("team"),
         fetchData("users")
     ]);
 
     state.tasks = tasks || {};
-    state.contacts = contacts || {};
+    state.team = team || {};
     state.users = users || {};
 
     saveToCache();
 }
 
+/* ==========================================================================
+   TASKS & PULSE STATS - PUBLIC API
+   ========================================================================== */
 /**
  * @description Returns an array of all tasks with their IDs included in the task objects.
  * @export
@@ -64,7 +67,22 @@ export function getPulseStats() {
 }
 
 /* ==========================================================================
-   INTERNAL UTILS (LOCAL)
+   TEAM MEMBERS - PUBLIC API
+   ========================================================================== */
+/**
+ * @description Returns an array of all team members with their IDs included in the team member objects.
+ * @export
+ * @return {Array<Object>} An array of team member objects with their IDs included
+ */
+export function getAllTeamMembers() {
+    return Object.keys(state.team).map(id => ({
+        id,
+        ...state.team[id]
+    }));
+}
+
+/* ==========================================================================
+   INTERNAL UTILS - LOCAL ONLY
    ========================================================================== */
 /**
 * @description Saves the current state to session storage for caching purposes.
