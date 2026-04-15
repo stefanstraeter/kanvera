@@ -2,14 +2,12 @@
 
 import { performLogout, getCurrentUser, getInitials } from '../../services/auth-logic.js';
 
-
 /**
  * @description Header component responsible for rendering the header and managing the dropdown menu and logout functionality.
  * @export
  * @class Header
  */
 export class Header {
-
     /* ==========================================================================
        LIFECYCLE & INITIALIZATION
        ========================================================================== */
@@ -38,6 +36,7 @@ export class Header {
             this.updateTitle();
             this.updateActionButton();
             this.updateUserAvatar();
+            this.manageAuthVisibility()
             this.initDropdown();
         } catch (err) {
             console.error('Error loading header template:', err);
@@ -148,6 +147,18 @@ export class Header {
         }
     }
 
+    manageAuthVisibility() {
+        const user = getCurrentUser();
+        const logoutLink = document.getElementById('logoutLink');
+        const actionBtn = document.getElementById(this.actionBtnId);
+        const divider = logoutLink?.previousElementSibling;
+
+        if (!user) {
+            if (logoutLink) logoutLink.style.display = 'none';
+            if (divider && divider.tagName === 'HR') divider.style.display = 'none';
+        }
+    }
+
     /* ==========================================================================
        USER AVATAR
        ========================================================================== */
@@ -161,11 +172,12 @@ export class Header {
         if (!avatarBtn) return;
 
         const user = getCurrentUser();
+
         if (user && user.name) {
             avatarBtn.textContent = getInitials(user.name);
         } else {
-            avatarBtn.textContent = "G";
+            avatarBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            avatarBtn.classList.add('user-avatar--guest');
         }
     }
-
 }
