@@ -1,0 +1,146 @@
+/* ==========================================================================
+   TEAM GRID SYSTEM 
+   ========================================================================== */
+.team-wrapper {
+  padding: var(--space-xl);
+  animation: fadeIn 0.6s ease-out;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-xl);
+  padding-bottom: var(--space-2xl);
+}
+
+/* ==========================================================================
+   TEAM CARD - BASE
+   ========================================================================== */
+.team-card {
+  background-color: var(--bg-app-card);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-lines);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.team-card__edit {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  opacity: 0.4;
+  transition: opacity var(--transition);
+}
+
+.team-card__edit button {
+  font-size: var(--font-size-s);
+}
+
+.team-card:hover .team-card__edit {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   TEAM CARD - AVATAR
+   ========================================================================== */
+.team-card__avatar {
+  margin-bottom: var(--space-lg);
+}
+
+.user-avatar--m {
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-main);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.user-avatar--m img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  color: var(--color-white);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   TEAM CARD - TEXT INFO
+   ========================================================================== */
+.team-card__info {
+  text-align: center;
+  width: 100%;
+}
+
+.team-card__info h3 {
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-heading);
+}
+
+.team-card__role {
+  font-size: var(--font-size-s);
+  color: var(--color-main);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-s);
+  margin-top: -4px;
+  margin-bottom: var(--space-md);
+}
+
+/* ==========================================================================
+   TEAM CARD - CONTACT
+   ========================================================================== */
+.team-card__contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.team-card__link {
+  text-decoration: none;
+  color: var(--color-medium-grey);
+  font-size: var(--font-size-s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  transition: color var(--transition);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.team-card__link:hover {
+  color: var(--color-main);
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 950px) {
+  .team-wrapper {
+    padding: var(--space-m);
+  }
+}
