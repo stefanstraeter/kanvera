@@ -1,14 +1,10 @@
 // src/services/data-service.js
 
 import { fetchData } from './firebase-service.js';
+import { DATA_CACHE_KEY, GUEST_LOGIN_DATA } from '../utils/constants.js';
+import { getCurrentUser } from './auth-logic.js';
 
-const STORE_KEY = "kanvera_data";
-
-let state = {
-    tasks: {},
-    team: {},
-    users: {}
-};
+let state = { tasks: {}, team: {}, users: {} };
 
 /* ==========================================================================
    DATA MANAGEMENT - PUBLIC API
@@ -35,15 +31,10 @@ export async function refreshAllData() {
    TASKS & PULSE STATS - PUBLIC API
    ========================================================================== */
 /**
- * @description Returns an array of all tasks with their IDs included in the task objects.
- * @export
- * @return {Array<Object>} An array of task objects with their IDs included
+ * @description Gibt alle Tasks als Array zurück.
  */
 export function getAllTasks() {
-    return Object.keys(state.tasks).map(id => ({
-        id,
-        ...state.tasks[id]
-    }));
+    return convertToArrayList(state.tasks);
 }
 
 /**
@@ -69,26 +60,65 @@ export function getPulseStats() {
 /* ==========================================================================
    TEAM MEMBERS - PUBLIC API
    ========================================================================== */
+
 /**
- * @description Returns an array of all team members with their IDs included in the team member objects.
+ * @description Get a list of all team members, including the current user if they are not already in the team list. 
  * @export
- * @return {Array<Object>} An array of team member objects with their IDs included
+ * @return {Array} - An array of team members.
  */
 export function getAllTeamMembers() {
-    return Object.keys(state.team).map(id => ({
-        id,
-        ...state.team[id]
-    }));
+    let members = convertToArrayList(state.team);
+    const currentUser = getCurrentUser();
+
+    if (!currentUser) return members;
+
+    const isAlreadyInList = members.some(m => m.email === currentUser.email);
+
+    if (!isAlreadyInList) {
+        members.push(createVirtualMember(currentUser));
+    }
+    return members;
+}
+
+/**
+ * @description Creates a virtual team member based on the current user.
+ * @param {Object} user - The current user object.
+ * @return {Object} - A virtual team member object.
+ */
+function createVirtualMember(user) {
+    return {
+        id: user.id || "guest-id",
+        name: user.name,
+        email: user.email,
+        roles: user.isGuest ? ["@guest"] : ["@team member"],
+        imageUrl: "",
+        phone: user.isGuest ? "demo mode" : "no phone",
+        isMe: true
+    };
 }
 
 /* ==========================================================================
-   INTERNAL UTILS - LOCAL ONLY
+   INTERNAL UTILS & HELPERS
    ========================================================================== */
 /**
-* @description Saves the current state to session storage for caching purposes.
+ * @description Converts a Firebase object into an array of objects.
+ * @param {Object} firebaseObject - The Firebase object to convert.
+ * @return {Array} - An array of objects.
+ */
+function convertToArrayList(firebaseObject) {
+    if (!firebaseObject) return [];
+    return Object.keys(firebaseObject).map(id => ({
+        id,
+        ...firebaseObject[id]
+    }));
+}
+
+
+/**
+* @description Saves the current state to session storage.
 */
 function saveToCache() {
-    sessionStorage.setItem(STORE_KEY, JSON.stringify(state));
+    sessionStorage.setItem(DATA_CACHE_KEY, JSON.stringify(state));
 }
 
 /* ==========================================================================
@@ -99,7 +129,7 @@ function saveToCache() {
  * @export
  */
 export async function initDataService() {
-    const cached = sessionStorage.getItem(STORE_KEY);
+    const cached = sessionStorage.getItem(DATA_CACHE_KEY);
 
     if (cached) {
         state = JSON.parse(cached);
