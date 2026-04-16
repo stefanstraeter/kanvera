@@ -1,11 +1,25 @@
 /* ==========================================================================
-   TEAM GRID SYSTEM 
+   TEAM LAYOUT STYLES
    ========================================================================== */
 .team-wrapper {
   padding: var(--space-xl);
   animation: fadeIn 0.6s ease-out;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   TEAM GRID SYSTEM 
+   ========================================================================== */
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
