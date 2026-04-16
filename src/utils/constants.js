@@ -1,3 +1,15 @@
+// src/utils/constants.js
+
+/** 
+ * @description Key used to store the authenticated user's session data in session storage. 
+ */
+export const AUTH_SESSION_KEY = "loggedInUser";
+
+/**  
+ * @description Key used to store the application's main data (tasks, team, users) in local storage for caching purposes.
+*/
+export const DATA_CACHE_KEY = "kanvera_data";
+
 /** 
  * @description A collection of error messages related to authentication processes.
  */
@@ -17,8 +29,8 @@ export const AUTH_ERRORS = {
  * @description Default guest user data used for guest login functionality.
  */
 export const GUEST_LOGIN_DATA = {
-    name: "Guest",
-    email: "guest@mail.com",
+    name: "Guest User",
+    email: "guest.user@kanvera.dev",
     password: "********"
 };
 
@@ -54,3 +66,5 @@ export const GREETING_MESSAGES = {
         subline: "Still working? Don't forget to rest!"
     }
 };
+
+
