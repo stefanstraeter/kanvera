@@ -13,13 +13,8 @@ function toggleHeaderElements(show) {
     const navText = document.querySelector('.access-nav-text');
     const toSignupBtn = document.getElementById('toSignupBtn');
 
-    if (show) {
-        navText?.classList.remove('u-invisible');
-        toSignupBtn?.classList.remove('u-invisible');
-    } else {
-        navText?.classList.add('u-invisible');
-        toSignupBtn?.classList.add('u-invisible');
-    }
+    navText?.classList.toggle('u-invisible', !show);
+    toSignupBtn?.classList.toggle('u-invisible', !show);
 }
 
 /**
@@ -103,13 +98,12 @@ export function initPasswordToggles() {
  * @param {*} wrapper - The wrapper element used to calculate the height
  */
 function adjustCardHeight(gateway, wrapper) {
-    if (wrapper && gateway) {
+    if (!wrapper || !gateway) return;
 
-        const contentHeight = wrapper.getBoundingClientRect().height;
-        const offset = window.innerWidth < 600 ? 10 : 0;
+    const contentHeight = wrapper.offsetHeight;
+    const offset = window.innerWidth < 600 ? 10 : 0;
 
-        gateway.style.height = `${contentHeight + offset}px`;
-    }
+    gateway.style.height = `${contentHeight + offset}px`;
 }
 
 /**
@@ -130,21 +124,17 @@ function setupInitialState(gateway, loginWrapper) {
 }
 
 /**
- * @description Slides the gateway slider to the specified view (signup or login) and toggles header elements accordingly
+ * @description Slide the gateway slider to the specified view (login or signup) and toggle header elements accordingly
  * @param {HTMLElement} slider - The slider element to be moved
  * @param {string} view - The target view ('signup' or 'login')
- * @return {void}
+ * @return {void} 
  */
 function slideTo(slider, view) {
     if (!slider) return;
+    const isSignup = view === 'signup';
 
-    if (view === 'signup') {
-        slider.style.transform = 'translateX(-50%)';
-        toggleHeaderElements(false);
-    } else {
-        slider.style.transform = 'translateX(0%)';
-        toggleHeaderElements(true);
-    }
+    slider.style.transform = isSignup ? 'translateX(-50%)' : 'translateX(0%)';
+    toggleHeaderElements(!isSignup);
 }
 
 /* ==========================================================================
@@ -159,17 +149,18 @@ function slideTo(slider, view) {
  * @param {string} [originalText=UI_BUTTON_TEXT.LOGIN_DEFAULT] - Text to show after loading
  * @return {void} 
  */
-export function setLoadingStateBtn(
-    btn,
-    isPending,
-    loadingText = UI_BUTTON_TEXT.LOGIN_PENDING,
-    originalText = UI_BUTTON_TEXT.LOGIN_DEFAULT
-) {
+export function setLoadingStateBtn(btn, isPending, loadingText = UI_BUTTON_TEXT.LOGIN_PENDING) {
     if (!btn) return;
+
+    if (isPending) {
+        btn.dataset.originalText = btn.innerText;
+        btn.innerText = loadingText;
+    } else {
+        btn.innerText = btn.dataset.originalText || UI_BUTTON_TEXT.LOGIN_DEFAULT;
+    }
+
     btn.disabled = isPending;
-    btn.innerText = isPending ? loadingText : originalText;
-    btn.style.opacity = isPending ? "0.5" : "1";
-    btn.style.cursor = isPending ? "not-allowed" : "pointer";
+    btn.classList.toggle('is-pending', isPending);
 }
 
 /* ==========================================================================
@@ -184,18 +175,20 @@ export function initSliderLogic() {
     const slider = document.getElementById('gatewaySlider');
     const loginWrapper = document.getElementById('loginWrapper');
     const signupWrapper = document.getElementById('signupWrapper');
-    const toSignupBtn = document.getElementById('toSignupBtn');
-    const toLoginArrow = document.getElementById('toLoginArrow');
+
+    if (!gateway || !slider) return;
 
     setupInitialState(gateway, loginWrapper);
 
-    toSignupBtn?.addEventListener('click', () => {
-        slideTo(slider, 'signup');
-        adjustCardHeight(gateway, signupWrapper);
-    });
+    const navigations = [
+        { btnId: 'toSignupBtn', view: 'signup', wrapper: signupWrapper },
+        { btnId: 'toLoginArrow', view: 'login', wrapper: loginWrapper }
+    ];
 
-    toLoginArrow?.addEventListener('click', () => {
-        slideTo(slider, 'login');
-        adjustCardHeight(gateway, loginWrapper);
+    navigations.forEach(({ btnId, view, wrapper }) => {
+        document.getElementById(btnId)?.addEventListener('click', () => {
+            slideTo(slider, view);
+            adjustCardHeight(gateway, wrapper);
+        });
     });
 }
