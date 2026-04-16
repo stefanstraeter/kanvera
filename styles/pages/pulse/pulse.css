@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PULSE LAYOUT WRAPPER
+   PULSE LAYOUT STYLES
    ========================================================================== */
 .pulse-wrapper {
   padding: var(--space-xl);
@@ -47,12 +47,12 @@
   border-radius: var(--radius-card);
   padding: var(--space-md);
   box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-lines);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  border: 1px solid var(--color-lines);
   width: 100%;
   min-width: 0;
   cursor: pointer;
