@@ -148,11 +148,11 @@ export class TeamPage {
         const grid = document.getElementById(this.gridId);
         if (!grid) return;
 
-        grid.addEventListener('click', (e) => {
-            if (e.target.closest('a')) {
+        grid.addEventListener('click', (event) => {
+            if (event.target.closest('a')) {
                 return;
             }
-            const card = e.target.closest('.team-card--clickable');
+            const card = event.target.closest('.team-card--clickable');
             if (card) {
                 const memberId = card.dataset.id;
                 this.handleEditClick(memberId);
