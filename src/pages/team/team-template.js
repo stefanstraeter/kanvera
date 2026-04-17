@@ -128,7 +128,7 @@ export const createConfirmDeleteHtml = (name) => {
  */
 export const createAddMemberModalHtml = () => {
     return `
-    <form id="js-add-member-form" class="modal-add-member">
+    <form id="js-add-member-form" class="modal-add-member" novalidate>
         <div class="modal-inline-edit-body">
             
             <div class="field-wrapper u-margin-bottom-md">
@@ -171,7 +171,7 @@ export const createAddMemberModalHtml = () => {
         </div>
 
         <div class="modal__actions">
-            <button type="submit" class="btn btn--s btn--full btn--primary">Create Member</button>
+            <button type="submit" class="btn btn--s btn--full btn--primary">Add Member</button>
             <button type="button" class="btn btn--s btn--full btn--secondary js-close-modal">Cancel</button>
         </div>
     </form>
