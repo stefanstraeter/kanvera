@@ -3,7 +3,7 @@
 import { initDataService, getAllTeamMembers } from '../../services/data-service.js';
 import { getInitials } from '../../services/auth-logic.js';
 import { openModal, closeModal } from '../../components/shared/modal.js';
-import { createMemberCardHtml, createEditModalHtml } from './team-template.js';
+import { createMemberCardHtml, createEditModalHtml, createConfirmDeleteHtml } from './team-template.js';
 
 /**
  * @description Page class for the Team page.
@@ -126,14 +126,31 @@ export class TeamPage {
      * @memberof TeamPage
      */
     async handleDeleteMember(memberId) {
-        if (confirm("Möchtest du dieses Team-Mitglied wirklich löschen?")) {
-            const memberManager = await import('../../services/data-service.js');
+        // 1. Daten holen für den Namen im Modal
+        const memberManager = await import('../../services/data-service.js');
+        const members = memberManager.getAllTeamMembers(); // Falls du so eine Funktion hast
+        const member = members.find(m => m.id === memberId);
 
-            memberManager.deleteMemberLocally(memberId);
+        // 2. Das aktuelle Edit-Modal schließen
+        closeModal();
 
-            closeModal();
-            this.renderTeamGrid();
-        }
+        // 3. Kurze Verzögerung für smoothe UX (optional)
+        setTimeout(() => {
+            const bodyHtml = createConfirmDeleteHtml(member ? member.name : "this member");
+
+            // 4. Das Modal als Bestätigungs-Dialog öffnen
+            openModal("Delete Member?", bodyHtml, null);
+
+            // 5. Den Delete-Button im neuen Modal aktivieren
+            const confirmBtn = document.querySelector('.js-confirm-delete-btn');
+            if (confirmBtn) {
+                confirmBtn.onclick = () => {
+                    memberManager.deleteMemberLocally(memberId);
+                    closeModal();
+                    this.renderTeamGrid();
+                };
+            }
+        }, 100);
     }
 
     /* ==========================================================================
