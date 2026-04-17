@@ -2,9 +2,10 @@
 
 import { initDataService } from '../../services/data-service.js';
 import { getCurrentUser } from '../../services/auth-service.js';
-import { getAllTeamMembers, updateMemberLocally } from '../../services/member-service.js';
-import { getInitials } from '../../utils/ui-helpers.js';
+import { getAllTeamMembers, updateMemberLocally, initAddMemberValidation, validateMemberForm } from '../../services/member-service.js';
 import { openModal, closeModal } from '../../components/shared/modal.js';
+import { getInitials, setLoadingStateBtn } from '../../utils/ui-helpers.js';
+import { MEMBER_UI_TEXT } from '../../utils/constants.js';
 import { createMemberCardHtml, createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './team-template.js';
 import { getMemberDataFromModal, createNewMemberObject } from './team-utils.js';
 
@@ -66,7 +67,6 @@ export class TeamPage {
         const bodyHtml = createEditModalHtml(member, initials, displayRole);
 
         openModal("Edit Profile", bodyHtml);
-
         this.setupModalInteractions(memberId);
     }
 
@@ -99,17 +99,26 @@ export class TeamPage {
     }
 
     /**
-     * @description Save changes for a team member
-     * @param {string} memberId - The ID of the team member
-     * @memberof TeamPage
-     */
+      * @description Save changes for a team member with loading state
+      * @param {string} memberId - The ID of the team member
+      * @memberof TeamPage
+      */
     async saveChanges(memberId) {
-        const updatedData = getMemberDataFromModal();
+        const saveBtn = document.querySelector('.js-save-inline');
 
-        updateMemberLocally(memberId, updatedData);
-        closeModal();
+        setLoadingStateBtn(saveBtn, true, MEMBER_UI_TEXT.SAVE_PENDING);
 
-        this.renderTeamGrid();
+        try {
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            const updatedData = getMemberDataFromModal();
+            updateMemberLocally(memberId, updatedData);
+            closeModal();
+            this.renderTeamGrid();
+
+        } catch (error) {
+            console.error("Update failed:", error);
+            setLoadingStateBtn(saveBtn, false, MEMBER_UI_TEXT.SAVE_DEFAULT);
+        }
     }
 
     /**
@@ -124,9 +133,7 @@ export class TeamPage {
 
         setTimeout(() => {
             const bodyHtml = createConfirmDeleteHtml(message);
-
             openModal(title, bodyHtml, null);
-
             const confirmBtn = document.querySelector('.js-confirm-delete-btn');
             if (confirmBtn) {
                 confirmBtn.onclick = () => {
@@ -168,18 +175,35 @@ export class TeamPage {
     handleAddMemberClick() {
         const bodyHtml = createAddMemberModalHtml();
 
-        // Nutzt deine Modal-Logik: openModal(title, body, onSaveCallback)
-        openModal("Add Member to Collective", bodyHtml, (data) => {
-            this.saveNewMember(data);
-        });
+        openModal(
+            "Add Member to Collective",
+            bodyHtml, (data) => this.saveNewMember(data),
+            validateMemberForm
+        );
+        initAddMemberValidation();
     }
-
+    /**
+     * @description Saves a new team member
+     * @param {*} formData - The data from the add member form
+     * @memberof TeamPage
+     */
     async saveNewMember(formData) {
-        const newMember = createNewMemberObject(formData);
-        const newId = `member-${Date.now()}`;
+        const form = document.getElementById('js-add-member-form');
+        const submitBtn = form?.querySelector('button[type="submit"]');
 
-        updateMemberLocally(newId, newMember);
-        this.renderTeamGrid();
+        setLoadingStateBtn(submitBtn, true, MEMBER_UI_TEXT.ADD_PENDING);
+
+        try {
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            const newMember = createNewMemberObject(formData);
+            const newId = `member-${Date.now()}`;
+            await updateMemberLocally(newId, newMember);
+            this.renderTeamGrid();
+
+        } catch (error) {
+            console.error("Save failed:", error);
+            setLoadingStateBtn(submitBtn, false, MEMBER_UI_TEXT.ADD_DEFAULT);
+        }
     }
 
     /* ==========================================================================
