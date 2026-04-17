@@ -1,9 +1,8 @@
 // src/services/data-service.js
 
 import { fetchData } from './firebase-service.js';
-import { DATA_CACHE_KEY, GUEST_LOGIN_DATA } from '../utils/constants.js';
 import { getCurrentUser } from './auth-service.js';
-
+import { DATA_CACHE_KEY, GUEST_LOGIN_DATA } from '../utils/constants.js';
 
 /* ==========================================================================
    STATE MANAGEMENT 
