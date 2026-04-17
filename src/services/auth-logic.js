@@ -89,7 +89,9 @@ export function getCurrentUser() {
  * @export
  */
 export function performLogout() {
-    sessionStorage.removeItem(AUTH_SESSION_KEY);
+    sessionStorage.clear();
+    localStorage.removeItem("kanvera_data");
+    window.location.replace('index.html');
 }
 
 /* ==========================================================================
