@@ -1,10 +1,10 @@
 // src/pages/access/sign-in.js
 
-import { validateNotEmpty, validateEmailFormat, validateMinLength, toggleError, attachLiveValidation } from '../../utils/input-validation.js';
-import { AUTH_ERRORS, GUEST_LOGIN_DATA, UI_BUTTON_TEXT } from '../../utils/constants.js';
-import { handleSignUp } from './sign-up.js';
 import { signInAsUser, signInAsGuest } from '../../services/auth-service.js';
-import { setLoadingStateBtn } from './access-utils.js';
+import { validateNotEmpty, validateEmailFormat, validateMinLength, toggleError, attachLiveValidation } from '../../utils/input-validation.js';
+import { setLoadingStateBtn } from '../../utils/ui-helpers.js';
+import { handleSignUp } from './sign-up.js';
+import { AUTH_ERRORS, GUEST_LOGIN_DATA, UI_BUTTON_TEXT } from '../../utils/constants.js';
 
 /* ==========================================================================
    INITIALIZATION
