@@ -135,3 +135,17 @@
 .margin-bottom--md {
   margin-bottom: var(--space-md);
 }
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDEs
+   ========================================================================== */
+
+@media (max-width: 450px) {
+  .modal__content {
+    padding: var(--space-lg);
+  }
+
+  .modal__actions {
+    flex-direction: column;
+  }
+}
