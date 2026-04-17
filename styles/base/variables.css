@@ -18,7 +18,7 @@
   --color-lines-light: #cacde7;
   --color-lines-dark: #3d3f4e;
   --color-danger: #ea5555;
-  --color-danger-hover: #ff9898;
+  --color-danger-hover: #e34e4e;
   --color-focus: #635fc7;
 
   --status-todo: #635fc7;
@@ -109,7 +109,7 @@
   --radius-pill: 6.25rem;
   --radius-sidebar: 1.5rem;
   --radius-card: 1rem;
-  --radius-modal: 0.375rem;
+  --radius-modal: 0.875rem;
   --radius-theme-switch: 1.5rem;
   --radius-input: 0.75rem;
 
