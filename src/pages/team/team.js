@@ -3,7 +3,7 @@
 import { initDataService, getAllTeamMembers } from '../../services/data-service.js';
 import { getInitials } from '../../services/auth-logic.js';
 import { openModal, closeModal } from '../../components/shared/modal.js';
-import { createMemberCardHtml, createEditModalHtml, createConfirmDeleteHtml } from './team-template.js';
+import { createMemberCardHtml, createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './team-template.js';
 
 /**
  * @description Page class for the Team page.
@@ -165,6 +165,45 @@ export class TeamPage {
     }
 
     /* ==========================================================================
+       ADD MEMBER LOGIC
+       ========================================================================== */
+    /**
+     * @description Öffnet das Modal für einen neuen Member
+     */
+    handleAddMemberClick() {
+        const bodyHtml = createAddMemberModalHtml();
+
+        // Nutzt deine Modal-Logik: openModal(title, body, onSaveCallback)
+        openModal("Add Member to Collective", bodyHtml, (data) => {
+            this.saveNewMember(data);
+        });
+    }
+
+    /**
+     * @description Erstellt das neue Member-Objekt und speichert es
+     */
+    async saveNewMember(data) {
+        // ID generieren (für Demo-Zwecke Zeitstempel nutzen)
+        const newId = `member-${Date.now()}`;
+
+        const newMember = {
+            id: newId,
+            name: data.name,
+            email: data.email,
+            roles: [data.role], // data.role kommt aus dem 'name' Attribut des Selects
+            phone: data.phone || "no phone",
+            imageUrl: "" // Initial leer
+        };
+
+        // Speichern über deinen DataService
+        const memberManager = await import('../../services/data-service.js');
+        memberManager.updateMemberLocally(newId, newMember);
+
+        // UI aktualisieren
+        this.renderTeamGrid();
+    }
+
+    /* ==========================================================================
        EVENTS
        ========================================================================== */
     /**
@@ -186,5 +225,10 @@ export class TeamPage {
                 this.handleEditClick(memberId);
             }
         });
+
+        const addBtn = document.querySelector('.js-header-add-member');
+        if (addBtn) {
+            addBtn.onclick = () => this.handleAddMemberClick();
+        }
     }
 }
