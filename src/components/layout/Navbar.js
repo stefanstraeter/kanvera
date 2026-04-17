@@ -1,7 +1,7 @@
 // src/components/layout/navbar.js
 
 import { applyTheme } from '../../utils/theme.js';
-import { getCurrentUser } from '../../services/auth-logic.js';
+import { getCurrentUser } from '../../services/auth-service.js';
 
 /**
  * @description Navbar component responsible for rendering the sidebar navigation and highlighting the active link based on the current URL path. 
