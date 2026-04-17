@@ -1,5 +1,8 @@
 // src/pages/team/team-utils.js
 
+/* ==========================================================================
+   TEAM PAGE UTILS
+   ========================================================================== */
 
 export function getMemberDataFromModal() {
     const name = document.querySelector('[data-field="name"]')?.innerText.trim();
