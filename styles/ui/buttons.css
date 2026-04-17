@@ -18,7 +18,6 @@
     transform 0.1s ease;
   user-select: none;
   -webkit-user-select: none;
-  gap: 0.5rem;
 }
 
 .btn:active {
