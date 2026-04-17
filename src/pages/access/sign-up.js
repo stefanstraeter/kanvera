@@ -1,9 +1,9 @@
 // src/pages/access/sign-up.js
 
-import { validateNotEmpty, validateEmailFormat, validateMinLength, toggleError } from '../../utils/input-validation.js';
-import { AUTH_ERRORS, UI_BUTTON_TEXT } from '../../utils/constants.js';
 import { checkIfEmailExists, createNewUser } from '../../services/auth-service.js';
-import { setLoadingStateBtn } from './access-utils.js';
+import { validateNotEmpty, validateEmailFormat, validateMinLength, toggleError } from '../../utils/input-validation.js';
+import { setLoadingStateBtn } from '../../utils/ui-helpers.js';
+import { AUTH_ERRORS, UI_BUTTON_TEXT } from '../../utils/constants.js';
 
 /* ==========================================================================
    SIGN UP LOGIC
