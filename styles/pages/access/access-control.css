@@ -127,10 +127,8 @@
   .view-wrapper {
     padding: var(--space-lg) var(--space-md);
   }
-}
 
-@media (max-width: 400px) {
   .gateway__back {
-    display: none;
+    left: 0;
   }
 }
