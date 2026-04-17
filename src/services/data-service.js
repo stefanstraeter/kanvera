@@ -58,9 +58,8 @@ export function getPulseStats() {
 }
 
 /* ==========================================================================
-   TEAM MEMBERS - PUBLIC API
+   TEAM MEMBERS - PUBLIC API & LOCAL UPDATES
    ========================================================================== */
-
 /**
  * @description Get a list of all team members, including the current user if they are not already in the team list. 
  * @export
@@ -96,6 +95,35 @@ function createVirtualMember(user) {
         isMe: true
     };
 }
+
+/**
+ * @description Updates a team member's data locally in the state and cache. If the member does not exist, it will be created.
+ * @export
+ * @param {string} id - The ID of the member.
+ * @param {Object} newData - The new data (e.g., {name, roles}).
+ */
+export function updateMemberLocally(id, newData) {
+    if (state.team && state.team[id]) {
+        state.team[id] = { ...state.team[id], ...newData };
+    } else {
+        state.team[id] = { id, ...newData };
+    }
+    saveToCache();
+}
+
+/**
+ * @description Deletes a team member locally from the state and cache.
+ * @export
+ * @param {string} id - The ID of the member.
+ * @return {void}
+ */
+export function deleteMemberLocally(id) {
+    if (state.team && state.team[id]) {
+        delete state.team[id];
+    }
+    saveToCache();
+}
+
 
 /* ==========================================================================
    INTERNAL UTILS & HELPERS
