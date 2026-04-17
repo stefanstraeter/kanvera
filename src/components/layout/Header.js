@@ -1,6 +1,7 @@
 // src/components/layout/header.js
 
-import { performLogout, getCurrentUser, getInitials } from '../../services/auth-logic.js';
+import { performLogout, getCurrentUser } from '../../services/auth-service.js';
+import { getInitials } from '../../utils/ui-helpers.js';
 
 /**
  * @description Header component responsible for rendering the header and managing the dropdown menu and logout functionality.
@@ -112,41 +113,69 @@ export class Header {
             actionBtn.style.display = 'none';
         }
     }
-
     /* ==========================================================================
-       DROPDOWN MENU
-       ========================================================================== */
+           DROPDOWN MENU
+           ========================================================================== */
     /**
-     * @description Initializes the dropdown menu for the user avatar in the header, including event listeners for opening/closing the menu and handling logout functionality.
-     * @memberof Header
+     * @description Initializes the dropdown menu by setting up event listeners for toggling the menu visibility.
      */
     initDropdown() {
         const trigger = document.getElementById('js-menu-trigger');
         const content = document.getElementById('js-menu-content');
-        const logoutLink = document.getElementById('logoutLink');
 
-        if (trigger && content) {
-            trigger.addEventListener('click', (event) => {
-                event.stopPropagation();
-                content.classList.toggle('is-active');
-            });
+        if (!trigger || !content) return;
 
-            if (logoutLink) {
-                logoutLink.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    performLogout();
-                });
-            }
-
-            content.addEventListener('click', (event) => {
-                event.stopPropagation();
-            });
-
-            document.addEventListener('click', () => {
-                content.classList.remove('is-active');
-            });
-        }
+        this.setupDropdownToggle(trigger, content);
+        this.setupExternalClose(content);
+        this.setupLogout();
     }
+
+    /**
+     * @description Sets up the event listener for toggling the dropdown menu visibility when the trigger element is clicked. It also stops event propagation to prevent unintended closing of the menu when interacting with it.
+     * @param {HTMLElement} trigger - The element that triggers the dropdown menu.
+     * @param {HTMLElement} content - The dropdown menu content element.
+     * @memberof Header
+     */
+    setupDropdownToggle(trigger, content) {
+        trigger.addEventListener('click', (event) => {
+            event.stopPropagation();
+            content.classList.toggle('is-active');
+        });
+
+        content.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+    }
+
+    /**
+     * @description Handles closing the dropdown menu when clicking outside of it.
+     * @param {HTMLElement} content - The dropdown menu content element.
+     * @memberof Header
+     */
+    setupExternalClose(content) {
+        document.addEventListener('click', () => {
+            content.classList.remove('is-active');
+        });
+    }
+
+    /**
+     * @description Binds the logout functionality to the logout link in the dropdown menu.
+     * @memberof Header
+     */
+    setupLogout() {
+        const logoutLink = document.getElementById('logoutLink');
+        if (!logoutLink) return;
+
+        logoutLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            performLogout();
+        });
+    }
+
+    /**
+     * @description Manages the visibility of authentication-related elements in the header based on the user's login status. 
+     * @memberof Header
+     */
 
     manageAuthVisibility() {
         const user = getCurrentUser();
