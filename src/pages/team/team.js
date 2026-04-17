@@ -149,13 +149,9 @@ export class TeamPage {
         if (!grid) return;
 
         grid.addEventListener('click', (e) => {
-            // 1. WICHTIG: Prüfen, ob der Klick auf oder innerhalb eines Links (<a>) war
             if (e.target.closest('a')) {
-                // Wir machen NICHTS. Der Browser führt einfach die Standard-Aktion des Links aus (mail/tel).
                 return;
             }
-
-            // 2. Ansonsten: Prüfen, ob eine Karte getroffen wurde
             const card = e.target.closest('.team-card--clickable');
             if (card) {
                 const memberId = card.dataset.id;
