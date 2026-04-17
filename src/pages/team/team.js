@@ -1,36 +1,33 @@
 // src/pages/team.js
+
 import { initDataService, getAllTeamMembers } from '../../services/data-service.js';
 import { getInitials } from '../../services/auth-logic.js';
+import { openModal, closeModal } from '../../components/shared/modal.js';
+import { createMemberCardHtml, createEditModalHtml } from './team-template.js';
 
 /**
- * @description Page class for the Team page, responsible for rendering team member cards and handling related interactions.
+ * @description Page class for the Team page.
  * @export
  * @class TeamPage
  */
 export class TeamPage {
-    /* ==========================================================================
-       INITIALIZATION
-       ========================================================================== */
     constructor() {
         this.gridId = 'js-team-grid';
     }
 
-    /**
-     * @description Initializes the Team page by setting up the data service and rendering the team member grid. 
-     * @return {void}
-     * @memberof TeamPage
-     */
     async init() {
         await initDataService();
         this.renderTeamGrid();
+        this.initEventListeners();
     }
 
     /* ==========================================================================
-       RENDERING TEAM GRID & CARD
+       RENDERING TEAM GRID
        ========================================================================== */
     /**
-     * @description Renders the team member grid by fetching all team members from the data service and generating HTML cards for each member.
-     * @return {void}
+     * @description Render the team grid by fetching all team members and generating HTML for each member card, then inserting it into the DOM
+     * @export
+     * @return {void} 
      * @memberof TeamPage
      */
     renderTeamGrid() {
@@ -38,58 +35,126 @@ export class TeamPage {
         if (!gridElement) return;
 
         const teamMembers = getAllTeamMembers();
-        gridElement.innerHTML = teamMembers.map(member => this.createCardHtml(member)).join('');
+
+        gridElement.innerHTML = teamMembers.map(member => {
+            const initials = getInitials(member.name);
+            const displayRole = Array.isArray(member.roles) ? member.roles[0] : member.roles;
+
+            return createMemberCardHtml(member, initials, displayRole);
+        }).join('');
+    }
+
+    /* ==========================================================================
+       TEAM CARD - EDIT & DELETE
+       ========================================================================== */
+    /**
+     * @description Handles the click event on a team member card, opening the edit modal
+     * @param {string} memberId - The ID of the team member
+     * @return {void} 
+     * @memberof TeamPage
+     */
+    handleEditClick(memberId) {
+        const members = getAllTeamMembers();
+        const member = members.find(m => m.id === memberId);
+        if (!member) return;
+
+        const initials = getInitials(member.name);
+        const displayRole = Array.isArray(member.roles) ? member.roles[0] : member.roles;
+        const bodyHtml = createEditModalHtml(member, initials, displayRole);
+
+        openModal("Edit Profile", bodyHtml);
+
+        this.setupModalInteractions(memberId);
     }
 
     /**
-     * @description Creates the HTML for a team member card.
-     * @param {*} member - The team member object.
-     * @return {string} The HTML string for the team member card.
+     * @description Sets up the interactions for the modal, including save and delete buttons, and enter-key handling
+     * @param {string} memberId - The ID of the team member
+     * @return {void} 
      * @memberof TeamPage
      */
-    createCardHtml(member) {
-        const { id, name, email, phone, roles, imageUrl } = member;
-        const initials = getInitials(name);
-        const displayRole = Array.isArray(roles) ? roles[0] : (roles || "@Member");
-        const finalImageUrl = imageUrl || "";
+    setupModalInteractions(memberId) {
+        const saveBtn = document.querySelector('.js-save-inline');
+        if (saveBtn) {
+            saveBtn.onclick = () => this.saveChanges(memberId);
+        }
+        const deleteBtn = document.querySelector('.js-delete-member');
+        if (deleteBtn) {
+            deleteBtn.onclick = () => this.handleDeleteMember(memberId);
+        }
+        const fields = document.querySelectorAll('.js-edit-field');
+        fields.forEach(field => {
+            field.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    field.blur();
+                }
+            });
+        });
+    }
 
-        return `
-        <div class="team-card" data-id="${id}">
-            <div class="team-card__edit">
-                <button class="btn-icon" title="Edit Member">
-                    <i class="fa-solid fa-pen"></i>
-                </button>
-            </div>
-            
-            <div class="team-card__avatar">
-                <div class="user-avatar--m">
-                    ${finalImageUrl
-                ? `<img src="${finalImageUrl}" 
-                                alt="${name}" 
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
-                : ''
+    /**
+     * @description Saves the changes made to a team member's information
+     * @param {string} memberId - The ID of the team member
+     * @return {void} 
+     * @memberof TeamPage
+     */
+    async saveChanges(memberId) {
+        const getFieldValue = (fieldName) => {
+            const element = document.querySelector(`[data-field="${fieldName}"]`);
+            return element ? element.innerText.trim() : "";
+        };
+
+        const updatedData = {
+            name: getFieldValue('name'),
+            roles: [getFieldValue('role')],
+            email: getFieldValue('email'),
+            phone: getFieldValue('phone')
+        };
+
+        const memberManager = await import('../../services/data-service.js');
+        memberManager.updateMemberLocally(memberId, updatedData);
+
+        closeModal();
+        this.renderTeamGrid();
+    }
+
+    /**
+     * @description Handles the deletion of a team member
+     * @param {string} memberId - The ID of the team member
+     * @return {void} 
+     * @memberof TeamPage
+     */
+    async handleDeleteMember(memberId) {
+        if (confirm("Möchtest du dieses Team-Mitglied wirklich löschen?")) {
+            const memberManager = await import('../../services/data-service.js');
+
+            memberManager.deleteMemberLocally(memberId);
+
+            closeModal();
+            this.renderTeamGrid();
+        }
+    }
+
+    /* ==========================================================================
+       EVENTS
+       ========================================================================== */
+    /**
+     * @description Initializes the event listeners for the team page
+     * @return {void} 
+     * @memberof TeamPage
+     */
+    initEventListeners() {
+        const grid = document.getElementById(this.gridId);
+        if (!grid) return;
+
+        grid.addEventListener('click', (e) => {
+            if (e.target.closest('a')) return;
+
+            const card = e.target.closest('.team-card--clickable');
+            if (card) {
+                this.handleEditClick(card.dataset.id);
             }
-                    <div class="avatar-placeholder" 
-                         style="${finalImageUrl ? 'display:none;' : 'display:flex;'}">
-                        ${initials}
-                    </div>
-                </div>
-            </div>
-
-            <div class="team-card__info">
-                <h3 class="heading-l">${name}</h3>
-                <p class="team-card__role">${displayRole}</p>
-                
-                <div class="team-card__contact-details">
-                    <a href="mailto:${email}" class="team-card__link">
-                        <i class="fa-regular fa-envelope"></i> ${email}
-                    </a>
-                    <p class="team-card__link text-body-m">
-                        <i class="fa-solid fa-phone"></i> ${phone || 'Keine Nummer'}
-                    </p>
-                </div>
-            </div>
-        </div>
-        `;
+        });
     }
 }
