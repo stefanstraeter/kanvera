@@ -40,6 +40,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  z-index: 1;
   transition:
     transform var(--transition),
     box-shadow var(--transition);
@@ -48,6 +49,11 @@
 .team-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-card-hover);
+}
+
+.team-card--clickable {
+  cursor: pointer;
+  user-select: none;
 }
 
 .team-card__delete {
@@ -59,6 +65,7 @@
 
 .team-card__delete button {
   font-size: var(--font-size-s);
+  color: var(--color-medium-grey);
   transition:
     transform 0.2s ease-in-out,
     color 0.2s ease-in-out;
@@ -158,6 +165,8 @@
   text-overflow: ellipsis;
   max-width: 100%;
   cursor: pointer;
+  position: relative;
+  z-index: 5;
 }
 
 .team-card__link:hover {
@@ -171,34 +180,4 @@
   .team-wrapper {
     padding: var(--space-m);
   }
-}
-
-.team-card--clickable {
-  cursor: pointer;
-  /* Verhindert, dass Text markiert wird, wenn man schnell doppelt klickt */
-  user-select: none;
-}
-
-/* Optional: Ein kleiner visueller Hinweis, wenn man die Karte drückt (Active State) */
-.team-card--clickable:active {
-  transform: scale(0.98);
-  transition: transform 0.1s ease;
-}
-
-/* Falls deine Links in der Karte den Klick "abfangen", 
-   verhindern wir das hier für die E-Mail im Edit-Modus */
-.team-card--clickable .team-card__link {
-  pointer-events: none;
-}
-
-/* Die Links in der Karte behalten ihren eigenen Kontext */
-.team-card__link {
-  cursor: pointer;
-  position: relative;
-  z-index: 2; /* Sicherstellen, dass die Links "oben" liegen */
-}
-
-.team-card__link:hover {
-  color: var(--color-main); /* Visuelles Feedback für den Link */
-  text-decoration: underline;
 }
