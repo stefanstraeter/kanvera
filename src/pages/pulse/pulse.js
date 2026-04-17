@@ -1,7 +1,26 @@
 // src/pages/pulse/pulse.js
 
-import { initDataService, getPulseStats } from '../../services/data-service.js';
+import { initDataService } from '../../services/data-service.js';
+import { getAllTasks, getPulseStats } from '../../services/task-service.js';
 import { getGreetingConfig, formatDeadline } from './pulse-utils.js';
+
+
+/* ==========================================================================
+    INITIALIZATION
+   ========================================================================== */
+/**
+ * @description Initialize the Pulse page by fetching necessary data and rendering the greeting and stats
+ * @export
+ */
+export async function initPulsePage() {
+    await initDataService();
+
+    const currentUser = JSON.parse(sessionStorage.getItem("loggedInUser")) || { guest: true };
+    const stats = getPulseStats();
+
+    renderPulseGreeting(currentUser);
+    renderPulseStats(stats);
+}
 
 /* ==========================================================================
     RENDERING GREETING AND STATS
@@ -37,19 +56,3 @@ function renderPulseStats(stats) {
     }
 }
 
-/* ==========================================================================
-    INITIALIZATION
-   ========================================================================== */
-/**
- * @description Initialize the Pulse page by fetching necessary data and rendering the greeting and stats
- * @export
- */
-export async function initPulsePage() {
-    await initDataService();
-
-    const currentUser = JSON.parse(sessionStorage.getItem("loggedInUser")) || { guest: true };
-    const stats = getPulseStats();
-
-    renderPulseGreeting(currentUser);
-    renderPulseStats(stats);
-}
