@@ -1,0 +1,73 @@
+/* ==========================================================================
+   AVATAR BASE STYLES
+   ========================================================================== */
+.avatar {
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-main);
+  color: var(--color-white);
+  flex-shrink: 0;
+  user-select: none;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--color-white);
+  font-size: var(--font-size-xl);
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   SIZES
+   ========================================================================== */
+.avatar--header {
+  width: var(--action-item-height);
+  height: var(--action-item-height);
+  font-size: var(--font-size-m);
+}
+
+.avatar--m {
+  width: 5.5rem;
+  height: 5.5rem;
+  font-size: var(--font-size-l);
+}
+
+.avatar--l {
+  width: 9rem;
+  height: 9rem;
+  font-size: var(--font-size-xl);
+}
+
+/* ==========================================================================
+   INTERACTIVE STATES
+   ========================================================================== */
+.avatar--clickable {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition:
+    background-color var(--transition),
+    transform 0.1s ease;
+}
+
+.avatar--clickable:hover {
+  background-color: var(--color-main-hover);
+}
+
+.avatar--clickable:active {
+  transform: scale(0.96);
+}
