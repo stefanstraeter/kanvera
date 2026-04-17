@@ -17,6 +17,7 @@
 @import url("./ui/scrollbar.css");
 @import url("./ui/components.css");
 @import url("./ui/splash-screen.css");
+@import url("./ui/modal.css");
 
 /* Layout */
 @import url("./layout/header.css");
