@@ -15,6 +15,8 @@ import { TeamPage } from './pages/team/team.js'
 async function init() {
     initThemeListeners();
 
+    await initLayout();
+
     if (document.getElementById('gatewaySlider')) {
         initSplashScreen();
         initSliderLogic();
@@ -35,7 +37,7 @@ async function init() {
         initDropdownLogic();
     }
 
-    await initLayout();
+
 }
 
 /* ==========================================================================
