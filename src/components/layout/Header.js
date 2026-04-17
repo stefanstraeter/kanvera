@@ -133,7 +133,6 @@ export class Header {
                 logoutLink.addEventListener('click', (event) => {
                     event.preventDefault();
                     performLogout();
-                    window.location.href = 'index.html';
                 });
             }
 
