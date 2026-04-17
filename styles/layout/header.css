@@ -36,36 +36,6 @@
 }
 
 /* ==========================================================================
-   USER AVATAR
-   ========================================================================== */
-.user-avatar {
-  width: var(--action-item-height);
-  height: var(--action-item-height);
-  background-color: var(--color-main);
-  color: var(--color-white);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-m);
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition:
-    background-color var(--transition),
-    transform 0.1s ease;
-  user-select: none;
-}
-
-.user-avatar:hover {
-  background-color: var(--color-main-hover);
-}
-
-.user-avatar:active {
-  transform: scale(0.96);
-}
-
-/* ==========================================================================
    TABLET HEADER
    ========================================================================== */
 @media (max-width: 950px) {
