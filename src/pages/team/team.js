@@ -1,9 +1,10 @@
 // src/pages/team.js
 
-import { initDataService, getAllTeamMembers } from '../../services/data-service.js';
+import { initDataService, getAllTeamMembers, updateMemberLocally } from '../../services/data-service.js';
 import { getInitials } from '../../services/auth-logic.js';
 import { openModal, closeModal } from '../../components/shared/modal.js';
 import { createMemberCardHtml, createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './team-template.js';
+import { getMemberDataFromModal, createNewMemberObject } from './team-utils.js';
 
 /**
  * @description Page class for the Team page.
@@ -93,29 +94,13 @@ export class TeamPage {
         });
     }
 
-    /**
-     * @description Saves the changes made to a team member's information
-     * @param {string} memberId - The ID of the team member
-     * @return {void} 
-     * @memberof TeamPage
-     */
+
     async saveChanges(memberId) {
-        const getFieldValue = (fieldName) => {
-            const element = document.querySelector(`[data-field="${fieldName}"]`);
-            return element ? element.innerText.trim() : "";
-        };
+        const updatedData = getMemberDataFromModal();
 
-        const updatedData = {
-            name: getFieldValue('name'),
-            roles: [getFieldValue('role')],
-            email: getFieldValue('email'),
-            phone: getFieldValue('phone')
-        };
-
-        const memberManager = await import('../../services/data-service.js');
-        memberManager.updateMemberLocally(memberId, updatedData);
-
+        updateMemberLocally(memberId, updatedData);
         closeModal();
+
         this.renderTeamGrid();
     }
 
@@ -179,27 +164,11 @@ export class TeamPage {
         });
     }
 
-    /**
-     * @description Erstellt das neue Member-Objekt und speichert es
-     */
-    async saveNewMember(data) {
-        // ID generieren (für Demo-Zwecke Zeitstempel nutzen)
+    async saveNewMember(formData) {
+        const newMember = createNewMemberObject(formData);
         const newId = `member-${Date.now()}`;
 
-        const newMember = {
-            id: newId,
-            name: data.name,
-            email: data.email,
-            roles: [data.role], // data.role kommt aus dem 'name' Attribut des Selects
-            phone: data.phone || "no phone",
-            imageUrl: "" // Initial leer
-        };
-
-        // Speichern über deinen DataService
-        const memberManager = await import('../../services/data-service.js');
-        memberManager.updateMemberLocally(newId, newMember);
-
-        // UI aktualisieren
+        updateMemberLocally(newId, newMember);
         this.renderTeamGrid();
     }
 
