@@ -19,7 +19,7 @@ export const createMemberCardHtml = (member, initials, displayRole) => {
     return `
         <div class="team-card team-card--clickable" data-id="${member.id}" role="button">
             <div class="team-card__avatar">
-                <div class="team-avatar team-avatar--m">
+                <div class="avatar avatar--m">
                     ${imageTag}
                     <div class="avatar-placeholder">
                         ${initials}
@@ -62,7 +62,7 @@ export const createEditModalHtml = (member, initials, displayRole) => {
         </div>
         
         <div class="modal-edit-header">
-            <div class="team-avatar team-avatar--l">
+            <div class="avatar avatar--l">
                 ${member.imageUrl
             ? `<img src="${member.imageUrl}" alt="${member.name}">`
             : `<div class="avatar-placeholder">${initials}</div>`
@@ -132,25 +132,16 @@ export const createAddMemberModalHtml = () => {
         <div class="modal-inline-edit-body">
             
             <div class="field-wrapper u-margin-bottom-md">
-                <label class="modal-label u-margin-bottom-xs">Full Name</label>
+                <label class="modal-label mb-xs">Full Name</label>
                 <div class="field-group">
-                    <i class="fa-regular fa-user field-icon"></i>
                     <input type="text" name="name" class="field-input" placeholder="e.g. Jane Doe" required>
                 </div>
+                <div class="error-msg"></div>
             </div>
 
             <div class="field-wrapper u-margin-bottom-md">
-                <label class="modal-label u-margin-bottom-xs">Email Address</label>
+                <label class="modal-label mb-xs">Role</label>
                 <div class="field-group">
-                    <i class="fa-regular fa-envelope field-icon"></i>
-                    <input type="email" name="email" class="field-input" placeholder="mail@example.com" required>
-                </div>
-            </div>
-
-            <div class="field-wrapper u-margin-bottom-md">
-                <label class="modal-label u-margin-bottom-xs">Role</label>
-                <div class="field-group">
-                    <i class="fa-solid fa-briefcase field-icon"></i>
                     <select name="role" class="field-input">
                         <option value="@developer">@developer</option>
                         <option value="@designer">@designer</option>
@@ -158,14 +149,23 @@ export const createAddMemberModalHtml = () => {
                         <option value="@guest">@guest</option>
                     </select>
                 </div>
+                <div class="error-msg"></div>
+            </div>
+
+            <div class="field-wrapper u-margin-bottom-md">
+                <label class="modal-label mb-xs">Email Address</label>
+                <div class="field-group">
+                    <input type="email" name="email" class="field-input" placeholder="mail@example.com" required>
+                </div>
+                <div class="error-msg"></div>
             </div>
 
             <div class="field-wrapper u-margin-bottom-l">
-                <label class="modal-label u-margin-bottom-xs">Phone Number</label>
+                <label class="modal-label mb-xs">Phone Number</label>
                 <div class="field-group">
-                    <i class="fa-solid fa-phone field-icon"></i>
                     <input type="tel" name="phone" class="field-input" placeholder="+49 123 456 789">
                 </div>
+                <div class="error-msg"></div>
             </div>
 
         </div>
