@@ -112,7 +112,7 @@ export const createConfirmDeleteHtml = (name) => {
             <p>Are you sure you want to delete <strong>${name}</strong>? This action cannot be reversed.</p>
             <div class="modal__actions u-margin-top-l">
                 <button class="btn btn--destructive btn--full btn--s js-confirm-delete-btn">Delete</button>
-                <button class="btn btn--secondary btn--full btn--sjs-close-modal">Cancel</button>
+                <button class="btn btn--secondary btn--full btn--s js-close-modal">Cancel</button>
             </div>
         </div>
     `;
