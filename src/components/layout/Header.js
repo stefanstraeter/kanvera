@@ -102,8 +102,10 @@ export class Header {
             actionBtn.style.display = 'none';
         } else if (path.includes('team')) {
             actionText.textContent = 'Add Member';
+            actionBtn.classList.add('js-header-add-member');
         } else if (path.includes('board')) {
             actionText.textContent = 'Add Task';
+            actionBtn.classList.add('js-header-add-task');
         } else if (path.includes('add-task')) {
             actionText.textContent = 'Add Task';
         } else {
