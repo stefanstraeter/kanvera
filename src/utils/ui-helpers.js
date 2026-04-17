@@ -1,5 +1,7 @@
 // src/utils/ui-helpers.js
 
+import { UI_BUTTON_TEXT } from '../utils/constants.js';
+
 /* ==========================================================================
     UI COMPONENT HELPERS
    ========================================================================== */
@@ -18,4 +20,30 @@ export function getInitials(name) {
         return initials[0] + initials[initials.length - 1];
     }
     return initials[0];
+}
+
+/* ==========================================================================
+   BUTTON LOADING STATE
+   ========================================================================== */
+/**
+ * @description Toggles the loading state of a button
+ * @export
+ * @param {HTMLElement} btn - The button element to be toggled
+ * @param {boolean} isPending - Loading state
+ * @param {string} [loadingText=UI_BUTTON_TEXT.LOGIN_PENDING] - Text to show during loading
+ * @param {string} [originalText=UI_BUTTON_TEXT.LOGIN_DEFAULT] - Text to show after loading
+ * @return {void} 
+ */
+export function setLoadingStateBtn(btn, isPending, loadingText = UI_BUTTON_TEXT.LOGIN_PENDING) {
+    if (!btn) return;
+
+    if (isPending) {
+        btn.dataset.originalText = btn.innerText;
+        btn.innerText = loadingText;
+    } else {
+        btn.innerText = btn.dataset.originalText || UI_BUTTON_TEXT.LOGIN_DEFAULT;
+    }
+
+    btn.disabled = isPending;
+    btn.classList.toggle('is-pending', isPending);
 }
