@@ -105,7 +105,11 @@ export const createEditModalHtml = (member, initials, displayRole) => {
     `;
 };
 
-
+/**
+ * @description Creates the HTML for the confirm delete modal.
+ * @param {string} name - The name of the member to be deleted.
+ * @return {string} HTML string for the confirm delete modal
+ */
 export const createConfirmDeleteHtml = (name) => {
     return `
         <div class="confirm-modal">
@@ -115,5 +119,61 @@ export const createConfirmDeleteHtml = (name) => {
                 <button class="btn btn--secondary btn--full btn--s js-close-modal">Cancel</button>
             </div>
         </div>
+    `;
+};
+
+/**
+ * @description Creates the HTML for adding a new team member using consistent input styles.
+ * @return {string} HTML string for the add member form
+ */
+export const createAddMemberModalHtml = () => {
+    return `
+    <form id="js-add-member-form" class="modal-add-member">
+        <div class="modal-inline-edit-body">
+            
+            <div class="field-wrapper u-margin-bottom-md">
+                <label class="modal-label u-margin-bottom-xs">Full Name</label>
+                <div class="field-group">
+                    <i class="fa-regular fa-user field-icon"></i>
+                    <input type="text" name="name" class="field-input" placeholder="e.g. Jane Doe" required>
+                </div>
+            </div>
+
+            <div class="field-wrapper u-margin-bottom-md">
+                <label class="modal-label u-margin-bottom-xs">Email Address</label>
+                <div class="field-group">
+                    <i class="fa-regular fa-envelope field-icon"></i>
+                    <input type="email" name="email" class="field-input" placeholder="mail@example.com" required>
+                </div>
+            </div>
+
+            <div class="field-wrapper u-margin-bottom-md">
+                <label class="modal-label u-margin-bottom-xs">Role</label>
+                <div class="field-group">
+                    <i class="fa-solid fa-briefcase field-icon"></i>
+                    <select name="role" class="field-input">
+                        <option value="@developer">@developer</option>
+                        <option value="@designer">@designer</option>
+                        <option value="@marketing">@marketing</option>
+                        <option value="@guest">@guest</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field-wrapper u-margin-bottom-l">
+                <label class="modal-label u-margin-bottom-xs">Phone Number</label>
+                <div class="field-group">
+                    <i class="fa-solid fa-phone field-icon"></i>
+                    <input type="tel" name="phone" class="field-input" placeholder="+49 123 456 789">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal__actions">
+            <button type="submit" class="btn btn--s btn--full btn--primary">Create Member</button>
+            <button type="button" class="btn btn--s btn--full btn--secondary js-close-modal">Cancel</button>
+        </div>
+    </form>
     `;
 };
