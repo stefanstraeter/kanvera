@@ -3,7 +3,37 @@
 import { UI_BUTTON_TEXT } from '../../utils/constants.js';
 
 /* ==========================================================================
-   HEADER ELEMENTS TOGGLE
+   INITIALIZATION OF GATEWAY
+   ========================================================================== */
+/**
+ * @description Initializes the slider logic for the gateway by setting up event listeners for navigation buttons and adjusting the card height accordingly
+ * @export
+ */
+export function initSliderLogic() {
+    const gateway = document.querySelector(".gateway");
+    const slider = document.getElementById('gatewaySlider');
+    const loginWrapper = document.getElementById('loginWrapper');
+    const signupWrapper = document.getElementById('signupWrapper');
+
+    if (!gateway || !slider) return;
+
+    setupInitialState(gateway, loginWrapper);
+
+    const navigations = [
+        { btnId: 'toSignupBtn', view: 'signup', wrapper: signupWrapper },
+        { btnId: 'toLoginArrow', view: 'login', wrapper: loginWrapper }
+    ];
+
+    navigations.forEach(({ btnId, view, wrapper }) => {
+        document.getElementById(btnId)?.addEventListener('click', () => {
+            slideTo(slider, view);
+            adjustCardHeight(gateway, wrapper);
+        });
+    });
+}
+
+/* ==========================================================================
+   HEADER ELEMENTS TOGGLE & DROPDOWN LOGIC
    ========================================================================== */
 /**
  * @description Toggles the visibility of header elements based on the provided flag
@@ -163,32 +193,4 @@ export function setLoadingStateBtn(btn, isPending, loadingText = UI_BUTTON_TEXT.
     btn.classList.toggle('is-pending', isPending);
 }
 
-/* ==========================================================================
-   INITIALIZATION OF GATEWAY LOGIC
-   ========================================================================== */
-/**
- * @description Initializes the slider logic for the gateway by setting up event listeners for navigation buttons and adjusting the card height accordingly
- * @export
- */
-export function initSliderLogic() {
-    const gateway = document.querySelector(".gateway");
-    const slider = document.getElementById('gatewaySlider');
-    const loginWrapper = document.getElementById('loginWrapper');
-    const signupWrapper = document.getElementById('signupWrapper');
 
-    if (!gateway || !slider) return;
-
-    setupInitialState(gateway, loginWrapper);
-
-    const navigations = [
-        { btnId: 'toSignupBtn', view: 'signup', wrapper: signupWrapper },
-        { btnId: 'toLoginArrow', view: 'login', wrapper: loginWrapper }
-    ];
-
-    navigations.forEach(({ btnId, view, wrapper }) => {
-        document.getElementById(btnId)?.addEventListener('click', () => {
-            slideTo(slider, view);
-            adjustCardHeight(gateway, wrapper);
-        });
-    });
-}
