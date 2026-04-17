@@ -9,14 +9,15 @@
  * @param {string} title 
  * @param {string} bodyHtml 
  * @param {Function} onSave 
+ * @param {Function} [validator] - Optional validation function for the form.
  */
-export function openModal(title, bodyHtml, onSave) {
+export function openModal(title, bodyHtml, onSave, validator = null) {
     const modal = getModalElement();
     if (!modal) return;
 
     renderModalContent(title, bodyHtml);
     initCloseEvents(modal);
-    initFormHandler(modal, onSave);
+    initFormHandler(modal, onSave, validator);
 
     modal.classList.add('is-active');
 }
@@ -77,21 +78,26 @@ function initCloseEvents(modal) {
  * @description Handles form submission, extracts data and triggers the callback.
  * @param {HTMLElement} modal 
  * @param {Function} onSave 
+ * @param {Function} [validator] - Optional validation function for the form.
  */
-function initFormHandler(modal, onSave) {
+function initFormHandler(modal, onSave, validator) {
     const form = modal.querySelector('form');
     if (!form) return;
 
-    form.onsubmit = (event) => {
+    form.onsubmit = async (event) => {
         event.preventDefault();
+
+        if (validator && !validator(form)) {
+            return;
+        }
+
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        onSave(data);
+        await onSave(data);
         closeModal();
     };
 }
-
 
 
 /* ==========================================================================
