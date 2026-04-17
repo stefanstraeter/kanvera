@@ -32,12 +32,12 @@ export const createMemberCardHtml = (member, initials, displayRole) => {
                 <p class="team-card__role">${displayRole}</p>
                 
                 <div class="team-card__contact-details">
-                    <span class="team-card__link">
+                    <a href="mailto:${member.email}" class="team-card__link js-contact-link">
                         <i class="fa-regular fa-envelope"></i> ${member.email}
-                    </span>
-                    <span class="team-card__link text-body-m">
-                        <i class="fa-solid fa-phone"></i> ${member.phone || 'No Number'}
-                    </span>
+                    </a>
+                    <a href="tel:${member.phone}" class="team-card__link js-contact-link">
+                        <i class="fa-solid fa-phone"></i> ${member.phone}
+                    </a>
                 </div>
             </div>
         </div>
