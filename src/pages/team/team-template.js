@@ -104,3 +104,16 @@ export const createEditModalHtml = (member, initials, displayRole) => {
     </div>
     `;
 };
+
+
+export const createConfirmDeleteHtml = (name) => {
+    return `
+        <div class="confirm-modal">
+            <p>Are you sure you want to delete <strong>${name}</strong>? This action cannot be reversed.</p>
+            <div class="modal__actions u-margin-top-l">
+                <button class="btn btn--destructive btn--full btn--s js-confirm-delete-btn">Delete</button>
+                <button class="btn btn--secondary btn--full btn--sjs-close-modal">Cancel</button>
+            </div>
+        </div>
+    `;
+};
