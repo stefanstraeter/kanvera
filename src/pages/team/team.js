@@ -120,37 +120,48 @@ export class TeamPage {
     }
 
     /**
-     * @description Handles the deletion of a team member
+     * @description  Shows a confirmation dialog before deleting a team member, and executes the provided callback if confirmed
+     * @param {string} title - Title of the confirmation dialog
+     * @param {string} message - The text content (e.g., the name of the member)
+     * @param {Function} onConfirm - The action to perform when the DELETE button is clicked
+     */
+    showConfirmDialog(title, message, onConfirm) {
+        closeModal();
+
+        setTimeout(() => {
+            const bodyHtml = createConfirmDeleteHtml(message);
+
+            openModal(title, bodyHtml, null);
+
+            const confirmBtn = document.querySelector('.js-confirm-delete-btn');
+            if (confirmBtn) {
+                confirmBtn.onclick = () => {
+                    onConfirm();
+                    closeModal();
+                };
+            }
+        }, 200);
+    }
+
+    /**
+     * @description  Handles the deletion process for a team member
      * @param {string} memberId - The ID of the team member
      * @return {void} 
      * @memberof TeamPage
      */
     async handleDeleteMember(memberId) {
-        // 1. Daten holen für den Namen im Modal
         const memberManager = await import('../../services/data-service.js');
-        const members = memberManager.getAllTeamMembers(); // Falls du so eine Funktion hast
-        const member = members.find(m => m.id === memberId);
+        const member = memberManager.getAllTeamMembers().find(m => m.id === memberId);
+        const name = member ? member.name : "this member";
 
-        // 2. Das aktuelle Edit-Modal schließen
-        closeModal();
-
-        // 3. Kurze Verzögerung für smoothe UX (optional)
-        setTimeout(() => {
-            const bodyHtml = createConfirmDeleteHtml(member ? member.name : "this member");
-
-            // 4. Das Modal als Bestätigungs-Dialog öffnen
-            openModal("Delete Member?", bodyHtml, null);
-
-            // 5. Den Delete-Button im neuen Modal aktivieren
-            const confirmBtn = document.querySelector('.js-confirm-delete-btn');
-            if (confirmBtn) {
-                confirmBtn.onclick = () => {
-                    memberManager.deleteMemberLocally(memberId);
-                    closeModal();
-                    this.renderTeamGrid();
-                };
+        this.showConfirmDialog(
+            "Delete Member?",
+            name,
+            () => {
+                memberManager.deleteMemberLocally(memberId);
+                this.renderTeamGrid();
             }
-        }, 100);
+        );
     }
 
     /* ==========================================================================
