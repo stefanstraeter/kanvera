@@ -1,7 +1,9 @@
 // src/pages/team.js
 
-import { initDataService, getAllTeamMembers, updateMemberLocally } from '../../services/data-service.js';
-import { getInitials } from '../../services/auth-logic.js';
+import { initDataService } from '../../services/data-service.js';
+import { getCurrentUser } from '../../services/auth-service.js';
+import { getAllTeamMembers, updateMemberLocally } from '../../services/member-service.js';
+import { getInitials } from '../../utils/ui-helpers.js';
 import { openModal, closeModal } from '../../components/shared/modal.js';
 import { createMemberCardHtml, createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './team-template.js';
 import { getMemberDataFromModal, createNewMemberObject } from './team-utils.js';
@@ -79,10 +81,12 @@ export class TeamPage {
         if (saveBtn) {
             saveBtn.onclick = () => this.saveChanges(memberId);
         }
+
         const deleteBtn = document.querySelector('.js-delete-member');
         if (deleteBtn) {
             deleteBtn.onclick = () => this.handleDeleteMember(memberId);
         }
+
         const fields = document.querySelectorAll('.js-edit-field');
         fields.forEach(field => {
             field.addEventListener('keydown', (e) => {
@@ -94,7 +98,11 @@ export class TeamPage {
         });
     }
 
-
+    /**
+     * @description Save changes for a team member
+     * @param {string} memberId - The ID of the team member
+     * @memberof TeamPage
+     */
     async saveChanges(memberId) {
         const updatedData = getMemberDataFromModal();
 
@@ -109,6 +117,7 @@ export class TeamPage {
      * @param {string} title - Title of the confirmation dialog
      * @param {string} message - The text content (e.g., the name of the member)
      * @param {Function} onConfirm - The action to perform when the DELETE button is clicked
+     * @memberof TeamPage
      */
     showConfirmDialog(title, message, onConfirm) {
         closeModal();
@@ -135,7 +144,7 @@ export class TeamPage {
      * @memberof TeamPage
      */
     async handleDeleteMember(memberId) {
-        const memberManager = await import('../../services/data-service.js');
+        const memberManager = await import('../../services/member-service.js');
         const member = memberManager.getAllTeamMembers().find(m => m.id === memberId);
         const name = member ? member.name : "this member";
 
@@ -153,7 +162,8 @@ export class TeamPage {
        ADD MEMBER LOGIC
        ========================================================================== */
     /**
-     * @description Öffnet das Modal für einen neuen Member
+     * @description Opens the modal for adding a new member
+     * @memberof TeamPage
      */
     handleAddMemberClick() {
         const bodyHtml = createAddMemberModalHtml();
@@ -173,7 +183,7 @@ export class TeamPage {
     }
 
     /* ==========================================================================
-       EVENTS
+       EVENTS LISTENERS
        ========================================================================== */
     /**
      * @description Initializes the event listeners for the team page
