@@ -67,4 +67,20 @@ export const GREETING_MESSAGES = {
     }
 };
 
+/** * @description UI Button texts for member management
+ */
+export const MEMBER_UI_TEXT = {
+    ADD_PENDING: "Adding...",
+    ADD_DEFAULT: "Add Member",
+    SAVE_PENDING: "Saving...",
+    SAVE_DEFAULT: "Save Changes"
+};
 
+/** * @description General validation error messages
+ */
+export const VALIDATION_ERRORS = {
+    FIELD_REQUIRED: "This field is required.",
+    FULL_NAME: "Please enter a full name.",
+    EMAIL_INVALID: "Please enter a valid email.",
+    PHONE_INVALID: "Please check the phone number."
+};
