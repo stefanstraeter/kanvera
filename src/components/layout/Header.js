@@ -69,7 +69,7 @@ export class Header {
         if (path.includes('pulse')) {
             titleElement.textContent = 'Daily Standup';
         } else if (path.includes('team')) {
-            titleElement.textContent = 'Team Directory';
+            titleElement.textContent = 'The Collective';
         } else if (path.includes('add-task')) {
             titleElement.textContent = 'Create New Issue';
         } else if (path.includes('board')) {
