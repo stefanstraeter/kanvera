@@ -35,8 +35,8 @@
   border-radius: 50%;
   cursor: pointer;
   transition:
-    transform 0.2s ease,
-    color 0.2s ease;
+    transform 0.2s ease-in-out,
+    color 0.2s ease-in-out;
 }
 
 .gateway__back:hover {
