@@ -3,7 +3,7 @@
 import { validateNotEmpty, validateEmailFormat, validateMinLength, toggleError, attachLiveValidation } from '../../utils/input-validation.js';
 import { AUTH_ERRORS, GUEST_LOGIN_DATA, UI_BUTTON_TEXT } from '../../utils/constants.js';
 import { handleSignUp } from './sign-up.js';
-import { signInAsUser, signInAsGuest } from '../../services/auth-logic.js';
+import { signInAsUser, signInAsGuest } from '../../services/auth-service.js';
 import { setLoadingStateBtn } from './access-utils.js';
 
 /* ==========================================================================
@@ -101,7 +101,6 @@ function setupAllLiveValidations() {
 /* ==========================================================================
    HELPERS FOR FORM HANDLING
    ========================================================================== */
-
 /**
  * @description Retrieves the email and password values from the login form input fields.
  * @return {{email: string, pass: string}} An object containing the email and password values.
