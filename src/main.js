@@ -15,6 +15,11 @@ import { TeamPage } from './pages/team/team.js'
 async function init() {
     initThemeListeners();
 
+    const isStaticPage = !document.getElementById('js-header-anchor');
+    if (isStaticPage && document.getElementById('js-menu-trigger')) {
+        initDropdownLogic();
+    }
+
     await initLayout();
 
     if (document.getElementById('gatewaySlider')) {
@@ -32,12 +37,6 @@ async function init() {
         const teamPage = new TeamPage();
         await teamPage.init();
     }
-
-    if (document.getElementById('js-menu-trigger')) {
-        initDropdownLogic();
-    }
-
-
 }
 
 /* ==========================================================================
