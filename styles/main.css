@@ -15,9 +15,10 @@
 @import url("./ui/theme-switch.css");
 @import url("./ui/form-feedback.css");
 @import url("./ui/scrollbar.css");
-@import url("./ui/components.css");
+@import url("./ui/dropdown.css");
 @import url("./ui/splash-screen.css");
 @import url("./ui/modal.css");
+@import url("./ui/avatar.css");
 
 /* Layout */
 @import url("./layout/header.css");
