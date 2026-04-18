@@ -33,9 +33,9 @@
   padding: var(--space-2xl);
   border-radius: var(--radius-modal);
   box-shadow: var(--shadow-modal);
-
   transform: translateY(-2rem);
   transition: transform var(--transition);
+  scrollbar-gutter: stable;
 }
 
 .modal.is-active .modal__content {
