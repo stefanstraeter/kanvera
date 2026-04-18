@@ -28,14 +28,14 @@ export const createMemberCardHtml = (member, initials, displayRole) => {
             </div>
 
             <div class="team-card__info">
-                <h3 class="heading-l">${member.name}</h3>
-                <p class="team-card__role">${displayRole}</p>
+                <h3 class="heading-l u-text-truncate">${member.name}</h3>
+                <p class="team-card__role u-text-truncate">${displayRole}</p>
                 
                 <div class="team-card__contact-details">
-                    <a href="mailto:${member.email}" class="team-card__link js-contact-link">
+                    <a href="mailto:${member.email}" class="team-card__link u-text-truncate js-contact-link">
                         <i class="fa-regular fa-envelope"></i> ${member.email}
                     </a>
-                    <a href="tel:${member.phone}" class="team-card__link js-contact-link">
+                    <a href="tel:${member.phone}" class="team-card__link u-text-truncate js-contact-link">
                         <i class="fa-solid fa-phone"></i> ${member.phone}
                     </a>
                 </div>
@@ -76,7 +76,7 @@ export const createEditModalHtml = (member, initials, displayRole) => {
                 <i class="fa-regular fa-user field-icon"></i>
                 <div class="inline-edit-wrapper">
                     <label class="modal-label">Role</label>
-                    <span class="js-edit-field" data-field="role" contenteditable="true" spellcheck="false">${displayRole}</span>
+                    <span class="js-edit-field " data-field="role" contenteditable="true" spellcheck="false">${displayRole}</span>
                 </div>
             </div>
 
@@ -92,7 +92,7 @@ export const createEditModalHtml = (member, initials, displayRole) => {
                 <i class="fa-solid fa-phone field-icon"></i>
                 <div class="inline-edit-wrapper">
                     <label class="modal-label">Phone Number</label>
-                    <span class="js-edit-field" data-field="phone" contenteditable="true" spellcheck="false">${member.phone || 'No Number'}</span>
+                    <span class="js-edit-field " data-field="phone" contenteditable="true" spellcheck="false">${member.phone || 'No Number'}</span>
                 </div>
             </div>
         </div>
