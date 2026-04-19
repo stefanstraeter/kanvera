@@ -4,6 +4,12 @@
 .pulse-wrapper {
   padding: var(--space-lg);
   max-width: 56rem;
+  opacity: 0;
+  transition: opacity 0.1s ease-in;
+}
+
+.pulse-wrapper.is-visible {
+  opacity: 1;
 }
 
 .pulse-header {
