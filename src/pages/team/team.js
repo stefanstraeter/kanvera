@@ -151,7 +151,7 @@ export class TeamPage {
      * @memberof TeamPage
      */
     async handleDeleteMember(memberId) {
-        const memberManager = await import('../../services/member-service.js');
+        const memberManager = await import('../../services/team-service.js');
         const member = memberManager.getAllTeamMembers().find(m => m.id === memberId);
         const name = member ? member.name : "this member";
 
