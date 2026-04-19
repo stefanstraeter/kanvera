@@ -34,3 +34,13 @@ export function getPulseStats() {
             .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))[0]?.dueDate || null
     };
 }
+
+
+/* ==========================================================================
+   BOARD TASKS
+   ========================================================================== */
+
+export function getTasksByCategory(category) {
+    const allTasks = getAllTasks();
+    return allTasks.filter(task => task.category === category);
+}
