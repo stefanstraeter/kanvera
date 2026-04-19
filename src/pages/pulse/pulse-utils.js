@@ -29,7 +29,7 @@ export function getGreetingConfig(user) {
 }
 
 /* ==========================================================================
-    DATE & TIME FORMATTING
+   TIME FORMATTING
    ========================================================================== */
 /**
  * @description Format a date string into a readable format
@@ -39,7 +39,6 @@ export function getGreetingConfig(user) {
  */
 export function formatDeadline(dateString) {
     if (!dateString) return "No upcoming deadline";
-
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
 
     return new Date(dateString).toLocaleDateString('en-US', options);
