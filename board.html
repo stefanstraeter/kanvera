@@ -6,7 +6,7 @@
     <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="assets/favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
-    <title>Board</title>
+    <title>Board - Kanvera</title>
 
     <link rel="stylesheet" href="./styles/main.css" />
 
@@ -21,6 +21,25 @@
   <body class="l-app">
     <aside class="l-sidebar" id="js-sidebar-anchor"></aside>
     <header class="l-header" id="js-header-anchor"></header>
-    <main class="l-content" id="js-content-anchor"></main>
+
+    <main class="l-content" id="jsContentAnchor">
+      <div class="board-wrapper">
+        <!-- <div class="board-search-bar margin-bottom--lg">
+          <div class="search-input-wrapper">
+            <input type="text" id="searchTask" class="input-field" placeholder="Search for tasks by title or description..." />
+          </div>
+        </div>-->
+        <div class="board-content">
+          <div class="board-columns" id="jsBoardColumns"></div>
+        </div>
+      </div>
+    </main>
+
+    <div id="js-global-modal" class="modal">
+      <div class="modal__content">
+        <h2 class="heading-l js-modal-title margin-bottom--md"></h2>
+        <div class="js-modal-body"></div>
+      </div>
+    </div>
   </body>
 </html>
