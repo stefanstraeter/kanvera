@@ -16,6 +16,14 @@ import { BoardPage } from './pages/board/board.js';
    ========================================================================== */
 async function init() {
     initThemeListeners();
+
+    if (document.getElementById('gatewaySlider')) {
+        initSplashScreen();
+        initSliderLogic();
+        initPasswordToggles();
+        initSignInLogic();
+    }
+
     await initDataService();
 
     const isStaticPage = !document.getElementById('js-header-anchor');
