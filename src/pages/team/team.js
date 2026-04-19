@@ -19,10 +19,10 @@ export class TeamPage {
         this.gridId = 'js-team-grid';
     }
 
-    async init() {
-        await initDataService();
+    init() {
         this.renderTeamGrid();
         this.initEventListeners();
+        this.showTeamWrapper();
     }
 
     /* ==========================================================================
@@ -46,6 +46,17 @@ export class TeamPage {
 
             return createMemberCardHtml(member, initials, displayRole);
         }).join('');
+    }
+
+    /**
+    * @description Show the team wrapper by adding the 'is-visible' class to it, making the content visible to the user
+    * @memberof TeamPage
+    */
+    showTeamWrapper() {
+        const wrapper = document.querySelector('.team-wrapper');
+        if (wrapper) {
+            wrapper.classList.add('is-visible');
+        }
     }
 
     /* ==========================================================================
