@@ -30,7 +30,8 @@
   grid-area: content;
   background-color: var(--bg-app-content);
   overflow-y: auto;
-  display: block;
+  display: flex;
+  height: 100%;
   min-height: 0;
   scrollbar-gutter: stable;
 }
