@@ -4,6 +4,11 @@ import { initDataService, getState, convertToArrayList } from '../../services/da
 import { getTasksByCategory } from '../../services/task-service.js';
 import { renderColumnHtml, createTaskCardHtml } from './board-template.js';
 
+/**
+ * @description Page class for the Board page.
+ * @export
+ * @class BoardPage
+ */
 export class BoardPage {
     constructor() {
         this.columns = [
@@ -14,12 +19,21 @@ export class BoardPage {
         ];
     }
 
-    async init() {
-        await initDataService();
+    init() {
         this.renderBoardLayout();
         this.renderAllTasks();
+        this.showBoardWrapper();
     }
 
+
+    /* ==========================================================================
+       RENDERING BOARD LAYOUT
+       ========================================================================== */
+    /**
+     * @description Render the board layout by creating columns based on the predefined column configuration and inserting them into the board container element
+     * @return {*} 
+     * @memberof BoardPage
+     */
     renderBoardLayout() {
         const boardContainer = document.getElementById('jsBoardColumns');
         if (!boardContainer) return;
@@ -29,6 +43,24 @@ export class BoardPage {
             .join('');
     }
 
+    /**
+     * @description Show the board wrapper by adding the 'is-visible' class to it, making the content visible to the user
+     * @memberof BoardPage
+     */
+    showBoardWrapper() {
+        const wrapper = document.querySelector('.board-wrapper');
+        if (wrapper) {
+            wrapper.classList.add('is-visible');
+        }
+    }
+
+    /* ==========================================================================
+       RENDERING TASKS IN COLUMNS
+       ========================================================================== */
+    /**
+     * @description Render all tasks in their respective columns by fetching tasks for each column and creating task cards
+     * @memberof BoardPage
+     */
     renderAllTasks() {
         this.columns.forEach(column => {
             const columnElement = document.getElementById(column.id);
