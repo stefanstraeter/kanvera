@@ -2,7 +2,18 @@
    TEAM LAYOUT STYLES
    ========================================================================== */
 .team-wrapper {
-  padding: var(--space-xl);
+  padding: var(--space-lg);
+  width: 100%;
+}
+
+/* ==========================================================================
+   TEAM GRID SYSTEM 
+   ========================================================================== */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-xl);
+  padding-bottom: var(--space-2xl);
   animation: fadeIn 0.6s ease-out;
 }
 
@@ -15,16 +26,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* ==========================================================================
-   TEAM GRID SYSTEM 
-   ========================================================================== */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: var(--space-xl);
-  padding-bottom: var(--space-2xl);
 }
 
 /* ==========================================================================
