@@ -11,7 +11,7 @@
   top: 0;
   color: var(--color-text-main);
   background-color: var(--bg-app-header);
-  padding: var(--space-xl);
+  padding: var(--space-lg);
   min-width: 0;
 }
 
