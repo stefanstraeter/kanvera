@@ -8,6 +8,12 @@
   flex: 1;
   min-height: 0;
   height: 100%;
+  opacity: 0;
+  transition: opacity 0.15s ease-in;
+}
+
+.board-wrapper.is-visible {
+  opacity: 1;
 }
 
 /* ==========================================================================
