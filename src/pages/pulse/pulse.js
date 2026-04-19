@@ -1,58 +1,101 @@
 // src/pages/pulse/pulse.js
 
 import { initDataService } from '../../services/data-service.js';
-import { getAllTasks, getPulseStats } from '../../services/task-service.js';
+import { getPulseStats } from '../../services/task-service.js';
 import { getGreetingConfig, formatDeadline } from './pulse-utils.js';
 
-
-/* ==========================================================================
-    INITIALIZATION
-   ========================================================================== */
 /**
- * @description Initialize the Pulse page by fetching necessary data and rendering the greeting and stats
+ * @description Page class for the Pulse page.
  * @export
+ * @class PulsePage
  */
-export async function initPulsePage() {
-    await initDataService();
+export class PulsePage {
+    constructor() {
+        this.statsMap = [
+            { id: 'totalTasks', statKey: 'total' },
+            { id: 'urgentCount', statKey: 'urgent' },
+            { id: 'countTodo', statKey: 'todo' },
+            { id: 'countDoing', statKey: 'doing' },
+            { id: 'countAwait', statKey: 'await' },
+            { id: 'countDone', statKey: 'done' }
+        ];
+    }
+    /**
+     * @description Initialize the Pulse page by loading necessary data and rendering the greeting and stats, then showing the pulse wrapper
+     * @memberof PulsePage
+     */
+    init() {
+        const currentUser = JSON.parse(sessionStorage.getItem("loggedInUser")) || { guest: true };
+        const stats = getPulseStats();
 
-    const currentUser = JSON.parse(sessionStorage.getItem("loggedInUser")) || { guest: true };
-    const stats = getPulseStats();
+        this.renderGreeting(currentUser);
+        this.renderStats(stats);
+        this.showPulseWrapper();
+    }
 
-    renderPulseGreeting(currentUser);
-    renderPulseStats(stats);
-}
+    /* ==========================================================================
+     RENDERING GREETING & STATS
+      ========================================================================== */
+    /**
+     * @description Show the pulse wrapper by adding the 'is-visible' class to it, making the content visible to the user
+     * @memberof PulsePage
+     */
+    showPulseWrapper() {
+        const wrapper = document.querySelector('.pulse-wrapper');
+        if (wrapper) {
+            wrapper.classList.add('is-visible');
+        }
+    }
 
-/* ==========================================================================
-    RENDERING GREETING AND STATS
-   ========================================================================== */
-/**
- * @description Render the greeting section of the Pulse page based on user information and time of day
- * @param {Object} user - The user object containing user information
- */
-function renderPulseGreeting(user) {
-    const config = getGreetingConfig(user);
+    /**
+     * @description Render the greeting section with the user's information
+     * @param {Object} user - The user object containing user information
+     * @memberof PulsePage
+     */
+    renderGreeting(user) {
+        const config = getGreetingConfig(user);
+        this.setElementText('greetingTitle', config.title);
+        this.setElementText('greetingSymbol', config.symbol);
+        this.setElementText('pulseUserName', config.name);
+        this.setElementText('greetingSubline', config.subline);
+    }
 
-    document.getElementById('greetingTitle').innerText = config.title;
-    document.getElementById('greetingSymbol').innerText = config.symbol;
-    document.getElementById('pulseUserName').innerText = config.name;
-    document.getElementById('greetingSubline').innerText = config.subline;
-}
+    /**
+     * @description Set the text content of an HTML element by its ID
+     * @param {string} id - The ID of the HTML element
+     * @param {string} value - The text content to set
+     * @memberof PulsePage
+     */
+    setElementText(id, value) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.innerText = value;
+        }
+    }
 
-/**
- * @description Render the task statistics section of the Pulse page based on the provided stats data
- * @param {Object} stats - The stats object containing task statistics
- */
-function renderPulseStats(stats) {
-    document.getElementById('totalTasks').innerText = stats.total;
-    document.getElementById('urgentCount').innerText = stats.urgent;
-    document.getElementById('countTodo').innerText = stats.todo;
-    document.getElementById('countDoing').innerText = stats.doing;
-    document.getElementById('countAwait').innerText = stats.await;
-    document.getElementById('countDone').innerText = stats.done;
+    /**
+     * @description Render the statistics section with the provided stats
+     * @param {Object} stats - The statistics object containing various stats
+     * @memberof PulsePage
+     */
+    renderStats(stats) {
+        this.statsMap.forEach(item => {
+            this.setElementText(item.id, stats[item.statKey]);
+        });
 
-    const deadlineEl = document.getElementById('nextDeadline');
-    if (deadlineEl) {
-        deadlineEl.innerText = formatDeadline(stats.nextDeadline);
+        this.setElementText('nextDeadline', formatDeadline(stats.nextDeadline));
+    }
+
+    /**
+     * @description Set the text content of an HTML element by its ID
+     * @param {string} id - The ID of the HTML element
+     * @param {string} value - The text content to set
+     * @memberof PulsePage
+     */
+    setElementText(id, value) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.innerText = value;
+        }
     }
 }
-
