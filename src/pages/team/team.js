@@ -2,7 +2,7 @@
 
 import { initDataService } from '../../services/data-service.js';
 import { getCurrentUser } from '../../services/auth-service.js';
-import { getAllTeamMembers, updateMemberLocally, initAddMemberValidation, validateMemberForm } from '../../services/member-service.js';
+import { getAllTeamMembers, updateMemberLocally, initAddMemberValidation, validateMemberForm } from '../../services/team-service.js';
 import { openModal, closeModal } from '../../components/shared/modal.js';
 import { getInitials, setLoadingStateBtn } from '../../utils/ui-helpers.js';
 import { MEMBER_UI_TEXT } from '../../utils/constants.js';
