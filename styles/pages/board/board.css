@@ -1,0 +1,105 @@
+/* ==========================================================================
+   BOARD LAYOUT STYLES
+   ========================================================================== */
+.board-wrapper {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+}
+
+/* ==========================================================================
+   BOARD CONTENT & COLUMNS 
+   ========================================================================== */
+.board-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.board-columns {
+  display: grid;
+  grid-template-columns: repeat(4, 280px);
+  gap: var(--space-lg);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: var(--space-lg);
+  scrollbar-gutter: stable;
+}
+
+/* ==========================================================================
+   BOARD COLUMN STYLING
+   ========================================================================== */
+.board-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.board-column__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  white-space: nowrap;
+}
+
+.board-column__title {
+  color: var(--color-medium-grey);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-s);
+  font-size: var(--font-size-body-m);
+}
+
+/* ==========================================================================
+   STATUS INDICATORS - DOTS
+   ========================================================================== */
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.status-dot--todo {
+  background-color: var(--status-todo);
+}
+.status-dot--inprogress {
+  background-color: var(--status-doing);
+}
+.status-dot--awaitfeedback {
+  background-color: var(--status-await-feedback);
+}
+.status-dot--done {
+  background-color: var(--status-done);
+}
+
+/* ==========================================================================
+   DROP ZONE & EMPTY STATE
+   ========================================================================== */
+.board-column__drop-zone {
+  min-height: 500px;
+  border-radius: var(--radius-card);
+}
+
+.board-column__empty-state {
+  color: var(--color-medium-grey);
+  font-size: var(--font-size-body-m);
+  text-align: center;
+  padding: var(--space-xl);
+}
