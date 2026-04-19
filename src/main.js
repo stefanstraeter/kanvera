@@ -8,6 +8,7 @@ import { initPasswordToggles, initSliderLogic, initDropdownLogic } from './pages
 import { initSignInLogic } from './pages/access/sign-in.js';
 import { initPulsePage } from './pages/pulse/pulse.js';
 import { TeamPage } from './pages/team/team.js'
+import { BoardPage } from './pages/board/board.js';
 
 /* ==========================================================================
    APP INITIALIZATION
@@ -36,6 +37,11 @@ async function init() {
     if (document.getElementById('js-team-grid')) {
         const teamPage = new TeamPage();
         await teamPage.init();
+    }
+
+    if (document.getElementById('jsBoardColumns')) {
+        const boardPage = new BoardPage();
+        boardPage.init();
     }
 }
 
