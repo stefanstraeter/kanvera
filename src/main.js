@@ -1,12 +1,13 @@
 // src/main.js
 
 import { initSplashScreen } from './utils/splash-screen.js';
-import { Navbar } from './components/layout/navbar.js';
-import { Header } from './components/layout/header.js';
 import { initThemeListeners } from './utils/theme.js';
 import { initPasswordToggles, initSliderLogic, initDropdownLogic } from './pages/access/access-utils.js';
 import { initSignInLogic } from './pages/access/sign-in.js';
-import { initPulsePage } from './pages/pulse/pulse.js';
+import { initDataService } from './services/data-service.js';
+import { Navbar } from './components/layout/navbar.js';
+import { Header } from './components/layout/header.js';
+import { PulsePage } from './pages/pulse/pulse.js';
 import { TeamPage } from './pages/team/team.js'
 import { BoardPage } from './pages/board/board.js';
 
@@ -15,6 +16,7 @@ import { BoardPage } from './pages/board/board.js';
    ========================================================================== */
 async function init() {
     initThemeListeners();
+    await initDataService();
 
     const isStaticPage = !document.getElementById('js-header-anchor');
     if (isStaticPage && document.getElementById('js-menu-trigger')) {
@@ -23,20 +25,14 @@ async function init() {
 
     await initLayout();
 
-    if (document.getElementById('gatewaySlider')) {
-        initSplashScreen();
-        initSliderLogic();
-        initPasswordToggles();
-        initSignInLogic();
-    }
-
     if (document.getElementById('totalTasks')) {
-        await initPulsePage();
+        const pulsePage = new PulsePage();
+        pulsePage.init();
     }
 
     if (document.getElementById('js-team-grid')) {
         const teamPage = new TeamPage();
-        await teamPage.init();
+        teamPage.init();
     }
 
     if (document.getElementById('jsBoardColumns')) {
