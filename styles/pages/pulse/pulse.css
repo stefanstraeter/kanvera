@@ -2,9 +2,16 @@
    PULSE LAYOUT STYLES
    ========================================================================== */
 .pulse-wrapper {
-  padding: var(--space-xl);
-  animation: fadeIn 0.6s ease-out;
+  padding: var(--space-lg);
   max-width: 56rem;
+}
+
+.pulse-header {
+  margin-bottom: var(--space-2xl);
+}
+
+.pulse-content {
+  animation: fadeIn 0.6s ease-out;
 }
 
 @keyframes fadeIn {
@@ -18,12 +25,8 @@
   }
 }
 
-.pulse-header {
-  margin-bottom: var(--space-2xl);
-}
-
 /* ==========================================================================
-   PULSE GRID SYSTEM 
+   PULSE GRID LAYOUT 
    ========================================================================== */
 .pulse-row {
   display: grid;
