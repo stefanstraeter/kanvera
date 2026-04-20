@@ -5,7 +5,7 @@
   padding: var(--space-lg);
   max-width: 56rem;
   opacity: 0;
-  transition: opacity 0.1s ease-in;
+  transition: opacity 0.15s ease-in;
 }
 
 .pulse-wrapper.is-visible {
