@@ -88,8 +88,8 @@
   "tasks": {
     "task1": {
       "assignedTo": [
-        "contactId1",
-        "contactId4"
+        "memberId1",
+        "memberId4"
       ],
       "category": "in progress",
       "description": "Create an animated hero intro using CSS and scroll triggers.",
@@ -100,9 +100,9 @@
     },
     "task2": {
       "assignedTo": [
-        "contactId3",
-        "contactId7",
-        "contactId10"
+        "memberId3",
+        "memberId7",
+        "memberId10"
       ],
       "category": "await feedback",
       "description": "Improve layout and responsiveness of product cards.",
@@ -123,7 +123,7 @@
     },
     "task3": {
       "assignedTo": [
-        "contactId2"
+        "memberId2"
       ],
       "category": "await feedback",
       "description": "Optimize rendering of large data sets in charts.",
@@ -144,8 +144,8 @@
     },
     "task4": {
       "assignedTo": [
-        "contactId5",
-        "contactId8"
+        "memberId5",
+        "memberId8"
       ],
       "category": "to do",
       "description": "Enable draggable content blocks with snap alignment.",
@@ -166,8 +166,8 @@
     },
     "task5": {
       "assignedTo": [
-        "contactId6",
-        "contactId9"
+        "memberId6",
+        "memberId9"
       ],
       "category": "to do",
       "description": "Ensure keyboard accessibility across UI components.",
@@ -178,7 +178,7 @@
     },
     "task6": {
       "assignedTo": [
-        "contactId11"
+        "memberId11"
       ],
       "category": "done",
       "description": "Build reusable button components and states.",
@@ -189,8 +189,8 @@
     },
     "task8": {
       "assignedTo": [
-        "contactId4",
-        "contactId7"
+        "memberId4",
+        "memberId7"
       ],
       "category": "to do",
       "description": "Improve user feedback when items are added to cart.",
@@ -211,86 +211,6 @@
     }
   },
   "users": {
-    "-Oq5-iLVxIWuo2VW6i0e": {
-      "email": "stefan_straeter@web.de",
-      "name": "Stefan Sträter",
-      "password": "12345678"
-    },
-    "-Oq522JEuAOdz-NdTKcW": {
-      "email": "test@test.de",
-      "name": "Stefan",
-      "password": "123456789"
-    },
-    "-Oq55rt5BgHB_SmTn0aj": {
-      "email": "peter@peter.de",
-      "name": "Peter",
-      "password": "12345678"
-    },
-    "-Oq581rNAhoblFvShpPx": {
-      "email": "stefan_straeter@web.com",
-      "name": "Stefan",
-      "password": "12345678"
-    },
-    "-Oq587S4njqzAZR-6xZ-": {
-      "email": "peter@web.de",
-      "name": "PETER",
-      "password": "12345678"
-    },
-    "-Oq5XczUI57OZ5oRO73X": {
-      "email": "test@web.de",
-      "name": "Stefan",
-      "password": "123456789"
-    },
-    "-Oq5baluuCwxMD4WEjVu": {
-      "email": "test@web.com",
-      "name": "Test",
-      "password": "12345678"
-    },
-    "-Oq5vwWcJESLVRBCOmft": {
-      "email": "peter@pan.de",
-      "name": "Peter Pan",
-      "password": "123456789"
-    },
-    "-Oq9djEZUxwYcgusQyI-": {
-      "email": "123@web.de",
-      "name": "Test",
-      "password": "12345678"
-    },
-    "-Oq9reCugR9b-KdVyMJX": {
-      "email": "test@test.fr",
-      "name": "Stefan",
-      "password": "12345678"
-    },
-    "-Oq9s9z5FbCir_xfJJCa": {
-      "email": "max@mustermann.de",
-      "name": "Max Mustermann",
-      "password": "12345678"
-    },
-    "-Oq9wdjPB2FHCz4bFM8y": {
-      "email": "test@test.dk",
-      "name": "Stefan",
-      "password": "12345678"
-    },
-    "-Oq9xj1DRXtBsfTI4Ec8": {
-      "email": "pelz@pelz.de",
-      "name": "Pelzlover",
-      "password": "ichliebepelz"
-    },
-    "-OqA3PLKI1j0E9LJIT0f": {
-      "email": "stefan@web.mn",
-      "name": "Peter Pan",
-      "password": "12345678"
-    },
-    "-OqB-qA-REwMHrzeRXmu": {
-      "email": "pelz@lover.de",
-      "name": "Pelz Lover",
-      "password": "pelzpelz"
-    },
-    "-OqBsIOdye7zNoei7dmj": {
-      "email": "igor@web.de",
-      "name": "Igor",
-      "password": "12345678"
-    },
     "userId1": {
       "email": "anna@test.de",
       "name": "Anna Schmidt",
