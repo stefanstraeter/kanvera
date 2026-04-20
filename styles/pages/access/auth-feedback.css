@@ -1,0 +1,59 @@
+/* ==========================================================================
+   AUTH USER FEEDBACK  
+   ========================================================================== */
+.auth-feedback {
+  position: fixed;
+  inset: 0;
+  background-color: var(--background-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition);
+  backdrop-filter: blur(2px);
+}
+
+.auth-feedback.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.auth-feedback__card {
+  background-color: var(--bg-app-card);
+  padding: var(--space-2xl);
+  border-radius: var(--radius-modal);
+  box-shadow: var(--shadow-modal);
+  width: 90%;
+  max-width: 30rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(2rem);
+  transition: transform var(--transition);
+}
+
+.auth-feedback.show .auth-feedback__card {
+  transform: translateY(0);
+}
+
+.auth-feedback__icon {
+  font-size: var(--font-size-2xl);
+  color: var(--color-main);
+  margin-bottom: var(--space-lg);
+}
+
+.auth-feedback__loader-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background-color: var(--color-main);
+  width: 0%;
+}
+
+.auth-feedback.show .auth-feedback__loader-bar {
+  width: 100%;
+  transition: width 2500ms linear;
+}
