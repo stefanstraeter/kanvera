@@ -1,7 +1,7 @@
 // src/pages/pulse/pulse.js
 
 import { initDataService } from '../../services/data-service.js';
-import { getPulseStats } from '../../services/task-service.js';
+import { getPulseStats } from '../../services/pulse-service.js';
 import { getGreetingConfig, formatDeadline } from './pulse-utils.js';
 
 /**
@@ -61,28 +61,14 @@ export class PulsePage {
     }
 
     /**
-     * @description Set the text content of an HTML element by its ID
-     * @param {string} id - The ID of the HTML element
-     * @param {string} value - The text content to set
-     * @memberof PulsePage
-     */
-    setElementText(id, value) {
-        const element = document.getElementById(id);
-        if (element) {
-            element.innerText = value;
-        }
-    }
-
-    /**
-     * @description Render the statistics section with the provided stats
-     * @param {Object} stats - The statistics object containing various stats
-     * @memberof PulsePage
-     */
+    * @description Render the statistics section with the provided stats
+    * @param {Object} stats - The statistics object containing various stats
+    * @memberof PulsePage
+    */
     renderStats(stats) {
         this.statsMap.forEach(item => {
             this.setElementText(item.id, stats[item.statKey]);
         });
-
         this.setElementText('nextDeadline', formatDeadline(stats.nextDeadline));
     }
 
@@ -95,7 +81,8 @@ export class PulsePage {
     setElementText(id, value) {
         const element = document.getElementById(id);
         if (element) {
-            element.innerText = value;
+            element.innerText = value ?? '';
         }
     }
+
 }
