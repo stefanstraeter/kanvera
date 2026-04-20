@@ -1,0 +1,104 @@
+/* ==========================================================================
+   TEAM CARD - BASE
+   ========================================================================== */
+.team-card {
+  background-color: var(--bg-app-card);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-lines);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.team-card:hover {
+  transform: translateY(-3px);
+}
+
+.team-card--clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.team-card__delete {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  transition: opacity var(--transition);
+}
+
+.team-card__delete button {
+  font-size: var(--font-size-s);
+  color: var(--color-medium-grey);
+  transition:
+    transform 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+}
+
+.team-card__delete button:hover {
+  color: var(--color-btn-danger-hover);
+  transform: scale(1.1);
+}
+
+.team-card__avatar {
+  margin-bottom: var(--space-lg);
+}
+
+/* ==========================================================================
+   TEAM CARD - TEXT INFO
+   ========================================================================== */
+.team-card__info {
+  text-align: center;
+  width: 100%;
+}
+
+.team-card__info h3 {
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-heading);
+}
+
+.team-card__role {
+  font-size: var(--font-size-s);
+  color: var(--color-main);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-s);
+  margin-top: -4px;
+  margin-bottom: var(--space-md);
+}
+
+/* ==========================================================================
+   TEAM CARD - CONTACT
+   ========================================================================== */
+.team-card__contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.team-card__link {
+  text-decoration: none;
+  color: var(--color-medium-grey);
+  font-size: var(--font-size-s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  transition: color var(--transition);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  cursor: pointer;
+  position: relative;
+  z-index: 5;
+}
+
+.team-card__link:hover {
+  color: var(--color-main-hover);
+}
