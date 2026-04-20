@@ -1,0 +1,133 @@
+/* ==========================================================================
+   PULSE CARD STYLING - BASE
+   ========================================================================== */
+.pulse-card {
+  background-color: var(--bg-app-card);
+  border-radius: var(--radius-card);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-lines);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  min-width: 0;
+  cursor: pointer;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.pulse-card:hover {
+  background-color: var(--color-main-hover);
+  transform: translateY(-3px);
+}
+
+.pulse-card .pulse-number {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-medium-grey);
+  transition: color 0.2s ease;
+}
+
+.pulse-card .pulse-label {
+  font-size: var(--font-size-body-m);
+  color: var(--color-medium-grey);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-s);
+  transition: color 0.2s ease;
+}
+
+.pulse-card:hover .pulse-number,
+.pulse-card:hover .pulse-label {
+  color: var(--color-white);
+}
+
+.pulse-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==========================================================================
+   PULSE CARD STYLING - URGENT 
+   ========================================================================== */
+.pulse-card--urgent {
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: var(--space-md);
+  background: #833ab4;
+  background: -webkit-linear-gradient(157deg, rgba(131, 58, 180, 1) 0%, rgba(255, 61, 36, 0.74) 100%);
+  background: -moz-linear-gradient(157deg, rgba(131, 58, 180, 1) 0%, rgba(255, 61, 36, 0.74) 100%);
+  background: linear-gradient(157deg, rgba(131, 58, 180, 1) 0%, rgba(255, 61, 36, 0.74) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#833AB4", endColorstr="#FF3D24", GradientType=0);
+  color: var(--color-white);
+}
+
+.urgent-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.urgent-deadline {
+  display: flex;
+  flex-direction: column;
+}
+
+.deadline-date {
+  font-size: var(--space-xl);
+  line-height: var(--line-height-heading);
+}
+
+.urgent-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.pulse-divider {
+  width: 1px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 0 var(--space-xl);
+}
+
+.pulse-card--urgent .pulse-number,
+.pulse-card--urgent .pulse-label,
+.pulse-card--urgent .deadline-date {
+  color: var(--color-white);
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 450px) {
+  .pulse-card {
+    width: 100%;
+  }
+
+  .pulse-row--main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pulse-card--urgent {
+    flex-direction: column;
+    gap: var(--space-lg);
+    align-items: center;
+    text-align: center;
+  }
+
+  .urgent-info {
+    align-items: center;
+    text-align: center;
+  }
+
+  .pulse-divider {
+    display: none;
+  }
+}
