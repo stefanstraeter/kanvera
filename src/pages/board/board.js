@@ -1,8 +1,10 @@
 //src/pages/board/board.js
 
 import { initDataService, getState, convertToArrayList } from '../../services/data-service.js';
-import { getTasksByCategory } from '../../services/task-service.js';
-import { renderColumnHtml, createTaskCardHtml } from './board-template.js';
+import { getTasksByCategory, resolveMemberDetails } from '../../services/task-service.js';
+import { renderColumnHtml } from './board-template.js';
+import { renderSingleTask } from './board-utils.js';
+import { getInitials } from '../../utils/ui-helpers.js';
 
 /**
  * @description Page class for the Board page.
@@ -58,7 +60,7 @@ export class BoardPage {
        RENDERING TASKS IN COLUMNS
        ========================================================================== */
     /**
-     * @description Render all tasks in their respective columns by fetching tasks for each column and creating task cards
+     * @description Render task cards in their respective columns by fetching tasks for each column and creating task cards
      * @memberof BoardPage
      */
     renderAllTasks() {
@@ -66,22 +68,10 @@ export class BoardPage {
             const columnElement = document.getElementById(column.id);
             if (!columnElement) return;
 
-            const rawTasks = getTasksByCategory(column.id);
-            const preparedTasks = rawTasks.map(task => {
-                const subCount = task.subtasks?.length || 0;
-                const doneCount = task.subtasks?.filter(st => st.done).length || 0;
+            const tasks = getTasksByCategory(column.id);
 
-                return {
-                    ...task,
-                    hasSubtasks: subCount > 0,
-                    progress: subCount > 0 ? (doneCount / subCount) * 100 : 0,
-                    subtaskStatus: `${doneCount}/${subCount}`,
-                    assigneeAvatars: ''
-                };
-            });
-
-            columnElement.innerHTML = preparedTasks
-                .map(task => createTaskCardHtml(task))
+            columnElement.innerHTML = tasks
+                .map(task => renderSingleTask(task))
                 .join('');
         });
     }
