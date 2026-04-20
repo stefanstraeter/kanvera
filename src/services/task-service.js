@@ -3,7 +3,7 @@
 import { getState, convertToArrayList } from './data-service.js';
 
 /* ==========================================================================
-   PULSE STATS
+   TASKS SERVICE
    ========================================================================== */
 /**
  * @description Returns an array of all tasks in the current state.
@@ -16,31 +16,29 @@ export function getAllTasks() {
 }
 
 /**
- * @description Returns the statistics for the Pulse page based on the current tasks.
+ * @description Gets all tasks that belong to a specific category (e.g., "to do", "in progress", "await feedback", "done") by filtering the list of all tasks based on their category property.
  * @export
- * @return {Object} An object containing the task statistics
+ * @param {string} category - The category of tasks to retrieve.
+ * @return {Array} An array of task objects that belong to the specified category.
  */
-export function getPulseStats() {
-    const tasks = getAllTasks();
-    return {
-        total: tasks.length,
-        todo: tasks.filter(task => task.category === 'to do').length,
-        doing: tasks.filter(task => task.category === 'in progress').length,
-        await: tasks.filter(task => task.category === 'await feedback').length,
-        done: tasks.filter(task => task.category === 'done').length,
-        urgent: tasks.filter(task => task.priority === 'urgent').length,
-        nextDeadline: tasks
-            .filter(task => task.priority === 'urgent' && task.dueDate)
-            .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))[0]?.dueDate || null
-    };
-}
-
-
-/* ==========================================================================
-   BOARD TASKS
-   ========================================================================== */
-
 export function getTasksByCategory(category) {
     const allTasks = getAllTasks();
     return allTasks.filter(task => task.category === category);
+}
+
+/**
+ * @description Gets the details of assignees based on their contact IDs.
+ * @export
+ * @param {Array} contactIds - An array of contact IDs.
+ * @return {Array} An array of assignee objects.
+ */
+export function resolveMemberDetails(contactIds) {
+    if (!contactIds || !Array.isArray(contactIds)) return [];
+
+    const state = getState();
+    const team = state.team || {};
+
+    return contactIds
+        .map(id => team[id])
+        .filter(member => !!member && member.name);
 }
