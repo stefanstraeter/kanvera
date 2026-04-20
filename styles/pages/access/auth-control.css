@@ -1,0 +1,130 @@
+/* ==========================================================================
+   AUTH FLOW CONTROLS & ELEMENTS
+   ========================================================================== */
+.auth-flow__header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.auth-flow__title {
+  display: inline-block;
+  position: relative;
+  padding-bottom: var(--space-xs);
+}
+
+.auth-flow__title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  background-color: var(--color-main);
+  border-radius: var(--radius-pill);
+}
+
+.auth-flow__back {
+  position: absolute;
+  left: var(--space-sm);
+  color: var(--color-main);
+  font-size: 1.2rem;
+  padding: var(--space-xs);
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+}
+
+.auth-flow__back:hover {
+  transform: scale(1.1);
+}
+
+.auth-flow__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.field-wrapper {
+  margin-bottom: var(--space-sm);
+}
+
+.policy-check {
+  text-align: center;
+}
+
+.auth-flow__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-top: var(--space-xs);
+}
+
+/* ==========================================================================
+   POLICY CHECKBOX
+   ========================================================================== */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.policy-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  user-select: none;
+}
+
+.icon-checked {
+  display: none;
+  color: var(--color-main);
+}
+
+.icon-unchecked {
+  color: var(--color-medium-grey);
+}
+
+.policy-input:checked + .policy-label .icon-checked {
+  display: inline-block;
+}
+
+.policy-input:checked + .policy-label .icon-unchecked {
+  display: none;
+}
+
+/* ==========================================================================
+   ANIMATION & STATE CLASSES
+   ========================================================================== */
+.slide-to-signup {
+  transform: translateX(-50%);
+}
+
+/* ==========================================================================
+   UTILITY CLASSES
+   ========================================================================== */
+.txt-center {
+  text-align: center;
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 600px) {
+  .auth-flow__actions {
+    flex-direction: column;
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-xs);
+    gap: var(--space-md);
+  }
+
+  .auth-flow__back {
+    left: 0;
+  }
+}
