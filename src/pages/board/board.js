@@ -4,6 +4,7 @@ import { initDataService, getState, convertToArrayList } from '../../services/da
 import { getTasksByCategory, resolveMemberDetails } from '../../services/task-service.js';
 import { renderColumnHtml } from './board-template.js';
 import { renderSingleTask } from './board-utils.js';
+import { initDragAndDrop, attachDragEventToCard } from './drag-n-drop.js';
 import { getInitials } from '../../utils/ui-helpers.js';
 
 /**
@@ -24,6 +25,7 @@ export class BoardPage {
     init() {
         this.renderBoardLayout();
         this.renderAllTasks();
+        initDragAndDrop(this.columns, () => this.renderAllTasks());
         this.showBoardWrapper();
     }
 
@@ -73,6 +75,9 @@ export class BoardPage {
             columnElement.innerHTML = tasks
                 .map(task => renderSingleTask(task))
                 .join('');
+
+            const cards = columnElement.querySelectorAll('.task-card');
+            cards.forEach(card => attachDragEventToCard(card));
         });
     }
 }
