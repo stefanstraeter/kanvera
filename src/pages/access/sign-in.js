@@ -14,15 +14,15 @@ import { AUTH_ERRORS, GUEST_LOGIN_DATA, UI_BUTTON_TEXT } from '../../utils/const
  * @export
  */
 export function initSignInLogic() {
-    const loginForm = document.getElementById('loginForm');
-    const signupForm = document.getElementById('signupForm');
-    const guestLoginBtn = document.getElementById('guestLoginBtn');
+    const signInForm = document.getElementById('signInForm');
+    const signUpForm = document.getElementById('signUpForm');
+    const guestSignInBtn = document.getElementById('guestSignInBtn');
 
     setupAllLiveValidations();
 
-    if (loginForm) loginForm.addEventListener('submit', handleSignIn);
-    if (signupForm) signupForm.addEventListener('submit', handleSignUp);
-    if (guestLoginBtn) guestLoginBtn.addEventListener('click', handleGuestSignIn);
+    if (signInForm) signInForm.addEventListener('submit', handleSignIn);
+    if (signUpForm) signUpForm.addEventListener('submit', handleSignUp);
+    if (guestSignInBtn) guestSignInBtn.addEventListener('click', handleGuestSignIn);
 }
 
 /* ==========================================================================
@@ -39,16 +39,16 @@ async function handleSignIn(event) {
 
     if (!isLoginValid(email, pass)) return;
 
-    const loginBtn = event.submitter;
-    setLoadingStateBtn(loginBtn, true);
+    const signInBtn = event.submitter;
+    setLoadingStateBtn(signInBtn, true);
 
     const user = await signInAsUser(email, pass);
 
     if (user) {
         completeLogin();
     } else {
-        setLoadingStateBtn(loginBtn, false);
-        toggleError(document.getElementById('loginEmail'), false, AUTH_ERRORS.INVALID_AUTH);
+        setLoadingStateBtn(signInBtn, false);
+        toggleError(document.getElementById('signInEmail'), false, AUTH_ERRORS.INVALID_AUTH);
     }
 }
 
@@ -60,7 +60,7 @@ async function handleSignIn(event) {
 async function handleGuestSignIn(event) {
     const guestBtn = event.currentTarget;
 
-    setLoadingStateBtn(guestBtn, true, UI_BUTTON_TEXT.LOGIN_PENDING, UI_BUTTON_TEXT.GUEST_DEFAULT);
+    setLoadingStateBtn(guestBtn, true, UI_BUTTON_TEXT.SIGNIN_PENDING, UI_BUTTON_TEXT.GUEST_DEFAULT);
 
     fillGuestCredentials();
     signInAsGuest();
@@ -76,11 +76,11 @@ async function handleGuestSignIn(event) {
  */
 function setupAllLiveValidations() {
     const inputFields = [
-        { id: 'loginEmail', validator: validateEmailFormat, error: AUTH_ERRORS.EMAIL_LOGIN },
-        { id: 'loginPassword', validator: validateNotEmpty, error: AUTH_ERRORS.PASSWORD_LOGIN },
-        { id: 'signupName', validator: validateNotEmpty, error: AUTH_ERRORS.NAME },
-        { id: 'signupEmail', validator: validateEmailFormat, error: AUTH_ERRORS.EMAIL_SIGNUP },
-        { id: 'signupPassword', validator: (v) => validateMinLength(v, 8), error: AUTH_ERRORS.PASSWORD_SIGNUP },
+        { id: 'signInEmail', validator: validateEmailFormat, error: AUTH_ERRORS.EMAIL_SIGNIN },
+        { id: 'signInPassword', validator: validateNotEmpty, error: AUTH_ERRORS.PASSWORD_SIGNIN },
+        { id: 'signUpName', validator: validateNotEmpty, error: AUTH_ERRORS.NAME },
+        { id: 'signUpEmail', validator: validateEmailFormat, error: AUTH_ERRORS.EMAIL_SIGNUP },
+        { id: 'signUpPassword', validator: (v) => validateMinLength(v, 8), error: AUTH_ERRORS.PASSWORD_SIGNUP },
         { id: 'policy', validator: (v) => v, error: AUTH_ERRORS.POLICY }
     ];
 
@@ -89,11 +89,11 @@ function setupAllLiveValidations() {
         if (inputField) attachLiveValidation(inputField, field.validator, field.error);
     });
 
-    const signupPass = document.getElementById('signupPassword');
-    const signupConfirm = document.getElementById('signupConfirmPassword');
+    const signUpPassword = document.getElementById('signUpPassword');
+    const signUpConfirm = document.getElementById('signUpConfirmPassword');
 
-    if (signupConfirm && signupPass) {
-        attachLiveValidation(signupConfirm, (val) => val === signupPass.value, AUTH_ERRORS.PASSWORD_CONFIRM);
+    if (signUpConfirm && signUpPassword) {
+        attachLiveValidation(signUpConfirm, (val) => val === signUpPassword.value, AUTH_ERRORS.PASSWORD_CONFIRM);
     }
 }
 
@@ -107,8 +107,8 @@ function setupAllLiveValidations() {
  */
 function getLoginCredentials() {
     return {
-        email: document.getElementById('loginEmail').value,
-        pass: document.getElementById('loginPassword').value
+        email: document.getElementById('signInEmail').value,
+        pass: document.getElementById('signInPassword').value
     };
 }
 
@@ -116,8 +116,8 @@ function getLoginCredentials() {
  * @description Fills the login form visually with guest credentials.
  */
 function fillGuestCredentials() {
-    const emailField = document.getElementById('loginEmail');
-    const passwordField = document.getElementById('loginPassword');
+    const emailField = document.getElementById('signInEmail');
+    const passwordField = document.getElementById('signInPassword');
 
     emailField.value = GUEST_LOGIN_DATA.email;
     passwordField.value = GUEST_LOGIN_DATA.password;
@@ -133,14 +133,14 @@ function fillGuestCredentials() {
  * @return {boolean} True if both email and password are valid, false otherwise.
  */
 function isLoginValid(email, password) {
-    const emailInput = document.getElementById('loginEmail');
-    const passwordInput = document.getElementById('loginPassword');
+    const emailInput = document.getElementById('signInEmail');
+    const passwordInput = document.getElementById('signInPassword');
 
     const isEmailOk = validateEmailFormat(email);
     const isPassOk = validateNotEmpty(password);
 
-    toggleError(emailInput, isEmailOk, AUTH_ERRORS.EMAIL_LOGIN);
-    toggleError(passwordInput, isPassOk, AUTH_ERRORS.PASSWORD_LOGIN);
+    toggleError(emailInput, isEmailOk, AUTH_ERRORS.EMAIL_SIGNIN);
+    toggleError(passwordInput, isPassOk, AUTH_ERRORS.PASSWORD_SIGNIN);
 
     return isEmailOk && isPassOk;
 }
