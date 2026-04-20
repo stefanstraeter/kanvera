@@ -41,6 +41,7 @@
   --color-text-main: var(--color-anthracite);
   --color-text-inverse: var(--color-anthracite);
   --color-lines: var(--color-lines-light);
+  --color-progress-bar: var(--color-very-light-grey);
 
   --color-btn-secondary-bg: var(--color-greyish-violett);
   --color-btn-secondary-hover: var(--color-main-hover);
@@ -96,6 +97,7 @@
   --space-xl: 2rem;
   --space-2xl: 3rem;
   --space-3xl: 4rem;
+  --space-10xl: 10rem;
 
   /* ==========================================================================
      BREAKPOINTS
@@ -112,6 +114,7 @@
   --radius-modal: 0.875rem;
   --radius-theme-switch: 1.5rem;
   --radius-input: 0.75rem;
+  --radius-task-category: 0.5rem;
 
   --transition: 200ms ease-in-out;
 
@@ -148,6 +151,7 @@
   --color-text-heading: var(--color-beige);
   --color-text-inverse: var(--color-beige);
   --color-lines: var(--color-lines-dark);
+  --color-progress-bar: var(--color-medium-grey);
 
   --color-btn-secondary-bg: var(--color-main-hover);
   --color-btn-secondary-hover: var(--color-beige);
