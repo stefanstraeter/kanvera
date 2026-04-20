@@ -3,31 +3,31 @@
 import { UI_BUTTON_TEXT } from '../../utils/constants.js';
 
 /* ==========================================================================
-   INITIALIZATION OF GATEWAY
+   INITIALIZATION OF AUTHENTICATION SLIDER, PASSWORD TOGGLES, AND DROPDOWN LOGIC
    ========================================================================== */
 /**
- * @description Initializes the slider logic for the gateway by setting up event listeners for navigation buttons and adjusting the card height accordingly
+ * @description Initializes the slider logic for the authentication flow by setting up event listeners for navigation buttons and adjusting the card height accordingly
  * @export
  */
 export function initSliderLogic() {
-    const gateway = document.querySelector(".gateway");
-    const slider = document.getElementById('gatewaySlider');
-    const loginWrapper = document.getElementById('loginWrapper');
-    const signupWrapper = document.getElementById('signupWrapper');
+    const authFlow = document.querySelector(".auth-flow");
+    const slider = document.getElementById('authFlowStage');
+    const signInWrapper = document.getElementById('signInWrapper');
+    const signUpWrapper = document.getElementById('signUpWrapper');
 
-    if (!gateway || !slider) return;
+    if (!authFlow || !slider) return;
 
-    setupInitialState(gateway, loginWrapper);
+    setupInitialState(authFlow, signInWrapper);
 
     const navigations = [
-        { btnId: 'toSignupBtn', view: 'signup', wrapper: signupWrapper },
-        { btnId: 'toLoginArrow', view: 'login', wrapper: loginWrapper }
+        { btnId: 'toSignUpBtn', view: 'signup', wrapper: signUpWrapper },
+        { btnId: 'toSignInArrow', view: 'login', wrapper: signInWrapper }
     ];
 
     navigations.forEach(({ btnId, view, wrapper }) => {
         document.getElementById(btnId)?.addEventListener('click', () => {
             slideTo(slider, view);
-            adjustCardHeight(gateway, wrapper);
+            adjustCardHeight(authFlow, wrapper);
         });
     });
 }
@@ -40,11 +40,11 @@ export function initSliderLogic() {
  * @param {boolean} show - Indicates whether to show or hide the header elements
  */
 function toggleHeaderElements(show) {
-    const navText = document.querySelector('.access-nav-text');
-    const toSignupBtn = document.getElementById('toSignupBtn');
+    const navText = document.querySelector('.auth-nav-text');
+    const toSignUpBtn = document.getElementById('toSignUpBtn');
 
     navText?.classList.toggle('u-invisible', !show);
-    toSignupBtn?.classList.toggle('u-invisible', !show);
+    toSignUpBtn?.classList.toggle('u-invisible', !show);
 }
 
 /**
@@ -120,41 +120,41 @@ export function initPasswordToggles() {
 }
 
 /* ==========================================================================
-   GATEWAY SLIDER & CARD HEIGHT ADJUSTMENT
+   AUTH FLOW SLIDER & CARD HEIGHT ADJUSTMENT
    ========================================================================== */
 /**
- * @description Adjusts the height of the gateway element based on the height of the wrapper element
- * @param {*} gateway - The gateway element whose height needs to be adjusted
+ * @description Adjusts the height of the authentication flow element based on the height of the wrapper element
+ * @param {*} authFlow - The authentication flow element whose height needs to be adjusted
  * @param {*} wrapper - The wrapper element used to calculate the height
  */
-function adjustCardHeight(gateway, wrapper) {
-    if (!wrapper || !gateway) return;
+function adjustCardHeight(authFlow, wrapper) {
+    if (!wrapper || !authFlow) return;
 
     const contentHeight = wrapper.offsetHeight;
     const offset = window.innerWidth < 600 ? 10 : 0;
 
-    gateway.style.height = `${contentHeight + offset}px`;
+    authFlow.style.height = `${contentHeight + offset}px`;
 }
 
 /**
- * @description Sets up the initial state of the gateway slider by disabling transitions, adjusting height, and then re-enabling transitions for smooth sliding effect
- * @param {HTMLElement} gateway - The gateway element
- * @param {HTMLElement} loginWrapper - The login wrapper element
+ * @description Sets up the initial state of the authentication flow by disabling transitions, adjusting height, and then re-enabling transitions for smooth sliding effect
+ * @param {HTMLElement} authFlow - The authentication flow element
+ * @param {HTMLElement} signInWrapper - The login wrapper element
  * @return {void}
  */
-function setupInitialState(gateway, loginWrapper) {
-    if (!gateway || !loginWrapper) return;
+function setupInitialState(authFlow, signInWrapper) {
+    if (!authFlow || !signInWrapper) return;
 
-    gateway.style.transition = 'none';
-    adjustCardHeight(gateway, loginWrapper);
+    authFlow.style.transition = 'none';
+    adjustCardHeight(authFlow, signInWrapper);
 
     setTimeout(() => {
-        gateway.style.transition = 'height 0.4s ease-in-out';
+        authFlow.style.transition = 'height 0.4s ease-in-out';
     }, 50);
 }
 
 /**
- * @description Slide the gateway slider to the specified view (login or signup) and toggle header elements accordingly
+ * @description Slide the authentication flow slider to the specified view (login or signup) and toggle header elements accordingly
  * @param {HTMLElement} slider - The slider element to be moved
  * @param {string} view - The target view ('signup' or 'login')
  * @return {void} 
