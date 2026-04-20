@@ -17,7 +17,9 @@ import { BoardPage } from './pages/board/board.js';
 async function init() {
     initThemeListeners();
 
-    if (document.getElementById('gatewaySlider')) {
+    const isAuthPage = document.getElementById('authFlowStage');
+
+    if (isAuthPage) {
         initSplashScreen();
         initSliderLogic();
         initPasswordToggles();
