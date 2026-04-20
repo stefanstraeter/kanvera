@@ -21,14 +21,14 @@
     <script type="module" src="./src/main.js"></script>
   </head>
 
-  <body class="access-viewport">
+  <body class="auth-viewport">
     <div id="splashScreen" class="splash-screen">
       <img id="splashScreenLogo" class="splash-screen__logo" src="assets/icons/logo-light.svg" alt="Kanvera Logo" />
     </div>
 
-    <header class="access-header">
-      <div class="access-header__left">
-        <a href="index.html" class="access-logo-link">
+    <header class="auth-header">
+      <div class="auth-header__left">
+        <a href="index.html" class="auth-logo-link">
           <picture>
             <source srcset="assets/icons/logo-mobile.svg" media="(max-width: 768px)" />
             <img src="" class="header__logo-img" id="headerLogoFinal" alt="Kanvera Logo" />
@@ -36,11 +36,11 @@
         </a>
       </div>
 
-      <div class="access-header__right">
-        <div class="access-nav-group">
-          <div class="access-cta-group">
-            <p class="access-nav-text hide-mobile">New to kanvera?</p>
-            <button id="toSignupBtn" class="btn btn--secondary btn--s u-min-w-8">Sign Up</button>
+      <div class="auth-header__right">
+        <div class="auth-nav-group">
+          <div class="auth-cta-group">
+            <p class="auth-nav-text hide-mobile">New to kanvera?</p>
+            <button id="toSignUpBtn" class="btn btn--secondary btn--s u-min-w-8">Sign Up</button>
           </div>
 
           <div class="theme-switch hide-mobile">
@@ -54,7 +54,7 @@
 
           <div class="menu-dropdown menu-dropdown--mobile-only">
             <button class="menu-dropdown__trigger" id="js-menu-trigger" aria-label="Menu">
-              <img src="assets/icons/icon-vertical-ellipsis.svg" alt="More" class="access-icon" />
+              <img src="assets/icons/icon-vertical-ellipsis.svg" alt="More" class="auth-icon" />
             </button>
 
             <div class="menu-dropdown__content" id="js-menu-content">
@@ -81,18 +81,18 @@
         </div>
       </div>
     </header>
-    <main class="access-main">
-      <section class="gateway">
-        <div class="gateway__stage" id="gatewaySlider">
-          <div class="view-wrapper" id="loginWrapper">
-            <form class="gateway__form" id="loginForm" novalidate>
-              <div class="gateway__header">
-                <h2 class="gateway__title heading-2xl">Hey there!</h2>
+    <main class="auth-main">
+      <section class="auth-flow">
+        <div class="auth-flow__stage" id="authFlowStage">
+          <div class="auth-flow__wrapper" id="signInWrapper">
+            <form class="auth-flow__form" id="signInForm" novalidate>
+              <div class="auth-flow__header">
+                <h2 class="auth-flow__title heading-2xl">Hey there!</h2>
               </div>
 
               <div class="field-wrapper">
                 <div class="field-group">
-                  <input type="email" id="loginEmail" class="field-input" placeholder="Email" />
+                  <input type="email" id="signInEmail" class="field-input" placeholder="Email" />
                   <i class="fa-regular fa-envelope field-icon"></i>
                 </div>
                 <div class="error-msg"></div>
@@ -100,28 +100,28 @@
 
               <div class="field-wrapper">
                 <div class="field-group">
-                  <input type="password" id="loginPassword" class="field-input" placeholder="Password" />
+                  <input type="password" id="signInPassword" class="field-input" placeholder="Password" />
                   <i class="fa-solid fa-eye-slash field-icon"></i>
                 </div>
                 <div class="error-msg"></div>
               </div>
 
-              <div class="gateway__actions">
+              <div class="auth-flow__actions">
                 <button type="submit" class="btn btn--s btn--primary btn--full">Sign In</button>
-                <button type="button" id="guestLoginBtn" class="btn btn--s btn--secondary btn--full">Guest Sign In</button>
+                <button type="button" id="guestSignInBtn" class="btn btn--s btn--secondary btn--full">Guest Sign In</button>
               </div>
             </form>
           </div>
-          <div class="view-wrapper" id="signupWrapper">
-            <form class="gateway__form" id="signupForm" novalidate>
-              <div class="gateway__header">
-                <i class="fa-solid fa-arrow-left gateway__back" id="toLoginArrow"></i>
-                <h2 class="gateway__title heading-2xl">Get on board!</h2>
+          <div class="auth-flow__wrapper" id="signUpWrapper">
+            <form class="auth-flow__form" id="signUpForm" novalidate>
+              <div class="auth-flow__header">
+                <i class="fa-solid fa-arrow-left auth-flow__back" id="toSignInArrow"></i>
+                <h2 class="auth-flow__title heading-2xl">Get on board!</h2>
               </div>
 
               <div class="field-wrapper">
                 <div class="field-group">
-                  <input type="text" id="signupName" class="field-input" placeholder="Name" />
+                  <input type="text" id="signUpName" class="field-input" placeholder="Name" />
                   <i class="fa-regular fa-user field-icon"></i>
                 </div>
                 <div class="error-msg"></div>
@@ -129,7 +129,7 @@
 
               <div class="field-wrapper">
                 <div class="field-group">
-                  <input type="email" id="signupEmail" class="field-input" placeholder="Email" />
+                  <input type="email" id="signUpEmail" class="field-input" placeholder="Email" />
                   <i class="fa-regular fa-envelope field-icon"></i>
                 </div>
                 <div class="error-msg"></div>
@@ -137,7 +137,7 @@
 
               <div class="field-wrapper">
                 <div class="field-group">
-                  <input type="password" id="signupPassword" class="field-input" placeholder="Password" />
+                  <input type="password" id="signUpPassword" class="field-input" placeholder="Password" />
                   <i class="fa-solid fa-eye-slash field-icon"></i>
                 </div>
                 <div class="error-msg"></div>
@@ -145,7 +145,7 @@
 
               <div class="field-wrapper">
                 <div class="field-group">
-                  <input type="password" id="signupConfirmPassword" class="field-input" placeholder="Confirm Password" />
+                  <input type="password" id="signUpConfirmPassword" class="field-input" placeholder="Confirm Password" />
                   <i class="fa-solid fa-eye-slash field-icon"></i>
                 </div>
                 <div class="error-msg"></div>
@@ -164,7 +164,7 @@
                 <div class="error-msg txt-center"></div>
               </div>
 
-              <div class="gateway__actions">
+              <div class="auth-flow__actions">
                 <button type="submit" class="btn btn--s btn--primary btn--full">Sign Up</button>
               </div>
             </form>
@@ -173,14 +173,14 @@
       </section>
     </main>
 
-    <div id="successOverlay" class="overlay">
-      <div class="modal-card">
-        <div class="modal-content">
-          <i class="fa-solid fa-circle-check success-icon"></i>
+    <div id="authSuccessOverlay" class="auth-feedback">
+      <div class="auth-feedback__card">
+        <div class="auth-feedback__content">
+          <i class="fa-solid fa-circle-check auth-feedback__icon"></i>
           <h2>Signup successful!</h2>
-          <p>You have been registered. Redirecting to login...</p>
+          <p>You have been registered. Redirecting to sign in...</p>
         </div>
-        <div class="modal-loader-bar"></div>
+        <div class="auth-feedback__loader-bar"></div>
       </div>
     </div>
   </body>
