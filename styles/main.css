@@ -25,10 +25,10 @@
 @import url("./layout/sidebar.css");
 
 /* Pages */
-@import url("./pages/access/access-layout.css");
-@import url("./pages/access/access-gateway.css");
-@import url("./pages/access/access-control.css");
-@import url("./pages/access/access-feedback.css");
+@import url("./pages/access/auth-layout.css");
+@import url("./pages/access/auth-flow.css");
+@import url("./pages/access/auth-control.css");
+@import url("./pages/access/auth-feedback.css");
 @import url("./pages/pulse/pulse.css");
 @import url("./pages/team/team.css");
 @import url("./pages/legal/legal.css");
