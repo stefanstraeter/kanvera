@@ -46,6 +46,7 @@
   overflow-y: hidden;
   padding-bottom: var(--space-lg);
   scrollbar-gutter: stable;
+  height: 100%;
 }
 
 /* ==========================================================================
@@ -55,13 +56,15 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  height: 100%;
+  max-height: calc(100vh - var(--header-height) - (var(--space-lg) * 2));
 }
 
 .board-column__header {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
   white-space: nowrap;
 }
 
@@ -71,6 +74,50 @@
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-s);
   font-size: var(--font-size-body-m);
+}
+
+/* ==========================================================================
+   DROP ZONE & EMPTY STATE
+   ========================================================================== */
+.board-column__drop-zone {
+  flex-grow: 0;
+  flex-shrink: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding-top: var(--space-xs);
+  padding-right: var(--space-xs);
+  padding-bottom: var(--space-lg);
+  max-height: calc(100vh - var(--header-height) - 9rem);
+  min-height: 3rem;
+}
+
+.js-drop-zone:empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 20rem;
+  width: 100%;
+  border: 2px dashed var(--color-lines);
+  border-radius: var(--radius-card);
+}
+
+.js-drop-zone:empty::after {
+  content: "No tasks yet";
+  font-size: var(--font-size-body-l);
+  color: var(--color-medium-grey);
+  font-weight: var(--font-weight-medium);
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.js-drop-zone.drag-over {
+  background-color: rgba(99, 95, 199, 0.1);
+  border-color: var(--color-main);
 }
 
 /* ==========================================================================
@@ -93,19 +140,4 @@
 }
 .status-dot--done {
   background-color: var(--status-done);
-}
-
-/* ==========================================================================
-   DROP ZONE & EMPTY STATE
-   ========================================================================== */
-.board-column__drop-zone {
-  min-height: 500px;
-  border-radius: var(--radius-card);
-}
-
-.board-column__empty-state {
-  color: var(--color-medium-grey);
-  font-size: var(--font-size-body-m);
-  text-align: center;
-  padding: var(--space-xl);
 }
