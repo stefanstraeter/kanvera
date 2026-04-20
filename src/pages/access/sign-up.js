@@ -34,7 +34,7 @@ export async function handleSignUp(event) {
         showSuccessMessage();
 
     } catch (error) {
-        console.error("Signup Error:", error);
+        console.error("SignUp Error:", error);
         setLoadingStateBtn(signupBtn, false);
     }
 }
@@ -48,10 +48,10 @@ export async function handleSignUp(event) {
  */
 function getFormData() {
     return {
-        name: document.getElementById('signupName').value.trim(),
-        email: document.getElementById('signupEmail').value.trim(),
-        password: document.getElementById('signupPassword').value,
-        confirm: document.getElementById('signupConfirmPassword').value,
+        name: document.getElementById('signUpName').value.trim(),
+        email: document.getElementById('signUpEmail').value.trim(),
+        password: document.getElementById('signUpPassword').value,
+        confirm: document.getElementById('signUpConfirmPassword').value,
         policy: document.getElementById('policy').checked
     };
 }
@@ -63,10 +63,10 @@ function getFormData() {
  */
 function isSignUpFormValid(data) {
     const inputFields = [
-        { id: 'signupName', ok: validateNotEmpty(data.name), err: AUTH_ERRORS.NAME },
-        { id: 'signupEmail', ok: validateEmailFormat(data.email), err: AUTH_ERRORS.EMAIL_SIGNUP },
-        { id: 'signupPassword', ok: validateMinLength(data.password, 8), err: AUTH_ERRORS.PASSWORD_SIGNUP },
-        { id: 'signupConfirmPassword', ok: data.password === data.confirm, err: AUTH_ERRORS.PASSWORD_CONFIRM },
+        { id: 'signUpName', ok: validateNotEmpty(data.name), err: AUTH_ERRORS.NAME },
+        { id: 'signUpEmail', ok: validateEmailFormat(data.email), err: AUTH_ERRORS.EMAIL_SIGNUP },
+        { id: 'signUpPassword', ok: validateMinLength(data.password, 8), err: AUTH_ERRORS.PASSWORD_SIGNUP },
+        { id: 'signUpConfirmPassword', ok: data.password === data.confirm, err: AUTH_ERRORS.PASSWORD_CONFIRM },
         { id: 'policy', ok: data.policy, err: AUTH_ERRORS.POLICY }
     ];
 
@@ -85,7 +85,7 @@ function isSignUpFormValid(data) {
  * @param {HTMLElement} btn - The button element to reset.
  */
 function handleEmailExistsError(btn) {
-    const emailInput = document.getElementById('signupEmail');
+    const emailInput = document.getElementById('signUpEmail');
     toggleError(emailInput, false, AUTH_ERRORS.EMAIL_EXISTS);
     setLoadingStateBtn(btn, false);
 }
@@ -94,7 +94,7 @@ function handleEmailExistsError(btn) {
  * @description Shows the success overlay or an alert and redirects the user.
  */
 function showSuccessMessage() {
-    const overlay = document.getElementById('successOverlay');
+    const overlay = document.getElementById('authSuccessOverlay');
 
     if (overlay) {
         overlay.classList.add('show');
@@ -102,7 +102,6 @@ function showSuccessMessage() {
             window.location.href = "index.html";
         }, 2500);
     } else {
-        alert("Signup successful!");
         window.location.href = "index.html";
     }
 }
