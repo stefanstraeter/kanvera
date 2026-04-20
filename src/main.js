@@ -2,8 +2,8 @@
 
 import { initSplashScreen } from './utils/splash-screen.js';
 import { initThemeListeners } from './utils/theme.js';
-import { initPasswordToggles, initSliderLogic, initDropdownLogic } from './pages/access/access-utils.js';
-import { initSignInLogic } from './pages/access/sign-in.js';
+import { initPasswordToggles, initSliderLogic, initDropdownLogic } from './pages/auth/auth-utils.js';
+import { initSignInLogic } from './pages/auth/sign-in.js';
 import { initDataService } from './services/data-service.js';
 import { Navbar } from './components/layout/navbar.js';
 import { Header } from './components/layout/header.js';
