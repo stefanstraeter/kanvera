@@ -1,0 +1,87 @@
+/* ==========================================================================
+   PULSE LAYOUT
+   ========================================================================== */
+.pulse-wrapper {
+  padding: var(--space-lg);
+  max-width: 56rem;
+  opacity: 0;
+  transition: opacity 0.1s ease-in;
+}
+
+.pulse-wrapper.is-visible {
+  opacity: 1;
+}
+
+.pulse-header {
+  margin-bottom: var(--space-2xl);
+}
+
+.pulse-content {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   PULSE GRID SYSTEM 
+   ========================================================================== */
+.pulse-row {
+  display: grid;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.pulse-row--main {
+  grid-template-columns: 1fr 2fr;
+}
+
+.pulse-row--stats {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .pulse-row--stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 950px) {
+  .pulse-wrapper {
+    padding: var(--space-m);
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 450px) {
+  .pulse-wrapper {
+    padding: var(--space-m);
+    width: 100%;
+  }
+
+  .pulse-row--stats {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .pulse-card {
+    width: 100%;
+  }
+
+  .pulse-row--main {
+    display: flex;
+    flex-direction: column;
+  }
+}
