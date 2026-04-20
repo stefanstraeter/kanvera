@@ -3,7 +3,7 @@
 import { UI_BUTTON_TEXT } from '../utils/constants.js';
 
 /* ==========================================================================
-    UI COMPONENT HELPERS
+    GET INITIALS FOR AVATARS
    ========================================================================== */
 /**
 * @description Generates initials from a given name. 
@@ -46,4 +46,19 @@ export function setLoadingStateBtn(btn, isPending, loadingText = UI_BUTTON_TEXT.
 
     btn.disabled = isPending;
     btn.classList.toggle('is-pending', isPending);
+}
+
+/* ==========================================================================
+   PROGRESS CALCULATION FOR PULSE PAGE & SUBTASKS
+   ========================================================================== */
+/**
+ * @description Calculates the progress percentage based on the number of completed items and the total number of items. It returns a percentage value that can be used to visually represent progress in the UI, such as in a progress bar or similar component.
+ * @export
+ * @param {number} done - The number of completed items.
+ * @param {number} total - The total number of items.
+ * @returns {number} A percentage value between 0 and 100.
+ */
+export function calculateProgressPercent(done, total) {
+    if (!total || total <= 0) return 0;
+    return (done / total) * 100;
 }
