@@ -1,9 +1,9 @@
 // src/services/task-service.js
 
-import { getState, convertToArrayList } from './data-service.js';
+import { getState, convertToArrayList, saveToCache } from './data-service.js';
 
 /* ==========================================================================
-   TASKS SERVICE
+   TASKS SERVICE 
    ========================================================================== */
 /**
  * @description Returns an array of all tasks in the current state.
@@ -27,10 +27,31 @@ export function getTasksByCategory(category) {
 }
 
 /**
+ * @description Updates the category of a task and marks all subtasks as done if the new category is "done".
+ * @export
+ * @param {string} taskId - The ID of the task to update.
+ * @param {string} newCategory - The new category to assign to the task.
+ * @return {Promise<void>} 
+ */
+export async function updateTaskCategory(taskId, newCategory) {
+    const state = getState();
+    const task = state.tasks[taskId];
+
+    if (!task) return;
+
+    task.category = newCategory;
+
+    if (newCategory === 'done' && task.subtasks) {
+        task.subtasks.forEach(st => st.done = true);
+    }
+    saveToCache();
+}
+
+/**
  * @description Gets the details of assignees based on their contact IDs.
  * @export
- * @param {Array} contactIds - An array of contact IDs.
- * @return {Array} An array of assignee objects.
+ * @param {Array<string>} contactIds - An array of contact IDs.
+ * @return {Array<Object>} An array of assignee objects.
  */
 export function resolveMemberDetails(contactIds) {
     if (!contactIds || !Array.isArray(contactIds)) return [];
