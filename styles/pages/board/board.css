@@ -64,7 +64,8 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  margin-bottom: var(--space-md);
+  padding: var(--space-xs);
+  margin-bottom: var(--space-xs);
   white-space: nowrap;
 }
 
@@ -80,16 +81,27 @@
    DROP ZONE & EMPTY STATE
    ========================================================================== */
 .board-column__drop-zone {
-  flex-grow: 0;
-  flex-shrink: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  min-height: 80%;
+  padding: var(--space-xs);
+  border: 1px solid transparent;
+  border-radius: var(--radius-card);
   overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-gutter: stable;
-  padding-top: var(--space-xs);
-  padding-right: var(--space-xs);
-  padding-bottom: var(--space-lg);
-  max-height: calc(100vh - var(--header-height) - 9rem);
-  min-height: 3rem;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.board-column__drop-zone--highlight {
+  background-color: rgba(99, 95, 199, 0.05);
+  border-color: var(--color-main-hover);
+  border-style: dashed;
 }
 
 .js-drop-zone:empty {
@@ -97,35 +109,32 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 20rem;
+  margin-top: var(--space-xs);
+  height: 1rem;
   width: 100%;
-  border: 2px dashed var(--color-lines);
-  border-radius: var(--radius-card);
 }
 
 .js-drop-zone:empty::after {
-  content: "No tasks yet";
-  font-size: var(--font-size-body-l);
+  content: "Enjoy the emptiness.\A Time for a coffee?!";
+  white-space: pre-wrap;
+  text-align: center;
+  line-height: 1.4;
+  font-size: var(--font-size-body-m);
   color: var(--color-medium-grey);
   font-weight: var(--font-weight-medium);
-  display: flex;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
 }
 
-.js-drop-zone.drag-over {
-  background-color: rgba(99, 95, 199, 0.1);
-  border-color: var(--color-main);
+.js-drop-zone:empty.board-column__drop-zone--highlight::after {
+  content: "Drop me here";
+  color: var(--color-main);
 }
 
 /* ==========================================================================
    STATUS INDICATORS - DOTS
    ========================================================================== */
 .status-dot {
-  width: 12px;
-  height: 12px;
+  width: 0.75rem;
+  height: 0.75rem;
   border-radius: 50%;
 }
 
