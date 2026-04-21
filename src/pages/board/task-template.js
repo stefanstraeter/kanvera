@@ -74,3 +74,83 @@ export function createAvatarHtml(member, initials, hasImage) {
         </div>
     `;
 }
+
+
+/* ==========================================================================
+    TEMPLATES FOR TASK DETAIL MODAL
+    ========================================================================== */
+/**
+ * @description Creates the HTML for the task detail modal based on the provided task data and assignee HTML, including editable fields for title and description, subtasks, and action buttons.
+ * @export
+ * @param {Object} task - The task data object
+ * @param {string} assigneeHtml - The HTML string representing the assignees
+ * @return {string} HTML string representing the task detail modal
+ */
+export const createTaskDetailHtml = (task, assigneeHtml) => {
+    return `
+    <div class="modal-edit-container task-detail" data-id="${task.id}">
+        <div class="team-card__delete">
+            <button type="button" class="btn-icon btn-icon--danger js-delete-task" title="Delete Task">
+               <i class="fa-regular fa-trash-can"></i>
+            </button>
+        </div>
+
+        <div class="task-detail__badge-wrapper u-margin-bottom-md">
+            <div class="badge badge--${task.priority}">${task.taskType}</div>
+        </div>
+
+        <h3 class="heading-l js-edit-task-field u-margin-bottom-sm" data-field="title" contenteditable="true" spellcheck="false">
+            ${task.title}
+        </h3>
+        
+        <p class="task-detail__description js-edit-task-field u-margin-bottom-lg" data-field="description" contenteditable="true" spellcheck="false">
+            ${task.description || 'No description provided.'}
+        </p>
+
+        <div class="task-detail__section u-margin-bottom-lg">
+            <label class="modal-label">Subtasks</label>
+            <div class="subtask-list">
+                ${renderSubtasksList(task.subtasks)}
+            </div>
+        </div>
+
+        <div class="task-detail__section">
+            <label class="modal-label">Assignees</label>
+            <div class="avatar-group u-margin-top-xs">
+                ${assigneeHtml || '<p class="u-text-body-m u-text-muted">No one assigned</p>'}
+            </div>
+        </div>
+
+        <div class="modal__actions u-margin-top-xl">
+            <button type="button" class="btn btn--s btn--full btn--primary js-save-task">Save Changes</button>
+            <button type="button" class="btn btn--s btn--full btn--secondary js-close-modal">Close</button>
+        </div>
+    </div>
+    `;
+};
+
+/**
+ * @description Renders the list of subtasks for the task detail modal.
+ * @param {Array<Object>} [subtasks=[]] - The array of subtasks
+ * @return {string} HTML string representing the list of subtasks
+ */
+function renderSubtasksList(subtasks = []) {
+    if (subtasks.length === 0) return '<p class="u-text-body-m u-text-muted">No subtasks defined.</p>';
+
+    return subtasks.map((st, i) => `
+        <div class="subtask-item">
+            <input type="checkbox" 
+                   id="st-${i}" 
+                   class="subtask-input js-subtask-toggle" 
+                   data-index="${i}" 
+                   ${st.done ? 'checked' : ''} 
+                   hidden />
+
+            <label for="st-${i}" class="subtask-label">
+                <i class="fa-regular fa-square icon-unchecked"></i>
+                <i class="fa-solid fa-square-check icon-checked"></i>
+                <span class="subtask-text ${st.done ? 'is-done' : ''}">${st.title}</span>
+            </label>
+        </div>
+    `).join('');
+}
