@@ -3,7 +3,18 @@
 import { getState, convertToArrayList, saveToCache } from './data-service.js';
 
 /* ==========================================================================
-   TASKS SERVICE 
+   COMMON HELPERS
+   ========================================================================== */
+/**
+ * @description Sorts tasks by their updated date in ascending order. 
+ * @param {Object} a - The first task object to compare.
+ * @param {Object} b - The second task object to compare.
+ * @return {number} A negative number if a should come before b, a positive number if a should come after b, or 0 if they are equal.
+ */
+const sortByUpdatedDate = (a, b) => (a.updatedAt || 0) - (b.updatedAt || 0);
+
+/* ==========================================================================
+   TASKS SERVICE
    ========================================================================== */
 /**
  * @description Returns an array of all tasks in the current state.
@@ -22,8 +33,11 @@ export function getAllTasks() {
  * @return {Array} An array of task objects that belong to the specified category.
  */
 export function getTasksByCategory(category) {
-    const allTasks = getAllTasks();
-    return allTasks.filter(task => task.category === category);
+    const allTasks = convertToArrayList(getState().tasks);
+
+    return allTasks
+        .filter(task => task.category === category)
+        .sort(sortByUpdatedDate);
 }
 
 /**
@@ -36,10 +50,10 @@ export function getTasksByCategory(category) {
 export async function updateTaskCategory(taskId, newCategory) {
     const state = getState();
     const task = state.tasks[taskId];
-
     if (!task) return;
 
     task.category = newCategory;
+    task.updatedAt = Date.now();
 
     if (newCategory === 'done' && task.subtasks) {
         task.subtasks.forEach(st => st.done = true);
@@ -47,6 +61,10 @@ export async function updateTaskCategory(taskId, newCategory) {
     saveToCache();
 }
 
+
+/* ==========================================================================
+   MEMBER DETAILS 
+   ========================================================================== */
 /**
  * @description Gets the details of assignees based on their contact IDs.
  * @export
