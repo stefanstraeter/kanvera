@@ -16,7 +16,9 @@ export function getAllTeamMembers() {
     const currentUser = getCurrentUser();
     let members = convertToArrayList(state.team);
     if (!currentUser) return members;
+
     const isAlreadyInList = members.some(m => m.email === currentUser.email);
+
 
     if (!isAlreadyInList) {
         members.push(createVirtualMember(currentUser));
