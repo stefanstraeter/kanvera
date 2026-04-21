@@ -23,19 +23,22 @@ export class BoardPage {
     }
 
     init() {
-        this.renderBoardLayout();
-        this.renderAllTasks();
-        initDragAndDrop(this.columns, () => this.renderAllTasks());
+        this.updateBoard();
         this.showBoardWrapper();
     }
 
+    updateBoard() {
+        this.renderBoardLayout();
+        this.renderAllTasks();
+        initDragAndDrop(this.columns, () => this.updateBoard());
+    }
 
     /* ==========================================================================
        RENDERING BOARD LAYOUT
        ========================================================================== */
     /**
      * @description Render the board layout by creating columns based on the predefined column configuration and inserting them into the board container element
-     * @return {*} 
+     * @return {void} 
      * @memberof BoardPage
      */
     renderBoardLayout() {
@@ -43,7 +46,13 @@ export class BoardPage {
         if (!boardContainer) return;
 
         boardContainer.innerHTML = this.columns
-            .map(col => renderColumnHtml(col))
+            .map(column => {
+                const tasks = getTasksByCategory(column.id);
+                return renderColumnHtml({
+                    ...column,
+                    taskCount: tasks.length
+                });
+            })
             .join('');
     }
 
