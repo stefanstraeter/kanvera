@@ -93,6 +93,7 @@
     background-color 0.3s ease,
     border-color 0.3s ease;
   scrollbar-width: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -105,12 +106,12 @@
 }
 
 .js-drop-zone:empty {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: var(--space-xs);
-
   height: 1rem;
   width: 100%;
 }
@@ -127,11 +128,19 @@
   font-size: var(--font-size-body-m);
   color: var(--color-medium-grey);
   font-weight: var(--font-weight-medium);
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    color 0.25s ease;
 }
 
 .js-drop-zone:empty.board-column__drop-zone--highlight::after {
   content: "Drop me here";
-  color: var(--color-main);
+  opacity: 1;
+  transform: translateY(-4px);
+  color: var(--color-main-hover);
 }
 
 /* ==========================================================================
