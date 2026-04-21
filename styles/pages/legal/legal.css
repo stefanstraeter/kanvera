@@ -1,5 +1,5 @@
 /* ==========================================================================
-  ARTICLE VIEW STYLES
+  ARTICLE VIEW LAYOUT
    ========================================================================== */
 .article-view {
   display: flex;
@@ -59,13 +59,4 @@
   position: absolute;
   left: -1.25rem;
   font-weight: var(--font-weight-bold);
-}
-
-/* ==========================================================================
-     RESPONSIVE OVERRIDES
-     ========================================================================== */
-@media (max-width: 950px) {
-  .article-view {
-    padding-bottom: calc(5rem + var(--space-xl));
-  }
 }

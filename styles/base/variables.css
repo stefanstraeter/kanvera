@@ -86,8 +86,9 @@
      ========================================================================== */
   --sidebar-width: 18.75rem;
   --header-height: 5rem;
+  --navbar-height-mobile: 5rem;
   --action-item-height: 3rem;
-  --action-item-height-mobile: 2.4rem;
+  --app-content-margin-bottom: calc(var(--navbar-height-mobile) + var(--space-xl));
 
   --space-2xs: 0.25rem;
   --space-xs: 0.5rem;

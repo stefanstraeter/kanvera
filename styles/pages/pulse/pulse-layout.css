@@ -59,17 +59,12 @@
 
 @media (max-width: 950px) {
   .pulse-wrapper {
-    padding: var(--space-m);
-    margin: 0 auto;
+    padding: 0;
+    width: 100%;
   }
 }
 
 @media (max-width: 450px) {
-  .pulse-wrapper {
-    padding: var(--space-m);
-    width: 100%;
-  }
-
   .pulse-row--stats {
     display: flex;
     flex-direction: column;

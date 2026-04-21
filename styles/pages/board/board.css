@@ -44,7 +44,6 @@
   gap: var(--space-lg);
   overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: var(--space-lg);
   scrollbar-gutter: stable;
   height: 100%;
 }
@@ -86,6 +85,7 @@
   gap: var(--space-lg);
   min-height: 80%;
   padding: var(--space-xs);
+  padding-bottom: var(--space-10xl);
   border: 1px solid transparent;
   border-radius: var(--radius-card);
   overflow-y: auto;
@@ -149,4 +149,21 @@
 }
 .status-dot--done {
   background-color: var(--status-done);
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 950px) {
+  .board-wrapper {
+    padding: 0;
+  }
+
+  .board-column__header {
+    padding: 0;
+  }
+
+  .board-column__drop-zone {
+    padding: 0 0 var(--space-10xl) 0;
+  }
 }

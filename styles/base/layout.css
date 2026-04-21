@@ -29,11 +29,18 @@
 .l-content {
   grid-area: content;
   background-color: var(--bg-app-content);
-  overflow-y: auto;
   display: flex;
+  overflow-y: auto;
   height: 100%;
   min-height: 0;
   scrollbar-gutter: stable;
+}
+
+/* ==========================================================================
+     CONTENT SPACING
+     ========================================================================== */
+.l-content-spacer {
+  margin-bottom: var(--app-content-margin-bottom);
 }
 
 /* ==========================================================================
@@ -57,6 +64,6 @@
   .l-content {
     grid-area: content;
     padding: var(--space-md);
-    padding-bottom: calc(5rem + var(--space-xl));
+    display: block;
   }
 }
