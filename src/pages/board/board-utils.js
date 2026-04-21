@@ -1,6 +1,6 @@
 import { resolveMemberDetails } from '../../services/task-service.js';
 import { getInitials, calculateProgressPercent } from '../../utils/ui-helpers.js';
-import { createAvatarHtml, createTaskCardHtml } from './board-template.js';
+import { createAvatarHtml, createTaskCardHtml } from './task-template.js';
 
 /* ==========================================================================
   GENERAL BOARD UTILITIES
