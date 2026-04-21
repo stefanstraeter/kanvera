@@ -63,7 +63,9 @@
 
   .l-content {
     grid-area: content;
-    padding: var(--space-md);
-    display: block;
+    height: calc(100% - var(--navbar-height-mobile));
+    padding: var(--space-md) var(--space-md) 0 var(--space-md);
+    display: flex;
+    flex-direction: column;
   }
 }
