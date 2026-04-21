@@ -10,7 +10,9 @@ export function renderColumnHtml(data) {
         <section class="board-column">
             <div class="board-column__header">
                 <span class="status-dot status-dot--${data.cssClass}"></span>
-                <h2 class="board-column__title">${data.title}</h2>
+                <h2 class="board-column__title">${data.title} 
+                    <span class="column-count">(${data.taskCount})</span>
+                </h2>
             </div>
             <div class="board-column__drop-zone js-drop-zone" id="${data.id}"></div>
         </section>
