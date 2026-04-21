@@ -2,7 +2,7 @@
    BOARD LAYOUT STYLES
    ========================================================================== */
 .board-wrapper {
-  padding: var(--space-lg);
+  padding: var(--space-lg) 0 0 var(--space-lg);
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -10,6 +10,7 @@
   height: 100%;
   opacity: 0;
   transition: opacity 0.15s ease-in;
+  overflow: hidden;
 }
 
 .board-wrapper.is-visible {
@@ -85,7 +86,6 @@
   gap: var(--space-lg);
   min-height: 80%;
   padding: var(--space-xs);
-  padding-bottom: var(--space-10xl);
   border: 1px solid transparent;
   border-radius: var(--radius-card);
   overflow-y: auto;
@@ -110,8 +110,13 @@
   justify-content: center;
   align-items: center;
   margin-top: var(--space-xs);
+
   height: 1rem;
   width: 100%;
+}
+
+.js-drop-zone:not(:empty) {
+  padding-bottom: var(--space-10xl);
 }
 
 .js-drop-zone:empty::after {
