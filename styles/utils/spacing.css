@@ -1,20 +1,9 @@
 /* ==========================================================================
-   Utils
+   PADDING & MARGIN UTILITIES
    ========================================================================== */
-.u-mb-lg {
-  margin-bottom: var(--space-lg);
-}
 
-.u-mb-md {
-  margin-bottom: var(--space-md);
-}
-
-.u-mb-sm {
-  margin-bottom: var(--space-sm);
-}
-
-.u-mb-xs {
-  margin-bottom: var(--space-xs);
+.u-p-md {
+  padding: var(--space-md);
 }
 
 .u-pt-lg {
@@ -31,4 +20,20 @@
 
 .u-pl-xs {
   padding-left: var(--space-xs);
+}
+
+.u-mb-lg {
+  margin-bottom: var(--space-lg);
+}
+
+.u-mb-md {
+  margin-bottom: var(--space-md);
+}
+
+.u-mb-sm {
+  margin-bottom: var(--space-sm);
+}
+
+.u-mb-xs {
+  margin-bottom: var(--space-xs);
 }
