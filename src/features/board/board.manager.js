@@ -7,7 +7,7 @@
 
 import { getTasksByCategory, getTaskById, updateTaskLocally } from '../task/task.service.js';
 import { renderColumnHtml } from './board.template.js';
-import { createTaskDetailHtml } from '../task/task-detail.template.js';
+import { createTaskDetailHtml } from '../task/task.template.js';
 import { renderSingleTask, generateAvatarsHtml, getTaskDataFromModal, getSubtaskChangeData, toggleSubtaskVisuals, showBoardWrapper } from './board.utils.js';
 import { initDragAndDrop, attachDragEventToCard } from './dnd.manager.js';
 import { openModal, closeModal } from '../../shared/components/modal.js';
