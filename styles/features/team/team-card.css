@@ -50,6 +50,14 @@
   margin-bottom: var(--space-lg);
 }
 
+.team-card__avatar-image--hidden {
+  display: none;
+}
+
+.team-card__avatar-placeholder--hidden {
+  display: none;
+}
+
 /* ==========================================================================
    TEAM CARD - TEXT INFO
    ========================================================================== */

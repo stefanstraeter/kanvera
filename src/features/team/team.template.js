@@ -11,9 +11,9 @@ export const createMemberCardHtml = (member, initials, displayRole) => {
     const imageTag = member.imageUrl
         ? `<img src="${member.imageUrl}"
                 alt="${member.name}"
-                style="display: none;"
-                onload="this.style.display='block'; this.nextElementSibling.style.display='none';"
-                onerror="this.remove();">`
+                class="avatar__img team-card__avatar-image"
+                data-avatar-image>
+            `
         : '';
 
     return `
@@ -21,7 +21,7 @@ export const createMemberCardHtml = (member, initials, displayRole) => {
             <div class="team-card__avatar">
                 <div class="avatar avatar--m">
                     ${imageTag}
-                    <div class="avatar-placeholder">
+                    <div class="avatar-placeholder team-card__avatar-placeholder" data-avatar-placeholder>
                         ${initials}
                     </div>
                 </div>

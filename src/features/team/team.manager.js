@@ -51,6 +51,44 @@ export class TeamManager {
 
             return createMemberCardHtml(member, initials, displayRole);
         }).join('');
+
+        this.setupAvatarFallbacks(gridElement);
+    }
+
+    /**
+     * @description Handle avatar image load/error without inline HTML handlers.
+     * @param {HTMLElement} scope - Parent element containing avatar markup
+     * @memberof TeamManager
+     */
+    setupAvatarFallbacks(scope) {
+        const avatarImages = scope.querySelectorAll('[data-avatar-image]');
+
+        avatarImages.forEach((img) => {
+            const placeholder = img.parentElement?.querySelector('[data-avatar-placeholder]');
+            if (!placeholder) return;
+
+            const showImage = () => {
+                img.classList.remove('team-card__avatar-image--hidden');
+                placeholder.classList.add('team-card__avatar-placeholder--hidden');
+            };
+
+            const showPlaceholder = () => {
+                img.classList.add('team-card__avatar-image--hidden');
+                placeholder.classList.remove('team-card__avatar-placeholder--hidden');
+            };
+
+            showPlaceholder();
+
+            if (img.complete) {
+                if (img.naturalWidth > 0) {
+                    showImage();
+                }
+                return;
+            }
+
+            img.addEventListener('load', showImage, { once: true });
+            img.addEventListener('error', showPlaceholder, { once: true });
+        });
     }
 
     /**
