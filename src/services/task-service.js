@@ -2,6 +2,11 @@
 
 import { getState, convertToArrayList, saveToCache } from './data-service.js';
 
+
+const sortByPosition = (a, b) => {
+    return a.id.localeCompare(b.id);
+};
+
 /* ==========================================================================
    COMMON HELPERS
    ========================================================================== */
@@ -37,7 +42,7 @@ export function getTasksByCategory(category) {
 
     return allTasks
         .filter(task => task.category === category)
-        .sort(sortByUpdatedDate);
+        .sort(sortByPosition);
 }
 
 /**
@@ -84,12 +89,12 @@ export async function updateTaskCategory(taskId, newCategory) {
  */
 export function updateTaskLocally(taskId, updatedData) {
     const state = getState();
-    if (!state.tasks[taskId]) return;
+    const currentTask = state.tasks[taskId];
+    if (!currentTask) return;
 
     state.tasks[taskId] = {
-        ...state.tasks[taskId],
-        ...updatedData,
-        updatedAt: Date.now()
+        ...currentTask,
+        ...updatedData
     };
     saveToCache();
 }
@@ -113,3 +118,4 @@ export function resolveMemberDetails(memberIds) {
         .map(id => team[id])
         .filter(member => !!member && member.name);
 }
+
