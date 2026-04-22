@@ -3,28 +3,26 @@
    ========================================================================== */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
 
-/* Base & Variables */
 @import url("./base/variables.css");
 @import url("./base/typography.css");
 @import url("./base/base.css");
-@import url("./base/layout.css");
 
-/* UI */
-@import url("./ui/buttons.css");
-@import url("./ui/inputs.css");
-@import url("./ui/theme-switch.css");
-@import url("./ui/form-feedback.css");
-@import url("./ui/scrollbar.css");
-@import url("./ui/dropdown.css");
-@import url("./ui/splash-screen.css");
-@import url("./ui/modal.css");
-@import url("./ui/avatar.css");
+@import url("./utils/layout.css");
+@import url("./utils/spacing.css");
 
-/* Layout */
+@import url("./components/buttons.css");
+@import url("./components/inputs.css");
+@import url("./components/theme-switch.css");
+@import url("./components/form-feedback.css");
+@import url("./components/scrollbar.css");
+@import url("./components/dropdown.css");
+@import url("./components/splash-screen.css");
+@import url("./components/modal.css");
+@import url("./components/avatar.css");
+
 @import url("./layout/header.css");
 @import url("./layout/sidebar.css");
 
-/* Pages */
 @import url("./pages/auth/auth-layout.css");
 @import url("./pages/auth/auth-flow.css");
 @import url("./pages/auth/auth-control.css");
@@ -40,3 +38,4 @@
 
 @import url("./pages/board/board.css");
 @import url("./pages/board/task-card.css");
+@import url("./pages/board/task-modal.css");
