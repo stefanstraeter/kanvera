@@ -67,7 +67,7 @@ export const createEditModalHtml = (member, initials, displayRole) => {
             : `<div class="avatar-placeholder">${initials}</div>`
         }
             </div>
-            <h3 class="heading-l js-edit-field" data-field="name" contenteditable="true" spellcheck="false">${member.name}</h3>
+            <h3 class="heading-l modal-edit-field js-edit-field" data-field="name" contenteditable="true" spellcheck="false">${member.name}</h3>
         </div>
 
         <div class="modal-inline-edit-body">
@@ -75,7 +75,7 @@ export const createEditModalHtml = (member, initials, displayRole) => {
                 <i class="fa-regular fa-user field-icon"></i>
                 <div class="inline-edit-wrapper">
                     <label class="modal-label">Role</label>
-                    <span class="js-edit-field " data-field="role" contenteditable="true" spellcheck="false">${displayRole}</span>
+                    <span class="modal-edit-field js-edit-field" data-field="role" contenteditable="true" spellcheck="false">${displayRole}</span>
                 </div>
             </div>
 
@@ -83,7 +83,7 @@ export const createEditModalHtml = (member, initials, displayRole) => {
                 <i class="fa-regular fa-envelope field-icon"></i>
                 <div class="inline-edit-wrapper">
                     <label class="modal-label">Email Address</label>
-                    <span class="js-edit-field" data-field="email" contenteditable="true" spellcheck="false">${member.email}</span>
+                    <span class="modal-edit-field js-edit-field" data-field="email" contenteditable="true" spellcheck="false">${member.email}</span>
                 </div>
             </div>
 
@@ -91,7 +91,7 @@ export const createEditModalHtml = (member, initials, displayRole) => {
                 <i class="fa-solid fa-phone field-icon"></i>
                 <div class="inline-edit-wrapper">
                     <label class="modal-label">Phone Number</label>
-                    <span class="js-edit-field " data-field="phone" contenteditable="true" spellcheck="false">${member.phone || 'No Number'}</span>
+                    <span class="modal-edit-field js-edit-field" data-field="phone" contenteditable="true" spellcheck="false">${member.phone || 'No Number'}</span>
                 </div>
             </div>
         </div>

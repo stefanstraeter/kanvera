@@ -105,7 +105,7 @@
   border-style: dashed;
 }
 
-.js-drop-zone:empty {
+.board-column__drop-zone:empty {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -116,11 +116,11 @@
   width: 100%;
 }
 
-.js-drop-zone:not(:empty) {
+.board-column__drop-zone:not(:empty) {
   padding-bottom: var(--space-10xl);
 }
 
-.js-drop-zone:empty::after {
+.board-column__drop-zone:empty::after {
   content: "Enjoy the emptiness.\A Time for a coffee?!";
   white-space: pre-wrap;
   text-align: center;
@@ -136,7 +136,7 @@
     color 0.25s ease;
 }
 
-.js-drop-zone:empty.board-column__drop-zone--highlight::after {
+.board-column__drop-zone:empty.board-column__drop-zone--highlight::after {
   content: "Drop me here";
   opacity: 1;
   transform: translateY(-4px);

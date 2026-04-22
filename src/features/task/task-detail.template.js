@@ -25,7 +25,7 @@ export const createTaskDetailHtml = (task, assigneeHtml) => {
         </div>
 
         <div class="modal-edit-header u-mb-lg">
-             <h3 class="heading-xl js-edit-field" data-field="title" contenteditable="true" spellcheck="false">
+             <h3 class="heading-xl modal-edit-field js-edit-field" data-field="title" contenteditable="true" spellcheck="false">
                 ${task.title}
             </h3>
         </div>
@@ -35,7 +35,7 @@ export const createTaskDetailHtml = (task, assigneeHtml) => {
                 <div class="inline-field">
                     <div class="inline-edit-wrapper">
                         <label class="modal-label">Due Date</label>
-                        <input type="date" class="field-input js-task-due-date" value="${task.dueDate || ''}">
+                        <input type="date" class="field-input task-detail__date-input js-task-due-date" value="${task.dueDate || ''}">
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@ export const createTaskDetailHtml = (task, assigneeHtml) => {
             <div class="inline-field u-mb-md">
                 <div class="inline-edit-wrapper">
                     <label class="modal-label">Description</label>
-                    <p class="task-detail__description js-edit-field" data-field="description" contenteditable="true" spellcheck="false">
+                    <p class="task-detail__description modal-edit-field js-edit-field" data-field="description" contenteditable="true" spellcheck="false">
                         ${task.description || 'No description provided.'}
                     </p>
                 </div>

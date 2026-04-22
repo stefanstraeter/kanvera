@@ -113,7 +113,7 @@
   line-height: 1.2;
 }
 
-.js-edit-field {
+.modal-edit-field {
   outline: none;
   min-height: 1.5rem;
   color: var(--color-text-main);
@@ -121,7 +121,7 @@
   transition: border-color var(--transition);
 }
 
-.js-edit-field:focus {
+.modal-edit-field:focus {
   border-bottom-color: var(--color-main);
 }
 

@@ -40,7 +40,7 @@
 /* ==========================================================================
   DATE PICKER
    ========================================================================== */
-.js-task-due-date::-webkit-calendar-picker-indicator {
+.task-detail__date-input::-webkit-calendar-picker-indicator {
   background: transparent;
   bottom: 0;
   color: transparent;
@@ -53,7 +53,7 @@
   width: auto;
 }
 
-.js-task-due-date {
+.task-detail__date-input {
   position: relative;
   cursor: pointer;
   width: 100%;
@@ -61,7 +61,7 @@
   font-size: var(--font-size-body-l);
 }
 
-.js-task-due-date:focus {
+.task-detail__date-input:focus {
   outline: none;
   border-color: var(--color-main);
 }
