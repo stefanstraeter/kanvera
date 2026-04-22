@@ -96,16 +96,7 @@
   margin-top: var(--space-xs);
 }
 
-.avatar-group {
-  display: flex;
-  align-items: center;
-}
-
-.avatar:first-child {
-  margin-left: 0;
-}
-
-.task-card__priority img {
+.task-card__priority-icon {
   width: 1rem;
   height: auto;
 }
