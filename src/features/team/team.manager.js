@@ -10,7 +10,8 @@ import { getAllTeamMembers, updateMemberLocally, deleteMemberLocally, initAddMem
 import { openModal, closeModal } from '../../shared/components/modal.js';
 import { getInitials, setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
 import { MEMBER_UI_TEXT } from '../../shared/utils/constants.js';
-import { createMemberCardHtml, createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './team.template.js';
+import { createMemberCardHtml } from './team-card.template.js';
+import { createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './team-modal.template.js';
 import { getMemberDataFromModal, createNewMemberObject } from './team.utils.js';
 
 /**
