@@ -16,7 +16,7 @@ export const createEditModalHtml = (member, initials, displayRole) => {
             </button>
         </div>
 
-        <div class="modal-edit-header">
+        <div class="modal__edit-header-member">
             <div class="avatar avatar--l">
                 ${member.imageUrl
             ? `<img src="${member.imageUrl}" alt="${member.name}">`
