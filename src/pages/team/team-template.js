@@ -56,7 +56,7 @@ export const createEditModalHtml = (member, initials, displayRole) => {
     return `
     <div class="modal-edit-container">
         <div class="team-card__delete">
-            <button type="button" class="btn-icon btn-icon--danger js-delete-member" title="Delete Member">
+            <button type="button" class="btn-icon btn-icon--danger modal__delete-icon js-delete-member" title="Delete Member">
                <i class="fa-regular fa-trash-can"></i>
             </button>
         </div>
@@ -132,7 +132,7 @@ export const createAddMemberModalHtml = () => {
         <div class="modal-inline-edit-body">
             
             <div class="field-wrapper u-margin-bottom-md">
-                <label class="modal-label mb-xs">Full Name</label>
+                <label class="modal-label u-mb-xs">Full Name</label>
                 <div class="field-group">
                     <input type="text" name="name" class="field-input" placeholder="e.g. Jane Doe" required>
                 </div>
@@ -140,7 +140,7 @@ export const createAddMemberModalHtml = () => {
             </div>
 
             <div class="field-wrapper u-margin-bottom-md">
-                <label class="modal-label mb-xs">Role</label>
+                <label class="modal-label u-mb-xs">Role</label>
                 <div class="field-group">
                     <select name="role" class="field-input">
                         <option value="@developer">@developer</option>
@@ -153,7 +153,7 @@ export const createAddMemberModalHtml = () => {
             </div>
 
             <div class="field-wrapper u-margin-bottom-md">
-                <label class="modal-label mb-xs">Email Address</label>
+                <label class="modal-label u-mb-xs">Email Address</label>
                 <div class="field-group">
                     <input type="email" name="email" class="field-input" placeholder="mail@example.com" required>
                 </div>
@@ -161,7 +161,7 @@ export const createAddMemberModalHtml = () => {
             </div>
 
             <div class="field-wrapper u-margin-bottom-l">
-                <label class="modal-label mb-xs">Phone Number</label>
+                <label class="modal-label u-mb-xs">Phone Number</label>
                 <div class="field-group">
                     <input type="tel" name="phone" class="field-input" placeholder="+49 123 456 789">
                 </div>
