@@ -80,11 +80,11 @@ export function createAvatarHtml(member, initials, hasImage) {
     TEMPLATES FOR TASK DETAIL MODAL
     ========================================================================== */
 /**
- * @description Creates the HTML for the task detail modal based on the provided task data and assignee HTML, including editable fields for title and description, subtasks, and action buttons.
+ * @description Creates the HTML for the task detail modal.
  * @export
  * @param {Object} task - The task data object
- * @param {string} assigneeHtml - The HTML string representing the assignees
- * @return {string} HTML string representing the task detail modal
+ * @param {string} assigneeHtml - The HTML string representing the avatars
+ * @return {string} HTML string
  */
 export const createTaskDetailHtml = (task, assigneeHtml) => {
     return `
@@ -95,29 +95,56 @@ export const createTaskDetailHtml = (task, assigneeHtml) => {
             </button>
         </div>
 
-        <div class="task-detail__badge-wrapper u-margin-bottom-md">
-            <div class="badge badge--${task.priority}">${task.taskType}</div>
+        <div class="mb-sm">
+            <div class="task-card__category badge">${task.taskType}</div>
         </div>
 
-        <h3 class="heading-l js-edit-task-field u-margin-bottom-sm" data-field="title" contenteditable="true" spellcheck="false">
+        <h3 class="heading-xl js-edit-task-field mb-md" data-field="title" contenteditable="true" spellcheck="false">
             ${task.title}
         </h3>
         
-        <p class="task-detail__description js-edit-task-field u-margin-bottom-lg" data-field="description" contenteditable="true" spellcheck="false">
-            ${task.description || 'No description provided.'}
-        </p>
+        <div class="task-detail__meta-grid mb-lg">
+            <div class="meta-item">
+                <label class="modal-label">Due Date:</label>
+                <input type="date" class="field-input js-task-due-date" value="${task.dueDate || ''}">
+            </div>
 
-        <div class="task-detail__section u-margin-bottom-lg">
-            <label class="modal-label">Subtasks</label>
-            <div class="subtask-list">
-                ${renderSubtasksList(task.subtasks)}
+            <div class="meta-item">
+                <label class="modal-label">Priority:</label>
+                <div class="priority-display priority--${task.priority}">
+                    <span class="u-text-capitalize">${task.priority}</span>
+                    <img src="assets/icons/priority/${task.priority}.svg" alt="${task.priority}" class="priority-icon--small">
+                </div>
             </div>
         </div>
 
+        <div class="u-margin-bottom-lg">
+            <label class="modal-label mb-xs">Description</label>
+            <p class="task-detail__description js-edit-task-field" data-field="description" contenteditable="true" spellcheck="false">
+                ${task.description || 'No description provided.'}
+            </p>
+        </div>
+
+        <div class="task-detail__section u-margin-bottom-lg">
+            <label class="modal-label mb-sm">Subtasks</label>
+            <div class="subtask-list u-margin-bottom-sm">
+                ${renderSubtasksList(task.subtasks)}
+            </div>
+            <button type="button" class="btn btn--s btn--full btn--secondary js-add-subtask-btn">
+                <i class="fa-solid fa-plus"></i> Add Subtask        
+            </button>
+        </div>
+
         <div class="task-detail__section">
-            <label class="modal-label">Assignees</label>
-            <div class="avatar-group u-margin-top-xs">
-                ${assigneeHtml || '<p class="u-text-body-m u-text-muted">No one assigned</p>'}
+            <label class="modal-label mb-sm">Assignees</label>
+            <div class="u-flex-between u-align-center">
+                <div class="avatar-group">
+                    ${assigneeHtml || '<p class="u-text-body-m u-text-muted">No one assigned</p>'}
+                     <button type="button" class="btn-icon btn-icon--primary js-edit-assignees" title="Edit Assignees">
+                    <i class="fa-solid fa-user-plus"></i>
+                </button>
+                </div>
+               
             </div>
         </div>
 
