@@ -1,0 +1,25 @@
+/* ==========================================================================
+   COSTUM SCROLLBAR
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-medium-grey);
+  border-radius: var(--radius-pill);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-main);
+}
+
+* {
+  scrollbar-color: var(--color-medium-grey) transparent;
+  scrollbar-width: thin;
+}
