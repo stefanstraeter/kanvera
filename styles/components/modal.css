@@ -84,6 +84,8 @@
   padding: var(--space-sm);
   border-radius: var(--radius-input);
   transition: background-color var(--transition);
+  margin-left: calc(var(--space-sm) * -1);
+  margin-right: calc(var(--space-sm) * -1);
 }
 
 .inline-field:hover {
