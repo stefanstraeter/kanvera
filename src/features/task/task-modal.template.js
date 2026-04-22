@@ -24,7 +24,7 @@ export const createTaskDetailHtml = (task, assigneeHtml) => {
             <div class="task-card__category badge">${task.taskType}</div>
         </div>
 
-        <div class="modal-edit-header u-mb-lg">
+        <div class="modal__edit-header-task u-mb-lg">
              <h3 class="heading-xl modal-edit-field js-edit-field" data-field="title" contenteditable="true" spellcheck="false">
                 ${task.title}
             </h3>
