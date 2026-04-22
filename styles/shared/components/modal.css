@@ -27,7 +27,7 @@
 .modal__content {
   background-color: var(--bg-app-card);
   width: 100%;
-  max-width: 30rem;
+  max-width: 32rem;
   max-height: 90vh;
   overflow-y: auto;
   padding: var(--space-2xl);
@@ -46,13 +46,17 @@
 /* ==========================================================================
    MODAL HEADER & MEMBER INFO
    ========================================================================== */
-.modal-edit-header {
+.modal__edit-header-member {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-md);
   margin: var(--space-lg) 0;
   position: relative;
+}
+
+.modal__edit-header-task {
+  text-align: left;
 }
 
 .modal__content .team-card {
