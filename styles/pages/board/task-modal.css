@@ -1,0 +1,90 @@
+/* ==========================================================================
+   TASK DETAIL - MODAL VIEW
+   ========================================================================== */
+.task-detail__description {
+  color: var(--color-medium-grey);
+  font-size: var(--font-size-body-l);
+  margin: var(--space-md) 0;
+  line-height: var(--line-height-body);
+}
+
+.subtask-item {
+  background-color: var(--color-subtask-bg);
+  padding: var(--space-sm);
+  border-radius: var(--radius-task-category);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xs);
+  transition: background-color var(--transition);
+}
+
+.subtask-item:hover {
+  background-color: var(--color-subtask-bg-hover);
+}
+
+.subtask-text.is-done {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   SUBTASK CHECKBOX
+   ========================================================================== */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.subtask-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  user-select: none;
+}
+
+.icon-checked {
+  display: none;
+  color: var(--color-main);
+}
+
+.icon-unchecked {
+  color: var(--color-medium-grey);
+}
+
+.subtask-input:checked + .subtask-label .icon-checked {
+  display: inline-block;
+}
+
+.subtask-input:checked + .subtask-label .icon-unchecked {
+  display: none;
+}
+
+.subtask-text.is-done {
+  text-decoration: line-through;
+  color: var(--color-medium-grey);
+  opacity: 0.6;
+}
+
+.task-detail__meta-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-md);
+}
+
+.priority-display {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-s);
+  width: fit-content;
+}
+
+.priority-icon--small {
+  width: 16px;
+  height: 16px;
+}
