@@ -25,7 +25,7 @@ export function createTaskCardHtml(task) {
                     <div class="avatar-group">${task.assigneeAvatars}</div>
                 </div>
                 <div class="task-card__priority">
-                    <img src="assets/icons/priority/${task.priority}.svg" alt="${task.priority}">
+                    <img src="assets/icons/priority/${task.priority}.svg" class="task-card__priority-icon" alt="${task.priority}" >
                 </div>
             </div>
         </article>
@@ -90,20 +90,20 @@ export const createTaskDetailHtml = (task, assigneeHtml) => {
     return `
     <div class="modal-edit-container task-detail" data-id="${task.id}">
         <div class="team-card__delete">
-            <button type="button" class="btn-icon btn-icon--danger js-delete-task" title="Delete Task">
+            <button type="button" class="btn-icon btn-icon--danger modal__delete-icon js-delete-task" title="Delete Task">
                <i class="fa-regular fa-trash-can"></i>
             </button>
         </div>
 
-        <div class="mb-sm">
+        <div class="u-mb-md">
             <div class="task-card__category badge">${task.taskType}</div>
         </div>
 
-        <h3 class="heading-xl js-edit-task-field mb-md" data-field="title" contenteditable="true" spellcheck="false">
+        <h3 class="heading-xl js-edit-task-field u-mb-md" data-field="title" contenteditable="true" spellcheck="false">
             ${task.title}
         </h3>
         
-        <div class="task-detail__meta-grid mb-lg">
+        <div class="task-detail__meta-grid u-mb-md">
             <div class="meta-item">
                 <label class="modal-label">Due Date:</label>
                 <input type="date" class="field-input js-task-due-date" value="${task.dueDate || ''}">
@@ -112,43 +112,43 @@ export const createTaskDetailHtml = (task, assigneeHtml) => {
             <div class="meta-item">
                 <label class="modal-label">Priority:</label>
                 <div class="priority-display priority--${task.priority}">
-                    <span class="u-text-capitalize">${task.priority}</span>
-                    <img src="assets/icons/priority/${task.priority}.svg" alt="${task.priority}" class="priority-icon--small">
+                    <span class="priority-text">${task.priority}</span>
+                    <img src="assets/icons/priority/${task.priority}.svg" alt="${task.priority}" class="priority-icon">
                 </div>
             </div>
         </div>
 
-        <div class="u-margin-bottom-lg">
-            <label class="modal-label mb-xs">Description</label>
+        <div class="u-mb-lg">
+            <label class="modal-label u-mb-xs">Description</label>
             <p class="task-detail__description js-edit-task-field" data-field="description" contenteditable="true" spellcheck="false">
                 ${task.description || 'No description provided.'}
             </p>
         </div>
 
-        <div class="task-detail__section u-margin-bottom-lg">
-            <label class="modal-label mb-sm">Subtasks</label>
-            <div class="subtask-list u-margin-bottom-sm">
+        <div class="task-detail__section u-mb-lg">
+            <label class="modal-label u-mb-xs">Subtasks</label>
+            <div class="subtask-list u-mb-sm">
                 ${renderSubtasksList(task.subtasks)}
             </div>
             <button type="button" class="btn btn--s btn--full btn--secondary js-add-subtask-btn">
-                <i class="fa-solid fa-plus"></i> Add Subtask        
+                <i class="fa-solid fa-plus btn-icon"></i> Add Subtask        
             </button>
         </div>
 
         <div class="task-detail__section">
-            <label class="modal-label mb-sm">Assignees</label>
+            <label class="modal-label u-mb-xs">Assignees</label>
             <div class="u-flex-between u-align-center">
                 <div class="avatar-group">
-                    ${assigneeHtml || '<p class="u-text-body-m u-text-muted">No one assigned</p>'}
-                     <button type="button" class="btn-icon btn-icon--primary js-edit-assignees" title="Edit Assignees">
-                    <i class="fa-solid fa-user-plus"></i>
-                </button>
+                    ${assigneeHtml}
+                    <button type="button" class="btn-icon btn-icon--primary js-edit-assignees u-pl-md" title="Edit Assignees">
+                        <i class="fa-solid fa-user-plus field-icon"></i>
+                    </button>
                 </div>
                
             </div>
         </div>
 
-        <div class="modal__actions u-margin-top-xl">
+        <div class="modal__actions u-mt-xl">
             <button type="button" class="btn btn--s btn--full btn--primary js-save-task">Save Changes</button>
             <button type="button" class="btn btn--s btn--full btn--secondary js-close-modal">Close</button>
         </div>
@@ -162,7 +162,7 @@ export const createTaskDetailHtml = (task, assigneeHtml) => {
  * @return {string} HTML string representing the list of subtasks
  */
 function renderSubtasksList(subtasks = []) {
-    if (subtasks.length === 0) return '<p class="u-text-body-m u-text-muted">No subtasks defined.</p>';
+    if (subtasks.length === 0) return '<p class="task-detail__description">No subtasks yet</p>';
 
     return subtasks.map((st, i) => `
         <div class="subtask-item">
