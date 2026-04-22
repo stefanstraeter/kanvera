@@ -12,6 +12,7 @@
   --color-light-grey: #deddf3;
   --color-medium-grey: #828fa3;
   --color-greyish-violett: #c6c3e7;
+  --color-dark-greyish-violett: #3a3953;
   --color-dark-grey: #2b2c37;
   --color-very-dark-grey: #20212c;
   --color-anthracite: #201f23;
@@ -42,6 +43,8 @@
   --color-text-inverse: var(--color-anthracite);
   --color-lines: var(--color-lines-light);
   --color-progress-bar: var(--color-very-light-grey);
+  --color-subtask-bg: var(--color-very-light-grey);
+  --color-subtask-bg-hover: var(--color-light-grey);
 
   --color-btn-secondary-bg: var(--color-greyish-violett);
   --color-btn-secondary-hover: var(--color-main-hover);
@@ -153,6 +156,8 @@
   --color-text-inverse: var(--color-beige);
   --color-lines: var(--color-lines-dark);
   --color-progress-bar: var(--color-medium-grey);
+  --color-subtask-bg: var(--color-very-dark-grey);
+  --color-subtask-bg-hover: var(--color-dark-greyish-violett);
 
   --color-btn-secondary-bg: var(--color-main-hover);
   --color-btn-secondary-hover: var(--color-beige);
