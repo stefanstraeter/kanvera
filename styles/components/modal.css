@@ -35,7 +35,8 @@
   box-shadow: var(--shadow-modal);
   transform: translateY(-2rem);
   transition: transform var(--transition);
-  scrollbar-gutter: stable;
+  scrollbar-gutter: stable both-edges;
+  overflow-y: auto;
 }
 
 .modal.is-active .modal__content {
@@ -61,6 +62,10 @@
   background: transparent !important;
   padding: 0 !important;
   margin-bottom: 0;
+}
+
+.modal__delete-icon {
+  padding: 0.625rem;
 }
 
 /* ==========================================================================
