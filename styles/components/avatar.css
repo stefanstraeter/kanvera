@@ -1,0 +1,114 @@
+/* ==========================================================================
+   AVATAR BASE STYLES
+   ========================================================================== */
+.avatar {
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-main);
+  color: var(--color-white);
+  flex-shrink: 0;
+  user-select: none;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--color-white);
+  font-size: var(--font-size-xl);
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   SIZES
+   ========================================================================== */
+.avatar--header {
+  width: var(--action-item-height);
+  height: var(--action-item-height);
+  font-size: var(--font-size-m);
+}
+
+.avatar--l {
+  width: 9rem;
+  height: 9rem;
+  font-size: var(--font-size-xl);
+}
+
+.avatar--m {
+  width: 5.5rem;
+  height: 5.5rem;
+  font-size: var(--font-size-l);
+}
+
+.avatar--s {
+  width: 2rem;
+  height: 2rem;
+  font-size: var(--font-size-xs);
+}
+
+.avatar__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==========================================================================
+   INTERACTIVE STATES
+   ========================================================================== */
+.avatar--clickable {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition:
+    background-color var(--transition),
+    transform 0.1s ease;
+}
+
+.avatar--clickable:hover {
+  background-color: var(--color-main-hover);
+}
+
+.avatar--clickable:active {
+  transform: scale(0.96);
+}
+
+/* ==========================================================================
+   AVATAR STACK - FOR BOARD CARDS
+   ========================================================================== */
+.avatar-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 0.5rem;
+}
+
+.avatar-group .avatar {
+  border: 2px solid var(--bg-app-card);
+  margin-left: -0.65rem;
+  position: relative;
+  transition:
+    transform var(--transition),
+    z-index 0s;
+}
+.avatar-group .avatar:first-child {
+  margin-left: 0;
+}
+
+.avatar-group .avatar:hover {
+  transform: translateY(-4px);
+  z-index: 10;
+  cursor: pointer;
+}
