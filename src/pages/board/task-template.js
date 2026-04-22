@@ -118,14 +118,14 @@ export const createTaskDetailHtml = (task, assigneeHtml) => {
             </div>
         </div>
 
-        <div class="u-mb-lg">
+        <div class="task-detail__section u-mb-md">
             <label class="modal-label u-mb-xs">Description</label>
             <p class="task-detail__description js-edit-task-field" data-field="description" contenteditable="true" spellcheck="false">
                 ${task.description || 'No description provided.'}
             </p>
         </div>
 
-        <div class="task-detail__section u-mb-lg">
+        <div class="task-detail__section u-mb-md">
             <label class="modal-label u-mb-xs">Subtasks</label>
             <div class="subtask-list u-mb-sm">
                 ${renderSubtasksList(task.subtasks)}
@@ -135,7 +135,7 @@ export const createTaskDetailHtml = (task, assigneeHtml) => {
             </button>
         </div>
 
-        <div class="task-detail__section">
+        <div class="task-detail__section u-mb-lg">
             <label class="modal-label u-mb-xs">Assignees</label>
             <div class="u-flex-between u-align-center">
                 <div class="avatar-group">
@@ -148,7 +148,7 @@ export const createTaskDetailHtml = (task, assigneeHtml) => {
             </div>
         </div>
 
-        <div class="modal__actions u-mt-xl">
+        <div class="modal__actions">
             <button type="button" class="btn btn--s btn--full btn--primary js-save-task">Save Changes</button>
             <button type="button" class="btn btn--s btn--full btn--secondary js-close-modal">Close</button>
         </div>
