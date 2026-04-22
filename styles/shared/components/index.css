@@ -1,0 +1,11 @@
+/* styles/shared/components/index.css */
+
+@import url("./buttons.css");
+@import url("./inputs.css");
+@import url("./theme-switch.css");
+@import url("./form-feedback.css");
+@import url("./scrollbar.css");
+@import url("./dropdown.css");
+@import url("./splash-screen.css");
+@import url("./modal.css");
+@import url("./avatar.css");

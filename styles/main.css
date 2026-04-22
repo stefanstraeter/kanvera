@@ -1,41 +1,44 @@
 /* ==========================================================================
    MAIN STYLESHEET
    ========================================================================== */
+
+/* ==========================================================================
+   LAYER: VENDOR
+   ========================================================================== */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
 
-@import url("./base/variables.css");
-@import url("./base/typography.css");
-@import url("./base/base.css");
+/* ==========================================================================
+   LAYER: CORE
+   ========================================================================== */
+@import url("./core/index.css");
 
-@import url("./utils/layout.css");
-@import url("./utils/spacing.css");
+/* ==========================================================================
+   LAYER: SHARED
+   ========================================================================== */
+@import url("./shared/index.css");
 
-@import url("./components/buttons.css");
-@import url("./components/inputs.css");
-@import url("./components/theme-switch.css");
-@import url("./components/form-feedback.css");
-@import url("./components/scrollbar.css");
-@import url("./components/dropdown.css");
-@import url("./components/splash-screen.css");
-@import url("./components/modal.css");
-@import url("./components/avatar.css");
+/* ==========================================================================
+   LAYER: FEATURE AUTH
+   ========================================================================== */
+@import url("./features/auth/index.css");
 
-@import url("./layout/header.css");
-@import url("./layout/sidebar.css");
+/* ==========================================================================
+   LAYER: FEATURE PULSE
+   ========================================================================== */
+@import url("./features/pulse/index.css");
 
-@import url("./pages/auth/auth-layout.css");
-@import url("./pages/auth/auth-flow.css");
-@import url("./pages/auth/auth-control.css");
-@import url("./pages/auth/auth-feedback.css");
+/* ==========================================================================
+   LAYER: FEATURE TEAM
+   ========================================================================== */
+@import url("./features/team/index.css");
 
-@import url("./pages/pulse/pulse-layout.css");
-@import url("./pages/pulse/pulse-card.css");
+/* ==========================================================================
+   LAYER: FEATURE LEGAL
+   ========================================================================== */
+@import url("./features/legal/index.css");
 
-@import url("./pages/team/team-layout.css");
-@import url("./pages/team/team-card.css");
-
-@import url("./pages/legal/legal.css");
-
-@import url("./pages/board/board.css");
-@import url("./pages/board/task-card.css");
-@import url("./pages/board/task-modal.css");
+/* ==========================================================================
+   LAYER: FEATURE BOARD + TASK
+   ========================================================================== */
+@import url("./features/board/index.css");
+@import url("./features/task/index.css");

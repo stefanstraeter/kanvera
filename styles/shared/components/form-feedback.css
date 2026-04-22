@@ -18,11 +18,3 @@
   visibility: visible;
   opacity: 1;
 }
-
-/* ==========================================================================
-   ERROR UNDERLINE
-   ========================================================================== */
-.field-group--error {
-  box-shadow: 0 0 0 1px var(--color-danger);
-  border-color: var(--color-danger) !important;
-}

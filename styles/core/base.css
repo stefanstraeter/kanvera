@@ -88,16 +88,6 @@ dd {
   color: var(--color-medium-grey);
 }
 
-.body-l {
-  font-size: var(--font-size-body-l);
-  line-height: var(--line-height-body, 1.5);
-}
-
-.body-m {
-  font-size: var(--font-size-body-m);
-  line-height: var(--line-height-body, 1.5);
-}
-
 /* ==========================================================================
    LISTS, LINKS & MEDIA
    ========================================================================== */

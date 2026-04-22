@@ -103,11 +103,6 @@
   padding-right: 0;
 }
 
-.u-w-auto {
-  width: auto;
-  min-width: 0;
-}
-
 .u-min-w-11 {
   min-width: 11rem;
 }

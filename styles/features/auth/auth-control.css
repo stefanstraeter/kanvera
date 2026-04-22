@@ -53,10 +53,6 @@
   margin-bottom: var(--space-sm);
 }
 
-.policy-check {
-  text-align: center;
-}
-
 .auth-flow__actions {
   display: flex;
   justify-content: center;
@@ -97,13 +93,6 @@
 
 .policy-input:checked + .policy-label .icon-unchecked {
   display: none;
-}
-
-/* ==========================================================================
-   ANIMATION & STATE CLASSES
-   ========================================================================== */
-.slide-to-signup {
-  transform: translateX(-50%);
 }
 
 /* ==========================================================================
