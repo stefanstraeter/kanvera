@@ -1,15 +1,15 @@
 // src/main.js
 
-import { initSplashScreen } from './utils/splash-screen.js';
-import { initThemeListeners } from './utils/theme.js';
-import { initPasswordToggles, initSliderLogic, initDropdownLogic } from './pages/auth/auth-utils.js';
-import { initSignInLogic } from './pages/auth/sign-in.js';
-import { initDataService } from './services/data-service.js';
-import { Navbar } from './components/layout/navbar.js';
-import { Header } from './components/layout/header.js';
-import { PulsePage } from './pages/pulse/pulse.js';
-import { TeamPage } from './pages/team/team.js'
-import { BoardPage } from './pages/board/board.js';
+import { initSplashScreen } from './shared/utils/splash-screen.js';
+import { initThemeListeners } from './shared/utils/theme.js';
+import { initPasswordToggles, initSliderLogic, initDropdownLogic } from './features/auth/auth.manager.js';
+import { initSignInLogic } from './features/auth/sign-in.js';
+import { initState } from './core/state.js';
+import { Navbar } from './shared/components/navbar.js';
+import { Header } from './shared/components/header.js';
+import { PulseManager } from './features/pulse/pulse.manager.js';
+import { TeamManager } from './features/team/team.manager.js';
+import { BoardManager } from './features/board/board.manager.js';
 
 /* ==========================================================================
    APP INITIALIZATION
@@ -26,7 +26,7 @@ async function init() {
         initSignInLogic();
     }
 
-    await initDataService();
+    await initState();
 
     const isStaticPage = !document.getElementById('js-header-anchor');
     if (isStaticPage && document.getElementById('js-menu-trigger')) {
@@ -36,18 +36,18 @@ async function init() {
     await initLayout();
 
     if (document.getElementById('totalTasks')) {
-        const pulsePage = new PulsePage();
-        pulsePage.init();
+        const pulseManager = new PulseManager();
+        pulseManager.init();
     }
 
     if (document.getElementById('js-team-grid')) {
-        const teamPage = new TeamPage();
-        teamPage.init();
+        const teamManager = new TeamManager();
+        teamManager.init();
     }
 
     if (document.getElementById('jsBoardColumns')) {
-        const boardPage = new BoardPage();
-        boardPage.init();
+        const boardManager = new BoardManager();
+        boardManager.init();
     }
 }
 
