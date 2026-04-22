@@ -4,7 +4,6 @@
 .task-detail__description {
   color: var(--color-medium-grey);
   font-size: var(--font-size-body-l);
-  margin: var(--space-md) 0;
   line-height: var(--line-height-body);
 }
 
@@ -26,6 +25,73 @@
 .subtask-text.is-done {
   text-decoration: line-through;
   opacity: 0.5;
+}
+
+/* ==========================================================================
+    META GRID
+   ========================================================================== */
+.task-detail__meta-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: fit-content;
+}
+
+/* ==========================================================================
+  DATE PICKER
+   ========================================================================== */
+.js-task-due-date::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+.js-task-due-date {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  min-height: 40px;
+  font-size: var(--font-size-body-l);
+}
+
+.js-task-due-date:focus {
+  outline: none;
+  border-color: var(--color-main);
+}
+
+/* ==========================================================================
+    PRIORITY DISPLAY
+   ========================================================================== */
+.priority-display {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-xs) var(--space-sm) 0;
+  width: fit-content;
+}
+
+.priority-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.priority-text {
+  font-size: var(--font-size-body-l);
+  color: var(--color-text-main);
 }
 
 /* ==========================================================================
@@ -67,24 +133,4 @@
   text-decoration: line-through;
   color: var(--color-medium-grey);
   opacity: 0.6;
-}
-
-.task-detail__meta-grid {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--space-md);
-}
-
-.priority-display {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-s);
-  width: fit-content;
-}
-
-.priority-icon--small {
-  width: 16px;
-  height: 16px;
 }
