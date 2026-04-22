@@ -100,7 +100,7 @@ export class BoardPage {
         if (!task) return;
 
         const assigneeHtml = generateAvatarsHtml(task.assignedTo || []);
-        openModal("Task Details", createTaskDetailHtml(task, assigneeHtml));
+        openModal("Edit Task", createTaskDetailHtml(task, assigneeHtml));
 
         this.setupTaskModalInteractions(taskId);
     }
