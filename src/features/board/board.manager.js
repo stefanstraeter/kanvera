@@ -13,7 +13,6 @@ import { renderSingleTask, generateAvatarsHtml, getTaskDataFromModal, getSubtask
 import { initDragAndDrop, attachDragEventToCard } from './dnd.manager.js';
 import { openModal, closeModal } from '../../shared/components/modal.js';
 import { getInitials, setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
-import { TASK_UI_TEXT } from '../../shared/utils/constants.js';
 
 /**
  * @description Page class for the Board page.
