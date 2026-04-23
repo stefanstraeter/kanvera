@@ -5,9 +5,9 @@
  * Orchestrates the task detail modal interactions and updates
  */
 
-import { getTaskById, updateTaskLocally } from './task.service.js';
+import { getTaskById, updateTaskLocally, deleteTaskLocally } from './task.service.js';
 import { openModal, closeModal } from '../../shared/components/modal.js';
-import { createTaskDetailHtml } from './task.template.js';
+import { createTaskDetailCardHtml, createConfirmDeleteTaskHtml } from './task.template.js';
 import { getTaskDataFromModal, generateAvatarsHtml, getSubtaskChangeData, toggleSubtaskVisuals } from '../board/board.utils.js';
 import { handleAsyncButtonAction } from '../../shared/utils/ui-helpers.js';
 import { UI_TASK_BUTTON_TEXT } from '../../shared/utils/constants.js';
@@ -36,7 +36,7 @@ export class TaskManager {
         if (!task) return;
 
         const assigneeHtml = generateAvatarsHtml(task.assignedTo);
-        openModal("Edit Task", createTaskDetailHtml(task, assigneeHtml));
+        openModal("Edit Task", createTaskDetailCardHtml(task, assigneeHtml));
 
         this.activateModalInteractions(taskId);
     }
@@ -66,7 +66,7 @@ export class TaskManager {
         const deleteBtn = document.querySelector('.js-delete-task');
 
         saveBtn?.addEventListener('click', () => this.saveTask(taskId));
-        deleteBtn?.addEventListener('click', () => this.deleteTask(taskId));
+        deleteBtn?.addEventListener('click', () => this.handleDeleteTask(taskId));
     }
 
     /**
@@ -98,7 +98,7 @@ export class TaskManager {
     }
 
     /* ==========================================================================
-       TASK ACTIONS
+       TASK ACTIONS - SAVE & UPDATE
        ========================================================================== */
 
     /**
@@ -138,17 +138,52 @@ export class TaskManager {
         if (this.onUpdate) this.onUpdate();
     }
 
+
+    /* ==========================================================================
+       DELETE TASK 
+       ========================================================================== */
+
     /**
-     * @description Deletes a task after user confirmation.
-     * @param {string} taskId - The ID of the task to delete
-     * @memberof TaskManager
+     * @description Shows a confirmation dialog before deleting a task.
+     * @param {string} title - Modal title
+     * @param {string} taskTitle - Title of the task
+     * @param {Function} onConfirm - Callback after confirmation
      */
-    deleteTask(taskId) {
-        if (confirm("Are you sure you want to delete this task?")) {
-            console.log("Deleting Task:", taskId);
-            // deleteTaskLocally(taskId); 
-            closeModal();
-            if (this.onUpdate) this.onUpdate();
-        }
+    showConfirmDeleteTaskDialog(title, taskTitle, onConfirm) {
+        closeModal();
+
+        setTimeout(() => {
+            const bodyHtml = createConfirmDeleteTaskHtml(taskTitle);
+            openModal(title, bodyHtml, null);
+
+            const confirmBtn = document.querySelector('.js-confirm-delete-task-btn');
+
+            if (confirmBtn) {
+                confirmBtn.onclick = () => {
+                    onConfirm();
+                    closeModal();
+                };
+            }
+        }, 200);
+    }
+
+    /**
+         * @description Initiates the delete process by showing a confirmation dialog.
+         * @param {string} taskId 
+         * @memberof TaskManager
+         */
+    handleDeleteTask(taskId) {
+        const task = getTaskById(taskId);
+        const taskTitle = task ? task.title : "this task";
+
+        this.showConfirmDeleteTaskDialog(
+            "Delete Task?",
+            taskTitle,
+            () => {
+                // Hier wird jetzt wirklich gelöscht!
+                deleteTaskLocally(taskId);
+                if (this.onUpdate) this.onUpdate();
+            }
+        );
     }
 }
