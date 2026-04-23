@@ -9,7 +9,7 @@ import { getCurrentUser } from '../auth/auth.service.js';
 import { getAllTeamMembers, updateMemberLocally, deleteMemberLocally, initAddMemberValidation, validateMemberForm } from './team.service.js';
 import { openModal, closeModal } from '../../shared/components/modal.js';
 import { getInitials, setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
-import { MEMBER_UI_TEXT } from '../../shared/utils/constants.js';
+import { UI_MEMBER_BUTTON_TEXT } from '../../shared/utils/constants.js';
 import { createMemberCardHtml } from './team-card.template.js';
 import { createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './team-modal.template.js';
 import { getMemberDataFromModal, createNewMemberObject } from './team.utils.js';
@@ -158,18 +158,19 @@ export class TeamManager {
     async saveChanges(memberId) {
         const saveBtn = document.querySelector('.js-save-inline');
 
-        setLoadingStateBtn(saveBtn, true, MEMBER_UI_TEXT.SAVE_PENDING);
+        setLoadingStateBtn(saveBtn, true, UI_MEMBER_BUTTON_TEXT.SAVE_PENDING);
 
         try {
             await new Promise(resolve => setTimeout(resolve, 1500));
             const updatedData = getMemberDataFromModal();
+
             updateMemberLocally(memberId, updatedData);
             closeModal();
             this.renderTeamGrid();
 
         } catch (error) {
             console.error("Update failed:", error);
-            setLoadingStateBtn(saveBtn, false, MEMBER_UI_TEXT.SAVE_DEFAULT);
+            setLoadingStateBtn(saveBtn, false, UI_MEMBER_BUTTON_TEXT.SAVE_DEFAULT);
         }
     }
 
@@ -244,7 +245,7 @@ export class TeamManager {
         const form = document.getElementById('js-add-member-form');
         const submitBtn = form?.querySelector('button[type="submit"]');
 
-        setLoadingStateBtn(submitBtn, true, MEMBER_UI_TEXT.ADD_PENDING);
+        setLoadingStateBtn(submitBtn, true, UI_MEMBER_BUTTON_TEXT.ADD_PENDING);
 
         try {
             await new Promise(resolve => setTimeout(resolve, 1500));
@@ -255,7 +256,7 @@ export class TeamManager {
 
         } catch (error) {
             console.error("Save failed:", error);
-            setLoadingStateBtn(submitBtn, false, MEMBER_UI_TEXT.ADD_DEFAULT);
+            setLoadingStateBtn(submitBtn, false, UI_MEMBER_BUTTON_TEXT.ADD_DEFAULT);
         }
     }
 
