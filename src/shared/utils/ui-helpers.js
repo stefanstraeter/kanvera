@@ -1,6 +1,6 @@
 // src/shared/utils/ui-helpers.js
 
-import { UI_BUTTON_TEXT } from './constants.js';
+import { UI_AUTH_BUTTON_TEXT } from './constants.js';
 
 /* ==========================================================================
    GET INITIALS FOR AVATARS
@@ -30,21 +30,42 @@ export function getInitials(name) {
  * @export
  * @param {HTMLElement} btn - The button element to be toggled.
  * @param {boolean} isPending - Loading state.
- * @param {string} [loadingText=UI_BUTTON_TEXT.SIGNIN_PENDING] - Text to show during loading.
+ * @param {string} [loadingText=UI_AUTH_BUTTON_TEXT.SIGNIN_PENDING] - Text to show during loading.
  * @return {void}
  */
-export function setLoadingStateBtn(btn, isPending, loadingText = UI_BUTTON_TEXT.SIGNIN_PENDING) {
+export function setLoadingStateBtn(btn, isPending, loadingText = UI_AUTH_BUTTON_TEXT.SIGNIN_PENDING) {
     if (!btn) return;
 
     if (isPending) {
         btn.dataset.originalText = btn.innerText;
         btn.innerText = loadingText;
     } else {
-        btn.innerText = btn.dataset.originalText || UI_BUTTON_TEXT.SIGNIN_DEFAULT;
+        btn.innerText = btn.dataset.originalText || UI_AUTH_BUTTON_TEXT.SIGNIN_DEFAULT;
     }
 
     btn.disabled = isPending;
     btn.classList.toggle('is-pending', isPending);
+}
+
+/**
+ * @description Handles asynchronous button actions with loading state.
+ * @export
+ * @param {HTMLElement} btn - The button element to be toggled.
+ * @param {Function} callback - The asynchronous function to execute.
+ * @param {Object} texts - An object containing text values for different states.
+ * @return {Promise<void>} A promise that resolves when the action is complete.
+ */
+export async function handleAsyncButtonAction(btn, callback, texts) {
+    if (!btn) return;
+
+    setLoadingStateBtn(btn, true, texts.SAVE_PENDING || texts.PENDING);
+
+    try {
+        await callback();
+    } catch (error) {
+        console.error("Action failed:", error);
+        setLoadingStateBtn(btn, false, texts.SAVE_DEFAULT || texts.DEFAULT);
+    }
 }
 
 /* ==========================================================================
