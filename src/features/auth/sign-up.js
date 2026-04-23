@@ -3,7 +3,7 @@
 import { checkIfEmailExists, createNewUser } from './auth.service.js';
 import { validateNotEmpty, validateEmailFormat, validateMinLength, toggleError } from '../../shared/utils/input-validation.js';
 import { setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
-import { AUTH_ERRORS, UI_BUTTON_TEXT } from '../../shared/utils/constants.js';
+import { AUTH_ERRORS, UI_AUTH_BUTTON_TEXT } from '../../shared/utils/constants.js';
 
 /* ==========================================================================
    SIGN UP LOGIC
@@ -20,7 +20,7 @@ export async function handleSignUp(event) {
     if (!isSignUpFormValid(formData)) return;
 
     const signupBtn = event.submitter;
-    setLoadingStateBtn(signupBtn, true, UI_BUTTON_TEXT.SIGNUP_PENDING);
+    setLoadingStateBtn(signupBtn, true, UI_AUTH_BUTTON_TEXT.SIGNUP_PENDING);
 
     try {
         const emailExists = await checkIfEmailExists(formData.email);
@@ -35,7 +35,7 @@ export async function handleSignUp(event) {
 
     } catch (error) {
         console.error("SignUp Error:", error);
-        setLoadingStateBtn(signupBtn, false);
+        setLoadingStateBtn(signupBtn, false, UI_AUTH_BUTTON_TEXT.SIGNUP_DEFAULT, UI_AUTH_BUTTON_TEXT.SIGNUP_PENDING);
     }
 }
 
@@ -87,7 +87,7 @@ function isSignUpFormValid(data) {
 function handleEmailExistsError(btn) {
     const emailInput = document.getElementById('signUpEmail');
     toggleError(emailInput, false, AUTH_ERRORS.EMAIL_EXISTS);
-    setLoadingStateBtn(btn, false);
+    setLoadingStateBtn(btn, false, UI_AUTH_BUTTON_TEXT.SIGNUP_DEFAULT, UI_AUTH_BUTTON_TEXT.SIGNUP_PENDING);
 }
 
 /**
