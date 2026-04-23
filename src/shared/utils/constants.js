@@ -1,5 +1,10 @@
 // src/shared/utils/constants.js
 
+
+/* ==========================================================================
+   KEY NAMES FOR STORAGE   
+   ========================================================================== */
+
 /**
  * @description Key used to store the authenticated user's session data in session storage.
  */
@@ -9,6 +14,10 @@ export const AUTH_SESSION_KEY = "loggedInUser";
  * @description Key used to store the application's main data (tasks, team, users) in local storage for caching purposes.
  */
 export const DATA_CACHE_KEY = "kanvera_data";
+
+/* ==========================================================================
+   INPUT VALIDATION ERROR MESSAGES    
+   ========================================================================== */
 
 /**
  * @description A collection of error messages related to authentication processes.
@@ -25,6 +34,10 @@ export const AUTH_ERRORS = {
     EMAIL_EXISTS: "This email is already registered."
 };
 
+/* ==========================================================================
+   DEFAULT GUEST DATA  
+   ========================================================================== */
+
 /**
  * @description Default guest user data used for guest login functionality.
  */
@@ -34,16 +47,55 @@ export const GUEST_LOGIN_DATA = {
     password: "********"
 };
 
+
+/* ==========================================================================
+   BUTTON TEXT CONSTANTS
+   ========================================================================== */
+
 /**
  * @description Default UI button text used for various authentication actions.
  */
-export const UI_BUTTON_TEXT = {
+export const UI_AUTH_BUTTON_TEXT = {
     SIGNIN_PENDING: "Signing in...",
     SIGNIN_DEFAULT: "Sign In",
     SIGNUP_PENDING: "Creating account...",
     SIGNUP_DEFAULT: "Sign Up",
     GUEST_DEFAULT: "Guest Sign In"
 };
+
+/**
+ * @description UI button texts for member management.
+ */
+export const UI_MEMBER_BUTTON_TEXT = {
+    ADD_PENDING: "Adding...",
+    ADD_DEFAULT: "Add Member",
+    SAVE_PENDING: "Saving...",
+    SAVE_DEFAULT: "Save Changes"
+};
+
+/**
+ * @description UI button texts for task management.
+ */
+export const UI_TASK_BUTTON_TEXT = {
+    ADD_PENDING: "Adding...",
+    ADD_DEFAULT: "Add Task",
+    SAVE_PENDING: "Saving...",
+    SAVE_DEFAULT: "Save Changes"
+};
+
+/**
+ * @description General validation error messages.
+ */
+export const VALIDATION_ERRORS = {
+    FIELD_REQUIRED: "This field is required.",
+    FULL_NAME: "Please enter a full name.",
+    EMAIL_INVALID: "Please enter a valid email.",
+    PHONE_INVALID: "Please check the phone number."
+};
+
+/* ==========================================================================
+    GREETING MESSAGES PULSE    
+   ========================================================================== */
 
 /**
  * @description Predefined greeting messages based on the time of day for the Pulse dashboard.
@@ -65,34 +117,4 @@ export const GREETING_MESSAGES = {
         title: "Night owl mode",
         subline: "Still working? Don't forget to rest!"
     }
-};
-
-/**
- * @description UI button texts for member management.
- */
-export const MEMBER_UI_TEXT = {
-    ADD_PENDING: "Adding...",
-    ADD_DEFAULT: "Add Member",
-    SAVE_PENDING: "Saving...",
-    SAVE_DEFAULT: "Save Changes"
-};
-
-/**
- * @description UI button texts for task management.
- */
-export const TASK_UI_TEXT = {
-    ADD_PENDING: "Adding...",
-    ADD_DEFAULT: "Add Task",
-    SAVE_PENDING: "Saving...",
-    SAVE_DEFAULT: "Save Changes"
-};
-
-/**
- * @description General validation error messages.
- */
-export const VALIDATION_ERRORS = {
-    FIELD_REQUIRED: "This field is required.",
-    FULL_NAME: "Please enter a full name.",
-    EMAIL_INVALID: "Please enter a valid email.",
-    PHONE_INVALID: "Please check the phone number."
 };
