@@ -10,7 +10,7 @@ import { openModal, closeModal } from '../../shared/components/modal.js';
 import { createTaskDetailHtml } from './task.template.js';
 import { getTaskDataFromModal, generateAvatarsHtml, getSubtaskChangeData, toggleSubtaskVisuals } from '../board/board.utils.js';
 import { handleAsyncButtonAction } from '../../shared/utils/ui-helpers.js';
-import { TASK_UI_TEXT } from '../../shared/utils/constants.js';
+import { UI_TASK_BUTTON_TEXT } from '../../shared/utils/constants.js';
 
 /**
  * @description Manager class for handling task-related operations and modal interactions.
@@ -117,7 +117,7 @@ export class TaskManager {
 
             closeModal();
             if (this.onUpdate) this.onUpdate();
-        }, TASK_UI_TEXT);
+        }, UI_TASK_BUTTON_TEXT);
     }
 
     /**
