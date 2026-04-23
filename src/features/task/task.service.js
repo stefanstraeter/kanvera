@@ -7,6 +7,10 @@
 
 import { getState, convertToArrayList, saveToCache } from '../../core/state.js';
 
+/* ==========================================================================
+   SORTING HELPERS FOR TASKS
+   ========================================================================== */
+
 const sortByPosition = (a, b) => a.id.localeCompare(b.id);
 const sortByUpdatedDate = (a, b) => (a.updatedAt || 0) - (b.updatedAt || 0);
 
@@ -21,6 +25,7 @@ const sortByUpdatedDate = (a, b) => (a.updatedAt || 0) - (b.updatedAt || 0);
  */
 export function getAllTasks() {
     const state = getState();
+
     return convertToArrayList(state.tasks);
 }
 
@@ -32,6 +37,7 @@ export function getAllTasks() {
  */
 export function getTasksByCategory(category) {
     const allTasks = convertToArrayList(getState().tasks);
+
     return allTasks
         .filter(task => task.category === category)
         .sort(sortByPosition);
@@ -45,6 +51,7 @@ export function getTasksByCategory(category) {
  */
 export function getTaskById(taskId) {
     const state = getState();
+
     return state.tasks[taskId] || null;
 }
 
@@ -56,8 +63,10 @@ export function getTaskById(taskId) {
  */
 export function resolveMemberDetails(memberIds) {
     if (!memberIds || !Array.isArray(memberIds)) return [];
+
     const state = getState();
     const team = state.team || {};
+
     return memberIds
         .map(id => team[id])
         .filter(member => !!member && member.name);
@@ -77,6 +86,7 @@ export function resolveMemberDetails(memberIds) {
 export function updateTaskCategory(taskId, newCategory) {
     const state = getState();
     const task = state.tasks[taskId];
+
     if (!task) return;
 
     task.category = newCategory;
@@ -98,6 +108,7 @@ export function updateTaskCategory(taskId, newCategory) {
 export function updateTaskLocally(taskId, updatedData) {
     const state = getState();
     const currentTask = state.tasks[taskId];
+
     if (!currentTask) return;
 
     state.tasks[taskId] = {
@@ -105,4 +116,19 @@ export function updateTaskLocally(taskId, updatedData) {
         ...updatedData
     };
     saveToCache();
+}
+
+
+/**
+ * @description Deletes a task from the local state and syncs with cache.
+ * @export
+ * @param {string} taskId - ID of the task to delete
+ */
+export function deleteTaskLocally(taskId) {
+    const state = getState();
+
+    if (state.tasks[taskId]) {
+        delete state.tasks[taskId];
+        saveToCache();
+    }
 }
