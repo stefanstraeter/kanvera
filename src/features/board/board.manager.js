@@ -11,7 +11,8 @@ import { createTaskDetailHtml } from '../task/task.template.js';
 import { renderSingleTask, generateAvatarsHtml, getTaskDataFromModal, getSubtaskChangeData, toggleSubtaskVisuals, showBoardWrapper } from './board.utils.js';
 import { initDragAndDrop, attachDragEventToCard } from './dnd.manager.js';
 import { openModal, closeModal } from '../../shared/components/modal.js';
-import { getInitials } from '../../shared/utils/ui-helpers.js';
+import { getInitials, setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
+import { TASK_UI_TEXT } from '../../shared/utils/constants.js';
 
 /**
  * @description Page class for the Board page.
@@ -166,17 +167,23 @@ export class BoardManager {
        INTERNAL MODAL HELPERS FOR TASK DETAILS
        ========================================================================== */
 
-    /**
-     * @description Saves the changes made in the task detail modal.
-     * @param {string} taskId - The ID of the task for which to save changes
-     * @memberof BoardManager
-     */
     async saveChanges(taskId) {
-        const updatedData = getTaskDataFromModal();
-        updateTaskLocally(taskId, updatedData);
+        const saveBtn = document.querySelector('.js-save-task'); // Dein Button Selector im Task-Modal
 
-        closeModal();
-        this.updateBoard();
+        // 1. Loading State aktivieren
+        setLoadingStateBtn(saveBtn, true, TASK_UI_TEXT.SAVE_PENDING);
+
+        try {
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            const updatedData = getTaskDataFromModal();
+
+            await updateTaskLocally(taskId, updatedData);
+            closeModal();
+            this.updateBoard();
+        } catch (error) {
+            console.error("Task update failed:", error);
+            setLoadingStateBtn(saveBtn, false, TASK_UI_TEXT.SAVE_DEFAULT);
+        }
     }
 
     /**
