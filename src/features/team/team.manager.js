@@ -57,39 +57,35 @@ export class TeamManager {
     }
 
     /**
-     * @description Handle avatar image load/error without inline HTML handlers.
-     * @param {HTMLElement} scope - Parent element containing avatar markup
+     * @description Sets up avatar fallbacks for all images within the given scope.
+     * @param {HTMLElement} scope - The container element to search for avatar images.
      * @memberof TeamManager
      */
     setupAvatarFallbacks(scope) {
-        const avatarImages = scope.querySelectorAll('[data-avatar-image]');
+        const avatars = scope.querySelectorAll('[data-avatar-image]');
+        avatars.forEach(img => this.initAvatarLoading(img));
+    }
 
-        avatarImages.forEach((img) => {
-            const placeholder = img.parentElement?.querySelector('[data-avatar-placeholder]');
-            if (!placeholder) return;
+    /**
+     * @description Initializes the avatar loading process, handling the display of the image and its placeholder.
+     * @param {HTMLImageElement} img - The avatar image element.
+     * @return {void} 
+     * @memberof TeamManager
+     */
+    initAvatarLoading(img) {
+        const placeholder = img.parentElement?.querySelector('[data-avatar-placeholder]');
+        if (!placeholder) return;
 
-            const showImage = () => {
-                img.classList.remove('team-card__avatar-image--hidden');
-                placeholder.classList.add('team-card__avatar-placeholder--hidden');
-            };
-
-            const showPlaceholder = () => {
-                img.classList.add('team-card__avatar-image--hidden');
-                placeholder.classList.remove('team-card__avatar-placeholder--hidden');
-            };
-
-            showPlaceholder();
-
-            if (img.complete) {
-                if (img.naturalWidth > 0) {
-                    showImage();
-                }
-                return;
-            }
-
-            img.addEventListener('load', showImage, { once: true });
-            img.addEventListener('error', showPlaceholder, { once: true });
-        });
+        const toggleUI = (isLoaded) => {
+            img.classList.toggle('team-card__avatar-image--hidden', !isLoaded);
+            placeholder.classList.toggle('team-card__avatar-placeholder--hidden', isLoaded);
+        };
+        toggleUI(false);
+        if (img.complete && img.naturalWidth > 0) {
+            return toggleUI(true);
+        }
+        img.addEventListener('load', () => toggleUI(true), { once: true });
+        img.addEventListener('error', () => toggleUI(false), { once: true });
     }
 
     /**
