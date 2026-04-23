@@ -5,7 +5,7 @@
  * Handles auth form UI interactions, validation, and state transitions
  */
 
-import { UI_BUTTON_TEXT } from '../../shared/utils/constants.js';
+import { UI_AUTH_BUTTON_TEXT } from '../../shared/utils/constants.js';
 
 /* ==========================================================================
    INITIALIZATION OF AUTHENTICATION SLIDER, PASSWORD TOGGLES, AND DROPDOWN LOGIC
