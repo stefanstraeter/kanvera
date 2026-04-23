@@ -78,6 +78,16 @@ export const MEMBER_UI_TEXT = {
 };
 
 /**
+ * @description UI button texts for task management.
+ */
+export const TASK_UI_TEXT = {
+    ADD_PENDING: "Adding...",
+    ADD_DEFAULT: "Add Task",
+    SAVE_PENDING: "Saving...",
+    SAVE_DEFAULT: "Save Changes"
+};
+
+/**
  * @description General validation error messages.
  */
 export const VALIDATION_ERRORS = {
