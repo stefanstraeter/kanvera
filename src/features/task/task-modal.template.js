@@ -77,10 +77,10 @@ export const createTaskDetailCardHtml = (task, assigneeHtml) => {
                     <div class="u-flex u-align-center">
                         <div class="avatar-group">
                             ${assigneeHtml}
+                            <button type="button" class="btn-icon btn-icon--primary js-edit-assignees u-pl-md" title="Edit Assignees">
+                              <i class="fa-solid fa-user-plus field-icon"></i>
+                            </button>
                         </div>
-                        <button type="button" class="btn-icon btn-icon--primary js-edit-assignees u-pl-md" title="Edit Assignees">
-                            <i class="fa-solid fa-user-plus field-icon"></i>
-                        </button>
                     </div>
                 </div>
             </div>
