@@ -25,22 +25,23 @@ export function getInitials(name) {
 /* ==========================================================================
    BUTTON LOADING STATE
    ========================================================================== */
+
 /**
- * @description Toggles the loading state of a button.
+ * @description Sets the loading state of a button.
  * @export
  * @param {HTMLElement} btn - The button element to be toggled.
  * @param {boolean} isPending - Loading state.
- * @param {string} [loadingText=UI_AUTH_BUTTON_TEXT.SIGNIN_PENDING] - Text to show during loading.
+ * @param {string} [loadingText] - Text to show during loading.
  * @return {void}
  */
-export function setLoadingStateBtn(btn, isPending, loadingText = UI_AUTH_BUTTON_TEXT.SIGNIN_PENDING) {
+export function setLoadingStateBtn(btn, isPending, loadingText) {
     if (!btn) return;
 
     if (isPending) {
         btn.dataset.originalText = btn.innerText;
-        btn.innerText = loadingText;
+        btn.innerText = loadingText || btn.innerText;
     } else {
-        btn.innerText = btn.dataset.originalText || UI_AUTH_BUTTON_TEXT.SIGNIN_DEFAULT;
+        btn.innerText = btn.dataset.originalText || btn.innerText;
     }
 
     btn.disabled = isPending;
@@ -48,23 +49,24 @@ export function setLoadingStateBtn(btn, isPending, loadingText = UI_AUTH_BUTTON_
 }
 
 /**
- * @description Handles asynchronous button actions with loading state.
+ * @description Handles the asynchronous action of a button, showing a loading state while the action is in progress and reverting it back once done.
  * @export
  * @param {HTMLElement} btn - The button element to be toggled.
- * @param {Function} callback - The asynchronous function to execute.
- * @param {Object} texts - An object containing text values for different states.
+ * @param {Function} callback - The asynchronous function to be executed.
+ * @param {Object} texts - An object containing button text for different states.
  * @return {Promise<void>} A promise that resolves when the action is complete.
  */
 export async function handleAsyncButtonAction(btn, callback, texts) {
     if (!btn) return;
 
-    setLoadingStateBtn(btn, true, texts.SAVE_PENDING || texts.PENDING);
+    const pendingText = texts.SAVE_PENDING || texts.SIGNIN_PENDING || texts.PENDING || "Loading...";
+    setLoadingStateBtn(btn, true, pendingText);
 
     try {
         await callback();
     } catch (error) {
         console.error("Action failed:", error);
-        setLoadingStateBtn(btn, false, texts.SAVE_DEFAULT || texts.DEFAULT);
+        setLoadingStateBtn(btn, false);
     }
 }
 
