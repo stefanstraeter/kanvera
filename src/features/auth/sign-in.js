@@ -4,7 +4,7 @@ import { signInAsUser, signInAsGuest } from './auth.service.js';
 import { validateNotEmpty, validateEmailFormat, validateMinLength, toggleError, attachLiveValidation } from '../../shared/utils/input-validation.js';
 import { setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
 import { handleSignUp } from './sign-up.js';
-import { AUTH_ERRORS, GUEST_LOGIN_DATA, UI_BUTTON_TEXT } from '../../shared/utils/constants.js';
+import { AUTH_ERRORS, GUEST_LOGIN_DATA, UI_AUTH_BUTTON_TEXT } from '../../shared/utils/constants.js';
 
 /* ==========================================================================
    INITIALIZATION
@@ -47,7 +47,7 @@ async function handleSignIn(event) {
     if (user) {
         completeLogin();
     } else {
-        setLoadingStateBtn(signInBtn, false);
+        setLoadingStateBtn(signInBtn, false, UI_AUTH_BUTTON_TEXT.SIGNIN_DEFAULT, UI_AUTH_BUTTON_TEXT.SIGNIN_PENDING);
         toggleError(document.getElementById('signInEmail'), false, AUTH_ERRORS.INVALID_AUTH);
     }
 }
@@ -60,7 +60,7 @@ async function handleSignIn(event) {
 async function handleGuestSignIn(event) {
     const guestBtn = event.currentTarget;
 
-    setLoadingStateBtn(guestBtn, true, UI_BUTTON_TEXT.SIGNIN_PENDING, UI_BUTTON_TEXT.GUEST_DEFAULT);
+    setLoadingStateBtn(guestBtn, true, UI_AUTH_BUTTON_TEXT.SIGNIN_PENDING, UI_AUTH_BUTTON_TEXT.GUEST_DEFAULT);
 
     fillGuestCredentials();
     signInAsGuest();
