@@ -65,7 +65,6 @@ export async function handleAsyncButtonAction(btn, callback, texts) {
     try {
         await callback();
     } catch (error) {
-        console.error("Action failed:", error);
         setLoadingStateBtn(btn, false);
     }
 }
