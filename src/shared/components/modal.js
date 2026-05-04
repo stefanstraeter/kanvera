@@ -6,9 +6,9 @@
 /**
  * @description Opens the modal, populates it, and initializes all logic.
  * @export
- * @param {string} title
- * @param {string} bodyHtml
- * @param {Function} onSave
+ * @param {string} title - The title to display in the modal header.
+ * @param {string} bodyHtml - The HTML string to inject into the modal body.
+ * @param {Function} onSave - Callback function that receives form data on submission.
  * @param {Function} [validator] - Optional validation function for the form.
  */
 export function openModal(title, bodyHtml, onSave, validator = null) {
@@ -51,7 +51,16 @@ function renderModalContent(title, bodyHtml) {
     const modal = getModalElement();
     if (!modal) return;
 
-    modal.querySelector('.js-modal-title').innerText = title;
+    const titleEl = modal.querySelector('.js-modal-title');
+
+    modal.classList.remove('modal--no-title');
+
+    if (!title) {
+        modal.classList.add('modal--no-title');
+    } else {
+        titleEl.innerText = title;
+    }
+
     modal.querySelector('.js-modal-body').innerHTML = bodyHtml;
 }
 
