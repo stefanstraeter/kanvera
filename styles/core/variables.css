@@ -45,6 +45,8 @@
   --color-progress-bar: var(--color-very-light-grey);
   --color-subtask-bg: var(--color-very-light-grey);
   --color-subtask-bg-hover: var(--color-light-grey);
+  --color-priority-menu-bg: var(--color-very-light-grey);
+  --color-priority-menu-bg-hover: var(--color-light-grey);
 
   --color-btn-secondary-bg: var(--color-greyish-violett);
   --color-btn-secondary-hover: var(--color-main-hover);
@@ -158,6 +160,8 @@
   --color-progress-bar: var(--color-medium-grey);
   --color-subtask-bg: var(--color-very-dark-grey);
   --color-subtask-bg-hover: var(--color-dark-greyish-violett);
+  --color-priority-menu-bg: var(--color-very-dark-grey);
+  --color-priority-menu-bg-hover: var(--color-dark-greyish-violett);
 
   --color-btn-secondary-bg: var(--color-main-hover);
   --color-btn-secondary-hover: var(--color-beige);
