@@ -60,14 +60,16 @@ export function renderSingleTask(task) {
    ========================================================================== */
 
 /**
- * @description Extracts the edited values (title, description) from the task detail modal.
+ * @description Extracts the edited values (title, description, priority, date) from the task detail modal.
  * @export
  * @return {Object} Object containing the edited values
  */
 export function getTaskDataFromModal() {
     return {
         title: document.querySelector('[data-field="title"]')?.innerText.trim(),
-        description: document.querySelector('[data-field="description"]')?.innerText.trim()
+        description: document.querySelector('[data-field="description"]')?.innerText.trim(),
+        priority: document.querySelector('.js-priority-toggle')?.dataset.priority,
+        dueDate: document.querySelector('.js-task-due-date')?.value
     };
 }
 
