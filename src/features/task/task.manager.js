@@ -36,7 +36,7 @@ export class TaskManager {
         if (!task) return;
 
         const assigneeHtml = generateAvatarsHtml(task.assignedTo);
-        openModal("Edit Task", createTaskDetailCardHtml(task, assigneeHtml));
+        openModal(null, createTaskDetailCardHtml(task, assigneeHtml));
 
         this.activateModalInteractions(taskId);
     }
@@ -54,6 +54,7 @@ export class TaskManager {
         this.registerActionButtons(taskId);
         this.registerSubtaskToggles(taskId);
         this.registerFieldBehaviors(taskId);
+        this.registerPrioritySelector();
     }
 
     /**
@@ -67,6 +68,37 @@ export class TaskManager {
 
         saveBtn?.addEventListener('click', () => this.saveTask(taskId));
         deleteBtn?.addEventListener('click', () => this.handleDeleteTask(taskId));
+    }
+
+    /**
+     * @description Registers priority selector toggle and option click listeners.
+     * @memberof TaskManager
+     */
+    registerPrioritySelector() {
+        const container = document.querySelector('.priority-select-container');
+        const toggle = document.querySelector('.js-priority-toggle');
+        const menu = document.querySelector('.js-priority-menu');
+        const options = document.querySelectorAll('.priority-option');
+
+        toggle?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menu?.classList.toggle('is-hidden');
+        });
+
+        options.forEach(option => {
+            option.addEventListener('click', (e) => {
+                const newValue = e.currentTarget.dataset.value;
+                this.updatePriorityUI(newValue);
+                menu?.classList.add('is-hidden');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+
+            if (!container?.contains(e.target) && !menu?.classList.contains('is-hidden')) {
+                menu?.classList.add('is-hidden');
+            }
+        });
     }
 
     /**
@@ -180,10 +212,28 @@ export class TaskManager {
             "Delete Task?",
             taskTitle,
             () => {
-                // Hier wird jetzt wirklich gelöscht!
                 deleteTaskLocally(taskId);
                 if (this.onUpdate) this.onUpdate();
             }
         );
+    }
+
+    /* ==========================================================================
+       UPDATE PRIORITY UI
+       ========================================================================== */
+    /**
+     * @description Updates the priority UI elements based on the given priority.
+     * @param {string} priority - The priority level (e.g., "low", "medium", "high")
+     * @memberof TaskManager
+     */
+    updatePriorityUI(priority) {
+        const display = document.querySelector('.js-priority-toggle');
+        const text = display.querySelector('.priority-text');
+        const icon = display.querySelector('.priority-icon');
+
+        display.dataset.priority = priority;
+        text.textContent = priority;
+        icon.src = `assets/icons/priority/${priority}.svg`;
+        display.className = `priority-display js-priority-toggle priority--${priority}`;
     }
 }
