@@ -19,12 +19,16 @@ export const createTaskDetailCardHtml = (task, assigneeHtml) => {
         <div class="modal-inline-edit-body">
             <div class="task-detail__meta-grid u-mb-md">
                 <div class="inline-field">
-                    <div class="inline-edit-wrapper">
-                        <label class="modal-label">Due Date</label>
-                        <input type="date" class="field-input task-detail__date-input js-task-due-date" value="${task.dueDate || ''}">
-                    </div>
+                    <label class="inline-edit-wrapper u-cursor-pointer">
+                    <span class="modal-label">Due Date</span>
+                    <input 
+                        type="date" 
+                        name="due_date" 
+                        class="field-input task-detail__date-input js-task-due-date" 
+                        value="${task.dueDate || ''}"
+                    >
+                    </label>
                 </div>
-
                 <div class="inline-field">
                     <div class="inline-edit-wrapper">
                         <label class="modal-label">Priority</label>
@@ -37,7 +41,7 @@ export const createTaskDetailCardHtml = (task, assigneeHtml) => {
                 <div class="inline-edit-wrapper">
                     <label class="modal-label">Description</label>
                     <p class="task-detail__description modal-edit-field js-edit-field" data-field="description" contenteditable="true" spellcheck="false">
-                        ${task.description || 'No description provided.'}
+                        ${task.description || 'No description yet'}
                     </p>
                 </div>
             </div>
@@ -46,10 +50,14 @@ export const createTaskDetailCardHtml = (task, assigneeHtml) => {
                 <div class="inline-edit-wrapper">
                     <label class="modal-label u-mb-xs">Subtasks</label>
                     <div class="subtask-list u-mb-sm">
-                        ${renderSubtasksList(task.subtasks)}
+                       ${renderSubtasksList(task.subtasks, task.id)}
                     </div>
                     <button type="button" class="btn btn--s btn--full btn--secondary js-add-subtask-btn">
-                        <i class="fa-solid fa-plus btn-icon"></i> Add Subtask
+                    <div class="btn-group">
+                        <i class="fa-solid fa-plus btn-icon"></i> 
+                        <span>Add Subtask</span>
+                    </div>
+                        
                     </button>
                 </div>
             </div>
@@ -60,7 +68,6 @@ export const createTaskDetailCardHtml = (task, assigneeHtml) => {
 
         <div class="modal__actions">
             <button type="button" class="btn btn--s btn--full btn--primary js-save-task">Save Changes</button>
-            <button type="button" class="btn btn--s btn--full btn--secondary js-close-modal">Close</button>
         </div>
     </div>
     `;
@@ -79,7 +86,7 @@ export const createTaskDetailCardHtml = (task, assigneeHtml) => {
 function renderHeaderSection(task) {
     return `
         <div class="team-card__delete">
-            <button type="button" class="btn-icon btn-icon--danger modal__delete-icon js-delete-task" title="Delete Task">
+            <button type="button" class="btn-icon btn-trash-icon modal__delete-icon js-delete-task" title="Delete Task">
                <i class="fa-regular fa-trash-can"></i>
             </button>
         </div>
@@ -146,25 +153,28 @@ function renderAssigneeSection(assigneeHtml) {
  * @param {Array<Object>} [subtasks=[]] - The array of subtasks
  * @return {string} HTML string representing the list of subtasks
  */
-function renderSubtasksList(subtasks = []) {
+function renderSubtasksList(subtasks = [], taskId) {
     if (subtasks.length === 0) return '<p class="task-detail__description">No subtasks yet</p>';
 
     return subtasks.map((st, i) => `
         <div class="subtask-item">
-            <input type="checkbox"
-                   id="st-${i}"
-                   class="subtask-input js-subtask-toggle"
-                   data-index="${i}"
-                   ${st.done ? 'checked' : ''}
+            <input type="checkbox" 
+                   id="st-${taskId}-${i}" 
+                   class="subtask-input js-subtask-toggle" 
+                   data-index="${i}" 
+                   ${st.done ? 'checked' : ''} 
                    hidden />
-
-            <label for="st-${i}" class="subtask-label">
-                <div class="subtask-content-wrapper">
-                    <i class="fa-regular fa-square icon-unchecked"></i>
-                    <i class="fa-solid fa-square-check icon-checked"></i>
-                    <span class="subtask-text ${st.done ? 'is-done' : ''}">${st.title}</span>
-                </div>
+            
+            <label for="st-${taskId}-${i}" class="subtask-checkbox-label">
+                <i class="fa-regular fa-square icon-unchecked"></i>
+                <i class="fa-solid fa-square-check icon-checked"></i>
             </label>
+            <span class="subtask-text modal-edit-field js-subtask-text ${st.done ? 'is-done' : ''}" 
+                  contenteditable="true" 
+                  data-index="${i}">${st.title}</span>
+            <button type="button" class="btn-icon btn-trash-icon u-pl-sm u-pr-sm js-delete-subtask" data-index="${i}">
+                <i class="fa-regular fa-trash-can"></i>
+            </button>
         </div>
     `).join('');
 }
