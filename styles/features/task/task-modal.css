@@ -1,26 +1,9 @@
 /* ==========================================================================
-   TASK DETAIL - MODAL VIEW
+   TASK DETAIL DESCRIPTION
    ========================================================================== */
 .task-detail__description {
   font-size: var(--font-size-body-l);
   line-height: var(--line-height-body);
-}
-
-.subtask-item {
-  background-color: var(--color-subtask-bg);
-  padding: var(--space-sm);
-  border-radius: var(--radius-task-category);
-  margin-bottom: var(--space-xs);
-  transition: background-color var(--transition);
-}
-
-.subtask-item:hover {
-  background-color: var(--color-subtask-bg-hover);
-}
-
-.subtask-text.is-done {
-  text-decoration: line-through;
-  opacity: 0.5;
 }
 
 /* ==========================================================================
@@ -135,27 +118,53 @@
 }
 
 /* ==========================================================================
-   SUBTASK CHECKBOX
+   SUBTASK CHECKBOX GROUP
    ========================================================================== */
 .checkbox-group {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1;
 }
 
-.subtask-label {
-  cursor: pointer;
+/* ==========================================================================
+   SUBTASKS SECTION
+   ========================================================================== */
+.subtask-item {
   display: flex;
   align-items: center;
-  width: 100%;
-  user-select: none;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  background-color: var(--color-subtask-bg);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-task-category);
+  margin-bottom: var(--space-xs);
+  transition: background-color var(--transition);
+}
+
+.subtask-item:hover {
+  background-color: var(--color-subtask-bg-hover);
 }
 
 .subtask-content-wrapper {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  width: 100%;
+  flex: 1;
+  position: relative;
+}
+
+.subtask-checkbox-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xs);
+  transition: transform 0.1s ease;
+}
+
+.subtask-checkbox-label:active {
+  transform: scale(0.9);
 }
 
 .icon-checked {
@@ -167,18 +176,43 @@
   color: var(--color-medium-grey);
 }
 
-.subtask-input:checked + .subtask-label .icon-checked {
+.subtask-input:checked + .subtask-checkbox-label .icon-checked {
   display: inline-block;
 }
 
-.subtask-input:checked + .subtask-label .icon-unchecked {
+.subtask-input:checked + .subtask-checkbox-label .icon-unchecked {
   display: none;
 }
 
-.subtask-text.is-done {
-  text-decoration: line-through;
+.subtask-text {
+  flex: 1;
+  cursor: text;
+  outline: none;
+  font-size: var(--font-size-body-l);
+  transition: all var(--transition);
+}
+
+.js-subtask-text:empty::before {
+  content: "A little more to-do...";
+  font-size: var(--font-size-body-l);
   color: var(--color-medium-grey);
+  font-weight: var(--font-weight-medium);
+  font-style: italic;
   opacity: 0.6;
+}
+
+.subtask-input:checked ~ .subtask-text {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.js-delete-subtask {
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.subtask-item:hover .js-delete-subtask {
+  opacity: 1;
 }
 
 /* ==========================================================================
