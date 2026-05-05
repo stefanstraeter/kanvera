@@ -41,3 +41,7 @@
 .u-mb-xs {
   margin-bottom: var(--space-xs);
 }
+
+.u-ml-sm {
+  margin-left: var(--space-sm);
+}
