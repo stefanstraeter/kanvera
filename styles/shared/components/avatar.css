@@ -66,6 +66,13 @@
   display: block;
 }
 
+.avatar--more {
+  background-color: var(--color-main-hover);
+  color: var(--color-white);
+  border: 2px solid var(--color-bg-modal);
+  font-size: 0.75rem;
+}
+
 /* ==========================================================================
    INTERACTIVE STATES
    ========================================================================== */
