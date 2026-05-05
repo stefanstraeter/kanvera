@@ -2,3 +2,6 @@
 
 @import url("./task-card.css");
 @import url("./task-modal.css");
+@import url("./subtask-modal.css");
+@import url("./assignee-dropdown.css");
+@import url("./priority-selector.css");
