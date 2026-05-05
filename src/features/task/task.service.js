@@ -118,7 +118,6 @@ export function updateTaskLocally(taskId, updatedData) {
     saveToCache();
 }
 
-
 /**
  * @description Deletes a task from the local state and syncs with cache.
  * @export
@@ -131,4 +130,58 @@ export function deleteTaskLocally(taskId) {
         delete state.tasks[taskId];
         saveToCache();
     }
+}
+
+/* ==========================================================================
+   SUBTASKS SERVICE
+   ========================================================================== */
+
+/**
+ * @description Adds a new subtask to a task. 
+ * @export
+ * @param {string} taskId - The ID of the task to which the subtask will be added.
+ * @param {string} [title=""] - The title of the new subtask.
+ * @return {void}
+ */
+export function addSubtask(taskId, title = "") {
+    const state = getState();
+    const task = state.tasks[taskId];
+    if (!task) return;
+
+    if (!task.subtasks) task.subtasks = [];
+    task.subtasks.push({ title, done: false });
+    saveToCache();
+}
+
+/**
+ * @description Removes a subtask from a task.
+ * @export
+ * @param {string} taskId - The ID of the task from which the subtask will be removed.
+ * @param {number} index - The index of the subtask to remove.
+ * @return {void}
+ */
+export function removeSubtask(taskId, index) {
+    const state = getState();
+    const task = state.tasks[taskId];
+    if (!task || !task.subtasks) return;
+
+    task.subtasks.splice(index, 1);
+    saveToCache();
+}
+
+/**
+ * @description Updates the title of a subtask.
+ * @export
+ * @param {string} taskId - The ID of the task containing the subtask.
+ * @param {number} index - The index of the subtask to update.
+ * @param {string} newTitle - The new title for the subtask.
+ * @return {void}
+ */
+export function updateSubtaskTitle(taskId, index, newTitle) {
+    const state = getState();
+    const task = state.tasks[taskId];
+    if (!task || !task.subtasks[index]) return;
+
+    task.subtasks[index].title = newTitle;
+    saveToCache();
 }
