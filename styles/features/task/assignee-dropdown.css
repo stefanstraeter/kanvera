@@ -1,0 +1,60 @@
+/* ==========================================================================
+   ASSIGNEE DROPDOWN - MAIN CONTAINER
+   ========================================================================== */
+.assignee-dropdown {
+  position: absolute;
+  z-index: 100;
+  background-color: var(--color-priority-menu-bg);
+  border-radius: var(--radius-task-category);
+  box-shadow: var(--shadow-card);
+  width: 16rem;
+  max-height: 16rem;
+  overflow-y: auto;
+}
+
+.assignee-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ==========================================================================
+   ASSIGNEE ITEM - LAYOUT & INFO
+   ========================================================================== */
+.assignee-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+  user-select: none;
+}
+
+.assignee-item:hover {
+  background-color: var(--color-priority-menu-bg-hover);
+}
+
+.assignee-item__info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.assignee-name {
+  font-size: var(--font-size-body-l);
+  color: var(--color-text-main);
+}
+
+/* ==========================================================================
+   SELECTION STATES ICON & HIGHLIGHT
+   ========================================================================== */
+.assignee-item.is-selected .assignee-name {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-main);
+}
+
+.check-icon {
+  font-size: var(--font-size-body-m);
+  color: var(--color-main);
+}
