@@ -33,19 +33,6 @@
   transition: opacity var(--transition);
 }
 
-.team-card__delete button {
-  font-size: var(--font-size-s);
-  color: var(--color-medium-grey);
-  transition:
-    transform 0.2s ease-in-out,
-    color 0.2s ease-in-out;
-}
-
-.team-card__delete button:hover {
-  color: var(--color-btn-danger-hover);
-  transform: scale(1.1);
-}
-
 .team-card__avatar {
   margin-bottom: var(--space-lg);
 }
