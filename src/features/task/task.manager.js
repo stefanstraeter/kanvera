@@ -5,7 +5,7 @@
  * Orchestrates the task detail modal interactions and updates
  */
 
-import { getTaskById, updateTaskLocally, deleteTaskLocally } from './task.service.js';
+import { getTaskById, updateTaskLocally, deleteTaskLocally, addSubtask, removeSubtask, updateSubtaskTitle } from './task.service.js';
 import { openModal, closeModal } from '../../shared/components/modal.js';
 import { createTaskDetailCardHtml, createConfirmDeleteTaskHtml } from './task.template.js';
 import { getTaskDataFromModal, generateAvatarsHtml, getSubtaskChangeData, toggleSubtaskVisuals } from '../board/board.utils.js';
@@ -55,6 +55,7 @@ export class TaskManager {
         this.registerSubtaskToggles(taskId);
         this.registerFieldBehaviors(taskId);
         this.registerPrioritySelector();
+        this.registerSubtaskActions(taskId);
     }
 
     /**
@@ -80,25 +81,23 @@ export class TaskManager {
         const menu = document.querySelector('.js-priority-menu');
         const options = document.querySelectorAll('.priority-option');
 
-        toggle?.addEventListener('click', (e) => {
-            e.stopPropagation();
+        toggle?.addEventListener('click', (event) => {
+            event.stopPropagation();
             menu?.classList.toggle('is-hidden');
         });
 
         options.forEach(option => {
-            option.addEventListener('click', (e) => {
-                const newValue = e.currentTarget.dataset.value;
-                this.updatePriorityUI(newValue);
+            option.onclick = () => {
+                this.updatePriorityUI(option.dataset.value);
                 menu?.classList.add('is-hidden');
-            });
+            };
         });
 
-        document.addEventListener('click', (e) => {
-
-            if (!container?.contains(e.target) && !menu?.classList.contains('is-hidden')) {
+        document.onclick = (event) => {
+            if (!container?.contains(event.target)) {
                 menu?.classList.add('is-hidden');
             }
-        });
+        };
     }
 
     /**
@@ -107,8 +106,7 @@ export class TaskManager {
      * @memberof TaskManager
      */
     registerSubtaskToggles(taskId) {
-        const toggles = document.querySelectorAll('.js-subtask-toggle');
-        toggles.forEach(checkbox => {
+        document.querySelectorAll('.js-subtask-toggle').forEach(checkbox => {
             checkbox.addEventListener('change', (event) => this.handleSubtaskChange(event, taskId));
         });
     }
@@ -120,13 +118,86 @@ export class TaskManager {
      */
     registerFieldBehaviors(taskId) {
         const titleField = document.querySelector('[data-field="title"]');
+        titleField?.addEventListener('keydown', (event) => event.key === 'Enter' && (event.preventDefault() || event.target.blur()));
+    }
 
-        titleField?.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                event.target.blur();
-            }
+    /**
+    * @description Registers click listeners for subtask add, delete, and edit actions.
+    * @param {string} taskId - The ID of the task
+    * @memberof TaskManager
+    */
+    registerSubtaskActions(taskId) {
+        const addBtn = document.querySelector('.js-add-subtask-btn');
+        addBtn?.addEventListener('click', () => this.handleSubtaskAdd(taskId));
+
+        document.querySelectorAll('.js-delete-subtask').forEach(btn => {
+            btn.addEventListener('click', (event) => this.handleSubtaskDelete(event, taskId, btn.dataset.index));
         });
+
+        document.querySelectorAll('.js-subtask-text').forEach(span => {
+            span.onblur = () => this.handleSubtaskTitleEdit(taskId, span.dataset.index, span.innerText);
+            span.onkeydown = (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    span.blur();
+                }
+            };
+        });
+    }
+
+    /* ==========================================================================
+       SUBTASK HANDLERS
+       ========================================================================== */
+
+    /**
+     * @description Handles the addition of a new subtask.
+     * @param {string} taskId - The ID of the task
+     * @memberof TaskManager
+     */
+    handleSubtaskAdd(taskId) {
+        addSubtask(taskId);
+        this.refreshTaskUI(taskId);
+
+        setTimeout(() => {
+            const texts = document.querySelectorAll('.js-subtask-text');
+            texts[texts.length - 1]?.focus();
+        }, 50);
+    }
+
+    /**
+     * @description Handles the deletion of a subtask.
+     * @param {Event} event - The event object
+     * @param {string} taskId - The ID of the task
+     * @param {number} index - The index of the subtask
+     * @memberof TaskManager
+     */
+    handleSubtaskDelete(event, taskId, index) {
+        event.stopPropagation();
+        removeSubtask(taskId, index);
+        this.refreshTaskUI(taskId);
+    }
+
+    /**
+     * @description Handles the editing of a subtask title.
+     * @param {string} taskId - The ID of the task
+     * @param {number} index - The index of the subtask
+     * @param {string} newTitle - The new title of the subtask
+     * @memberof TaskManager
+     */
+    handleSubtaskTitleEdit(taskId, index, newTitle) {
+        const cleanedTitle = newTitle.trim();
+        updateSubtaskTitle(taskId, index, cleanedTitle);
+        if (this.onUpdate) this.onUpdate();
+    }
+
+    /**
+     * @description Refreshes the task UI by reopening the task detail and triggering an update.
+     * @param {string} taskId - The ID of the task
+     * @memberof TaskManager
+     */
+    refreshTaskUI(taskId) {
+        this.openTaskDetail(taskId);
+        if (this.onUpdate) this.onUpdate();
     }
 
     /* ==========================================================================
@@ -153,23 +224,55 @@ export class TaskManager {
     }
 
     /**
-     * @description Handles the toggle state of a subtask and updates it locally.
-     * @param {Event} event - The change event
+     * @description Handles the change event for a subtask checkbox.
+     * @param {Event} event - The event object
      * @param {string} taskId - The ID of the task
+     * @return {void}
      * @memberof TaskManager
      */
     handleSubtaskChange(event, taskId) {
-        const { index, isDone } = getSubtaskChangeData(event);
-        const task = getTaskById(taskId);
+        const checkbox = event.target;
+        const item = checkbox.closest('.subtask-item');
+        const textSpan = item.querySelector('.js-subtask-text');
 
-        if (task && task.subtasks) {
-            task.subtasks[index].done = isDone;
-            updateTaskLocally(taskId, { subtasks: task.subtasks });
+        if (!this.canToggleSubtask(textSpan)) {
+            checkbox.checked = false;
+            textSpan.focus();
+            return;
         }
-        toggleSubtaskVisuals(index, isDone);
+
+        const isDone = checkbox.checked;
+        const index = checkbox.dataset.index;
+        this.updateSubtaskState(taskId, index, isDone);
+
+        textSpan.classList.toggle('is-done', isDone);
         if (this.onUpdate) this.onUpdate();
     }
 
+    /**
+     * @description Updates the state of a subtask.
+     * @param {string} taskId - The ID of the task
+     * @param {number} index - The index of the subtask
+     * @param {boolean} isDone - The new state of the subtask
+     * @memberof TaskManager
+     */
+    updateSubtaskState(taskId, index, isDone) {
+        const task = getTaskById(taskId);
+        if (task?.subtasks[index]) {
+            task.subtasks[index].done = isDone;
+            updateTaskLocally(taskId, { subtasks: task.subtasks });
+        }
+    }
+
+    /**
+     * @description Checks if a subtask can be toggled based on its text content.
+     * @param {HTMLElement} textSpan - The span element containing the subtask text
+     * @return {boolean} - True if the subtask can be toggled, false otherwise
+     * @memberof TaskManager
+     */
+    canToggleSubtask(textSpan) {
+        return textSpan.innerText.trim().length > 0;
+    }
 
     /* ==========================================================================
        DELETE TASK 
