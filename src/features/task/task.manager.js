@@ -5,6 +5,7 @@
 
 import { getTaskById, updateTaskLocally, deleteTaskLocally } from './task.service.js';
 import { SubtaskManager } from './subtask.manager.js';
+import { AssigneeManager } from './assignee.manager.js';
 import { openModal, closeModal } from '../../shared/components/modal.js';
 import { createTaskDetailCardHtml, createConfirmDeleteTaskHtml } from './task.template.js';
 import { getTaskDataFromModal, generateAvatarsHtml } from '../board/board.utils.js';
@@ -70,6 +71,12 @@ export class TaskManager {
             (id) => this.refreshTaskUI(id)
         );
         this.subtaskManager.init();
+
+        this.assigneeManager = new AssigneeManager(
+            taskId,
+            (id) => this.refreshTaskUI(id)
+        );
+        this.assigneeManager.init();
     }
 
     /**
