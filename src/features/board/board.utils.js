@@ -9,19 +9,32 @@ import { createAvatarHtml, createTaskCardHtml } from '../task/task.template.js';
    ========================================================================== */
 
 /**
- * @description Generates HTML for assignee avatars based on their member IDs by resolving member details and creating avatar HTML for each assignee.
+ * @description Generates the HTML for assignee avatars based on their IDs, with an optional limit and overflow badge.
  * @export
- * @param {Array<string>} assignedToIds - Array of member IDs for the assignees
- * @return {string} HTML string representing the avatars of the assignees
+ * @param {Array} assignedToIds - Array of user IDs assigned to the task
+ * @param {number} [limit=5] - Maximum number of avatars to display before showing the overflow badge
+ * @return {string} HTML string of avatars and optional overflow badge
  */
-export function generateAvatarsHtml(assignedToIds) {
-    const members = resolveMemberDetails(assignedToIds);
+export function generateAvatarsHtml(assignedToIds, limit = 5) {
+    if (!assignedToIds || assignedToIds.length === 0) return '';
 
-    return members.map(member => {
+    const total = assignedToIds.length;
+    const showBadge = total > limit;
+    const itemsToRender = showBadge ? limit - 1 : total;
+    const displayIds = assignedToIds.slice(0, itemsToRender);
+    const members = resolveMemberDetails(displayIds);
+
+    let html = members.map(member => {
         const hasImage = member.imageUrl && member.imageUrl.trim() !== "";
         const initials = getInitials(member.name);
         return createAvatarHtml(member, initials, hasImage);
     }).join('');
+
+    if (showBadge) {
+        const extraCount = total - itemsToRender;
+        html += `<div class="avatar avatar--s avatar--more" title="${total} Assignees">+${extraCount}</div>`;
+    }
+    return html;
 }
 
 /**
