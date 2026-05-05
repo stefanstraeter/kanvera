@@ -15,7 +15,7 @@ export const createEditModalHtml = (member, initials, displayRole) => {
     return `
     <div class="modal-edit-container">
         <div class="team-card__delete">
-            <button type="button" class="btn-icon btn-icon--danger modal__delete-icon js-delete-member" title="Delete Member">
+            <button type="button" class="btn-icon btn-trash-icon modal__delete-icon js-delete-member" title="Delete Member">
                <i class="fa-regular fa-trash-can"></i>
             </button>
         </div>
