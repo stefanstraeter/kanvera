@@ -134,14 +134,14 @@ function renderAssigneeSection(assigneeHtml) {
         <div class="inline-field u-mb-lg">
             <div class="inline-edit-wrapper">
                 <label class="modal-label u-mb-xs">Assignees</label>
-                <div class="u-flex u-align-center">
                     <div class="avatar-group">
-                        ${assigneeHtml}
-                        <button type="button" class="btn-icon btn-icon--primary js-edit-assignees u-pl-md" title="Edit Assignees">
-                          <i class="fa-solid fa-user-plus field-icon"></i>
+                        <div class="js-modal-avatars">
+                            ${assigneeHtml}
+                        </div>
+                        <button type="button" class="btn-icon btn-add-assignees u-ml-sm js-edit-assignees" title="Edit Assignees">
+                          <i class="fa-solid fa-user-plus field-icon "></i>
                         </button>
                     </div>
-                </div>
             </div>
         </div>
     `;
