@@ -1,14 +1,13 @@
-// src/features/task/task.manager.js
-
 /**
  * Task Manager
  * Orchestrates the task detail modal interactions and updates
  */
 
-import { getTaskById, updateTaskLocally, deleteTaskLocally, addSubtask, removeSubtask, updateSubtaskTitle } from './task.service.js';
+import { getTaskById, updateTaskLocally, deleteTaskLocally } from './task.service.js';
+import { SubtaskManager } from './subtask.manager.js';
 import { openModal, closeModal } from '../../shared/components/modal.js';
 import { createTaskDetailCardHtml, createConfirmDeleteTaskHtml } from './task.template.js';
-import { getTaskDataFromModal, generateAvatarsHtml, getSubtaskChangeData, toggleSubtaskVisuals } from '../board/board.utils.js';
+import { getTaskDataFromModal, generateAvatarsHtml } from '../board/board.utils.js';
 import { handleAsyncButtonAction } from '../../shared/utils/ui-helpers.js';
 import { UI_TASK_BUTTON_TEXT } from '../../shared/utils/constants.js';
 
@@ -23,7 +22,7 @@ export class TaskManager {
     }
 
     /* ==========================================================================
-       MODAL INITIALIZATION
+       PUBLIC API / MODAL CONTROL
        ========================================================================== */
 
     /**
@@ -41,8 +40,18 @@ export class TaskManager {
         this.activateModalInteractions(taskId);
     }
 
+    /**
+     * @description Refreshes the task UI by reopening the task detail and triggering an update.
+     * @param {string} taskId - The ID of the task
+     * @memberof TaskManager
+     */
+    refreshTaskUI(taskId) {
+        this.openTaskDetail(taskId);
+        if (this.onUpdate) this.onUpdate();
+    }
+
     /* ==========================================================================
-       EVENT LISTENERS MODAL
+       INTERACTION REGISTRATION
        ========================================================================== */
 
     /**
@@ -52,10 +61,15 @@ export class TaskManager {
      */
     activateModalInteractions(taskId) {
         this.registerActionButtons(taskId);
-        this.registerSubtaskToggles(taskId);
         this.registerFieldBehaviors(taskId);
         this.registerPrioritySelector();
-        this.registerSubtaskActions(taskId);
+
+        this.subtaskManager = new SubtaskManager(
+            taskId,
+            this.onUpdate,
+            (id) => this.refreshTaskUI(id)
+        );
+        this.subtaskManager.init();
     }
 
     /**
@@ -101,107 +115,22 @@ export class TaskManager {
     }
 
     /**
-     * @description Registers change listeners for subtask toggle checkboxes.
-     * @param {string} taskId - The ID of the task
-     * @memberof TaskManager
-     */
-    registerSubtaskToggles(taskId) {
-        document.querySelectorAll('.js-subtask-toggle').forEach(checkbox => {
-            checkbox.addEventListener('change', (event) => this.handleSubtaskChange(event, taskId));
-        });
-    }
-
-    /**
      * @description Registers keyboard listeners for input fields (e.g., title).
      * @param {string} taskId - The ID of the task
      * @memberof TaskManager
      */
     registerFieldBehaviors(taskId) {
         const titleField = document.querySelector('[data-field="title"]');
-        titleField?.addEventListener('keydown', (event) => event.key === 'Enter' && (event.preventDefault() || event.target.blur()));
-    }
-
-    /**
-    * @description Registers click listeners for subtask add, delete, and edit actions.
-    * @param {string} taskId - The ID of the task
-    * @memberof TaskManager
-    */
-    registerSubtaskActions(taskId) {
-        const addBtn = document.querySelector('.js-add-subtask-btn');
-        addBtn?.addEventListener('click', () => this.handleSubtaskAdd(taskId));
-
-        document.querySelectorAll('.js-delete-subtask').forEach(btn => {
-            btn.addEventListener('click', (event) => this.handleSubtaskDelete(event, taskId, btn.dataset.index));
-        });
-
-        document.querySelectorAll('.js-subtask-text').forEach(span => {
-            span.onblur = () => this.handleSubtaskTitleEdit(taskId, span.dataset.index, span.innerText);
-            span.onkeydown = (event) => {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                    span.blur();
-                }
-            };
+        titleField?.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                event.target.blur();
+            }
         });
     }
 
     /* ==========================================================================
-       SUBTASK HANDLERS
-       ========================================================================== */
-
-    /**
-     * @description Handles the addition of a new subtask.
-     * @param {string} taskId - The ID of the task
-     * @memberof TaskManager
-     */
-    handleSubtaskAdd(taskId) {
-        addSubtask(taskId);
-        this.refreshTaskUI(taskId);
-
-        setTimeout(() => {
-            const texts = document.querySelectorAll('.js-subtask-text');
-            texts[texts.length - 1]?.focus();
-        }, 50);
-    }
-
-    /**
-     * @description Handles the deletion of a subtask.
-     * @param {Event} event - The event object
-     * @param {string} taskId - The ID of the task
-     * @param {number} index - The index of the subtask
-     * @memberof TaskManager
-     */
-    handleSubtaskDelete(event, taskId, index) {
-        event.stopPropagation();
-        removeSubtask(taskId, index);
-        this.refreshTaskUI(taskId);
-    }
-
-    /**
-     * @description Handles the editing of a subtask title.
-     * @param {string} taskId - The ID of the task
-     * @param {number} index - The index of the subtask
-     * @param {string} newTitle - The new title of the subtask
-     * @memberof TaskManager
-     */
-    handleSubtaskTitleEdit(taskId, index, newTitle) {
-        const cleanedTitle = newTitle.trim();
-        updateSubtaskTitle(taskId, index, cleanedTitle);
-        if (this.onUpdate) this.onUpdate();
-    }
-
-    /**
-     * @description Refreshes the task UI by reopening the task detail and triggering an update.
-     * @param {string} taskId - The ID of the task
-     * @memberof TaskManager
-     */
-    refreshTaskUI(taskId) {
-        this.openTaskDetail(taskId);
-        if (this.onUpdate) this.onUpdate();
-    }
-
-    /* ==========================================================================
-       TASK ACTIONS - SAVE & UPDATE
+       TASK ACTIONS SAVE / DELETE / UPDATE
        ========================================================================== */
 
     /**
@@ -224,59 +153,23 @@ export class TaskManager {
     }
 
     /**
-     * @description Handles the change event for a subtask checkbox.
-     * @param {Event} event - The event object
+     * @description Initiates the delete process by showing a confirmation dialog.
      * @param {string} taskId - The ID of the task
-     * @return {void}
      * @memberof TaskManager
      */
-    handleSubtaskChange(event, taskId) {
-        const checkbox = event.target;
-        const item = checkbox.closest('.subtask-item');
-        const textSpan = item.querySelector('.js-subtask-text');
-
-        if (!this.canToggleSubtask(textSpan)) {
-            checkbox.checked = false;
-            textSpan.focus();
-            return;
-        }
-
-        const isDone = checkbox.checked;
-        const index = checkbox.dataset.index;
-        this.updateSubtaskState(taskId, index, isDone);
-
-        textSpan.classList.toggle('is-done', isDone);
-        if (this.onUpdate) this.onUpdate();
-    }
-
-    /**
-     * @description Updates the state of a subtask.
-     * @param {string} taskId - The ID of the task
-     * @param {number} index - The index of the subtask
-     * @param {boolean} isDone - The new state of the subtask
-     * @memberof TaskManager
-     */
-    updateSubtaskState(taskId, index, isDone) {
+    handleDeleteTask(taskId) {
         const task = getTaskById(taskId);
-        if (task?.subtasks[index]) {
-            task.subtasks[index].done = isDone;
-            updateTaskLocally(taskId, { subtasks: task.subtasks });
-        }
-    }
+        const taskTitle = task ? task.title : "this task";
 
-    /**
-     * @description Checks if a subtask can be toggled based on its text content.
-     * @param {HTMLElement} textSpan - The span element containing the subtask text
-     * @return {boolean} - True if the subtask can be toggled, false otherwise
-     * @memberof TaskManager
-     */
-    canToggleSubtask(textSpan) {
-        return textSpan.innerText.trim().length > 0;
+        this.showConfirmDeleteTaskDialog(
+            "Delete Task?",
+            taskTitle,
+            () => {
+                deleteTaskLocally(taskId);
+                if (this.onUpdate) this.onUpdate();
+            }
+        );
     }
-
-    /* ==========================================================================
-       DELETE TASK 
-       ========================================================================== */
 
     /**
      * @description Shows a confirmation dialog before deleting a task.
@@ -302,28 +195,6 @@ export class TaskManager {
         }, 200);
     }
 
-    /**
-         * @description Initiates the delete process by showing a confirmation dialog.
-         * @param {string} taskId 
-         * @memberof TaskManager
-         */
-    handleDeleteTask(taskId) {
-        const task = getTaskById(taskId);
-        const taskTitle = task ? task.title : "this task";
-
-        this.showConfirmDeleteTaskDialog(
-            "Delete Task?",
-            taskTitle,
-            () => {
-                deleteTaskLocally(taskId);
-                if (this.onUpdate) this.onUpdate();
-            }
-        );
-    }
-
-    /* ==========================================================================
-       UPDATE PRIORITY UI
-       ========================================================================== */
     /**
      * @description Updates the priority UI elements based on the given priority.
      * @param {string} priority - The priority level (e.g., "low", "medium", "high")
