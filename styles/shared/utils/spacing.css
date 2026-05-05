@@ -18,6 +18,10 @@
   padding-left: var(--space-sm);
 }
 
+.u-pr-sm {
+  padding-right: var(--space-sm);
+}
+
 .u-pl-xs {
   padding-left: var(--space-xs);
 }
