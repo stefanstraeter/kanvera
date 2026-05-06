@@ -53,6 +53,18 @@
   color: var(--color-medium-grey);
 }
 
+.field-input.task-textarea {
+  height: auto;
+  resize: vertical;
+  min-height: 2rem;
+}
+
+.field-wrapper:has(textarea) .field-group {
+  height: auto;
+  align-items: flex-start;
+  padding: var(--space-md);
+}
+
 /* ==========================================================================
    FIELD ICON
    ========================================================================== */
