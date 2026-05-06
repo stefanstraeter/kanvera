@@ -1,4 +1,6 @@
 import { getState, convertToArrayList, saveToCache } from '../../core/state.js';
+import { toggleError, validateNotEmpty, attachLiveValidation } from '../../shared/utils/input-validation.js';
+import { VALIDATION_ERRORS } from '../../shared/utils/constants.js';
 
 /* ==========================================================================
    SORTING HELPERS FOR TASKS
@@ -17,9 +19,7 @@ const sortByUpdatedDate = (a, b) => (a.updatedAt || 0) - (b.updatedAt || 0);
  * @return {Array} An array of task objects.
  */
 export function getAllTasks() {
-    const state = getState();
-
-    return convertToArrayList(state.tasks);
+    return convertToArrayList(getState().tasks);
 }
 
 /**
@@ -37,15 +37,13 @@ export function getTasksByCategory(category) {
 }
 
 /**
- * @description Gets the details of a task based on its ID.
+ * @description Retrieves a task by its ID.
  * @export
  * @param {string} taskId - The ID of the task to retrieve.
  * @return {Object|null} The task object if found, otherwise null.
  */
 export function getTaskById(taskId) {
-    const state = getState();
-
-    return state.tasks[taskId] || null;
+    return getState().tasks[taskId] || null;
 }
 
 /**
@@ -72,21 +70,19 @@ export function resolveMemberDetails(memberIds) {
 /**
  * @description Updates the category of a task and marks all subtasks as done if the new category is "done".
  * @export
- * @param {string} taskId - The ID of the task to update.
- * @param {string} newCategory - The new category to assign to the task.
- * @return {void}
+ * @param {string} taskId
+ * @param {string} newCategory
+ * @return {void} 
  */
 export function updateTaskCategory(taskId, newCategory) {
-    const state = getState();
-    const task = state.tasks[taskId];
-
+    const task = getTaskOrWarn(taskId);
     if (!task) return;
 
     task.category = newCategory;
     task.updatedAt = Date.now();
 
-    if (newCategory === 'done' && task.subtasks) {
-        task.subtasks.forEach(st => st.done = true);
+    if (newCategory === 'done') {
+        completeAllSubtasks(task);
     }
     saveToCache();
 }
@@ -100,13 +96,12 @@ export function updateTaskCategory(taskId, newCategory) {
  */
 export function updateTaskLocally(taskId, updatedData) {
     const state = getState();
-    const currentTask = state.tasks[taskId];
-
-    if (!currentTask) return;
+    if (!state.tasks[taskId]) return;
 
     state.tasks[taskId] = {
-        ...currentTask,
-        ...updatedData
+        ...state.tasks[taskId],
+        ...updatedData,
+        updatedAt: Date.now()
     };
     saveToCache();
 }
@@ -125,6 +120,20 @@ export function deleteTaskLocally(taskId) {
     }
 }
 
+/**
+ * @description Adds a completely new task to the state.
+ * @export
+ * @param {string} taskId - The new unique ID.
+ * @param {Object} taskData - The full task object.
+ */
+export function createTaskLocally(taskId, taskData) {
+    const state = getState();
+
+    state.tasks[taskId] = taskData;
+    saveToCache();
+}
+
+
 /* ==========================================================================
    SUBTASKS SERVICE
    ========================================================================== */
@@ -137,12 +146,11 @@ export function deleteTaskLocally(taskId) {
  * @return {void}
  */
 export function addSubtask(taskId, title = "") {
-    const state = getState();
-    const task = state.tasks[taskId];
-
+    const task = getTaskOrWarn(taskId);
     if (!task) return;
 
     if (!task.subtasks) task.subtasks = [];
+
     task.subtasks.push({ title, done: false });
     saveToCache();
 }
@@ -155,9 +163,7 @@ export function addSubtask(taskId, title = "") {
  * @return {void}
  */
 export function removeSubtask(taskId, index) {
-    const state = getState();
-    const task = state.tasks[taskId];
-
+    const task = getTaskOrWarn(taskId);
     if (!task || !task.subtasks) return;
 
     task.subtasks.splice(index, 1);
@@ -180,4 +186,62 @@ export function updateSubtaskTitle(taskId, index, newTitle) {
 
     task.subtasks[index].title = newTitle;
     saveToCache();
+}
+
+/* ==========================================================================
+    VALIDATION & LIVE LISTENERS FOR ADD TASK FORM
+   ========================================================================== */
+
+/**
+ * @description Initializes live validation for the add task form.
+ * @export
+ * @return {void} 
+ */
+export function initAddTaskValidation() {
+    const form = document.getElementById('js-add-task-form');
+    if (!form) return;
+
+    const titleInput = form.querySelector('input[name="title"]');
+
+    attachLiveValidation(titleInput, validateNotEmpty, VALIDATION_ERRORS.FIELD_REQUIRED);
+}
+
+/**
+ * @description Validates the add task form.
+ * @export
+ * @param {HTMLFormElement} form - The form element to validate.
+ * @return {boolean} - Returns true if the form is valid, false otherwise.
+ */
+export function validateTaskForm(form) {
+    const titleInput = form.querySelector('input[name="title"]');
+    const isValid = validateNotEmpty(titleInput.value);
+
+    toggleError(titleInput, isValid, VALIDATION_ERRORS.FIELD_REQUIRED);
+
+    return isValid;
+}
+
+/* ==========================================================================
+   PRIVATE HELPERS
+   ========================================================================== */
+
+/**
+ * @description Retrieves a task by its ID.
+ * @param {string} taskId - The ID of the task to retrieve.
+ * @return {Object|null} The task object if found, otherwise null.
+ */
+function getTaskOrWarn(taskId) {
+    const task = getState().tasks[taskId];
+    return task;
+}
+
+/**
+ * @description Marks all subtasks of a task as done.
+ * @param {Object} task - The task object whose subtasks should be marked as done.
+ * @return {void}
+ */
+function completeAllSubtasks(task) {
+    if (task.subtasks) {
+        task.subtasks.forEach(st => st.done = true);
+    }
 }
