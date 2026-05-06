@@ -1,16 +1,8 @@
-// src/features/team/team.manager.js
-
-/**
- * Team Manager
- * Orchestrates the team page rendering and delegates member actions to MemberManager.
- */
-
 import { getAllTeamMembers } from './team.service.js';
 import { showTeamWrapper } from './team.utils.js';
 import { getInitials } from '../../shared/utils/ui-helpers.js';
 import { createMemberCardHtml } from '../member/member.template.js';
 import { MemberManager } from '../member/member.manager.js';
-
 
 /**
  * @description Page class for managing the team view and member grid.
@@ -24,7 +16,7 @@ export class TeamManager {
     }
 
     /**
-     * @description Initializes the team page by rendering the grid and attaching events.
+     * @description Initializes the team manager by rendering the grid and setting up event listeners.
      * @memberof TeamManager
      */
     init() {
@@ -34,11 +26,12 @@ export class TeamManager {
     }
 
     /* ==========================================================================
-       RENDERING TEAM GRID
+       RENDERING
        ========================================================================== */
 
     /**
-     * @description Renders the team grid by generating HTML for each member card.
+     * @description Renders the team grid by fetching members and updating the DOM.
+     * @return {void} 
      * @memberof TeamManager
      */
     renderTeamGrid() {
@@ -46,23 +39,41 @@ export class TeamManager {
         if (!gridElement) return;
 
         const teamMembers = getAllTeamMembers();
-
-        gridElement.innerHTML = teamMembers.map(member => {
-            const initials = getInitials(member.name);
-            const displayRole = Array.isArray(member.roles) ? member.roles[0] : member.roles;
-            return createMemberCardHtml(member, initials, displayRole);
-        }).join('');
-
+        this.updateGridContent(gridElement, teamMembers);
         this.setupAvatarFallbacks(gridElement);
     }
 
-    /* ==========================================================================
-       AVATAR INITIALIZATION & FALLBACKS
-       ========================================================================== */
+    /**
+     * @description Updates the grid content with member cards based on the provided members array.
+     * @param {*} gridElement - The DOM element representing the team grid.
+     * @param {*} members - An array of team member objects to display in the grid.
+     * @memberof TeamManager
+     */
+    updateGridContent(gridElement, members) {
+        gridElement.innerHTML = members.map(member => {
+            const initials = getInitials(member.name);
+            const role = this.getFirstRole(member.roles);
+            return createMemberCardHtml(member, initials, role);
+        }).join('');
+    }
 
     /**
-     * @description Scans for avatar images and initializes loading fallbacks.
-     * @param {HTMLElement} scope - The container to search within.
+     * @description
+     * @param {*} roles
+     * @return {*} 
+     * @memberof TeamManager
+     */
+    getFirstRole(roles) {
+        return Array.isArray(roles) ? roles[0] : roles;
+    }
+
+    /* ==========================================================================
+       AVATAR LOGIC UI Task
+       ========================================================================= */
+
+    /**
+     * @description Sets up avatar image loading with fallbacks for all avatar images within the given scope.
+     * @param {HTMLElement} scope - The DOM element within which to search for avatar images.
      * @memberof TeamManager
      */
     setupAvatarFallbacks(scope) {
@@ -71,64 +82,103 @@ export class TeamManager {
     }
 
     /**
-     * @description Handles the visual toggle between avatar image and initials placeholder.
-     * @param {HTMLImageElement} img - The image element to monitor.
+     * @description Initializes avatar image loading by checking if the image is already loaded or setting up event listeners for load and error events.
+     * @param {HTMLImageElement} img - The avatar image element to initialize.
+     * @return {void} 
      * @memberof TeamManager
      */
     initAvatarLoading(img) {
         const placeholder = img.parentElement?.querySelector('[data-avatar-placeholder]');
         if (!placeholder) return;
 
-        const toggleUI = (isLoaded) => {
-            img.classList.toggle('team-card__avatar-image--hidden', !isLoaded);
-            placeholder.classList.toggle('team-card__avatar-placeholder--hidden', isLoaded);
-        };
-
-        toggleUI(false);
-
         if (img.complete && img.naturalWidth > 0) {
-            return toggleUI(true);
+            this.showAvatarImage(img, placeholder);
+            return;
         }
+        this.bindAvatarLoadEvents(img, placeholder);
+    }
 
-        img.addEventListener('load', () => toggleUI(true), { once: true });
-        img.addEventListener('error', () => toggleUI(false), { once: true });
+    /**
+     * @description Binds load and error events to the avatar image to handle displaying the image or fallback placeholder.
+     * @param {HTMLImageElement} img - The avatar image element.
+     * @param {HTMLElement} placeholder - The placeholder element to show if the image fails to load.
+     * @memberof TeamManager
+     */
+    bindAvatarLoadEvents(img, placeholder) {
+        img.addEventListener('load', () => this.showAvatarImage(img, placeholder), { once: true });
+        img.addEventListener('error', () => this.showPlaceholder(img, placeholder), { once: true });
+    }
+
+    /**
+     * @description Shows the avatar image and hides the placeholder when the image loads successfully.
+     * @param {HTMLImageElement} img - The avatar image element.
+     * @param {HTMLElement} placeholder - The placeholder element to hide when the image loads.
+     * @memberof TeamManager
+     */
+    showAvatarImage(img, placeholder) {
+        img.classList.remove('team-card__avatar-image--hidden');
+        placeholder.classList.add('team-card__avatar-placeholder--hidden');
+    }
+
+    /**
+     * @description Shows the placeholder and hides the avatar image when the image fails to load.
+     * @param {HTMLImageElement} img - The avatar image element.
+     * @param {HTMLElement} placeholder - The placeholder element to show when the image fails to load.
+     * @memberof TeamManager
+     */
+    showPlaceholder(img, placeholder) {
+        img.classList.add('team-card__avatar-image--hidden');
+        placeholder.classList.remove('team-card__avatar-placeholder--hidden');
     }
 
     /* ==========================================================================
-       EVENT LISTENERS
+       EVENT LISTENERS 
        ========================================================================== */
 
     /**
-     * @description Initializes event listeners for the team page, including member card interactions and header actions.
+     * @description Initializes event listeners for the team grid and header actions.
      * @memberof TeamManager
      */
     initEventListeners() {
-        this.registerGridInteractions();
+        this.registerGridClicks();
         this.registerHeaderActions();
     }
 
     /**
-     * @description Registers interactions for the team grid (event delegation).
+     * @description Registers click event listeners on the team grid to handle clicks on member cards while ignoring clicks on links.
      * @memberof TeamManager
      */
-    registerGridInteractions() {
+    registerGridClicks() {
         const grid = document.getElementById(this.gridId);
-        if (!grid) return;
+        grid?.addEventListener('click', (event) => this.handleGridClick(event));
+    }
 
-        grid.addEventListener('click', (event) => {
-            // Ignoriere Klicks auf Links (Email/Telefon)
-            if (event.target.closest('a')) return;
 
-            const card = event.target.closest('.team-card--clickable');
-            if (card) {
-                const memberId = card.dataset.id;
-                this.memberManager.handleEditClick(memberId);
-            }
-        });
+    /**
+     * @description Handles click events on the grid, checking for links and clickable cards.
+     * @param {MouseEvent} event - The click event.
+     * @memberof TeamManager
+     */
+    handleGridClick(event) {
+        if (event.target.closest('a')) return;
+
+        const card = event.target.closest('.team-card--clickable');
+        if (card) {
+            this.processEditAction(card.dataset.id);
+        }
     }
 
     /**
-     * @description Registers global actions such as the "Add Member" button.
+     * @description Processes the edit action for a team member.
+     * @param {string} memberId - The ID of the member to edit.
+     * @memberof TeamManager
+     */
+    processEditAction(memberId) {
+        this.memberManager.handleEditClick(memberId);
+    }
+
+    /**
+     * @description Registers click event listeners for header actions, such as adding a new team member.
      * @memberof TeamManager
      */
     registerHeaderActions() {
