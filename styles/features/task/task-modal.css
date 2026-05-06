@@ -37,7 +37,7 @@
   position: relative;
   cursor: pointer;
   width: 100%;
-  min-height: 40px;
+  min-height: 2.5rem;
   font-size: var(--font-size-body-l);
 }
 
