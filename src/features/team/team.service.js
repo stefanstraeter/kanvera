@@ -23,6 +23,7 @@ export function getAllTeamMembers() {
     const state = getState();
     const currentUser = getCurrentUser();
     let members = convertToArrayList(state.team);
+
     if (!currentUser) return members;
 
     const isAlreadyInList = members.some(m => m.email === currentUser.email);
