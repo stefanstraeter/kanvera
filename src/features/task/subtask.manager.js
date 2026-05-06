@@ -1,7 +1,3 @@
-/**
- * Subtask Manager
- * Handles all interactions and state updates for subtasks
- */
 import { addSubtask, removeSubtask, updateSubtaskTitle, getTaskById, updateTaskLocally } from './task.service.js';
 
 /**
