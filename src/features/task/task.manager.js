@@ -1,8 +1,9 @@
-import { getTaskById, updateTaskLocally, deleteTaskLocally } from './task.service.js';
 import { SubtaskManager } from './subtask.manager.js';
 import { AssigneeManager } from './assignee.manager.js';
+import { PriorityManager } from './priority.manager.js';
+import { getTaskById, updateTaskLocally, deleteTaskLocally, initAddTaskValidation, validateTaskForm } from './task.service.js';
 import { openModal, closeModal } from '../../shared/components/modal.js';
-import { createTaskDetailCardHtml, createConfirmDeleteTaskHtml } from './task.template.js';
+import { createTaskDetailCardHtml, createConfirmDeleteTaskHtml, createAddTaskModalHtml } from './task.template.js';
 import { getTaskDataFromModal, generateAvatarsHtml } from '../board/board.utils.js';
 import { handleAsyncButtonAction } from '../../shared/utils/ui-helpers.js';
 import { UI_TASK_BUTTON_TEXT } from '../../shared/utils/constants.js';
@@ -14,6 +15,7 @@ import { UI_TASK_BUTTON_TEXT } from '../../shared/utils/constants.js';
 export class TaskManager {
     constructor(onUpdateCallback) {
         this.onUpdate = onUpdateCallback;
+        this.priorityManager = new PriorityManager('js-priority-input-edit');
     }
 
     /* ==========================================================================
@@ -84,8 +86,8 @@ export class TaskManager {
      */
     registerInteractions(taskId) {
         this.registerButtons(taskId);
-        this.registerPrioritySelector();
         this.registerFieldInputs();
+        this.priorityManager.init();
     }
 
     /**
@@ -168,7 +170,6 @@ export class TaskManager {
        CORE ACTIONS SAVE / DELETE
        ========================================================================== */
 
-
     /**
      * @description Saves the task with the given ID.
      * @param {string} taskId - The ID of the task to save.
@@ -190,9 +191,11 @@ export class TaskManager {
     async processSave(taskId) {
         await new Promise(resolve => setTimeout(resolve, 1500));
 
+        const currentPriority = document.querySelector('.js-priority-toggle')?.dataset.priority;
         const updatedData = getTaskDataFromModal();
-        updateTaskLocally(taskId, updatedData);
 
+        updatedData.priority = currentPriority;
+        updateTaskLocally(taskId, updatedData);
         closeModal();
         this.notifyUpdate();
     }
@@ -204,7 +207,7 @@ export class TaskManager {
      */
     initiateDeletion(taskId) {
         const task = getTaskById(taskId);
-        const title = task?.title || "this task";
+        const title = task?.title;
 
         this.showConfirmDeleteDialog(title, () => this.processDeletion(taskId));
     }
@@ -218,6 +221,7 @@ export class TaskManager {
         deleteTaskLocally(taskId);
         this.notifyUpdate();
     }
+
 
     /* ==========================================================================
        UI HELPERS
