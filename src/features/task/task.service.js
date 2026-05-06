@@ -1,5 +1,5 @@
 import { getState, convertToArrayList, saveToCache } from '../../core/state.js';
-import { toggleError, validateNotEmpty, attachLiveValidation } from '../../shared/utils/input-validation.js';
+import { toggleError, validateNotEmpty, attachLiveValidation, validateNotPastDate } from '../../shared/utils/input-validation.js';
 import { VALIDATION_ERRORS } from '../../shared/utils/constants.js';
 
 /* ==========================================================================
@@ -193,20 +193,6 @@ export function updateSubtaskTitle(taskId, index, newTitle) {
    ========================================================================== */
 
 /**
- * @description Initializes live validation for the add task form.
- * @export
- * @return {void} 
- */
-export function initAddTaskValidation() {
-    const form = document.getElementById('js-add-task-form');
-    if (!form) return;
-
-    const titleInput = form.querySelector('input[name="title"]');
-
-    attachLiveValidation(titleInput, validateNotEmpty, VALIDATION_ERRORS.FIELD_REQUIRED);
-}
-
-/**
  * @description Validates the add task form.
  * @export
  * @param {HTMLFormElement} form - The form element to validate.
@@ -214,12 +200,58 @@ export function initAddTaskValidation() {
  */
 export function validateTaskForm(form) {
     const titleInput = form.querySelector('input[name="title"]');
-    const isValid = validateNotEmpty(titleInput.value);
+    const dateInput = form.querySelector('input[name="dueDate"]');
+    const isTitleValid = validateNotEmpty(titleInput.value);
 
-    toggleError(titleInput, isValid, VALIDATION_ERRORS.FIELD_REQUIRED);
+    toggleError(titleInput, isTitleValid, VALIDATION_ERRORS.TITLE_REQUIRED);
 
-    return isValid;
+    const dateErrorMessage = getDateErrorMessage(dateInput.value);
+    const isDateValid = dateErrorMessage === "";
+    toggleError(dateInput, isDateValid, dateErrorMessage);
+
+    return isTitleValid && isDateValid;
 }
+
+/**
+ * @description Generates an error message for the due date input if the date is invalid. 
+ * @export
+ * @return {string} - An error message if the date is invalid, or an empty string if the date is valid.
+ */
+export function initAddTaskValidation() {
+    const form = document.getElementById('js-add-task-form');
+    if (!form) return;
+
+    const titleInput = form.querySelector('input[name="title"]');
+    const dateInput = form.querySelector('input[name="dueDate"]');
+
+    attachLiveValidation(titleInput, validateNotEmpty, VALIDATION_ERRORS.TITLE_REQUIRED);
+
+    attachLiveValidation(
+        dateInput,
+        (val) => getDateErrorMessage(val) === "",
+        VALIDATION_ERRORS.DATE_INVALID
+    );
+}
+
+/* ==========================================================================
+    VALIDATION HELPERS FOR ADD TASK FORM
+   ========================================================================== */
+
+/**
+ * @description Checks if the due date is valid and returns an appropriate error message if it is not.
+ * @param {string} value - The value of the due date input to validate.
+ * @return {string} An error message if the date is invalid, or an empty string if the date is valid.
+ */
+function getDateErrorMessage(value) {
+    if (!validateNotEmpty(value)) {
+        return VALIDATION_ERRORS.DATE_EMPTY;
+    }
+    if (!validateNotPastDate(value)) {
+        return VALIDATION_ERRORS.DATE_INVALID;
+    }
+    return "";
+}
+
 
 /* ==========================================================================
    PRIVATE HELPERS
