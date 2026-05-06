@@ -92,7 +92,10 @@ export const VALIDATION_ERRORS = {
     FIELD_REQUIRED: "This field is required.",
     FULL_NAME: "Please enter a full name.",
     EMAIL_INVALID: "Please enter a valid email.",
-    PHONE_INVALID: "Please check the phone number."
+    PHONE_INVALID: "Please check the phone number.",
+    TITLE_REQUIRED: "Please enter a title.",
+    DATE_EMPTY: "Please select a date.",
+    DATE_INVALID: "Date cannot be in the past."
 };
 
 /* ==========================================================================
