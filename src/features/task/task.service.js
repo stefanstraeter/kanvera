@@ -1,10 +1,3 @@
-// src/features/task/task.service.js
-
-/**
- * Task Service
- * Handles all task CRUD operations and state management
- */
-
 import { getState, convertToArrayList, saveToCache } from '../../core/state.js';
 
 /* ==========================================================================
@@ -146,6 +139,7 @@ export function deleteTaskLocally(taskId) {
 export function addSubtask(taskId, title = "") {
     const state = getState();
     const task = state.tasks[taskId];
+
     if (!task) return;
 
     if (!task.subtasks) task.subtasks = [];
@@ -163,6 +157,7 @@ export function addSubtask(taskId, title = "") {
 export function removeSubtask(taskId, index) {
     const state = getState();
     const task = state.tasks[taskId];
+
     if (!task || !task.subtasks) return;
 
     task.subtasks.splice(index, 1);
@@ -180,6 +175,7 @@ export function removeSubtask(taskId, index) {
 export function updateSubtaskTitle(taskId, index, newTitle) {
     const state = getState();
     const task = state.tasks[taskId];
+
     if (!task || !task.subtasks[index]) return;
 
     task.subtasks[index].title = newTitle;
