@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TEMPLATES FOR TASK DETAIL MODAL - EDIT
+   TEMPLATES FOR TASK MODAL - DETAIL & EDIT
    ========================================================================== */
 
 /**
@@ -30,7 +30,7 @@ export const createTaskDetailCardHtml = (task, assigneeHtml) => {
                 <div class="inline-field">
                     <div class="inline-edit-wrapper">
                         <label class="modal-label">Priority</label>
-                        ${renderPrioritySelector(task.priority)}
+                        ${renderPrioritySelector(task.priority, false)}
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@ export const createTaskDetailCardHtml = (task, assigneeHtml) => {
 
 
 /* ==========================================================================
-   SUB-TEMPLATES PRIORITY SELECTOR, ASSIGNEES, SUBTASKS
+   SUB-TEMPLATES HEADER
    ========================================================================== */
 
 /**
@@ -99,28 +99,68 @@ function renderHeaderSection(task) {
     `;
 }
 
-
+/* ==========================================================================
+   SUB-TEMPLATES PRIORITY SELECTOR
+   ========================================================================== */
 /**
- * @description Renders the priority selector for the task detail modal.
- * @param {string} currentPriority - The current priority of the task
- * @return {string} HTML string representing the priority selector
+ * @description Renders the priority selector component for the task detail modal, allowing users to view and change the priority of the task.
+ * @param {string} currentPriority - The current priority value of the task
+ * @param {boolean} [isFormStyle=false] - Flag to determine if the selector is rendered in form style (with caret) or inline style
+ * @return {string} HTML string representing the priority selector component
  */
-function renderPrioritySelector(currentPriority) {
+function renderPrioritySelector(currentPriority, isFormStyle = false) {
+    let styleClass = 'priority-select--inline';
+    let inputId = 'js-priority-input-edit';
+    let caretHtml = '';
+
+    if (isFormStyle) {
+        styleClass = 'priority-select--form';
+        inputId = 'js-priority-input';
+        caretHtml = '<span class="priority-caret"><i class="fa-solid fa-caret-down"></i></span>';
+    }
+
     return `
-        <div class="priority-select-container">
-            <div class="priority-display js-priority-toggle" data-priority="${currentPriority}">
-                <span class="priority-text">${currentPriority}</span>
-                <img src="assets/icons/priority/${currentPriority}.svg" alt="" class="priority-icon">
+        <div class="priority-select-container ${styleClass}">
+            <input type="hidden" name="priority" id="${inputId}" value="${currentPriority}">
+            
+            <div class="js-priority-toggle priority-trigger priority--${currentPriority}" 
+                 data-priority="${currentPriority}">
+                
+                <div class="priority-content">
+                    <img src="assets/icons/priority/${currentPriority}.svg" alt="" class="priority-icon">
+                    <span class="priority-text">${currentPriority}</span>
+                </div>
+                
+                ${caretHtml}
             </div>
+            
             <div class="priority-options-menu is-hidden js-priority-menu">
-                <div class="priority-option" data-value="low">Low <img src="assets/icons/priority/low.svg" alt="" class="priority-icon"></div>
-                <div class="priority-option" data-value="medium">Medium <img src="assets/icons/priority/medium.svg" alt="" class="priority-icon"></div>
-                <div class="priority-option" data-value="urgent">Urgent <img src="assets/icons/priority/urgent.svg" alt="" class="priority-icon"></div>
+                ${renderOption('low')}
+                ${renderOption('medium')}
+                ${renderOption('urgent')}
             </div>
         </div>
     `;
 }
 
+/**
+ * @description Renders a single priority option for the priority selector component.
+ * @param {string} value - The priority value (e.g., 'low', 'medium', 'urgent')
+ * @return {string} HTML string representing the priority option
+ */
+function renderOption(value) {
+    const label = value.charAt(0).toUpperCase() + value.slice(1);
+
+    return `
+        <div class="priority-option" data-value="${value}">
+            <img src="assets/icons/priority/${value}.svg" alt=""> ${label}
+        </div>
+    `;
+}
+
+/* ==========================================================================
+   SUB-TEMPLATES ASSIGNEES
+   ========================================================================== */
 
 /**
  * @description Renders the assignee section for the task detail modal.
@@ -145,6 +185,9 @@ function renderAssigneeSection(assigneeHtml) {
     `;
 }
 
+/* ==========================================================================
+   SUB-TEMPLATES SUBTASKS
+   ========================================================================== */
 
 /**
  * @description Renders the list of subtasks for the task detail modal.
@@ -179,7 +222,7 @@ function renderSubtasksList(subtasks = [], taskId) {
 
 
 /* ==========================================================================
-   TEMPLATES FOR TASK DETAIL MODAL - DELETE
+   TEMPLATES FOR TASK MODAL - DELETE
    ========================================================================== */
 
 /**
@@ -200,7 +243,90 @@ export const createConfirmDeleteTaskHtml = (taskTitle) => {
 };
 
 
-
 /* ==========================================================================
-   TEMPLATES FOR TASK DETAIL MODAL - ADD NEW TASK
+   TEMPLATES FOR ADD/NEW TASK MODAL 
    ========================================================================== */
+
+/**
+ * @description Creates the HTML for adding a new task with full details.
+ * @param {string} assigneeOptionsHtml - Pre-rendered <option> tags for team members
+ * @return {string} HTML string
+ */
+export const createAddTaskModalHtml = (assigneeOptionsHtml) => {
+    // Wir definieren eine Standard-Priorität für den neuen Task
+    const defaultPriority = 'medium';
+
+    return `
+    <form id="js-add-task-form" class="modal-add-task" novalidate>
+        <div class="modal-inline-edit-body">
+
+            <!-- Title -->
+            <div class="field-wrapper">
+                <label class="modal-label u-mb-xs">Title</label>
+                <div class="field-group">
+                    <input type="text" name="title" class="field-input" placeholder="e.g. Design System" required>
+                </div>
+                <div class="error-msg"></div>
+            </div>
+
+            <!-- Description -->
+            <div class="field-wrapper">
+                <label class="modal-label u-mb-xs">Description</label>
+                <div class="field-group">
+                    <textarea name="description" class="field-input task-textarea" placeholder="What needs to be done?"></textarea>
+                </div>
+                 <div class="error-msg"></div>
+            </div>
+
+            <div class="field-row" style="display: flex; gap: 1rem;">
+                <div class="field-wrapper" style="flex: 1;">
+                    <label class="modal-label u-mb-xs">Due Date</label>
+                    <div class="field-group">
+                        <input type="date" name="dueDate" class="field-input" required>
+                    </div>
+                    <div class="error-msg"></div>
+                </div>
+                
+  
+                <div class="field-wrapper" style="flex: 1;">
+                    <label class="modal-label u-mb-xs">Priority</label>
+                    ${renderPrioritySelector('medium', true)}
+                </div>
+            </div>
+
+            <!-- Assignees Selection -->
+            <div class="field-wrapper u-margin-bottom-md">
+                <label class="modal-label u-mb-xs">Assignees</label>
+                <div class="field-group">
+                    <select id="js-add-task-assignee-select" class="field-input">
+                        <option value="" disabled selected>Select a member...</option>
+                        ${assigneeOptionsHtml}
+                    </select>
+                </div>
+                <!-- Container für die ausgewählten Assignee-Badges -->
+                <div id="js-temp-assignee-list" class="temp-tag-list u-mt-xs"></div>
+                <div class="error-msg"></div>
+            </div>
+
+            <!-- Subtasks Section -->
+            <div class="field-wrapper u-margin-bottom-l">
+                <label class="modal-label u-mb-xs">Subtasks</label>
+                <div class="field-group subtask-input-group" style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="js-add-subtask-input" class="field-input" placeholder="Add subtask step">
+                    <button type="button" id="js-add-subtask-btn" class="btn btn--primary" style="width: 40px">+</button>
+                </div>
+                <!-- Liste für die Subtask-Vorschau -->
+                <ul id="js-temp-subtask-list" class="subtask-preview-list u-mt-sm"></ul>
+                <div class="error-msg"></div>
+            </div>
+
+        </div>
+
+        <div class="modal__actions">
+            <button type="submit" class="btn btn--s btn--full btn--primary">Create Task</button>
+            <button type="button" class="btn btn--s btn--full btn--secondary js-close-modal">Cancel</button>
+        </div>
+    </form>
+    `;
+};
+
