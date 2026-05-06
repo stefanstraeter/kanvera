@@ -15,6 +15,7 @@ export class SubtaskManager {
         this.taskId = taskId;
         this.onUpdate = onUpdate;
         this.onRefreshUI = onRefreshUI;
+        this.localSubtasks = [];
     }
 
     /* ==========================================================================
@@ -90,8 +91,14 @@ export class SubtaskManager {
      * @memberof SubtaskManager
      */
     handleAdd() {
-        addSubtask(this.taskId);
-        this.onRefreshUI(this.taskId);
+        if (this.taskId) {
+            addSubtask(this.taskId);
+            this.onRefreshUI(this.taskId);
+        } else {
+            const newSubtask = { id: `temp-${Date.now()}`, title: '', done: false };
+            this.localSubtasks.push(newSubtask);
+            this.refreshUI();
+        }
 
         setTimeout(() => {
             const texts = document.querySelectorAll('.js-subtask-text');
@@ -107,12 +114,18 @@ export class SubtaskManager {
      */
     handleDelete(event, index) {
         event.stopPropagation();
-        this.processDeletion(index);
+        if (this.taskId) {
+            removeSubtask(this.taskId, index);
+        } else {
+            this.localSubtasks.splice(index, 1);
+        }
+        this.refreshUI();
     }
 
     /**
      * @description Internal logic to remove data and refresh UI.
      * @param {string} index - The index of the subtask to remove
+     * @memberof SubtaskManager
      */
     processDeletion(index) {
         removeSubtask(this.taskId, index);
@@ -156,8 +169,14 @@ export class SubtaskManager {
             return;
         }
 
-        this.processToggle(index, checkbox.checked);
+        if (this.taskId) {
+            this.processToggle(index, checkbox.checked);
+        } else {
+            this.localSubtasks[index].done = checkbox.checked;
+            this.refreshUI();
+        }
     }
+
     /**
      * @description Processes the toggle action for a subtask.
      * @param {string} index - The index of the subtask
@@ -183,6 +202,11 @@ export class SubtaskManager {
         return document.querySelector(`.js-subtask-text[data-index="${index}"]`);
     }
 
+    /**
+     * @description Resets the checkbox state and focuses the corresponding text span.
+     * @param {HTMLInputElement} checkbox - The checkbox element to reset
+     * @memberof SubtaskManager
+     */
     resetCheckbox(checkbox) {
         checkbox.checked = false;
         const item = checkbox.closest('.subtask-item');
