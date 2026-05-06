@@ -111,8 +111,26 @@ export class SubtaskManager {
      */
     handleDelete(event, index) {
         event.stopPropagation();
+        this.processDeletion(index);
+    }
+
+    /**
+     * @description Internal logic to remove data and refresh UI.
+     * @param {string} index - The index of the subtask to remove
+     */
+    processDeletion(index) {
         removeSubtask(this.taskId, index);
-        this.onRefreshUI(this.taskId);
+        this.refreshUI();
+    }
+
+    /**
+    * @description Simple wrapper for the UI refresh callback.
+     * @memberof SubtaskManager
+     */
+    refreshUI() {
+        if (this.onRefreshUI) {
+            this.onRefreshUI(this.taskId);
+        }
     }
 
     /**
@@ -127,28 +145,53 @@ export class SubtaskManager {
     }
 
     /**
-     * @description Handles the status toggle (done/undone) of a subtask.
-     * @param {Event} event - The event object
+     * @description Handles the toggle action for a subtask checkbox.
+     * @param {Event} event - The change event from the checkbox
+     * @return {void}
      * @memberof SubtaskManager
      */
     handleToggle(event) {
         const checkbox = event.target;
-        const item = checkbox.closest('.subtask-item');
-        const textSpan = item.querySelector('.js-subtask-text');
+        const index = checkbox.dataset.index;
+        const textSpan = this.getTextSpanByIndex(index);
 
         if (!this.canToggle(textSpan)) {
-            checkbox.checked = false;
-            textSpan.focus();
+            this.resetCheckbox(checkbox);
             return;
         }
 
-        const isDone = checkbox.checked;
-        const index = checkbox.dataset.index;
+        this.processToggle(index, checkbox.checked);
+    }
+    /**
+     * @description Processes the toggle action for a subtask.
+     * @param {string} index - The index of the subtask
+     * @param {boolean} isDone - The completion status
+     * @memberof SubtaskManager
+     */
+    processToggle(index, isDone) {
+        const task = getTaskById(this.taskId);
 
-        this.updateState(index, isDone);
-        textSpan.classList.toggle('is-done', isDone);
+        task.subtasks[index].done = isDone;
+        updateTaskLocally(this.taskId, { subtasks: task.subtasks });
 
         if (this.onUpdate) this.onUpdate();
+    }
+
+    /**
+     * @description Retrieves the text span element for a given subtask index.
+     * @param {string} index - The index of the subtask
+     * @return {HTMLElement|null} The text span element or null if not found
+     * @memberof SubtaskManager
+     */
+    getTextSpanByIndex(index) {
+        return document.querySelector(`.js-subtask-text[data-index="${index}"]`);
+    }
+
+    resetCheckbox(checkbox) {
+        checkbox.checked = false;
+        const item = checkbox.closest('.subtask-item');
+
+        item.querySelector('.js-subtask-text')?.focus();
     }
 
     /* ==========================================================================
