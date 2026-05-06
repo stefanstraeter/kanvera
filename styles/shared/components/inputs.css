@@ -9,6 +9,7 @@
   border: 1px solid var(--color-lines);
   border-radius: var(--radius-input);
   padding: 0 var(--space-md);
+  margin: 2px 0;
   transition: border-color var(--transition);
   gap: var(--space-sm);
 }
