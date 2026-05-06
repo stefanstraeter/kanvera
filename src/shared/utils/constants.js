@@ -80,7 +80,9 @@ export const UI_TASK_BUTTON_TEXT = {
     ADD_PENDING: "Adding...",
     ADD_DEFAULT: "Add Task",
     SAVE_PENDING: "Saving...",
-    SAVE_DEFAULT: "Save Changes"
+    SAVE_DEFAULT: "Save Changes",
+    CREATE_PENDING: "Creating...",
+    CREATE_DEFAULT: "Create Task"
 };
 
 /**
