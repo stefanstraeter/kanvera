@@ -1,8 +1,3 @@
-/**
- * Task Manager
- * Orchestrates the task detail modal interactions and updates
- */
-
 import { getTaskById, updateTaskLocally, deleteTaskLocally } from './task.service.js';
 import { SubtaskManager } from './subtask.manager.js';
 import { AssigneeManager } from './assignee.manager.js';
@@ -13,9 +8,8 @@ import { handleAsyncButtonAction } from '../../shared/utils/ui-helpers.js';
 import { UI_TASK_BUTTON_TEXT } from '../../shared/utils/constants.js';
 
 /**
- * @description Manager class for handling task-related operations and modal interactions.
- * @export
- * @class TaskManager
+ * @description Manager class for task modal interactions.
+ * Refactored for Single Responsibility and clear flow.
  */
 export class TaskManager {
     constructor(onUpdateCallback) {
@@ -23,32 +17,60 @@ export class TaskManager {
     }
 
     /* ==========================================================================
-       PUBLIC API / MODAL CONTROL
+       MODAL CONTROL
        ========================================================================== */
 
     /**
-     * @description Opens the task detail modal and registers all necessary event listeners.
-     * @param {string} taskId - The ID of the task to display
+     * @description Opens the task detail modal for a given task ID, initializes sub-managers and registers interactions.
+     * @param {string} taskId - The ID of the task to display in the modal.
+     * @return {void} 
      * @memberof TaskManager
      */
     openTaskDetail(taskId) {
         const task = getTaskById(taskId);
         if (!task) return;
 
-        const assigneeHtml = generateAvatarsHtml(task.assignedTo);
-        openModal(null, createTaskDetailCardHtml(task, assigneeHtml));
-
-        this.activateModalInteractions(taskId);
+        this.renderTaskModal(task);
+        this.activateSubManagers(taskId);
+        this.registerInteractions(taskId);
     }
 
     /**
-     * @description Refreshes the task UI by reopening the task detail and triggering an update.
-     * @param {string} taskId - The ID of the task
+     * @description Renders the task detail modal content based on the provided task data.
+     * @param {Object} task - The task data to display in the modal.
+     * @memberof TaskManager
+     */
+    renderTaskModal(task) {
+        const assigneeHtml = generateAvatarsHtml(task.assignedTo);
+        const modalContent = createTaskDetailCardHtml(task, assigneeHtml);
+        openModal(null, modalContent);
+    }
+
+    /**
+     * @description Refreshes the task detail modal UI, typically after updates to subtasks or assignees, by re-rendering the modal content.
+     * @param {string} taskId - The ID of the task to refresh in the modal.
      * @memberof TaskManager
      */
     refreshTaskUI(taskId) {
         this.openTaskDetail(taskId);
-        if (this.onUpdate) this.onUpdate();
+        this.notifyUpdate();
+    }
+
+    /* ==========================================================================
+       SUB-MANAGER ACTIVATION
+       ========================================================================== */
+
+    /**
+     * @description Activates sub-managers for subtasks and assignees for a given task ID.
+     * @param {string} taskId - The ID of the task for which to activate sub-managers.
+     * @memberof TaskManager
+     */
+    activateSubManagers(taskId) {
+        this.subtaskManager = new SubtaskManager(taskId, this.onUpdate, (id) => this.refreshTaskUI(id));
+        this.subtaskManager.init();
+
+        this.assigneeManager = new AssigneeManager(taskId, (id) => this.refreshTaskUI(id));
+        this.assigneeManager.init();
     }
 
     /* ==========================================================================
@@ -56,78 +78,36 @@ export class TaskManager {
        ========================================================================== */
 
     /**
-     * @description Activates all interactions within the task detail modal.
-     * @param {string} taskId - The ID of the task
+     * @description Registers interactions for the task modal, including buttons, priority selector, and field inputs.
+     * @param {string} taskId - The ID of the task for which to register interactions.
      * @memberof TaskManager
      */
-    activateModalInteractions(taskId) {
-        this.registerActionButtons(taskId);
-        this.registerFieldBehaviors(taskId);
+    registerInteractions(taskId) {
+        this.registerButtons(taskId);
         this.registerPrioritySelector();
-
-        this.subtaskManager = new SubtaskManager(
-            taskId,
-            this.onUpdate,
-            (id) => this.refreshTaskUI(id)
-        );
-        this.subtaskManager.init();
-
-        this.assigneeManager = new AssigneeManager(
-            taskId,
-            (id) => this.refreshTaskUI(id)
-        );
-        this.assigneeManager.init();
+        this.registerFieldInputs();
     }
 
     /**
-     * @description Registers click listeners for save and delete buttons.
-     * @param {string} taskId - The ID of the task
+     * @description Registers button interactions for saving and deleting tasks.
+     * @param {string} taskId - The ID of the task for which to register button interactions.
      * @memberof TaskManager
      */
-    registerActionButtons(taskId) {
+    registerButtons(taskId) {
         const saveBtn = document.querySelector('.js-save-task');
         const deleteBtn = document.querySelector('.js-delete-task');
 
         saveBtn?.addEventListener('click', () => this.saveTask(taskId));
-        deleteBtn?.addEventListener('click', () => this.handleDeleteTask(taskId));
+        deleteBtn?.addEventListener('click', () => this.initiateDeletion(taskId));
     }
 
     /**
-     * @description Registers priority selector toggle and option click listeners.
+     * @description Registers input field interactions for the task modal.
      * @memberof TaskManager
      */
-    registerPrioritySelector() {
-        const container = document.querySelector('.priority-select-container');
-        const toggle = document.querySelector('.js-priority-toggle');
-        const menu = document.querySelector('.js-priority-menu');
-        const options = document.querySelectorAll('.priority-option');
-
-        toggle?.addEventListener('click', (event) => {
-            event.stopPropagation();
-            menu?.classList.toggle('is-hidden');
-        });
-
-        options.forEach(option => {
-            option.onclick = () => {
-                this.updatePriorityUI(option.dataset.value);
-                menu?.classList.add('is-hidden');
-            };
-        });
-
-        document.onclick = (event) => {
-            if (!container?.contains(event.target)) {
-                menu?.classList.add('is-hidden');
-            }
-        };
-    }
-
-    /**
-     * @description Registers keyboard listeners for input fields (e.g., title).
-     * @param {string} taskId - The ID of the task
-     * @memberof TaskManager
-     */
-    registerFieldBehaviors(taskId) {
+    registerFieldInputs() {
         const titleField = document.querySelector('[data-field="title"]');
+
         titleField?.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault();
@@ -137,74 +117,146 @@ export class TaskManager {
     }
 
     /* ==========================================================================
-       TASK ACTIONS SAVE / DELETE / UPDATE
+       PRIORITY SELECTOR LOGIC
        ========================================================================== */
 
     /**
-     * @description Handles the saving of task changes with a loading state.
-     * @param {string} taskId - The ID of the task to save
+     * @description Registers interactions for the priority selector dropdown, including toggle behavior and option selection.  
+     * @memberof TaskManager
+     */
+    registerPrioritySelector() {
+        const toggle = document.querySelector('.js-priority-toggle');
+        const menu = document.querySelector('.js-priority-menu');
+        const options = document.querySelectorAll('.priority-option');
+
+        toggle?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menu?.classList.toggle('is-hidden');
+        });
+
+        options.forEach(opt => {
+            opt.onclick = () => this.handlePriorityChange(opt.dataset.value, menu);
+        });
+
+        this.setupPriorityOutsideClick(menu);
+    }
+
+    /**
+     * @description Handles the change of priority for a task and updates the UI accordingly.
+     * @param {string} priority - The new priority value.
+     * @param {HTMLElement} menu - The priority menu element.
+     * @memberof TaskManager
+     */
+    handlePriorityChange(priority, menu) {
+        this.updatePriorityUI(priority);
+        menu?.classList.add('is-hidden');
+    }
+
+    /**
+     * @description Sets up an outside click listener to close the priority menu when clicking outside of it.
+     * @param {HTMLElement} menu - The priority menu element.
+     * @memberof TaskManager
+     */
+    setupPriorityOutsideClick(menu) {
+        const container = document.querySelector('.priority-select-container');
+        document.onclick = (e) => {
+            if (!container?.contains(e.target)) menu?.classList.add('is-hidden');
+        };
+    }
+
+    /* ==========================================================================
+       CORE ACTIONS SAVE / DELETE
+       ========================================================================== */
+
+
+    /**
+     * @description Saves the task with the given ID.
+     * @param {string} taskId - The ID of the task to save.
      * @memberof TaskManager
      */
     async saveTask(taskId) {
         const saveBtn = document.querySelector('.js-save-task');
 
         await handleAsyncButtonAction(saveBtn, async () => {
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            const updatedData = getTaskDataFromModal();
-
-            updateTaskLocally(taskId, updatedData);
-
-            closeModal();
-            if (this.onUpdate) this.onUpdate();
+            await this.processSave(taskId);
         }, UI_TASK_BUTTON_TEXT);
     }
 
     /**
-     * @description Initiates the delete process by showing a confirmation dialog.
-     * @param {string} taskId - The ID of the task
+     * @description Processes the save action for a task.
+     * @param {string} taskId - The ID of the task to save.
      * @memberof TaskManager
      */
-    handleDeleteTask(taskId) {
-        const task = getTaskById(taskId);
-        const taskTitle = task ? task.title : "this task";
+    async processSave(taskId) {
+        await new Promise(resolve => setTimeout(resolve, 1500));
 
-        this.showConfirmDeleteTaskDialog(
-            "Delete Task?",
-            taskTitle,
-            () => {
-                deleteTaskLocally(taskId);
-                if (this.onUpdate) this.onUpdate();
-            }
-        );
+        const updatedData = getTaskDataFromModal();
+        updateTaskLocally(taskId, updatedData);
+
+        closeModal();
+        this.notifyUpdate();
     }
 
     /**
-     * @description Shows a confirmation dialog before deleting a task.
-     * @param {string} title - Modal title
-     * @param {string} taskTitle - Title of the task
-     * @param {Function} onConfirm - Callback after confirmation
+     * @description Initiates the deletion process for a task by showing a confirmation dialog.
+     * @param {string} taskId - The ID of the task to delete.
+     * @memberof TaskManager
      */
-    showConfirmDeleteTaskDialog(title, taskTitle, onConfirm) {
+    initiateDeletion(taskId) {
+        const task = getTaskById(taskId);
+        const title = task?.title || "this task";
+
+        this.showConfirmDeleteDialog(title, () => this.processDeletion(taskId));
+    }
+
+    /**
+     * @description Processes the deletion of a task.
+     * @param {string} taskId - The ID of the task to delete.
+     * @memberof TaskManager
+     */
+    processDeletion(taskId) {
+        deleteTaskLocally(taskId);
+        this.notifyUpdate();
+    }
+
+    /* ==========================================================================
+       UI HELPERS
+       ========================================================================== */
+
+    /**
+     * @description Shows a confirmation dialog for deleting a task.
+     * @param {string} taskTitle - The title of the task to delete.
+     * @param {Function} onConfirm - The callback function to execute on confirmation.
+     * @memberof TaskManager
+     */
+    showConfirmDeleteDialog(taskTitle, onConfirm) {
         closeModal();
 
         setTimeout(() => {
-            const bodyHtml = createConfirmDeleteTaskHtml(taskTitle);
-            openModal(title, bodyHtml, null);
-
-            const confirmBtn = document.querySelector('.js-confirm-delete-task-btn');
-
-            if (confirmBtn) {
-                confirmBtn.onclick = () => {
-                    onConfirm();
-                    closeModal();
-                };
-            }
+            const html = createConfirmDeleteTaskHtml(taskTitle);
+            openModal("Delete Task?", html, null);
+            this.bindConfirmDelete(onConfirm);
         }, 200);
     }
 
     /**
+     * @description Binds the confirmation button for deleting a task.
+     * @param {Function} onConfirm - The callback function to execute on confirmation.
+     * @memberof TaskManager
+     */
+    bindConfirmDelete(onConfirm) {
+        const confirmBtn = document.querySelector('.js-confirm-delete-task-btn');
+        if (confirmBtn) {
+            confirmBtn.onclick = () => {
+                onConfirm();
+                closeModal();
+            };
+        }
+    }
+
+    /**
      * @description Updates the priority UI elements based on the given priority.
-     * @param {string} priority - The priority level (e.g., "low", "medium", "high")
+     * @param {string} priority - The new priority value.
      * @memberof TaskManager
      */
     updatePriorityUI(priority) {
@@ -216,5 +268,13 @@ export class TaskManager {
         text.textContent = priority;
         icon.src = `assets/icons/priority/${priority}.svg`;
         display.className = `priority-display js-priority-toggle priority--${priority}`;
+    }
+
+    /**
+     * @description Notifies the parent component or callback about an update, typically after saving or deleting a task, to trigger any necessary UI refreshes or state updates.
+     * @memberof TaskManager
+     */
+    notifyUpdate() {
+        if (this.onUpdate) this.onUpdate();
     }
 }
