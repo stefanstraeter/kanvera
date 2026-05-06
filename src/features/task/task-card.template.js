@@ -48,7 +48,7 @@ function renderProgressSection(task) {
             <div class="progress-bar">
                 <div class="progress-bar__fill" style="width: ${task.progress}%"></div>
             </div>
-            <span class="progress-text">${task.subtaskStatus} Subtasks</span>
+            <!--<span class="progress-text">${task.subtaskStatus} Subtasks</span>-->
         </div>
     `;
 }
