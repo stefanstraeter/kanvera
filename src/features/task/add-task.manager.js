@@ -173,13 +173,13 @@ export class AddTaskManager {
     assembleTaskObject(id, data) {
         return {
             id: id,
-            title: data.title,
-            description: data.description || '',
+            title: data.title.trim(),
+            description: (data.description || '').trim(),
             dueDate: data.dueDate || '',
             priority: data.priority || 'medium',
-            category: 'to do',
-            assignedTo: this.tempAssignees,
-            subtasks: this.tempSubtasks,
+            category: 'todo',
+            assignedTo: [...this.tempAssignees],
+            subtasks: [...this.tempSubtasks],
             createdAt: Date.now(),
             updatedAt: Date.now()
         };
