@@ -116,7 +116,7 @@ function renderPrioritySelector(currentPriority, isFormStyle = false) {
     if (isFormStyle) {
         styleClass = 'priority-select--form';
         inputId = 'js-priority-input';
-        caretHtml = '<span class="priority-caret"><i class="fa-solid fa-caret-down"></i></span>';
+        caretHtml = '<span class="priority-caret"><i class="fa-solid fa-angle-down"></i></span>';
     }
 
     return `
@@ -260,7 +260,6 @@ export const createAddTaskModalHtml = (assigneeOptionsHtml) => {
     <form id="js-add-task-form" class="modal-add-task" novalidate>
         <div class="modal-inline-edit-body">
 
-            <!-- Title -->
             <div class="field-wrapper">
                 <label class="modal-label u-mb-xs">Title</label>
                 <div class="field-group">
@@ -269,7 +268,6 @@ export const createAddTaskModalHtml = (assigneeOptionsHtml) => {
                 <div class="error-msg"></div>
             </div>
 
-            <!-- Description -->
             <div class="field-wrapper">
                 <label class="modal-label u-mb-xs">Description</label>
                 <div class="field-group">
@@ -282,19 +280,17 @@ export const createAddTaskModalHtml = (assigneeOptionsHtml) => {
                 <div class="field-wrapper" style="flex: 1;">
                     <label class="modal-label u-mb-xs">Due Date</label>
                     <div class="field-group">
-                        <input type="date" name="dueDate" class="field-input" required>
+                        <input type="date" name="dueDate" id="due-date" class="field-input">
                     </div>
                     <div class="error-msg"></div>
                 </div>
                 
-  
                 <div class="field-wrapper" style="flex: 1;">
                     <label class="modal-label u-mb-xs">Priority</label>
                     ${renderPrioritySelector('medium', true)}
                 </div>
             </div>
 
-            <!-- Assignees Selection -->
             <div class="field-wrapper u-margin-bottom-md">
                 <label class="modal-label u-mb-xs">Assignees</label>
                 <div class="field-group">
@@ -308,7 +304,6 @@ export const createAddTaskModalHtml = (assigneeOptionsHtml) => {
                 <div class="error-msg"></div>
             </div>
 
-            <!-- Subtasks Section -->
             <div class="field-wrapper u-margin-bottom-l">
                 <label class="modal-label u-mb-xs">Subtasks</label>
                 <div class="field-group subtask-input-group" style="display: flex; gap: 0.5rem;">
