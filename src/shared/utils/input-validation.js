@@ -1,5 +1,3 @@
-// src/shared/utils/input-validation.js
-
 /* ==========================================================================
    PURE VALIDATION LOGIC
    ========================================================================== */
@@ -33,6 +31,24 @@ export function validateEmailFormat(email) {
  */
 export function validateMinLength(value, min) {
     return value.length >= min;
+}
+
+/**
+ * @description Validates that the date is not in the past.
+ * @export
+ * @param {string} dateString - The date value from the input (YYYY-MM-DD).
+ * @return {boolean} Returns true if the date is today or in the future, or if empty.
+ */
+export function validateNotPastDate(dateString) {
+    if (!dateString) return true;
+
+    const selectedDate = new Date(dateString);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return selectedDate >= today;
 }
 
 /* ==========================================================================
