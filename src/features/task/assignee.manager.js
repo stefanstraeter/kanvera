@@ -23,7 +23,6 @@ export class AssigneeManager {
      */
     init() {
         const editBtn = document.querySelector('.js-edit-assignees');
-
         editBtn?.addEventListener('click', (event) => {
             event.stopPropagation();
             this.toggleDropdown();
@@ -35,46 +34,39 @@ export class AssigneeManager {
        ========================================================================== */
 
     /**
-     * @description Toggles the visibility of the assignee dropdown. If the dropdown is open, it will be closed. 
+     * @description Toggles the visibility of the assignee dropdown.
      * @memberof AssigneeManager
      */
     toggleDropdown() {
         const dropdown = document.querySelector('.js-assignee-dropdown');
-
-        if (dropdown) {
-            this.closeDropdown(dropdown);
-        } else {
-            this.renderDropdown();
-        }
+        dropdown ? this.closeDropdown(dropdown) : this.renderDropdown();
     }
 
     /**
-     * @description Renders the assignee dropdown with all team members and their assigned status for the current task.
+     * @description Renders the assignee dropdown.
      * @memberof AssigneeManager
      */
     renderDropdown() {
         const task = getTaskById(this.taskId);
         const allMembers = convertToArrayList(getState().team);
 
-        const dropdownHtml = this.createAssigneeDropdownHtml(allMembers, task.assignedTo);
+        const html = this.createAssigneeDropdownHtml(allMembers, task.assignedTo);
         const anchor = document.querySelector('.js-edit-assignees');
 
         if (anchor) {
-            anchor.insertAdjacentHTML('afterend', dropdownHtml);
+            anchor.insertAdjacentHTML('afterend', html);
             this.registerDropdownEvents();
         }
     }
 
     /**
-     * @description Closes the assignee dropdown and triggers the board update callback if provided.
-     * @param {HTMLElement} dropdown - The dropdown element to be closed.
+     * @description Closes the assignee dropdown.
+     * @param {HTMLElement} dropdown - The dropdown element to close
      * @memberof AssigneeManager
      */
     closeDropdown(dropdown) {
         dropdown.remove();
-        if (this.onUpdateBoard) {
-            this.onUpdateBoard();
-        }
+        this.refreshBoard();
     }
 
     /* ==========================================================================
@@ -131,34 +123,51 @@ export class AssigneeManager {
        ========================================================================== */
 
     /**
-     * @description Handles the toggling of an assignee for the current task.
+     * @description Handles the toggle action for an assignee.
      * @param {string} memberId - The ID of the member to toggle.
      * @param {HTMLElement} listItem - The list item element representing the member.
      * @memberof AssigneeManager
      */
     handleToggle(memberId, listItem) {
         const task = getTaskById(this.taskId);
-        const assignedTo = this.calculateNewAssignees(memberId, task.assignedTo);
+        const newAssignees = this.calculateNewAssignees(memberId, task.assignedTo);
 
-        updateTaskLocally(this.taskId, { assignedTo });
-
-        const isSelected = assignedTo.includes(memberId);
-
-        this.updateItemVisuals(listItem, isSelected);
-        this.refreshModalAvatars(assignedTo);
+        this.processUpdate(newAssignees);
+        this.updateUI(listItem, memberId, newAssignees);
     }
 
     /**
-     * @description Calculates the new list of assignees for the current task.
+     * @description Updates the data locally.
+     * @param {Array} newAssignees - The updated list of assigned member IDs.
+     * @memberof AssigneeManager
+     */
+    processUpdate(newAssignees) {
+        updateTaskLocally(this.taskId, { assignedTo: newAssignees });
+    }
+
+    /**
+     * @description Coordinates all UI changes.
+     * @param {HTMLElement} listItem - The list item element representing the member.
      * @param {string} memberId - The ID of the member to toggle.
-     * @param {Array} currentList - The current list of assigned member IDs.
+     * @param {Array} newAssignees - The updated list of assigned member IDs.
+     * @memberof AssigneeManager
+     */
+    updateUI(listItem, memberId, newAssignees) {
+        const isSelected = newAssignees.includes(memberId);
+
+        this.updateItemVisuals(listItem, isSelected);
+        this.refreshModalAvatars(newAssignees);
+    }
+
+    /**
+     * @description Calculates the new list of assignees based on the current selection.
+     * @param {string} memberId - The ID of the member to toggle.
+     * @param {Array} [currentList=[]] - The current list of assigned member IDs.
      * @returns {Array} The updated list of assigned member IDs.
      * @memberof AssigneeManager
      */
     calculateNewAssignees(memberId, currentList = []) {
-        const isSelected = currentList.includes(memberId);
-
-        return isSelected
+        return currentList.includes(memberId)
             ? currentList.filter(id => id !== memberId)
             : [...currentList, memberId];
     }
@@ -201,9 +210,18 @@ export class AssigneeManager {
      */
     refreshModalAvatars(assignedIds) {
         const container = document.querySelector('.js-modal-avatars');
-
         if (container) {
             container.innerHTML = generateAvatarsHtml(assignedIds);
+        }
+    }
+
+    /**
+     * @description Refreshes the board by invoking the update callback.
+     * @memberof AssigneeManager
+     */
+    refreshBoard() {
+        if (this.onUpdateBoard) {
+            this.onUpdateBoard();
         }
     }
 
@@ -220,7 +238,7 @@ export class AssigneeManager {
      */
     createAssigneeDropdownHtml(allMembers, assignedIds) {
         const itemsHtml = allMembers
-            .map(member => this.renderAssigneeItem(member, assignedIds?.includes(member.id)))
+            .map(m => this.renderAssigneeItem(m, assignedIds?.includes(m.id)))
             .join('');
 
         return `
