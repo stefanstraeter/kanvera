@@ -44,6 +44,14 @@ export class SubtaskManager {
     registerAddAction() {
         const addBtn = document.querySelector('.js-add-subtask-btn');
         addBtn?.addEventListener('click', () => this.handleAdd());
+
+        const formInput = document.getElementById('js-add-subtask-input');
+        formInput?.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                this.handleAdd();
+            }
+        });
     }
 
     /**
@@ -95,9 +103,19 @@ export class SubtaskManager {
             addSubtask(this.taskId);
             this.onRefreshUI(this.taskId);
         } else {
-            const newSubtask = { id: `temp-${Date.now()}`, title: '', done: false };
+            const input = document.getElementById('js-add-subtask-input');
+            const title = (input?.value || '').trim();
+
+            if (!title) {
+                input?.focus();
+                return;
+            }
+
+            const newSubtask = { id: `temp-${Date.now()}`, title, done: false };
             this.localSubtasks.push(newSubtask);
+            if (input) input.value = '';
             this.refreshUI();
+            return;
         }
 
         setTimeout(() => {
@@ -138,7 +156,7 @@ export class SubtaskManager {
      */
     refreshUI() {
         if (this.onRefreshUI) {
-            this.onRefreshUI(this.taskId);
+            this.onRefreshUI(this.taskId ? this.taskId : [...this.localSubtasks]);
         }
     }
 
@@ -149,8 +167,18 @@ export class SubtaskManager {
      */
     handleTitleEdit(span) {
         const cleanedTitle = span.innerText.trim();
-        updateSubtaskTitle(this.taskId, span.dataset.index, cleanedTitle);
-        if (this.onUpdate) this.onUpdate();
+
+        if (this.taskId) {
+            updateSubtaskTitle(this.taskId, span.dataset.index, cleanedTitle);
+            if (this.onUpdate) this.onUpdate();
+            return;
+        }
+
+        const index = Number(span.dataset.index);
+        if (!Number.isNaN(index) && this.localSubtasks[index]) {
+            this.localSubtasks[index].title = cleanedTitle;
+            this.refreshUI();
+        }
     }
 
     /**
