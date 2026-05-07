@@ -1,6 +1,7 @@
 import { updateTaskLocally, getTaskById } from '../task.service.js';
 import { getState, convertToArrayList } from '../../../core/state.js';
 import { generateAvatarsHtml } from '../../board/board.utils.js';
+import { createDropdownHtml, renderItem } from '../templates/components/assignee.template.js';
 
 /**
  * @description Manager class for handling assignee selection in both Add and Edit modes.
@@ -89,7 +90,7 @@ export class AssigneeManager {
     renderDropdown() {
         const assignedIds = this.getCurrentSelection();
         const allMembers = convertToArrayList(getState().team);
-        const html = this.createDropdownHtml(allMembers, assignedIds);
+        const html = createDropdownHtml(allMembers, assignedIds);
         this.insertDropdown(html);
     }
 
@@ -117,7 +118,7 @@ export class AssigneeManager {
     }
 
     /* ==========================================================================
-       EVENT HANDLING - LISTENERS
+       EVENT HANDLERS 
        ========================================================================== */
 
     /**
@@ -131,7 +132,6 @@ export class AssigneeManager {
             this.toggleDropdown();
         });
     }
-
 
     /**
      * @description Registers event listeners for interaction with the dropdown items and outside clicks to close the dropdown.
@@ -185,7 +185,7 @@ export class AssigneeManager {
     }
 
     /* ==========================================================================
-       4. UI UPDATES
+       UI UPDATES
        ========================================================================== */
 
     /**
@@ -227,44 +227,5 @@ export class AssigneeManager {
         if (container) {
             container.innerHTML = generateAvatarsHtml(newList);
         }
-    }
-
-    /* ==========================================================================
-       5. TEMPLATES 
-       ========================================================================== */
-
-    /**
-     * @description Creates the HTML for the dropdown menu.
-     * @param {Array<Object>} allMembers The list of all members.
-     * @param {Array<string>} assignedIds The list of assigned member IDs.
-     * @returns {string} The HTML string for the dropdown.
-     * @memberof AssigneeManager
-     */
-    createDropdownHtml(allMembers, assignedIds) {
-        const items = allMembers
-            .map(m => this.renderItem(m, assignedIds.includes(m.id)))
-            .join('');
-        return `
-            <div class="assignee-dropdown js-assignee-dropdown">
-                <ul class="assignee-list">${items}</ul>
-            </div>`;
-    }
-
-    /**
-     * @description Renders a single member item for the dropdown.
-     * @param {Object} member The member object.
-     * @param {boolean} isAssigned Whether the member is assigned.
-     * @returns {string} The HTML string for the member item.
-     * @memberof AssigneeManager
-     */
-    renderItem(member, isAssigned) {
-        return `
-            <li class="assignee-item ${isAssigned ? 'is-selected' : ''}" data-id="${member.id}">
-                <div class="assignee-item__info">
-                    <img src="${member.imageUrl}" class="avatar avatar--s" alt="">
-                    <span class="assignee-name">${member.name}</span>
-                </div>
-                ${isAssigned ? '<i class="fa-solid fa-check check-icon"></i>' : ''}
-            </li>`;
     }
 }
