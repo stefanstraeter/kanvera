@@ -2,7 +2,7 @@
 
 @import url("./task-card.css");
 @import url("./task-modal.css");
-@import url("./subtask-modal.css");
-@import url("./assignee-dropdown.css");
-@import url("./priority-selector.css");
-@import url("./add-task-modal.css");
+@import url("./subtask.css");
+@import url("./assignee.css");
+@import url("./priority.css");
+@import url("./add-task.css");
