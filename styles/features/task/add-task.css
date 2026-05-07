@@ -1,0 +1,50 @@
+/* ==========================================================================
+   PRIORITY SELECTOR - CORE CONTAINER
+   ========================================================================== */
+.priority-select-container {
+  position: relative;
+  width: 100%;
+}
+
+.priority-trigger {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   MODIFIERS - FORM & INLINE
+   ========================================================================== */
+.priority-select--form .priority-trigger {
+  height: 3rem;
+  background-color: var(--bg-input);
+  border: 1px solid var(--color-lines);
+  border-radius: var(--radius-input);
+  padding: 0 var(--space-md);
+  justify-content: space-between;
+}
+
+.priority-select--inline .priority-trigger {
+  padding: var(--space-xs) 0;
+  gap: var(--space-sm);
+  border-radius: var(--radius-input);
+}
+
+/* ==========================================================================
+   CONTENT & CARET
+   ========================================================================== */
+.priority-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.priority-text {
+  text-transform: capitalize;
+  font-size: var(--font-size-m);
+}
+
+.priority-caret {
+  color: var(--color-medium-grey);
+  font-size: 0.8rem;
+}
