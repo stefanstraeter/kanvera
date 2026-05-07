@@ -22,6 +22,11 @@
   border-color: var(--color-danger);
 }
 
+.field-group:has(.js-assignee-dropdown),
+.field-group:has(.js-priority-menu) {
+  position: relative;
+}
+
 /* ==========================================================================
    FIELD INPUT
    ========================================================================== */
