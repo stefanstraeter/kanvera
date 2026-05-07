@@ -3,10 +3,12 @@ import { AssigneeManager } from './assignee.manager.js';
 import { PriorityManager } from './priority.manager.js';
 
 import { openModal, closeModal } from '../../../shared/components/modal.js';
+import { renderSubtasksList } from '../templates/components/subtask.template.js';
 import { createAddTaskModalHtml } from '../templates/task.template.js';
 import { initAddTaskValidation, validateTaskForm, createTaskLocally } from '../task.service.js';
 import { setLoadingStateBtn } from '../../../shared/utils/ui-helpers.js';
 import { UI_TASK_BUTTON_TEXT } from '../../../shared/utils/constants.js';
+
 
 /**
  * @description Manager class for handling the "Add Task" modal, including form state, validation, and task creation logic.
@@ -97,7 +99,7 @@ export class AddTaskManager {
     }
 
     /* ==========================================================================
-       SUBTASK RENDERING & HTML TEMPLATING
+       SUBTASK RENDERING
        ========================================================================== */
 
     /**
@@ -109,24 +111,8 @@ export class AddTaskManager {
         const list = document.getElementById('js-temp-subtask-list');
         if (!list) return;
 
-        list.innerHTML = this.generateSubtasksHtml();
+        list.innerHTML = renderSubtasksList(this.tempSubtasks);
         this.subtaskManager.init();
-    }
-    /**
-     * @description Generates the HTML for the current list of subtasks in the add task modal's preview area.
-     * @return {string} The HTML string representing the subtasks.
-     * @memberof AddTaskManager
-     */
-    generateSubtasksHtml() {
-        return this.tempSubtasks.map((s, index) => `
-            <div class="subtask-item">
-                <input type="checkbox" class="js-subtask-toggle" data-index="${index}" ${s.done ? 'checked' : ''}>
-                <span class="subtask-text js-subtask-text" contenteditable="true" data-index="${index}">
-                    ${s.title}
-                </span>
-                <button type="button" class="js-delete-subtask" data-index="${index}">×</button>
-            </div>
-        `).join('');
     }
 
     /* ==========================================================================
