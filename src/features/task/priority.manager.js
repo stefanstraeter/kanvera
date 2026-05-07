@@ -23,50 +23,6 @@ export class PriorityManager {
     }
 
     /* ==========================================================================
-       EVENT BINDING
-       ========================================================================== */
-
-    /**
-     * @description Binds the click event to the priority toggle button to show/hide the priority options menu.
-     * @param {HTMLElement} menu - The priority options menu element.
-     * @memberof PriorityManager
-     */
-    bindPriorityToggle(menu) {
-        const toggle = document.querySelector('.js-priority-toggle');
-        toggle?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            menu.classList.toggle('is-hidden');
-        });
-    }
-
-    /**
-     * @description Binds click events to each priority option in the menu to handle priority selection and update the UI accordingly.
-     * @param {HTMLElement} menu - The priority options menu element.
-     * @memberof PriorityManager
-     */
-    bindPriorityOptions(menu) {
-        const options = document.querySelectorAll('.priority-option');
-        options.forEach(option => {
-            option.addEventListener('click', (e) => {
-                e.stopPropagation();
-                this.handlePrioritySelection(option.dataset.value);
-                menu.classList.add('is-hidden');
-            });
-        });
-    }
-
-    /**
-     * @description Binds a click event to the document to hide the priority menu when clicking outside of it.
-     * @param {HTMLElement} menu - The priority options menu element.
-     * @memberof PriorityManager
-     */
-    bindOutsideClick(menu) {
-        document.addEventListener('click', () => {
-            menu.classList.add('is-hidden');
-        });
-    }
-
-    /* ==========================================================================
        LOGIC & DATA HANDLING
        ========================================================================== */
 
@@ -145,5 +101,50 @@ export class PriorityManager {
         display.dataset.priority = priority;
         display.classList.remove('priority--low', 'priority--medium', 'priority--urgent');
         display.classList.add(`priority--${priority}`);
+    }
+
+
+    /* ==========================================================================
+     EVENT BINDING
+     ========================================================================== */
+
+    /**
+     * @description Binds the click event to the priority toggle button to show/hide the priority options menu.
+     * @param {HTMLElement} menu - The priority options menu element.
+     * @memberof PriorityManager
+     */
+    bindPriorityToggle(menu) {
+        const toggle = document.querySelector('.js-priority-toggle');
+        toggle?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menu.classList.toggle('is-hidden');
+        });
+    }
+
+    /**
+     * @description Binds click events to each priority option in the menu to handle priority selection and update the UI accordingly.
+     * @param {HTMLElement} menu - The priority options menu element.
+     * @memberof PriorityManager
+     */
+    bindPriorityOptions(menu) {
+        const options = document.querySelectorAll('.priority-option');
+        options.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.handlePrioritySelection(option.dataset.value);
+                menu.classList.add('is-hidden');
+            });
+        });
+    }
+
+    /**
+     * @description Binds a click event to the document to hide the priority menu when clicking outside of it.
+     * @param {HTMLElement} menu - The priority options menu element.
+     * @memberof PriorityManager
+     */
+    bindOutsideClick(menu) {
+        document.addEventListener('click', () => {
+            menu.classList.add('is-hidden');
+        });
     }
 }
