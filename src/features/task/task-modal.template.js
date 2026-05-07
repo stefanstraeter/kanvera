@@ -60,7 +60,7 @@ export const createTaskDetailCardHtml = (task, assigneeHtml) => {
                 </div>
             </div>
 
-            ${renderAssigneeSection(assigneeHtml)}
+            ${renderAssigneeSelector(assigneeHtml)}
 
         </div>
 
@@ -162,25 +162,32 @@ function renderOption(value) {
    SUB-TEMPLATES ASSIGNEES
    ========================================================================== */
 
-/**
- * @description Renders the assignee section for the task detail modal.
- * @param {string} assigneeHtml - The HTML string representing the assignees
- * @return {string} HTML string representing the assignee section
- */
-function renderAssigneeSection(assigneeHtml) {
-    return `
-        <div class="inline-field u-mb-lg">
-            <div class="inline-edit-wrapper">
-                <label class="modal-label u-mb-xs">Assignees</label>
-                    <div class="avatar-group">
-                        <div class="js-modal-avatars">
-                            ${assigneeHtml}
-                        </div>
-                        <button type="button" class="btn-icon btn-add-assignees u-ml-sm js-edit-assignees" title="Edit Assignees">
-                          <i class="fa-solid fa-user-plus field-icon "></i>
-                        </button>
+
+export function renderAssigneeSelector(assigneeHtml = '', isFormStyle = false) {
+
+    const wrapperClass = isFormStyle ? 'field-wrapper u-mb-md' : 'field-wrapper u-mb-lg';
+    const triggerHtml = isFormStyle
+        ? `
+            <div class="field-group">
+                <div class="assignee-trigger-field js-edit-assignees">
+                    <div class="js-modal-avatars avatar-group">
+                        ${assigneeHtml || '<span class="placeholder-text">Select members...</span>'}
                     </div>
-            </div>
+                    <i class="fa-solid fa-angle-down u-ml-auto"></i>
+                </div>
+            </div>`
+        : `
+            <div class="avatar-group">
+                <div class="js-modal-avatars">${assigneeHtml}</div>
+                <button type="button" class="btn-icon btn-add-assignees u-ml-sm js-edit-assignees" title="Edit Assignees">
+                    <i class="fa-solid fa-user-plus field-icon "></i>
+                </button>
+            </div>`;
+
+    return `
+        <div class="${wrapperClass}">
+            <label class="modal-label u-mb-xs">Assignees</label>
+            ${triggerHtml}
         </div>
     `;
 }
@@ -210,9 +217,11 @@ function renderSubtasksList(subtasks = [], taskId) {
                 <i class="fa-regular fa-square icon-unchecked"></i>
                 <i class="fa-solid fa-square-check icon-checked"></i>
             </label>
+
             <span class="subtask-text modal-edit-field js-subtask-text ${st.done ? 'is-done' : ''}" 
                   contenteditable="true" 
                   data-index="${i}">${st.title}</span>
+
             <button type="button" class="btn-icon btn-trash-icon u-pl-sm u-pr-sm js-delete-subtask" data-index="${i}">
                 <i class="fa-regular fa-trash-can"></i>
             </button>
@@ -292,15 +301,7 @@ export const createAddTaskModalHtml = (assigneeOptionsHtml) => {
             </div>
 
             <div class="field-wrapper u-margin-bottom-md">
-                <label class="modal-label u-mb-xs">Assignees</label>
-                <div class="field-group">
-                    <select id="js-add-task-assignee-select" class="field-input">
-                        <option value="" disabled selected>Select a member...</option>
-                        ${assigneeOptionsHtml}
-                    </select>
-                </div>
-                <!-- Container für die ausgewählten Assignee-Badges -->
-                <div id="js-temp-assignee-list" class="temp-tag-list u-mt-xs"></div>
+                    ${renderAssigneeSelector('', true)}
                 <div class="error-msg"></div>
             </div>
 
