@@ -49,12 +49,12 @@ export const createAddTaskModalHtml = (assigneeOptionsHtml) => {
                 </div>
             </div>
 
-            <div class="field-wrapper u-margin-bottom-md">
+            <div class="field-wrapper">
                     ${renderAssigneeSelector('', true)}
                 <div class="error-msg"></div>
             </div>
 
-            <div class="field-wrapper u-margin-bottom-l">
+            <div class="field-wrapper">
                 <label class="modal-label u-mb-xs">Subtasks</label>
                 <div class="field-group subtask-input-group" style="display: flex; gap: 0.5rem;">
                     <input type="text" id="js-add-subtask-input" class="field-input" placeholder="Add subtask step">
