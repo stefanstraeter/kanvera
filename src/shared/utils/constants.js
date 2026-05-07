@@ -15,6 +15,36 @@ export const AUTH_SESSION_KEY = "loggedInUser";
  */
 export const DATA_CACHE_KEY = "kanvera_data";
 
+
+/* ==========================================================================
+   TASK TYPES FOR TASK CREATION     
+   ========================================================================== */
+
+/**
+ * @description An array of task types with their corresponding values and labels, used for task creation throughout the application.
+ */
+export const TASK_TYPES = [
+    { value: 'feature', label: 'Feature' },
+    { value: 'ui/ux', label: 'UI/UX' },
+    { value: 'bug fix', label: 'Bug Fix' },
+];
+
+
+/* ==========================================================================
+   TASK TYPES LABELS FOR DISPLAY    
+   ========================================================================== */
+
+/** 
+ * @description A mapping of task type values to their display labels, used for rendering task types in the UI when only the value is stored.
+ */
+export const TASK_TYPE_LABELS = {
+    'feature': 'Feature',
+    'ui/ux': 'UI/UX',
+    'bug fix': 'Bug Fix',
+};
+
+
+
 /* ==========================================================================
    INPUT VALIDATION ERROR MESSAGES    
    ========================================================================== */
