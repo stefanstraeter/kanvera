@@ -3,38 +3,78 @@ import { getState, convertToArrayList } from '../../core/state.js';
 import { generateAvatarsHtml } from '../board/board.utils.js';
 
 /**
- * @description Manager class for handling the assignee dropdown.
+ * @description Manager class for handling assignee selection in both Add and Edit modes.
  * @export
  * @class AssigneeManager
  */
 export class AssigneeManager {
-    constructor(taskId, onUpdateBoard) {
+    constructor(taskId = null, onUpdate = null) {
         this.taskId = taskId;
-        this.onUpdateBoard = onUpdateBoard;
+        this.onUpdate = onUpdate;
+        this.tempSelectedIds = [];
+    }
+
+    /**
+     * @description Initializes the assignee manager by setting up the initial state and attaching event listeners to the trigger button.
+     * @param {Array} initialIds - Optional array of initially assigned member IDs (used in Edit mode)
+     * @return {void}
+     */
+    init(initialIds = []) {
+        this.tempSelectedIds = initialIds;
+        this.attachTriggerListener();
     }
 
     /* ==========================================================================
-       INITIALIZATION
+       DATA LOGIC - STATE MANAGEMENT
        ========================================================================== */
-
     /**
-     * @description Initializes the assignee manager by setting up event listeners.
+     * @description Determines the current list of assigned member IDs based on whether we're in Add or Edit mode.
+     * @return {Array} The current list of assigned member IDs.
      * @memberof AssigneeManager
      */
-    init() {
-        const editBtn = document.querySelector('.js-edit-assignees');
-        editBtn?.addEventListener('click', (event) => {
-            event.stopPropagation();
-            this.toggleDropdown();
-        });
+    getCurrentSelection() {
+        if (this.taskId) {
+            return getTaskById(this.taskId)?.assignedTo || [];
+        }
+        return this.tempSelectedIds;
+    }
+
+    /**
+     * @description Calculates the new list of assigned member IDs by toggling the presence of the given member ID in the current list.
+     * @param {*} memberId The ID of the member to toggle.
+     * @param {Array} currentList The current list of assigned member IDs.
+     * @return {Array} The new list of assigned member IDs.
+     * @memberof AssigneeManager
+     */
+    calculateNewList(memberId, currentList) {
+        return currentList.includes(memberId)
+            ? currentList.filter(id => id !== memberId)
+            : [...currentList, memberId];
+    }
+
+    /**
+     * @description Saves the new list of assigned member IDs to the task (in Edit mode) or updates the temporary state (in Add mode), and triggers any necessary UI updates via callbacks.
+     * @param {Array} newList The new list of assigned member IDs.
+     * @memberof AssigneeManager
+     */
+    saveSelection(newList) {
+        if (this.taskId) {
+            updateTaskLocally(this.taskId, { assignedTo: newList });
+        } else {
+            this.tempSelectedIds = newList;
+            if (typeof this.onUpdate === 'function') {
+                this.onUpdate(newList);
+            }
+        }
     }
 
     /* ==========================================================================
-       DROPDOWN CONTROL
+       CORE CONTROL - DROPDOWN TOGGLING & RENDERING
        ========================================================================== */
 
     /**
-     * @description Toggles the visibility of the assignee dropdown.
+     * @description Toggles the visibility of the assignee dropdown. If the dropdown is currently open, it will be closed; if it is closed, it will be rendered and displayed.
+     * @return {void}
      * @memberof AssigneeManager
      */
     toggleDropdown() {
@@ -43,16 +83,23 @@ export class AssigneeManager {
     }
 
     /**
-     * @description Renders the assignee dropdown.
+     * @description Renders the assignee dropdown by generating the appropriate HTML based on the current team members and assigned members, and inserting it into the DOM. Also sets up event listeners for interaction with the dropdown items and outside clicks to close the dropdown.
      * @memberof AssigneeManager
      */
     renderDropdown() {
-        const task = getTaskById(this.taskId);
+        const assignedIds = this.getCurrentSelection();
         const allMembers = convertToArrayList(getState().team);
+        const html = this.createDropdownHtml(allMembers, assignedIds);
+        this.insertDropdown(html);
+    }
 
-        const html = this.createAssigneeDropdownHtml(allMembers, task.assignedTo);
+    /**
+     * @description Inserts the generated dropdown HTML into the DOM and registers event listeners for interaction with the dropdown items and outside clicks to close the dropdown.
+     * @param {string} html The HTML string to insert into the DOM.
+     * @memberof AssigneeManager
+     */
+    insertDropdown(html) {
         const anchor = document.querySelector('.js-edit-assignees');
-
         if (anchor) {
             anchor.insertAdjacentHTML('afterend', html);
             this.registerDropdownEvents();
@@ -60,21 +107,34 @@ export class AssigneeManager {
     }
 
     /**
-     * @description Closes the assignee dropdown.
-     * @param {HTMLElement} dropdown - The dropdown element to close
+     * @description Closes the assignee dropdown and triggers any necessary UI updates via callbacks.
+     * @param {*} dropdown The dropdown element to close.
      * @memberof AssigneeManager
      */
     closeDropdown(dropdown) {
         dropdown.remove();
-        this.refreshBoard();
+        if (this.taskId && this.onUpdate) this.onUpdate();
     }
 
     /* ==========================================================================
-       EVENT HANDLING
+       EVENT HANDLING - LISTENERS
        ========================================================================== */
 
     /**
-     * @description Registers event listeners for the assignee dropdown.
+     * @description Attaches a click listener to the assignee edit button to toggle the dropdown.
+     * @memberof AssigneeManager
+     */
+    attachTriggerListener() {
+        const btn = document.querySelector('.js-edit-assignees');
+        btn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleDropdown();
+        });
+    }
+
+
+    /**
+     * @description Registers event listeners for interaction with the dropdown items and outside clicks to close the dropdown.
      * @memberof AssigneeManager
      */
     registerDropdownEvents() {
@@ -83,182 +143,125 @@ export class AssigneeManager {
     }
 
     /**
-     * @description Sets up click event listeners for each assignee item in the dropdown.
+     * @description Sets up click listeners for each dropdown item to handle selection toggling.
      * @memberof AssigneeManager
      */
     setupItemClicks() {
         const dropdown = document.querySelector('.js-assignee-dropdown');
-        const items = dropdown.querySelectorAll('.assignee-item');
-
-        items.forEach(item => {
-            item.onclick = (event) => {
-                event.stopImmediatePropagation();
+        dropdown?.querySelectorAll('.assignee-item').forEach(item => {
+            item.onclick = (e) => {
+                e.stopImmediatePropagation();
                 this.handleToggle(item.dataset.id, item);
             };
         });
     }
 
     /**
-     * @description Sets up a click event listener to close the dropdown when clicking outside of it.
+     * @description Sets up a click listener on the document to close the dropdown when clicking outside of it.
      * @memberof AssigneeManager
      */
     setupOutsideClick() {
         const dropdown = document.querySelector('.js-assignee-dropdown');
-
-        const outsideListener = (event) => {
-            const isClickInside = dropdown.contains(event.target);
-            const isClickOnToggle = event.target.closest('.js-edit-assignees');
-
-            if (!isClickInside && !isClickOnToggle) {
+        const listener = (e) => {
+            if (!dropdown.contains(e.target) && !e.target.closest('.js-edit-assignees')) {
                 this.closeDropdown(dropdown);
-                document.removeEventListener('click', outsideListener);
+                document.removeEventListener('click', listener);
             }
         };
-
-        setTimeout(() => document.addEventListener('click', outsideListener), 0);
+        setTimeout(() => document.addEventListener('click', listener), 0);
     }
 
-    /* ==========================================================================
-       LOGIC & DATA
-       ========================================================================== */
-
     /**
-     * @description Handles the toggle action for an assignee.
-     * @param {string} memberId - The ID of the member to toggle.
-     * @param {HTMLElement} listItem - The list item element representing the member.
+     * @description Handles the toggling of a member's selection state in the dropdown.
+     * @param {string} memberId The ID of the member to toggle.
+     * @param {HTMLElement} listItem The list item element corresponding to the member.
      * @memberof AssigneeManager
      */
     handleToggle(memberId, listItem) {
-        const task = getTaskById(this.taskId);
-        const newAssignees = this.calculateNewAssignees(memberId, task.assignedTo);
-
-        this.processUpdate(newAssignees);
-        this.updateUI(listItem, memberId, newAssignees);
-    }
-
-    /**
-     * @description Updates the data locally.
-     * @param {Array} newAssignees - The updated list of assigned member IDs.
-     * @memberof AssigneeManager
-     */
-    processUpdate(newAssignees) {
-        updateTaskLocally(this.taskId, { assignedTo: newAssignees });
-    }
-
-    /**
-     * @description Coordinates all UI changes.
-     * @param {HTMLElement} listItem - The list item element representing the member.
-     * @param {string} memberId - The ID of the member to toggle.
-     * @param {Array} newAssignees - The updated list of assigned member IDs.
-     * @memberof AssigneeManager
-     */
-    updateUI(listItem, memberId, newAssignees) {
-        const isSelected = newAssignees.includes(memberId);
-
-        this.updateItemVisuals(listItem, isSelected);
-        this.refreshModalAvatars(newAssignees);
-    }
-
-    /**
-     * @description Calculates the new list of assignees based on the current selection.
-     * @param {string} memberId - The ID of the member to toggle.
-     * @param {Array} [currentList=[]] - The current list of assigned member IDs.
-     * @returns {Array} The updated list of assigned member IDs.
-     * @memberof AssigneeManager
-     */
-    calculateNewAssignees(memberId, currentList = []) {
-        return currentList.includes(memberId)
-            ? currentList.filter(id => id !== memberId)
-            : [...currentList, memberId];
+        const currentList = this.getCurrentSelection();
+        const newList = this.calculateNewList(memberId, currentList);
+        this.saveSelection(newList);
+        this.updateUI(listItem, memberId, newList);
     }
 
     /* ==========================================================================
-       UI UPDATES
+       4. UI UPDATES
        ========================================================================== */
 
     /**
-     * @description Updates the visuals of an assignee item based on its selection status.
-     * @param {HTMLElement} listItem - The list item element representing the member.
-     * @param {boolean} isSelected - Whether the member is selected.
+     * @description Updates the UI to reflect the current selection state of a member.
+     * @param {HTMLElement} listItem The list item element corresponding to the member.
+     * @param {string} memberId The ID of the member to update.
+     * @param {Array<string>} newList The updated list of selected member IDs.
      * @memberof AssigneeManager
      */
-    updateItemVisuals(listItem, isSelected) {
+    updateUI(listItem, memberId, newList) {
+        const isSelected = newList.includes(memberId);
         listItem.classList.toggle('is-selected', isSelected);
-        this.toggleCheckIcon(listItem, isSelected);
+        this.updateCheckIcon(listItem, isSelected);
+        this.updateAvatarPreview(newList);
     }
 
     /**
-     * @description Toggles the check icon for an assignee item based on its selection status.
-     * @param {HTMLElement} listItem - The list item element representing the member.
-     * @param {boolean} isSelected - Whether the member is selected.
+     * @description Updates the check icon for a member based on their selection state.
+     * @param {HTMLElement} listItem The list item element corresponding to the member.
+     * @param {boolean} isSelected Whether the member is selected.
      * @memberof AssigneeManager
      */
-    toggleCheckIcon(listItem, isSelected) {
-        const checkIcon = listItem.querySelector('.check-icon');
-
-        if (isSelected && !checkIcon) {
+    updateCheckIcon(listItem, isSelected) {
+        const icon = listItem.querySelector('.check-icon');
+        if (isSelected && !icon) {
             listItem.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-check check-icon"></i>');
-        } else if (!isSelected && checkIcon) {
-            checkIcon.remove();
+        } else if (!isSelected && icon) {
+            icon.remove();
         }
     }
 
     /**
-     * @description Refreshes the avatars displayed in the modal based on the assigned member IDs.
-     * @param {Array} assignedIds - The list of assigned member IDs.
+     * @description Updates the avatar preview container with the current selection.
+     * @param {Array<string>} newList The updated list of selected member IDs.
      * @memberof AssigneeManager
      */
-    refreshModalAvatars(assignedIds) {
+    updateAvatarPreview(newList) {
         const container = document.querySelector('.js-modal-avatars');
         if (container) {
-            container.innerHTML = generateAvatarsHtml(assignedIds);
-        }
-    }
-
-    /**
-     * @description Refreshes the board by invoking the update callback.
-     * @memberof AssigneeManager
-     */
-    refreshBoard() {
-        if (this.onUpdateBoard) {
-            this.onUpdateBoard();
+            container.innerHTML = generateAvatarsHtml(newList);
         }
     }
 
     /* ==========================================================================
-       HTML TEMPLATES
+       5. TEMPLATES 
        ========================================================================== */
 
     /**
-     * @description Creates the HTML for the assignee dropdown.
-     * @param {Array} allMembers - The list of all members.
-     * @param {Array} assignedIds - The list of assigned member IDs.
-     * @returns {string} The HTML string for the assignee dropdown.
+     * @description Creates the HTML for the dropdown menu.
+     * @param {Array<Object>} allMembers The list of all members.
+     * @param {Array<string>} assignedIds The list of assigned member IDs.
+     * @returns {string} The HTML string for the dropdown.
      * @memberof AssigneeManager
      */
-    createAssigneeDropdownHtml(allMembers, assignedIds) {
-        const itemsHtml = allMembers
-            .map(m => this.renderAssigneeItem(m, assignedIds?.includes(m.id)))
+    createDropdownHtml(allMembers, assignedIds) {
+        const items = allMembers
+            .map(m => this.renderItem(m, assignedIds.includes(m.id)))
             .join('');
-
         return `
             <div class="assignee-dropdown js-assignee-dropdown">
-                <ul class="assignee-list">${itemsHtml}</ul>
+                <ul class="assignee-list">${items}</ul>
             </div>`;
     }
 
     /**
-     * @description Renders an individual assignee item for the dropdown.
-     * @param {Object} member - The member object containing id, name, and imageUrl.
-     * @param {boolean} isAssigned - Whether the member is currently assigned.
-     * @returns {string} The HTML string for the assignee item.
+     * @description Renders a single member item for the dropdown.
+     * @param {Object} member The member object.
+     * @param {boolean} isAssigned Whether the member is assigned.
+     * @returns {string} The HTML string for the member item.
      * @memberof AssigneeManager
      */
-    renderAssigneeItem(member, isAssigned) {
+    renderItem(member, isAssigned) {
         return `
             <li class="assignee-item ${isAssigned ? 'is-selected' : ''}" data-id="${member.id}">
                 <div class="assignee-item__info">
-                    <img src="${member.imageUrl}" class="avatar avatar--s" alt="${member.name}">
+                    <img src="${member.imageUrl}" class="avatar avatar--s" alt="">
                     <span class="assignee-name">${member.name}</span>
                 </div>
                 ${isAssigned ? '<i class="fa-solid fa-check check-icon"></i>' : ''}
