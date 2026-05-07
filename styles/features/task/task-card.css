@@ -44,6 +44,19 @@
   font-size: 0.75rem;
   font-weight: var(--font-weight-bold);
   text-transform: capitalize;
+  letter-spacing: 0.04em;
+}
+
+.task-card__category[data-type="feature"] {
+  background-color: var(--color-main);
+}
+
+.task-card__category[data-type="ui/ux"] {
+  background-color: var(--status-done);
+}
+
+.task-card__category[data-type="bug fix"] {
+  background-color: var(--status-await-feedback);
 }
 
 .task-card__description {
