@@ -49,10 +49,6 @@
   gap: var(--space-xs);
 }
 
-.field-wrapper {
-  margin-bottom: var(--space-sm);
-}
-
 .auth-flow__actions {
   display: flex;
   justify-content: center;
