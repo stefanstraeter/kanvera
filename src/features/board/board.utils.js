@@ -2,7 +2,7 @@
 
 import { resolveMemberDetails } from '../task/task.service.js';
 import { getInitials, calculateProgressPercent } from '../../shared/utils/ui-helpers.js';
-import { createAvatarHtml, createTaskCardHtml } from '../task/task.template.js';
+import { createAvatarHtml, createTaskCardHtml } from '../task/templates/task.template.js';
 
 /* ==========================================================================
    TASK RENDERING PREPARATION

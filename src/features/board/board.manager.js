@@ -1,6 +1,6 @@
-import { getTasksByCategory } from '../task/task.service.js';
 import { TaskManager } from '../task/task.manager.js';
-import { AddTaskManager } from '../task/add-task.manager.js';
+import { AddTaskManager } from '../task/components/add-task.manager.js';
+import { getTasksByCategory } from '../task/task.service.js';
 import { renderColumnHtml } from './board.template.js';
 import { renderSingleTask, showBoardWrapper } from './board.utils.js';
 import { initDragAndDrop, attachDragEventToCard } from './dnd.manager.js';

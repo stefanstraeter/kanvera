@@ -1,6 +1,6 @@
-import { updateTaskLocally, getTaskById } from './task.service.js';
-import { getState, convertToArrayList } from '../../core/state.js';
-import { generateAvatarsHtml } from '../board/board.utils.js';
+import { updateTaskLocally, getTaskById } from '../task.service.js';
+import { getState, convertToArrayList } from '../../../core/state.js';
+import { generateAvatarsHtml } from '../../board/board.utils.js';
 
 /**
  * @description Manager class for handling assignee selection in both Add and Edit modes.

@@ -1,11 +1,12 @@
 import { SubtaskManager } from './subtask.manager.js';
 import { AssigneeManager } from './assignee.manager.js';
 import { PriorityManager } from './priority.manager.js';
-import { openModal, closeModal } from '../../shared/components/modal.js';
-import { createAddTaskModalHtml } from './task.template.js';
-import { initAddTaskValidation, validateTaskForm, createTaskLocally } from './task.service.js';
-import { setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
-import { UI_TASK_BUTTON_TEXT } from '../../shared/utils/constants.js';
+
+import { openModal, closeModal } from '../../../shared/components/modal.js';
+import { createAddTaskModalHtml } from '../templates/task.template.js';
+import { initAddTaskValidation, validateTaskForm, createTaskLocally } from '../task.service.js';
+import { setLoadingStateBtn } from '../../../shared/utils/ui-helpers.js';
+import { UI_TASK_BUTTON_TEXT } from '../../../shared/utils/constants.js';
 
 /**
  * @description Manager class for handling the "Add Task" modal, including form state, validation, and task creation logic.

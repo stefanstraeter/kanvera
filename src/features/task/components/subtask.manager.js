@@ -1,4 +1,4 @@
-import { addSubtask, removeSubtask, updateSubtaskTitle, getTaskById, updateTaskLocally } from './task.service.js';
+import { addSubtask, removeSubtask, updateSubtaskTitle, getTaskById, updateTaskLocally } from '../task.service.js';
 
 /**
  * @description Manager class for handling subtask-specific operations within a task.
