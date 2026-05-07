@@ -100,6 +100,7 @@
   flex-direction: row;
   align-items: center;
   position: relative;
+  min-height: 2rem;
 }
 
 .avatar-group .avatar {
