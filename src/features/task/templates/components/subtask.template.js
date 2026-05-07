@@ -8,7 +8,7 @@
  * @return {string} HTML string representing the list of subtasks
  */
 export function renderSubtasksList(subtasks = [], taskId) {
-    if (subtasks.length === 0) return '<p class="task-detail__description">No subtasks yet</p>';
+    if (subtasks.length === 0) return '<p class="task-detail__description"></p>';
 
     return subtasks.map((st, i) => `
         <div class="subtask-item">
