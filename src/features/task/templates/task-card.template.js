@@ -11,7 +11,7 @@
 export function createTaskCardHtml(task) {
     return `
         <article class="task-card" draggable="true" id="${task.id}">
-            <div class="task-card__category badge">${task.taskType}</div>
+            <div class="task-card__category badge" data-type="${task.taskType}">${task.taskType}</div>
             <div class="task-card__content">
                 <h3 class="task-card__title">${task.title}</h3>
                 <p class="task-card__description">${task.description}</p>
