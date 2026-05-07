@@ -1,6 +1,7 @@
 import { SubtaskManager } from './subtask.manager.js';
 import { AssigneeManager } from './assignee.manager.js';
 import { PriorityManager } from './priority.manager.js';
+import { TaskTypeManager } from './task-type.manager.js';
 
 import { openModal, closeModal } from '../../../shared/components/modal.js';
 import { renderSubtasksList } from '../templates/components/subtask.template.js';
@@ -21,6 +22,7 @@ export class AddTaskManager {
         this.tempSubtasks = [];
         this.tempAssignees = [];
         this.priorityManager = new PriorityManager();
+        this.taskTypeManager = new TaskTypeManager();
     }
 
     /**
@@ -31,6 +33,7 @@ export class AddTaskManager {
         this.resetDraftState();
         this.openAddTaskModal();
         this.priorityManager.init();
+        this.taskTypeManager.init();
         this.activateSubManagers();
         initAddTaskValidation();
     }
@@ -111,7 +114,7 @@ export class AddTaskManager {
         const list = document.getElementById('js-temp-subtask-list');
         if (!list) return;
 
-        list.innerHTML = renderSubtasksList(this.tempSubtasks);
+        list.innerHTML = renderSubtasksList(this.tempSubtasks, null, true);
         this.subtaskManager.init();
     }
 
@@ -169,6 +172,7 @@ export class AddTaskManager {
             description: (data.description || '').trim(),
             dueDate: data.dueDate || '',
             priority: data.priority || 'medium',
+            taskType: data.taskType || 'feature',
             category: 'to do',
             assignedTo: Array.isArray(finalAssignees) ? [...finalAssignees] : [],
             subtasks: [...this.tempSubtasks],
