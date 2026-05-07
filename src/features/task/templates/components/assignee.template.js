@@ -3,39 +3,40 @@
    ========================================================================== */
 
 /**
- * @description Renders the assignee selector component for the task detail modal, allowing users to view and change the assignees of the task.
- * @memberof TaskManager
- * @export
- * @param {string} [assigneeHtml=''] - HTML string representing the current assignees (avatar images), can be empty if no assignees
- * @param {boolean} [isFormStyle=false] - Flag to determine if the selector is rendered in form style (with caret) or inline style
- * @return {string} HTML string representing the assignee selector component
+ * @description Renders the assignee selector component for the task detail modal.
+ * @param {string} [assigneeHtml=''] 
+ * @param {boolean} [isFormStyle=false] 
+ * @return {string}
+ */
+/**
+ * @description Renders the assignee selector component for the task detail modal.
+ * @param {string} [assigneeHtml=''] 
+ * @param {boolean} [isFormStyle=false] 
+ * @return {string}
  */
 export function renderAssigneeSelector(assigneeHtml = '', isFormStyle = false) {
+    const labelClass = isFormStyle ? 'modal-label u-mb-xs' : 'modal-label';
+    const content = assigneeHtml || (isFormStyle ? '<span class="placeholder-text">Select members...</span>' : '');
 
-    const wrapperClass = isFormStyle ? 'field-wrapper u-mb-md' : 'field-wrapper u-mb-lg';
     const triggerHtml = isFormStyle
-        ? `
-            <div class="field-group">
+        ? `<div class="field-group">
                 <div class="assignee-trigger-field js-edit-assignees">
-                    <div class="js-modal-avatars avatar-group">
-                        ${assigneeHtml || '<span class="placeholder-text">Select members...</span>'}
-                    </div>
-                    <i class="fa-solid fa-angle-down u-ml-auto"></i>
+                    <div class="js-modal-avatars avatar-group">${content}</div>
+                    <i class="fa-solid fa-angle-down priority-caret"></i>
                 </div>
-            </div>`
-        : `
-            <div class="avatar-group">
-                <div class="js-modal-avatars">${assigneeHtml}</div>
-                <button type="button" class="btn-icon btn-add-assignees u-ml-sm js-edit-assignees" title="Edit Assignees">
-                    <i class="fa-solid fa-user-plus field-icon "></i>
-                </button>
-            </div>`;
+           </div>`
+        : `<div class="inline-field">
+                <div class="avatar-group">
+                    <div class="js-modal-avatars">${content}</div>
+                    <button type="button" class="btn-icon btn-add-assignees u-ml-sm js-edit-assignees" title="Edit Assignees">
+                        <i class="fa-solid fa-user-plus field-icon"></i>
+                    </button>
+                </div>
+           </div>`;
 
     return `
-        <div class="${wrapperClass}">
-            <label class="modal-label u-mb-xs">Assignees</label>
-            ${triggerHtml}
-        </div>
+        <label class="${labelClass}">Assignees</label>
+        ${triggerHtml}
     `;
 }
 
