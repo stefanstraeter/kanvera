@@ -17,4 +17,5 @@
 .error-msg.show {
   visibility: visible;
   opacity: 1;
+  text-align: right;
 }
