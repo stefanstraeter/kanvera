@@ -75,11 +75,10 @@
 }
 
 .js-subtask-text:empty::before {
-  content: "A little more to-do...";
+  content: "e.g. Make coffee";
   font-size: var(--font-size-body-l);
   color: var(--color-medium-grey);
   font-weight: var(--font-weight-medium);
-  font-style: italic;
   opacity: 0.6;
 }
 
