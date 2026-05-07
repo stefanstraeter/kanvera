@@ -1,5 +1,5 @@
 
-import { renderPrioritySelector, renderAssigneeSelector } from './components.template.js';
+import { renderPrioritySelector, renderAssigneeSelector, renderSubtaskSection, renderTaskTypeSelector } from './components.template.js';
 
 /* ==========================================================================
    TEMPLATES FOR TASK FORM (ADD NEW TASK) 
@@ -11,8 +11,6 @@ import { renderPrioritySelector, renderAssigneeSelector } from './components.tem
  * @return {string} HTML string
  */
 export const createAddTaskModalHtml = (assigneeOptionsHtml) => {
-
-    const defaultPriority = 'medium';
 
     return `
     <form id="js-add-task-form" class="modal-add-task" novalidate>
@@ -49,21 +47,18 @@ export const createAddTaskModalHtml = (assigneeOptionsHtml) => {
                 </div>
             </div>
 
+            <div class="field-wrapper">
+                <label class="modal-label u-mb-xs">Task Type</label>
+                ${renderTaskTypeSelector('feature')}
+            </div>
+
             <div class="field-wrapper u-flex">
                     ${renderAssigneeSelector('', true)}
                 <div class="error-msg"></div>
             </div>
 
             <div class="field-wrapper u-flex">
-                <label class="modal-label u-mb-xs">Subtasks</label>
-                <div class="field-group subtask-input-group" style="display: flex; gap: 0.5rem;">
-                    <input type="text" id="js-add-subtask-input" class="field-input" placeholder="A little step to get there...">
-                    <button type="button" id="js-add-subtask-btn" class="btn-add-subtask" title="Add Subtask">
-                        <i class="fa-solid fa-plus btn-icon"></i>
-                    </button>
-                </div>
-
-                <ul id="js-temp-subtask-list" class="subtask-preview-list u-mt-sm"></ul>
+                ${renderSubtaskSection([], null, true)}
                 <div class="error-msg"></div>
             </div>
 
