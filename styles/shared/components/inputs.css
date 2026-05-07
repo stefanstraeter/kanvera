@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FIELD COMPONENT
+   FIELD COMPONENT 
    ========================================================================== */
 .field-group {
   display: flex;
@@ -25,6 +25,15 @@
 .field-group:has(.js-assignee-dropdown),
 .field-group:has(.js-priority-menu) {
   position: relative;
+}
+
+.field-wrapper {
+  margin-bottom: var(--space-xs);
+}
+
+.field-row {
+  display: flex;
+  gap: var(--space-md);
 }
 
 /* ==========================================================================
