@@ -35,23 +35,3 @@ export function renderSubtasksList(subtasks = [], taskId) {
     `).join('');
 }
 
-/* ==========================================================================
-   SUBTASKS DELETE & TOGGLE HANDLING
-   ========================================================================== */
-
-/**
-   * @description Generates the HTML for the current list of subtasks in the add task modal's preview area.
-   * @return {string} The HTML string representing the subtasks.
-   * @memberof AddTaskManager
-   */
-export function generateSubtasksHtml() {
-    return this.tempSubtasks.map((s, index) => `
-            <div class="subtask-item">
-                <input type="checkbox" class="js-subtask-toggle" data-index="${index}" ${s.done ? 'checked' : ''}>
-                <span class="subtask-text js-subtask-text" contenteditable="true" data-index="${index}">
-                    ${s.title}
-                </span>
-                <button type="button" class="js-delete-subtask" data-index="${index}"></button>
-            </div>
-        `).join('');
-}
