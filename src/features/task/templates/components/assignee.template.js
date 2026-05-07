@@ -8,12 +8,6 @@
  * @param {boolean} [isFormStyle=false] 
  * @return {string}
  */
-/**
- * @description Renders the assignee selector component for the task detail modal.
- * @param {string} [assigneeHtml=''] 
- * @param {boolean} [isFormStyle=false] 
- * @return {string}
- */
 export function renderAssigneeSelector(assigneeHtml = '', isFormStyle = false) {
     const labelClass = isFormStyle ? 'modal-label u-mb-xs' : 'modal-label';
     const content = assigneeHtml || (isFormStyle ? '<span class="placeholder-text">Select members...</span>' : '');
