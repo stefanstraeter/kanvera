@@ -1,5 +1,4 @@
-import { renderPrioritySelector, renderAssigneeSelector } from './components.template.js';
-import { renderSubtasksList } from './components/subtask.template.js';
+import { renderPrioritySelector, renderAssigneeSelector, renderSubtaskSection } from './components.template.js';
 
 /* ==========================================================================
    TEMPLATE FOR TASK MODAL
@@ -49,17 +48,7 @@ export const createTaskDetailCardHtml = (task, assigneeHtml) => {
 
             <div class="inline-field u-mb-md">
                 <div class="inline-edit-wrapper">
-                    <label class="modal-label u-mb-xs">Subtasks</label>
-                    <div class="subtask-list u-mb-sm">
-                       ${renderSubtasksList(task.subtasks, task.id)}
-                    </div>
-                    <button type="button" class="btn btn--s btn--full btn--secondary js-add-subtask-btn">
-                    <div class="btn-group">
-                        <i class="fa-solid fa-plus btn-icon"></i> 
-                        <span>Add Subtask</span>
-                    </div>
-                        
-                    </button>
+                    ${renderSubtaskSection(task.subtasks, task.id)}
                 </div>
             </div>
 
@@ -92,7 +81,7 @@ function renderHeaderSection(task) {
             </button>
         </div>
         <div class="u-mb-md">
-            <div class="task-card__category badge">${task.taskType}</div>
+            <div class="task-card__category badge" data-type="${task.taskType}">${task.taskType}</div>
         </div>
         <div class="modal__edit-header-task u-mb-lg">
              <h3 class="heading-xl modal-edit-field js-edit-field" data-field="title" contenteditable="true" spellcheck="false">
