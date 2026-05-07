@@ -88,8 +88,9 @@ export class AddTaskManager {
      * @memberof AddTaskManager
      */
     initAssigneeManager() {
-        this.assigneeManager = new AssigneeManager(null, (newList) => {
-            this.tempAssignees = newList;
+        this.assigneeManager = null;
+        this.assigneeManager = new AssigneeManager(null, (selectedIds) => {
+            this.tempAssignees = selectedIds;
         });
         this.assigneeManager.init();
     }
@@ -171,14 +172,18 @@ export class AddTaskManager {
      * @memberof AddTaskManager
      */
     assembleTaskObject(id, data) {
+        const finalAssignees = this.assigneeManager
+            ? this.assigneeManager.getCurrentSelection()
+            : this.tempAssignees;
+
         return {
             id: id,
             title: data.title.trim(),
             description: (data.description || '').trim(),
             dueDate: data.dueDate || '',
             priority: data.priority || 'medium',
-            category: 'todo',
-            assignedTo: [...this.tempAssignees],
+            category: 'to do',
+            assignedTo: Array.isArray(finalAssignees) ? [...finalAssignees] : [],
             subtasks: [...this.tempSubtasks],
             createdAt: Date.now(),
             updatedAt: Date.now()
