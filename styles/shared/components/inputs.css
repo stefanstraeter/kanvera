@@ -46,7 +46,7 @@
   outline: none;
   min-width: 0;
   font-family: var(--font-primary);
-  font-size: var(--font-size-m);
+  font-size: var(--font-size-body-l);
   color: var(--color-text-main);
   background: transparent;
   caret-color: var(--color-focus);
@@ -56,7 +56,14 @@
   color: var(--color-medium-grey);
   opacity: 1;
   font-family: var(--font-primary);
-  font-size: var(--font-size-m);
+  font-size: var(--font-size-body-l);
+}
+
+.placeholder-text {
+  color: var(--color-medium-grey);
+  opacity: 1;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-body-l);
 }
 
 .field-input::-moz-placeholder {
@@ -69,15 +76,25 @@
 }
 
 .field-input.task-textarea {
-  height: auto;
   resize: vertical;
-  min-height: 2rem;
+  min-height: 3rem;
+  margin-bottom: var(--space-xs);
+  overflow: auto;
+  padding-top: var(--space-sm);
+  box-sizing: border-box;
 }
 
 .field-wrapper:has(textarea) .field-group {
   height: auto;
+  min-height: 3rem;
   align-items: flex-start;
-  padding: var(--space-md);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.field-select {
+  cursor: pointer;
+  appearance: none;
 }
 
 /* ==========================================================================
