@@ -95,7 +95,7 @@
       "description": "Create an animated hero intro using CSS and scroll triggers.",
       "dueDate": "2026-03-01",
       "priority": "medium",
-      "taskType": "technical task",
+      "taskType": "feature",
       "title": "Hero Animation on Landingpage"
     },
     "task2": {
@@ -118,7 +118,7 @@
           "title": "Hover states"
         }
       ],
-      "taskType": "user story",
+      "taskType": "ui/ux",
       "title": "Product Grid Redesign"
     },
     "task3": {
@@ -139,7 +139,7 @@
           "title": "Performance testing"
         }
       ],
-      "taskType": "technical task",
+      "taskType": "bug fix",
       "title": "Chart Performance Optimization on Dashboard"
     },
     "task4": {
@@ -161,7 +161,7 @@
           "title": "Visual feedback"
         }
       ],
-      "taskType": "technical task",
+      "taskType": "feature",
       "title": "Drag & Drop Implementation"
     },
     "task5": {
@@ -173,7 +173,7 @@
       "description": "Ensure keyboard accessibility across UI components.",
       "dueDate": "2026-03-29",
       "priority": "medium",
-      "taskType": "user story",
+      "taskType": "ui/ux",
       "title": "Keyboard Navigation Accessibility"
     },
     "task6": {
@@ -184,7 +184,7 @@
       "description": "Build reusable button components and states.",
       "dueDate": "2026-03-22",
       "priority": "low",
-      "taskType": "technical task",
+      "taskType": "feature",
       "title": "Button Library & Design System "
     },
     "task8": {
@@ -206,7 +206,7 @@
           "title": "Visual confirmation"
         }
       ],
-      "taskType": "user story",
+      "taskType": "ui/ux",
       "title": "Cart UI: Add-to-Cart Feedback"
     }
   },
