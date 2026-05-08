@@ -1,4 +1,3 @@
-// src/shared/utils/ui-helpers.js
 
 import { UI_AUTH_BUTTON_TEXT } from './constants.js';
 

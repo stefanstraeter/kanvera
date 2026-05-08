@@ -1,4 +1,3 @@
-// src/shared/utils/splash-screen.js
 
 /* ==========================================================================
    SPLASH SCREEN HELPERS

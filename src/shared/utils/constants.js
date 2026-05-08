@@ -1,5 +1,3 @@
-// src/shared/utils/constants.js
-
 
 /* ==========================================================================
    KEY NAMES FOR STORAGE   
