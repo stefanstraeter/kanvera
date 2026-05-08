@@ -1,7 +1,7 @@
 import { updateTaskLocally, getTaskById } from '../task.service.js';
-import { getState, convertToArrayList } from '../../../core/state.js';
 
 import { generateAvatarsHtml } from '../../board/board.utils.js';
+import { getAllTeamMembers } from '../../team/team.service.js';
 
 import { createDropdownHtml, renderItem } from '../templates/components/assignee.template.js';
 
@@ -91,7 +91,7 @@ export class AssigneeManager {
      */
     renderDropdown() {
         const assignedIds = this.getCurrentSelection();
-        const allMembers = convertToArrayList(getState().team);
+        const allMembers = getAllTeamMembers();
         const html = createDropdownHtml(allMembers, assignedIds);
         this.insertDropdown(html);
     }
