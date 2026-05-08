@@ -1,3 +1,5 @@
+import { MEMBER_ROLE_OPTIONS } from '../../shared/utils/constants.js';
+
 /* ==========================================================================
    TEMPLATES FOR MEMBER DETAIL MODAL - EDIT
    ========================================================================== */
@@ -84,6 +86,14 @@ export const createConfirmDeleteHtml = (name) => {
     `;
 };
 
+function renderRoleOption(role) {
+    return `
+        <div class="priority-option js-member-role-option" data-value="${role}">
+            <span class="priority-text">${role}</span>
+        </div>
+    `;
+}
+
 
 /* ==========================================================================
    TEMPLATES FOR MEMBER DETAIL MODAL - ADD NEW MEMBER
@@ -108,14 +118,22 @@ export const createAddMemberModalHtml = () => {
 
             <div class="field-wrapper u-margin-bottom-md">
                 <label class="modal-label u-mb-xs">Role</label>
-                <div class="field-group">
-                    <select name="role" class="field-input">
-                        <option value="@developer">@developer</option>
-                        <option value="@designer">@designer</option>
-                        <option value="@marketing">@marketing</option>
-                        <option value="@guest">@guest</option>
-                    </select>
-                </div>
+                
+                    <div class="priority-select-container priority-select--form">
+                        <input type="hidden" name="role" id="js-member-role-input" value="@developer">
+
+                        <div class="priority-trigger js-member-role-toggle" data-role="@developer">
+                            <div class="priority-content">
+                                <span class="priority-text">developer</span>
+                            </div>
+                            <span class="priority-caret"><i class="fa-solid fa-angle-down"></i></span>
+                        </div>
+
+                        <div class="priority-options-menu is-hidden js-member-role-menu">
+                            ${MEMBER_ROLE_OPTIONS.map(renderRoleOption).join('')}
+                        </div>
+                    </div>
+                
                 <div class="error-msg"></div>
             </div>
 
