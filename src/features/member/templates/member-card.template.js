@@ -19,7 +19,7 @@ export const createMemberCardHtml = (member, initials, displayRole) => {
         : '';
 
     return `
-        <div class="team-card team-card--clickable" data-id="${member.id}" role="button">
+        <div class="team-card team-card--clickable" data-id="${member.id}" ${member.isMe ? 'data-is-me="true"' : ''} role="button">
             <div class="team-card__avatar">
                 <div class="avatar avatar--m">
                     ${imageTag}
