@@ -1,4 +1,3 @@
-// src/shared/components/navbar.js
 
 import { applyTheme } from '../utils/theme.js';
 import { getCurrentUser } from '../../features/auth/auth.service.js';

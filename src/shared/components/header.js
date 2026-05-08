@@ -1,4 +1,3 @@
-// src/shared/components/header.js
 
 import { performLogout, getCurrentUser } from '../../features/auth/auth.service.js';
 import { getInitials } from '../utils/ui-helpers.js';
