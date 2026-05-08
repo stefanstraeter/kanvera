@@ -22,8 +22,8 @@ export function renderAssigneeSelector(assigneeHtml = '', isFormStyle = false) {
         : `<div class="inline-field">
                 <div class="avatar-group">
                     <div class="js-modal-avatars">${content}</div>
-                    <button type="button" class="btn-icon btn-add-assignees u-ml-sm js-edit-assignees" title="Edit Assignees">
-                        <i class="fa-solid fa-user-plus field-icon"></i>
+                    <button type="button" class="btn-add-assignees btn-icon-only icon-interaction u-ml-sm js-edit-assignees" title="Edit Assignees">
+                        <i class="fa-solid fa-user-plus"></i>
                     </button>
                 </div>
            </div>`;
