@@ -1,8 +1,3 @@
-/**
- * Member Service
- * Handles single member data operations and validation
- */
-
 import { getState, saveToCache } from '../../core/state.js';
 import { toggleError, validateNotEmpty, validateEmailFormat, attachLiveValidation } from '../../shared/utils/input-validation.js';
 import { VALIDATION_ERRORS } from '../../shared/utils/constants.js';
