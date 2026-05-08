@@ -51,6 +51,17 @@ export function validateNotPastDate(dateString) {
     return selectedDate >= today;
 }
 
+/**
+ * @description Validates a phone number format. Allows digits, spaces, +, -, and parentheses. Empty values are valid (field is optional).
+ * @export
+ * @param {string} value - The phone value to validate.
+ * @return {boolean} Returns true if valid or empty, false if letters or invalid characters are present.
+ */
+export function validatePhoneFormat(value) {
+    if (!value || value.trim().length === 0) return true;
+    return /^[\d\s+\-().]+$/.test(value.trim());
+}
+
 /* ==========================================================================
    DOM UTILITIES - UI UPDATE
    ========================================================================== */
