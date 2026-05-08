@@ -7,6 +7,7 @@ import { openModal, closeModal } from '../../shared/components/modal.js';
 import { validateEmailFormat, validatePhoneFormat } from '../../shared/utils/input-validation.js';
 import { getInitials, setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
 import { UI_MEMBER_BUTTON_TEXT, VALIDATION_ERRORS } from '../../shared/utils/constants.js';
+import { getCurrentUser } from '../../features/auth/auth.service.js';
 
 import { createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './templates/member.template.js';
 
@@ -32,8 +33,29 @@ export class MemberManager {
         const member = getMemberById(memberId);
         if (!member) return;
 
-        this.renderEditModal(member);
+        this.renderEditModal(member, memberId);
         this.setupModalInteractions(memberId);
+    }
+
+    /**
+     * @description Handle editing the currently logged-in user's own card.
+     * @memberof MemberManager
+     */
+    handleSelfEditClick() {
+        const user = getCurrentUser();
+        if (!user) return;
+
+        const member = getMemberById(user.id) || {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            roles: user.isGuest ? ['@guest'] : ['@team member'],
+            phone: '',
+            imageUrl: ''
+        };
+
+        this.renderEditModal(member, member.id, true);
+        this.setupModalInteractions(member.id);
     }
 
     /**
@@ -41,12 +63,12 @@ export class MemberManager {
      * @param {Object} member - The member object to edit
      * @memberof MemberManager
      */
-    renderEditModal(member) {
+    renderEditModal(member, memberId, hideDeletion = false) {
         const initials = getInitials(member.name);
         const role = Array.isArray(member.roles) ? member.roles[0] : member.roles;
-        const html = createEditModalHtml(member, initials, role);
+        const html = createEditModalHtml(member, initials, role, hideDeletion);
 
-        openModal("Edit Profile", html);
+        openModal('Edit Profile', html);
     }
 
     /**
