@@ -46,23 +46,6 @@ export function getTaskById(taskId) {
     return getState().tasks[taskId] || null;
 }
 
-/**
- * @description Gets the details of assignees based on their member IDs.
- * @export
- * @param {Array<string>} memberIds - An array of member IDs.
- * @return {Array<Object>} An array of assignee objects.
- */
-export function resolveMemberDetails(memberIds) {
-    if (!memberIds || !Array.isArray(memberIds)) return [];
-
-    const state = getState();
-    const team = state.team || {};
-
-    return memberIds
-        .map(id => team[id])
-        .filter(member => !!member && member.name);
-}
-
 /* ==========================================================================
    TASKS SERVICE WRITE
    ========================================================================== */
