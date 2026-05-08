@@ -4,8 +4,9 @@ import { getMemberDataFromModal, createNewMemberObject } from './member.utils.js
 
 import { openModal, closeModal } from '../../shared/components/modal.js';
 
+import { validateEmailFormat, validatePhoneFormat } from '../../shared/utils/input-validation.js';
 import { getInitials, setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
-import { UI_MEMBER_BUTTON_TEXT } from '../../shared/utils/constants.js';
+import { UI_MEMBER_BUTTON_TEXT, VALIDATION_ERRORS } from '../../shared/utils/constants.js';
 
 import { createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './templates/member.template.js';
 
@@ -55,6 +56,11 @@ export class MemberManager {
      */
     async saveChanges(memberId) {
         const saveBtn = document.querySelector('.js-save-inline');
+
+        if (!this.validateInlineFields()) {
+            return;
+        }
+
         setLoadingStateBtn(saveBtn, true, UI_MEMBER_BUTTON_TEXT.SAVE_PENDING);
 
         try {
@@ -64,6 +70,47 @@ export class MemberManager {
         } catch (error) {
             console.error("Update failed:", error);
             setLoadingStateBtn(saveBtn, false, UI_MEMBER_BUTTON_TEXT.SAVE_DEFAULT);
+        }
+    }
+
+    /**
+     * @description Validates inline-edit fields (email, phone) before saving.
+     * @return {boolean} True if all fields are valid.
+     * @memberof MemberManager
+     */
+    validateInlineFields() {
+        const emailSpan = document.querySelector('[data-field="email"]');
+        const phoneSpan = document.querySelector('[data-field="phone"]');
+        const emailError = document.querySelector('[data-error="email"]');
+        const phoneError = document.querySelector('[data-error="phone"]');
+
+        const emailValue = emailSpan?.innerText.trim() || '';
+        const phoneValue = phoneSpan?.innerText.trim() || '';
+
+        const isEmailValid = validateEmailFormat(emailValue);
+        const isPhoneValid = validatePhoneFormat(phoneValue);
+
+        this.toggleInlineError(emailError, isEmailValid, VALIDATION_ERRORS.EMAIL_INVALID);
+        this.toggleInlineError(phoneError, isPhoneValid, VALIDATION_ERRORS.PHONE_INVALID);
+
+        return isEmailValid && isPhoneValid;
+    }
+
+    /**
+     * @description Shows or hides an inline error message.
+     * @param {HTMLElement} errorEl
+     * @param {boolean} isValid
+     * @param {string} message
+     * @memberof MemberManager
+     */
+    toggleInlineError(errorEl, isValid, message) {
+        if (!errorEl) return;
+        if (!isValid) {
+            errorEl.textContent = message;
+            errorEl.classList.add('show');
+        } else {
+            errorEl.textContent = '';
+            errorEl.classList.remove('show');
         }
     }
 

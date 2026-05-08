@@ -35,6 +35,7 @@ export const createEditModalHtml = (member, initials, displayRole) => {
                 <div class="inline-edit-wrapper">
                     <label class="modal-label">Role</label>
                     <span class="modal-edit-field js-edit-field" data-field="role" contenteditable="true" spellcheck="false">${displayRole}</span>
+                     <div class="error-msg"></div>
                 </div>
             </div>
 
@@ -43,6 +44,7 @@ export const createEditModalHtml = (member, initials, displayRole) => {
                 <div class="inline-edit-wrapper">
                     <label class="modal-label">Email Address</label>
                     <span class="modal-edit-field js-edit-field" data-field="email" contenteditable="true" spellcheck="false">${member.email}</span>
+                    <div class="error-msg" data-error="email"></div>
                 </div>
             </div>
 
@@ -51,6 +53,7 @@ export const createEditModalHtml = (member, initials, displayRole) => {
                 <div class="inline-edit-wrapper">
                     <label class="modal-label">Phone Number</label>
                     <span class="modal-edit-field js-edit-field" data-field="phone" contenteditable="true" spellcheck="false">${member.phone || 'No Number'}</span>
+                    <div class="error-msg" data-error="phone"></div>
                 </div>
             </div>
         </div>

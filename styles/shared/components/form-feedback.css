@@ -3,8 +3,9 @@
    ========================================================================== */
 .error-msg {
   color: var(--color-danger);
-  font-size: var(--font-size-body-m);
-  min-height: 1.2rem;
+  font-size: var(--font-size-body-s);
+  height: 1.5rem;
+  line-height: 1.2rem;
   padding: 0 var(--space-xs);
   visibility: hidden;
   opacity: 0;
