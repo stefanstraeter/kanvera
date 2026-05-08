@@ -1,10 +1,29 @@
-/**
- * Member Utilities
- * Helper functions for extracting and formatting member-specific data.
- */
+import { getState } from '../../core/state.js';
+
 
 /* ==========================================================================
-   DATA EXTRACTION FROM INPUT FIELDS AND CREATION OF MEMBER OBJECTS
+   MEMBER DATA RESOLUTION
+   ========================================================================== */
+
+/**
+ * @description Gets the details of assignees based on their member IDs.
+ * @export
+ * @param {Array<string>} memberIds - An array of member IDs.
+ * @return {Array<Object>} An array of assignee objects.
+ */
+export function resolveMemberDetails(memberIds) {
+    if (!memberIds || !Array.isArray(memberIds)) return [];
+
+    const state = getState();
+    const team = state.team || {};
+
+    return memberIds
+        .map(id => team[id])
+        .filter(member => !!member && member.name);
+}
+
+/* ==========================================================================
+   DATA EXTRACTION FROM INPUT FIELDS
    ========================================================================== */
 
 /**
@@ -26,6 +45,10 @@ export function getMemberDataFromModal() {
     };
 }
 
+
+/* ==========================================================================
+    MEMBER OBJECT CREATION
+   ========================================================================== */
 /**
  * @description Creates a structured member object from raw form data (used for new members).
  * @export
