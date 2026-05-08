@@ -167,7 +167,7 @@ export class TeamManager {
 
         const card = event.target.closest('.team-card--clickable');
         if (card) {
-            this.processEditAction(card.dataset.id);
+            this.processEditAction(card.dataset.id, card.dataset.isMe === 'true');
         }
     }
 
@@ -176,8 +176,12 @@ export class TeamManager {
      * @param {string} memberId - The ID of the member to edit.
      * @memberof TeamManager
      */
-    processEditAction(memberId) {
-        this.memberManager.handleEditClick(memberId);
+    processEditAction(memberId, isMe) {
+        if (isMe) {
+            this.memberManager.handleSelfEditClick();
+        } else {
+            this.memberManager.handleEditClick(memberId);
+        }
     }
 
     /**
