@@ -118,6 +118,7 @@ export class MemberManager {
             (data) => this.saveNewMember(data),
             validateMemberForm
         );
+        this.initRoleDropdown();
         initAddMemberValidation();
     }
 
@@ -179,6 +180,80 @@ export class MemberManager {
 
         if (saveBtn) saveBtn.onclick = () => this.saveChanges(memberId);
         if (deleteBtn) deleteBtn.onclick = () => this.handleDeleteMember(memberId);
+    }
+
+    /**
+     * @description Initializes the role dropdown in the add member form.
+     * @memberof MemberManager
+     */
+    initRoleDropdown() {
+        const menu = document.querySelector('.js-member-role-menu');
+        if (!menu) return;
+
+        this.bindRoleToggle(menu);
+        this.bindRoleOptions(menu);
+        this.bindRoleOutsideClick(menu);
+    }
+
+    /**
+     * @description Binds the role dropdown toggle button.
+     * @param {HTMLElement} menu - The role options menu.
+     * @memberof MemberManager
+     */
+    bindRoleToggle(menu) {
+        const toggle = document.querySelector('.js-member-role-toggle');
+        toggle?.addEventListener('click', (event) => {
+            event.stopPropagation();
+            menu.classList.toggle('is-hidden');
+        });
+    }
+
+    /**
+     * @description Binds the role option click handlers.
+     * @param {HTMLElement} menu - The role options menu.
+     * @memberof MemberManager
+     */
+    bindRoleOptions(menu) {
+        menu.querySelectorAll('.js-member-role-option').forEach(option => {
+            option.addEventListener('click', (event) => {
+                event.stopPropagation();
+                this.handleRoleSelection(option.dataset.value, menu);
+            });
+        });
+    }
+
+    /**
+     * @description Closes the role dropdown when clicking outside.
+     * @param {HTMLElement} menu - The role options menu.
+     * @memberof MemberManager
+     */
+    bindRoleOutsideClick(menu) {
+        const listener = (event) => {
+            if (!menu.contains(event.target) && !event.target.closest('.js-member-role-toggle')) {
+                menu.classList.add('is-hidden');
+                document.removeEventListener('click', listener);
+            }
+        };
+
+        setTimeout(() => document.addEventListener('click', listener), 0);
+    }
+
+    /**
+     * @description Updates role UI and hidden input after selection.
+     * @param {string} role - The selected role value.
+     * @param {HTMLElement} menu - The role options menu.
+     * @memberof MemberManager
+     */
+    handleRoleSelection(role, menu) {
+        const input = document.getElementById('js-member-role-input');
+        const toggle = document.querySelector('.js-member-role-toggle');
+        const text = toggle?.querySelector('.priority-text');
+
+        if (input) input.value = role;
+        if (toggle) toggle.dataset.role = role;
+        if (text) text.textContent = role;
+
+        menu.classList.add('is-hidden');
     }
 
     /**
