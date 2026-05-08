@@ -1,6 +1,8 @@
 import { updateTaskLocally, getTaskById } from '../task.service.js';
 import { getState, convertToArrayList } from '../../../core/state.js';
+
 import { generateAvatarsHtml } from '../../board/board.utils.js';
+
 import { createDropdownHtml, renderItem } from '../templates/components/assignee.template.js';
 
 /**

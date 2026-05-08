@@ -1,9 +1,3 @@
-// src/features/auth/auth.manager.js
-
-/**
- * Authentication Manager
- * Handles auth form UI interactions, validation, and state transitions
- */
 
 import { UI_AUTH_BUTTON_TEXT } from '../../shared/utils/constants.js';
 

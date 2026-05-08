@@ -1,12 +1,15 @@
 // src/main.js
 
+import { initState } from './core/state.js';
+
 import { initSplashScreen } from './shared/utils/splash-screen.js';
 import { initThemeListeners } from './shared/utils/theme.js';
-import { initPasswordToggles, initSliderLogic, initDropdownLogic } from './features/auth/auth.manager.js';
-import { initSignInLogic } from './features/auth/sign-in.js';
-import { initState } from './core/state.js';
+
 import { Navbar } from './shared/components/navbar.js';
 import { Header } from './shared/components/header.js';
+
+import { initPasswordToggles, initSliderLogic, initDropdownLogic } from './features/auth/auth.manager.js';
+import { initSignInLogic } from './features/auth/sign-in.js';
 import { PulseManager } from './features/pulse/pulse.manager.js';
 import { TeamManager } from './features/team/team.manager.js';
 import { BoardManager } from './features/board/board.manager.js';

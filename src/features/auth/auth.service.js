@@ -1,11 +1,6 @@
-// src/features/auth/auth.service.js
-
-/**
- * Authentication Service
- * Handles user login, signup, and session management
- */
 
 import { fetchData, postData } from '../../core/firebase.config.js';
+
 import { AUTH_SESSION_KEY, GUEST_LOGIN_DATA } from '../../shared/utils/constants.js';
 
 /* ==========================================================================

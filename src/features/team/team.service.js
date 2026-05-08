@@ -5,8 +5,10 @@
  * Handles team member data and operations
  */
 
-import { getCurrentUser } from '../auth/auth.service.js';
 import { getState, saveToCache, convertToArrayList } from '../../core/state.js';
+
+import { getCurrentUser } from '../auth/auth.service.js';
+
 import { toggleError, validateNotEmpty, validateEmailFormat, attachLiveValidation } from '../../shared/utils/input-validation.js';
 import { VALIDATION_ERRORS } from '../../shared/utils/constants.js';
 

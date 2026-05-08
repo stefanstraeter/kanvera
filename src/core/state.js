@@ -1,9 +1,3 @@
-// src/core/state.js
-
-/**
- * Central Application State Management
- * Single source of truth for tasks, team, and users data
- */
 
 import { fetchData } from './firebase.config.js';
 import { DATA_CACHE_KEY } from '../shared/utils/constants.js';

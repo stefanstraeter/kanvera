@@ -1,4 +1,3 @@
-// src/features/board/dnd.manager.js
 
 import { updateTaskCategory } from '../task/task.service.js';
 

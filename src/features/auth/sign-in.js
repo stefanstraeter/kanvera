@@ -1,9 +1,9 @@
-// src/features/auth/sign-in.js
 
 import { signInAsUser, signInAsGuest } from './auth.service.js';
+import { handleSignUp } from './sign-up.js';
+
 import { validateNotEmpty, validateEmailFormat, validateMinLength, toggleError, attachLiveValidation } from '../../shared/utils/input-validation.js';
 import { setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
-import { handleSignUp } from './sign-up.js';
 import { AUTH_ERRORS, GUEST_LOGIN_DATA, UI_AUTH_BUTTON_TEXT } from '../../shared/utils/constants.js';
 
 /* ==========================================================================

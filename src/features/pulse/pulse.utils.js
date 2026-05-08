@@ -1,4 +1,3 @@
-// src/features/pulse/pulse.utils.js
 
 import { GREETING_MESSAGES } from '../../shared/utils/constants.js';
 

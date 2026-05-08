@@ -1,9 +1,3 @@
-// src/features/pulse/pulse.service.js
-
-/**
- * Pulse Service
- * Handles pulse/news-feed statistics and data
- */
 
 import { getAllTasks } from '../task/task.service.js';
 

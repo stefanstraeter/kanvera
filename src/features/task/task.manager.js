@@ -1,13 +1,18 @@
+
+import { getTaskById, updateTaskLocally, deleteTaskLocally, initAddTaskValidation, validateTaskForm } from './task.service.js';
+
 import { SubtaskManager } from './components/subtask.manager.js';
 import { AssigneeManager } from './components/assignee.manager.js';
 import { PriorityManager } from './components/priority.manager.js';
 
-import { getTaskById, updateTaskLocally, deleteTaskLocally, initAddTaskValidation, validateTaskForm } from './task.service.js';
-import { openModal, closeModal } from '../../shared/components/modal.js';
-import { createTaskDetailCardHtml, createConfirmDeleteTaskHtml, createAddTaskModalHtml } from './templates/task.template.js';
 import { getTaskDataFromModal, generateAvatarsHtml } from '../board/board.utils.js';
+
+import { openModal, closeModal } from '../../shared/components/modal.js';
+
 import { handleAsyncButtonAction } from '../../shared/utils/ui-helpers.js';
 import { UI_TASK_BUTTON_TEXT } from '../../shared/utils/constants.js';
+
+import { createTaskDetailCardHtml, createConfirmDeleteTaskHtml, createAddTaskModalHtml } from './templates/task.template.js';
 
 /**
  * @description Manager class for task modal interactions.

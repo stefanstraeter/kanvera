@@ -1,14 +1,18 @@
+
+import { initAddTaskValidation, validateTaskForm, createTaskLocally } from '../task.service.js';
+
 import { SubtaskManager } from './subtask.manager.js';
 import { AssigneeManager } from './assignee.manager.js';
 import { PriorityManager } from './priority.manager.js';
 import { TaskTypeManager } from './task-type.manager.js';
 
 import { openModal, closeModal } from '../../../shared/components/modal.js';
-import { renderSubtasksList } from '../templates/components/subtask.template.js';
-import { createAddTaskModalHtml } from '../templates/task.template.js';
-import { initAddTaskValidation, validateTaskForm, createTaskLocally } from '../task.service.js';
+
 import { setLoadingStateBtn } from '../../../shared/utils/ui-helpers.js';
 import { UI_TASK_BUTTON_TEXT } from '../../../shared/utils/constants.js';
+
+import { renderSubtasksList } from '../templates/components/subtask.template.js';
+import { createAddTaskModalHtml } from '../templates/task.template.js';
 
 
 /**

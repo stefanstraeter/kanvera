@@ -1,9 +1,3 @@
-// src/features/pulse/pulse.manager.js
-
-/**
- * Pulse Manager
- * Orchestrates the pulse page rendering and statistics
- */
 
 import { getPulseStats } from './pulse.service.js';
 import { getGreetingConfig, formatDeadline } from './pulse.utils.js';

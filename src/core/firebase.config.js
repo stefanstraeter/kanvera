@@ -1,9 +1,3 @@
-// src/core/firebase.config.js
-
-/**
- * Firebase Realtime Database Configuration
- * Contains all low-level Firebase API communication
- */
 
 const BASE_URL = "https://kanvera-default-rtdb.europe-west1.firebasedatabase.app/";
 

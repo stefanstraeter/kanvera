@@ -1,9 +1,12 @@
+
+import { getTasksByCategory } from '../task/task.service.js';
 import { TaskManager } from '../task/task.manager.js';
 import { AddTaskManager } from '../task/components/add-task.manager.js';
-import { getTasksByCategory } from '../task/task.service.js';
-import { renderColumnHtml } from './board.template.js';
-import { renderSingleTask, showBoardWrapper } from './board.utils.js';
+
 import { initDragAndDrop, attachDragEventToCard } from './dnd.manager.js';
+import { renderSingleTask, showBoardWrapper } from './board.utils.js';
+
+import { renderColumnHtml } from './board.template.js';
 
 /**
  * @description Manager for the Board view. Handles rendering of columns and tasks, as well as user interactions on the board.

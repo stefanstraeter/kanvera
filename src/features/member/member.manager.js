@@ -1,9 +1,13 @@
+
 import { getMemberById, updateMemberLocally, deleteMemberLocally, initAddMemberValidation, validateMemberForm } from './member.service.js';
+import { getMemberDataFromModal, createNewMemberObject } from './member.utils.js';
+
 import { openModal, closeModal } from '../../shared/components/modal.js';
+
 import { getInitials, setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
 import { UI_MEMBER_BUTTON_TEXT } from '../../shared/utils/constants.js';
+
 import { createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './member.template.js';
-import { getMemberDataFromModal, createNewMemberObject } from './member.utils.js';
 
 /**
  * @description Manager class for member interactions.

@@ -1,6 +1,6 @@
-// src/features/auth/sign-up.js
 
 import { checkIfEmailExists, createNewUser } from './auth.service.js';
+
 import { validateNotEmpty, validateEmailFormat, validateMinLength, toggleError } from '../../shared/utils/input-validation.js';
 import { setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
 import { AUTH_ERRORS, UI_AUTH_BUTTON_TEXT } from '../../shared/utils/constants.js';

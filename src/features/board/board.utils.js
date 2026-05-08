@@ -1,5 +1,7 @@
 import { resolveMemberDetails } from '../member/member.utils.js';
+
 import { getInitials, calculateProgressPercent } from '../../shared/utils/ui-helpers.js';
+
 import { createAvatarHtml, createTaskCardHtml } from '../task/templates/task.template.js';
 
 /* ==========================================================================
