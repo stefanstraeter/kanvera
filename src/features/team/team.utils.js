@@ -1,7 +1,3 @@
-/**
- * Team Utilities
- * Helper functions for the team page UI.
- */
 
 /* ==========================================================================
    UI HELPERS
