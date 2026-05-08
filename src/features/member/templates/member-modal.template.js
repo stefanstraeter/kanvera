@@ -10,14 +10,15 @@
  * @param {string} displayRole
  * @return {string} HTML string for the edit modal of the team member
  */
-export const createEditModalHtml = (member, initials, displayRole) => {
+export const createEditModalHtml = (member, initials, displayRole, hideDeletion = false) => {
     return `
     <div class="modal-edit-container">
+        ${hideDeletion ? '' : `
         <div class="team-card__delete">
             <button type="button" class="btn-icon-only btn-trash-icon icon-interaction js-delete-member" title="Delete Member">
                <i class="fa-regular fa-trash-can"></i>
             </button>
-        </div>
+        </div>`}
 
         <div class="modal__edit-header-member">
             <div class="avatar avatar--l">
