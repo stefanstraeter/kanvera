@@ -46,6 +46,16 @@ export const TASK_TYPE_LABELS = {
 
 
 /* ==========================================================================
+   MEMBER ROLE OPTIONS   
+   ========================================================================== */
+
+/**
+ * @description An array of available member role values used across the member management feature.
+ */
+export const MEMBER_ROLE_OPTIONS = ['developer', 'designer', 'marketing', 'guest'];
+
+
+/* ==========================================================================
    INPUT VALIDATION ERROR MESSAGES    
    ========================================================================== */
 
