@@ -1,9 +1,3 @@
-// src/features/team/team.service.js
-
-/**
- * Team Service
- * Handles team member data and operations
- */
 
 import { getState, saveToCache, convertToArrayList } from '../../core/state.js';
 
