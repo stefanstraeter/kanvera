@@ -1,6 +1,4 @@
-// src/features/board/board.utils.js
-
-import { resolveMemberDetails } from '../task/task.service.js';
+import { resolveMemberDetails } from '../member/member.utils.js';
 import { getInitials, calculateProgressPercent } from '../../shared/utils/ui-helpers.js';
 import { createAvatarHtml, createTaskCardHtml } from '../task/templates/task.template.js';
 
