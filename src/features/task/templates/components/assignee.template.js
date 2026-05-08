@@ -1,3 +1,5 @@
+import { getInitials } from '../../../../shared/utils/ui-helpers.js';
+
 /* ==========================================================================
    ASSIGNEES SELECTOR
    ========================================================================== */
@@ -65,10 +67,17 @@ export function createDropdownHtml(allMembers, assignedIds) {
  * @memberof AssigneeManager
  */
 export function renderItem(member, isAssigned) {
+    const hasImage = !!member.imageUrl;
+    const initials = getInitials(member.name);
+    const bgColor = hasImage ? 'transparent' : (member.color || 'var(--color-main)');
+    const avatarContent = hasImage
+        ? `<img src="${member.imageUrl}" alt="${member.name}" class="avatar__img">`
+        : initials;
+
     return `
             <li class="assignee-item ${isAssigned ? 'is-selected' : ''}" data-id="${member.id}">
                 <div class="assignee-item__info">
-                    <img src="${member.imageUrl}" class="avatar avatar--s" alt="">
+                    <div class="avatar avatar--s" style="background-color: ${bgColor}" title="${member.name}">${avatarContent}</div>
                     <span class="assignee-name">${member.name}</span>
                 </div>
                 ${isAssigned ? '<i class="fa-solid fa-check check-icon"></i>' : ''}
