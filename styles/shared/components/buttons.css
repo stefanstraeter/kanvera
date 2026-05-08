@@ -62,41 +62,45 @@
 }
 
 /* ==========================================================================
-   BUTTON ICON
+   BUTTON ICON STYLES
    ========================================================================== */
-.btn-icon {
+.btn-icon-only {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-s);
-  font-weight: var(--font-weight-bold);
 }
 
 .btn-trash-icon {
-  font-size: var(--font-size-s);
+  font-size: var(--font-size-m);
+  padding: var(--space-xs);
   color: var(--color-medium-grey);
-  transition:
-    transform 0.2s ease-in-out,
-    color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
 }
 
 .btn-trash-icon:hover {
   color: var(--color-btn-danger-hover);
-  transform: scale(1.1);
 }
 
 .btn-add-assignees {
-  transition: transform 0.2s ease-in-out;
+  font-size: var(--font-size-m);
+  padding: var(--space-xs);
+  color: var(--color-medium-grey);
+  transition: color 0.2s ease-in-out;
 }
 
 .btn-add-assignees:hover {
-  transform: scale(1.1);
+  color: var(--color-btn-main-hover);
 }
 
 .btn-add-subtask {
   font-size: var(--font-size-s);
+  padding: var(--space-xs) 0 var(--space-xs) var(--space-xs);
   color: var(--color-medium-grey);
-  transition: transform 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+
+.btn-add-subtask:hover {
+  color: var(--color-btn-main-hover);
 }
 
 /* ==========================================================================
@@ -127,6 +131,17 @@
 
 .btn--destructive:hover {
   background-color: var(--color-btn-danger-hover);
+}
+
+/* ==========================================================================
+   ICON INTERACTION
+   ========================================================================== */
+.icon-interaction {
+  display: inline-flex;
+}
+
+.icon-interaction:active {
+  transform: scale(0.9);
 }
 
 /* ==========================================================================
@@ -161,7 +176,7 @@
     display: none;
   }
 
-  .btn-icon {
+  .btn-icon-only {
     margin: 0;
   }
 }
