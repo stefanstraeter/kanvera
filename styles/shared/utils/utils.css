@@ -61,3 +61,19 @@
 .u-text-center {
   text-align: center !important;
 }
+
+/* ==========================================================================
+    TEXT ALIGNMENT UTILITIES
+   ========================================================================== */
+.hidden-on-desktop {
+  display: none;
+}
+
+/* ==========================================================================
+    RESPONSIVE VISIBILITY UTILITIES
+   ========================================================================== */
+@media (max-width: 650px) {
+  .hidden-on-desktop {
+    display: inline-block;
+  }
+}
