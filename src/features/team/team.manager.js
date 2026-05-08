@@ -5,7 +5,7 @@ import { MemberManager } from '../member/member.manager.js';
 
 import { getInitials } from '../../shared/utils/ui-helpers.js';
 
-import { createMemberCardHtml } from '../member/member.template.js';
+import { createMemberCardHtml } from '../member/templates/member.template.js';
 
 /**
  * @description Page class for managing the team view and member grid.
