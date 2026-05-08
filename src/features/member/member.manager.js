@@ -7,7 +7,7 @@ import { openModal, closeModal } from '../../shared/components/modal.js';
 import { getInitials, setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
 import { UI_MEMBER_BUTTON_TEXT } from '../../shared/utils/constants.js';
 
-import { createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './member.template.js';
+import { createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './templates/member.template.js';
 
 /**
  * @description Manager class for member interactions.
