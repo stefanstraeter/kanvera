@@ -60,13 +60,9 @@ export class TaskTypeManager {
      * @memberof TaskTypeManager
      */
     bindOutsideClick(menu) {
-        const listener = (event) => {
-            if (!menu.contains(event.target) && !event.target.closest('.js-task-type-toggle')) {
-                menu.classList.add('is-hidden');
-                document.removeEventListener('click', listener);
-            }
-        };
-        setTimeout(() => document.addEventListener('click', listener), 0);
+        document.addEventListener('click', () => {
+            menu.classList.add('is-hidden');
+        });
     }
 
     /* ==========================================================================
