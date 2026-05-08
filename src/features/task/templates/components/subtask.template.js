@@ -15,8 +15,8 @@ export function renderSubtaskSection(subtasks = [], taskId = null, isFormStyle =
             <label class="modal-label u-mb-xs">Subtasks</label>
             <div class="field-group subtask-input-group" style="display: flex; gap: 0.5rem;">
                 <input type="text" id="js-add-subtask-input" class="field-input" placeholder="e.g. Make coffee">
-                <button type="button" id="js-add-subtask-btn" class="btn-add-subtask js-add-subtask-btn" title="Add Subtask">
-                    <i class="fa-solid fa-plus btn-icon"></i>
+                <button type="button" id="js-add-subtask-btn" class="btn-icon-only btn-add-subtask icon-interaction js-add-subtask-btn" title="Add Subtask">
+                    <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
             <div id="js-temp-subtask-list" class="subtask-preview-list u-mt-sm">
@@ -32,7 +32,6 @@ export function renderSubtaskSection(subtasks = [], taskId = null, isFormStyle =
         </div>
         <button type="button" class="btn btn--s btn--full btn--secondary js-add-subtask-btn">
             <div class="btn-group">
-                <i class="fa-solid fa-plus btn-icon"></i>
                 <span>Add Subtask</span>
             </div>
         </button>
@@ -59,7 +58,7 @@ export function renderSubtasksList(subtasks = [], taskId, isFormStyle = false) {
                       contenteditable="true" 
                       data-index="${i}">${st.title || ''}</span>
 
-                <button type="button" class="btn-icon btn-trash-icon u-pl-sm u-pr-sm js-delete-subtask" data-index="${i}">
+                <button type="button" class="btn-icon-only btn-trash-icon icon-interaction u-pl-sm u-pr-sm js-delete-subtask" data-index="${i}">
                     <i class="fa-regular fa-trash-can"></i>
                 </button>
             </div>
@@ -84,7 +83,7 @@ export function renderSubtasksList(subtasks = [], taskId, isFormStyle = false) {
                   contenteditable="true" 
                   data-index="${i}">${st.title}</span>
 
-            <button type="button" class="btn-icon btn-trash-icon u-pl-sm u-pr-sm js-delete-subtask" data-index="${i}">
+            <button type="button" class="btn-icon-only btn-trash-icon icon-interaction u-pl-sm u-pr-sm js-delete-subtask" data-index="${i}">
                 <i class="fa-regular fa-trash-can"></i>
             </button>
         </div>
