@@ -228,14 +228,9 @@ export class MemberManager {
      * @memberof MemberManager
      */
     bindRoleOutsideClick(menu) {
-        const listener = (event) => {
-            if (!menu.contains(event.target) && !event.target.closest('.js-member-role-toggle')) {
-                menu.classList.add('is-hidden');
-                document.removeEventListener('click', listener);
-            }
-        };
-
-        setTimeout(() => document.addEventListener('click', listener), 0);
+        document.addEventListener('click', () => {
+            menu.classList.add('is-hidden');
+        });
     }
 
     /**
