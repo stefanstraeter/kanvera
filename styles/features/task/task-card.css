@@ -43,7 +43,6 @@
   border-radius: var(--radius-task-category);
   font-size: 0.75rem;
   font-weight: var(--font-weight-bold);
-  text-transform: capitalize;
   letter-spacing: 0.04em;
 }
 
