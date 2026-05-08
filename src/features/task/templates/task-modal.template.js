@@ -1,4 +1,5 @@
 import { renderPrioritySelector, renderAssigneeSelector, renderSubtaskSection } from './components.template.js';
+import { formatTaskTypeLabel } from '../task.utils.js';
 
 /* ==========================================================================
    TEMPLATE FOR TASK MODAL
@@ -76,12 +77,12 @@ export const createTaskDetailCardHtml = (task, assigneeHtml) => {
 function renderHeaderSection(task) {
     return `
         <div class="team-card__delete">
-            <button type="button" class="btn-icon btn-trash-icon modal__delete-icon js-delete-task" title="Delete Task">
+            <button type="button" class="btn-icon-only btn-trash-icon icon-interaction js-delete-task" title="Delete Task">
                <i class="fa-regular fa-trash-can"></i>
             </button>
         </div>
         <div class="u-mb-md">
-            <div class="task-card__category badge" data-type="${task.taskType}">${task.taskType}</div>
+            <div class="task-card__category badge" data-type="${task.taskType}">${formatTaskTypeLabel(task.taskType)}</div>
         </div>
         <div class="modal__edit-header-task u-mb-lg">
              <h3 class="heading-xl modal-edit-field js-edit-field" data-field="title" contenteditable="true" spellcheck="false">
