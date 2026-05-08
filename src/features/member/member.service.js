@@ -1,6 +1,6 @@
 import { getState, saveToCache } from '../../core/state.js';
 
-import { toggleError, validateNotEmpty, validateEmailFormat, attachLiveValidation } from '../../shared/utils/input-validation.js';
+import { toggleError, validateNotEmpty, validateEmailFormat, validatePhoneFormat, attachLiveValidation } from '../../shared/utils/input-validation.js';
 import { VALIDATION_ERRORS } from '../../shared/utils/constants.js';
 
 /* ==========================================================================
@@ -64,9 +64,11 @@ export function initAddMemberValidation() {
 
     const nameInput = form.querySelector('input[name="name"]');
     const emailInput = form.querySelector('input[name="email"]');
+    const phoneInput = form.querySelector('input[name="phone"]');
 
     attachLiveValidation(nameInput, validateNotEmpty, VALIDATION_ERRORS.FULL_NAME);
     attachLiveValidation(emailInput, validateEmailFormat, VALIDATION_ERRORS.EMAIL_INVALID);
+    attachLiveValidation(phoneInput, validatePhoneFormat, VALIDATION_ERRORS.PHONE_INVALID);
 }
 
 export function validateMemberForm(form) {
