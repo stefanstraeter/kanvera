@@ -69,7 +69,7 @@
   flex: 1;
   cursor: text;
   outline: none;
-  font-size: var(--font-size-body-l);
+  font-size: var(--font-size-m);
   transition: all var(--transition);
 }
 
@@ -80,7 +80,7 @@
 
 .js-subtask-text:empty::before {
   content: "e.g. Make coffee";
-  font-size: var(--font-size-body-l);
+  font-size: var(--font-size-m);
   color: var(--color-medium-grey);
   font-weight: var(--font-weight-medium);
   opacity: 0.6;
