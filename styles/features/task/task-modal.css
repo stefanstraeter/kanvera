@@ -2,7 +2,7 @@
    TASK DETAIL DESCRIPTION
    ========================================================================== */
 .task-detail__description {
-  font-size: var(--font-size-body-l);
+  font-size: var(--font-size-m);
   line-height: var(--line-height-body);
 }
 
@@ -38,7 +38,7 @@
   cursor: pointer;
   width: 100%;
   min-height: 2.5rem;
-  font-size: var(--font-size-body-l);
+  font-size: var(--font-size-m);
 }
 
 .task-detail__date-input:focus {
