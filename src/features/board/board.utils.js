@@ -5,8 +5,20 @@ import { getInitials, calculateProgressPercent } from '../../shared/utils/ui-hel
 import { createAvatarHtml, createTaskCardHtml } from '../task/templates/task.template.js';
 
 /* ==========================================================================
-   TASK RENDERING PREPARATION
+    AVATAR GENERATION
    ========================================================================== */
+
+/**
+ * @description Renders a single avatar HTML element for a member
+ * @param {Object} member - Member object with name and imageUrl
+ * @return {string} HTML string for the avatar
+ */
+function renderMemberAvatar(member) {
+    const hasImage = member.imageUrl && member.imageUrl.trim() !== "";
+    const initials = getInitials(member.name);
+
+    return createAvatarHtml(member, initials, hasImage);
+}
 
 /**
  * @description Generates the HTML for assignee avatars based on their IDs, with an optional limit and overflow badge.
@@ -20,21 +32,40 @@ export function generateAvatarsHtml(assignedToIds, limit = 5) {
 
     const total = assignedToIds.length;
     const showBadge = total > limit;
-    const itemsToRender = showBadge ? limit - 1 : total;
-    const displayIds = assignedToIds.slice(0, itemsToRender);
+    const displayCount = showBadge ? limit - 1 : total;
+    const displayIds = assignedToIds.slice(0, displayCount);
     const members = resolveMemberDetails(displayIds);
 
-    let html = members.map(member => {
-        const hasImage = member.imageUrl && member.imageUrl.trim() !== "";
-        const initials = getInitials(member.name);
-        return createAvatarHtml(member, initials, hasImage);
-    }).join('');
+    let html = members.map(renderMemberAvatar).join('');
 
     if (showBadge) {
-        const extraCount = total - itemsToRender;
+        const extraCount = total - displayCount;
         html += `<div class="avatar avatar--s avatar--more" title="${total} Assignees">+${extraCount}</div>`;
     }
+
     return html;
+}
+
+
+/* ==========================================================================
+    TASK CARD PREPARATION & RENDERING
+   ========================================================================== */
+
+/**
+ * @description Calculates subtask statistics (count, progress, status)
+ * @param {Object} task - The task object
+ * @return {Object} Stats object with hasSubtasks, progress, and subtaskStatus
+ */
+function getSubtaskStats(task) {
+    const subtasks = task.subtasks || [];
+    const totalCount = subtasks.length;
+    const doneCount = subtasks.filter(st => st.done).length;
+
+    return {
+        hasSubtasks: totalCount > 0,
+        progress: calculateProgressPercent(doneCount, totalCount),
+        subtaskStatus: `${doneCount}/${totalCount}`
+    };
 }
 
 /**
@@ -44,15 +75,13 @@ export function generateAvatarsHtml(assignedToIds, limit = 5) {
  * @return {Object} Prepared task data with additional properties for rendering
  */
 export function prepareTaskData(task) {
-    const subtasks = task.subtasks || [];
-    const subCount = subtasks.length;
-    const doneCount = subtasks.filter(st => st.done).length;
+    const stats = getSubtaskStats(task);
 
     return {
         ...task,
-        hasSubtasks: subCount > 0,
-        progress: calculateProgressPercent(doneCount, subCount),
-        subtaskStatus: `${doneCount}/${subCount}`,
+        hasSubtasks: stats.hasSubtasks,
+        progress: stats.progress,
+        subtaskStatus: stats.subtaskStatus,
         assigneeAvatars: generateAvatarsHtml(task.assignedTo)
     };
 }
@@ -68,8 +97,10 @@ export function renderSingleTask(task) {
     return createTaskCardHtml(preparedTask);
 }
 
+
+
 /* ==========================================================================
-   MODAL DATA EXTRACTION
+    DATA EXTRACTION FROM MODALS & EVENTS
    ========================================================================== */
 
 /**
@@ -79,12 +110,16 @@ export function renderSingleTask(task) {
  */
 export function getTaskDataFromModal() {
     return {
-        title: document.querySelector('[data-field="title"]')?.innerText.trim(),
-        description: document.querySelector('[data-field="description"]')?.innerText.trim(),
-        priority: document.querySelector('.js-priority-toggle')?.dataset.priority,
-        dueDate: document.querySelector('.js-task-due-date')?.value
+        title: document.querySelector('[data-field="title"]')?.innerText.trim() ?? '',
+        description: document.querySelector('[data-field="description"]')?.innerText.trim() ?? '',
+        priority: document.querySelector('.js-priority-toggle')?.dataset.priority ?? '',
+        dueDate: document.querySelector('.js-task-due-date')?.value ?? ''
     };
 }
+
+/* ==========================================================================
+   SUBTASK EVENT HANDLER FUNCTIONS
+   ========================================================================== */
 
 /**
  * @description Extracts the index and status from the checkbox event.
@@ -99,6 +134,7 @@ export function getSubtaskChangeData(event) {
     };
 }
 
+
 /* ==========================================================================
    UI STATE & VISUALS
    ========================================================================== */
@@ -110,8 +146,8 @@ export function getSubtaskChangeData(event) {
  * @param {boolean} isDone - The completion status of the subtask
  */
 export function toggleSubtaskVisuals(index, isDone) {
-    const label = document.querySelector(`label[for="st-${index}"] .subtask-text`);
-    label?.classList.toggle('is-done', isDone);
+    const textElement = document.querySelector(`label[for="st-${index}"] .subtask-text`);
+    textElement?.classList.toggle('is-done', isDone);
 }
 
 /**
