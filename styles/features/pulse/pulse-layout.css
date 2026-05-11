@@ -2,7 +2,7 @@
    PULSE LAYOUT
    ========================================================================== */
 .pulse-wrapper {
-  padding: var(--space-lg);
+  padding: var(--space-md);
   max-width: 56rem;
   opacity: 0;
   transition: opacity 0.15s ease-in;
