@@ -75,6 +75,28 @@
               <span class="pulse-label">Done</span>
             </div>
           </div>
+
+          <div class="pulse-row pulse-row--personal">
+            <div class="pulse-card pulse-card--gauge">
+              <span class="pulse-label">Productivity Gauge</span>
+              <div class="pulse-gauge" id="productivityGauge" aria-label="Done task ratio">
+                <div class="pulse-gauge__inner">
+                  <span class="pulse-number" id="productivityPercent">0%</span>
+                  <span class="pulse-label">Done Rate</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pulse-card pulse-card--busy">
+              <div class="busy-header">
+                <span class="pulse-label">Who's Busy?</span>
+                <span class="busy-subline">Top 3 in progress</span>
+              </div>
+              <ul class="busy-list" id="busyList">
+                <li class="busy-empty">No active workload yet</li>
+              </ul>
+            </div>
+          </div>
         </main>
       </div>
     </main>
