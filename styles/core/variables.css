@@ -22,9 +22,9 @@
   --color-danger-hover: #ff9898;
   --color-focus: #635fc7;
 
-  --status-todo: #635fc7;
-  --status-doing: #f5a560;
-  --status-await-feedback: #ea7564;
+  --status-up-next: #635fc7;
+  --status-in-progress: #f5a560;
+  --status-review: #ea7564;
   --status-done: #62c4b7;
 
   /* ==========================================================================
