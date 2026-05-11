@@ -29,7 +29,7 @@ export const createAddMemberModalHtml = () => {
 
                         <div class="priority-trigger js-member-role-toggle" data-role="@developer">
                             <div class="priority-content">
-                                <span class="priority-text">developer</span>
+                                <span class="priority-text">@developer</span>
                             </div>
                             <span class="priority-caret"><i class="fa-solid fa-angle-down"></i></span>
                         </div>
