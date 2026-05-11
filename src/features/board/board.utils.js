@@ -1,4 +1,5 @@
 import { resolveMemberDetails } from '../member/member.utils.js';
+import { getAllTeamMembers } from '../team/team.service.js';
 
 import { getInitials, calculateProgressPercent } from '../../shared/utils/ui-helpers.js';
 
@@ -34,7 +35,9 @@ export function generateAvatarsHtml(assignedToIds, limit = 5) {
     const showBadge = total > limit;
     const displayCount = showBadge ? limit - 1 : total;
     const displayIds = assignedToIds.slice(0, displayCount);
-    const members = resolveMemberDetails(displayIds);
+    const allMembers = getAllTeamMembers();
+    const memberMap = new Map(allMembers.map(m => [m.id, m]));
+    const members = displayIds.map(id => memberMap.get(id)).filter(m => !!m && m.name);
 
     let html = members.map(renderMemberAvatar).join('');
 
