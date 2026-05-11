@@ -94,16 +94,16 @@
 
 .inline-field .field-icon {
   font-size: 1.1rem;
-  color: var(--color-medium-grey);
+  color: var(--color-text-muted);
   width: 1.5rem;
   text-align: center;
 }
 
 .modal-label {
   display: block;
-  font-size: var(--font-size-body-m);
+  font-size: var(--font-size-s);
   font-weight: var(--font-weight-bold);
-  color: var(--color-medium-grey);
+  color: var(--color-text-muted);
   line-height: 1.2;
 }
 
