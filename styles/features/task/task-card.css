@@ -47,15 +47,15 @@
 }
 
 .task-card__category[data-type="feature"] {
-  background-color: var(--color-main);
+  background-color: var(--task-category-feature);
 }
 
 .task-card__category[data-type="ui/ux"] {
-  background-color: var(--status-done);
+  background-color: var(--task-category-ui-ux);
 }
 
 .task-card__category[data-type="bug fix"] {
-  background-color: var(--status-await-feedback);
+  background-color: var(--task-category-bug-fix);
 }
 
 .task-card__description {
