@@ -2,7 +2,7 @@
    TEAM LAYOUT
    ========================================================================== */
 .team-wrapper {
-  padding: var(--space-lg);
+  padding: var(--space-md);
   width: 100%;
   opacity: 0;
   transition: opacity 0.15s ease-in;
