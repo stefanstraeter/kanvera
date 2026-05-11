@@ -1,0 +1,100 @@
+/* ==========================================================================
+   BOARD SEARCH BAR
+   ========================================================================== */
+.board-search-bar {
+  display: flex;
+  width: 100%;
+}
+
+.search-input-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 20rem;
+}
+
+.search-input-wrapper::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background-color: var(--color-main);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s ease;
+  pointer-events: none;
+}
+
+.search-input-wrapper:focus-within::after {
+  transform: scaleX(1);
+}
+
+.board-search-input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-m);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.board-search-input:focus {
+  outline: none;
+}
+
+.board-search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.btn-search-reset {
+  position: absolute;
+  right: var(--space-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: var(--font-size-m);
+  padding: var(--space-xs);
+  transition: color 0.2s ease;
+  display: none;
+}
+
+.btn-search-reset:hover {
+  color: var(--color-main);
+}
+
+.board-search-input:not(:placeholder-shown) ~ .btn-search-reset,
+.search-input-wrapper:has(.board-search-input:not(:placeholder-shown)) .btn-search-reset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   SEARCH & FILTER STATES
+   ========================================================================== */
+.is-hidden {
+  display: none;
+}
+
+.task-card.is-hidden,
+[data-task-id].is-hidden {
+  display: none !important;
+}
+
+.column-empty-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.column-empty-message.is-hidden {
+  display: none;
+}
