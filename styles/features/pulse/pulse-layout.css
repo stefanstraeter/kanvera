@@ -48,12 +48,20 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
+.pulse-row--personal {
+  grid-template-columns: 1fr 2fr;
+}
+
 /* ==========================================================================
    RESPONSIVE OVERRIDES
    ========================================================================== */
 @media (max-width: 1200px) {
   .pulse-row--stats {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pulse-row--personal {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -76,6 +84,11 @@
   }
 
   .pulse-row--main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pulse-row--personal {
     display: flex;
     flex-direction: column;
   }
