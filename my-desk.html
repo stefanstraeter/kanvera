@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" translate="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
+
+    <title>My Desk</title>
+
+    <link rel="stylesheet" href="./styles/main.css" />
+
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      })();
+    </script>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body class="l-app">
+    <aside class="l-sidebar" id="js-sidebar-anchor"></aside>
+    <header class="l-header" id="js-header-anchor"></header>
+    <main class="l-content" id="js-content-anchor">
+      <div class="my-desk-wrapper l-content-spacer">
+        <header class="my-desk-header">
+          <h2 class="color-medium-grey">Zero in on what matters. Sorted by flow</h2>
+        </header>
+
+        <section class="my-desk-filter" aria-label="Task status filter">
+          <button class="my-desk-filter__btn is-active" data-status="all" type="button">All</button>
+          <button class="my-desk-filter__btn" data-status="up next" type="button">Up Next</button>
+          <button class="my-desk-filter__btn" data-status="in progress" type="button">In Progress</button>
+          <button class="my-desk-filter__btn" data-status="review" type="button">Review</button>
+          <button class="my-desk-filter__btn" data-status="done" type="button">Done</button>
+        </section>
+
+        <section class="my-desk-list" id="js-my-desk-list" aria-live="polite"></section>
+
+        <section class="my-desk-empty is-hidden" id="js-my-desk-empty">
+          <p class="color-medium-grey">"All caught up!</p>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
