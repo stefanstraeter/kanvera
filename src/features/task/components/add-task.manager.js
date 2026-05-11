@@ -177,7 +177,7 @@ export class AddTaskManager {
             dueDate: data.dueDate || '',
             priority: data.priority || 'medium',
             taskType: data.taskType || 'feature',
-            category: 'to do',
+            category: 'up next',
             assignedTo: Array.isArray(finalAssignees) ? [...finalAssignees] : [],
             subtasks: [...this.tempSubtasks],
             createdAt: Date.now(),
