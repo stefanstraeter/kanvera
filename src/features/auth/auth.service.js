@@ -1,5 +1,6 @@
 
 import { fetchData, postData } from '../../core/firebase.config.js';
+import { getState, saveToCache } from '../../core/state.js';
 
 import { AUTH_SESSION_KEY, GUEST_LOGIN_DATA } from '../../shared/utils/constants.js';
 
@@ -29,6 +30,7 @@ export async function signInAsUser(email, password) {
             isGuest: false
         };
         saveToSession(sessionData);
+        createWelcomeTaskForUser(foundUser.id);
         return sessionData;
     }
     return null;
@@ -43,9 +45,11 @@ export function signInAsGuest() {
     const guestData = {
         name: GUEST_LOGIN_DATA.name,
         email: GUEST_LOGIN_DATA.email,
+        id: 'guest-id',
         isGuest: true
     };
     saveToSession(guestData);
+    createWelcomeTaskForUser('guest-id');
     return guestData;
 }
 
@@ -121,4 +125,38 @@ async function getAllUsersAsArray() {
         id,
         ...data
     }));
+}
+
+/* ==========================================================================
+    WELCOME TASK GENERATION
+    ========================================================================== */
+
+/**
+ * @description Creates and stores a welcome task for a new user in the session state if one doesn't already exist.
+ * @param {string} userId - The ID of the user to create a welcome task for.
+ * @return {void}
+ */
+function createWelcomeTaskForUser(userId) {
+    const state = getState();
+    const welcomeTaskId = `welcome-${userId}`;
+
+    if (state.tasks[welcomeTaskId]) return;
+
+    const dueDate = new Date();
+    dueDate.setDate(dueDate.getDate() + 7);
+    const dueDateString = dueDate.toISOString().split('T')[0];
+
+    const welcomeTask = {
+        title: "Welcome to Kanvera!",
+        description: "Explore the board, create tasks, and collaborate with your team. Drag tasks to different columns to update their status.",
+        assignedTo: [userId],
+        category: "up next",
+        priority: "low",
+        taskType: "feature",
+        dueDate: dueDateString,
+        isWelcomeTask: true
+    };
+
+    state.tasks[welcomeTaskId] = welcomeTask;
+    saveToCache();
 }
