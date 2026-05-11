@@ -4,7 +4,7 @@ import { fetchData, postData } from '../../core/firebase.config.js';
 import { AUTH_SESSION_KEY, GUEST_LOGIN_DATA } from '../../shared/utils/constants.js';
 
 /* ==========================================================================
-   USER & GUEST SIGN-IN
+   SIGN-IN  
    ========================================================================== */
 
 /**
@@ -50,7 +50,7 @@ export function signInAsGuest() {
 }
 
 /* ==========================================================================
-   SIGN UP CHECKS & USER CREATION
+   SIGN-UP  
    ========================================================================== */
 
 /**
@@ -107,8 +107,8 @@ export function performLogout() {
 }
 
 /* ==========================================================================
-    INTERNAL UTILS & HELPERS
-   ========================================================================== */
+    UTILS  
+    ========================================================================== */
 
 /**
  * @description Fetches all users from the database and returns them as an array.

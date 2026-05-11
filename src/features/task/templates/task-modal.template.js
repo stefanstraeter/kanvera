@@ -2,7 +2,7 @@ import { renderPrioritySelector, renderAssigneeSelector, renderSubtaskSection } 
 import { formatTaskTypeLabel } from '../task.utils.js';
 
 /* ==========================================================================
-   TEMPLATE FOR TASK MODAL
+   TASK MODAL TEMPLATE  
    ========================================================================== */
 
 /**

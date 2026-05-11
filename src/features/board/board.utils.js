@@ -7,7 +7,7 @@ import { createAvatarHtml, createTaskCardHtml } from '../task/templates/task.tem
 
 /* ==========================================================================
     AVATAR GENERATION
-   ========================================================================== */
+    ========================================================================== */
 
 /**
  * @description Renders a single avatar HTML element for a member
@@ -52,7 +52,7 @@ export function generateAvatarsHtml(assignedToIds, limit = 5) {
 
 /* ==========================================================================
     TASK CARD PREPARATION & RENDERING
-   ========================================================================== */
+    ========================================================================== */
 
 /**
  * @description Calculates subtask statistics (count, progress, status)
@@ -104,7 +104,7 @@ export function renderSingleTask(task) {
 
 /* ==========================================================================
     DATA EXTRACTION FROM MODALS & EVENTS
-   ========================================================================== */
+    ========================================================================== */
 
 /**
  * @description Extracts the edited values (title, description, priority, date) from the task detail modal.
@@ -121,7 +121,7 @@ export function getTaskDataFromModal() {
 }
 
 /* ==========================================================================
-   SUBTASK EVENT HANDLER FUNCTIONS
+   SUBTASK EVENTS  
    ========================================================================== */
 
 /**
@@ -139,7 +139,7 @@ export function getSubtaskChangeData(event) {
 
 
 /* ==========================================================================
-   UI STATE & VISUALS
+   UI STATE  
    ========================================================================== */
 
 /**

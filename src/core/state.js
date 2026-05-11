@@ -3,21 +3,21 @@ import { fetchData } from './firebase.config.js';
 import { DATA_CACHE_KEY } from '../shared/utils/constants.js';
 
 /* ==========================================================================
-   STATE MANAGEMENT 
-   ========================================================================== */
+    STATE STORE
+    ========================================================================== */
 
 let state = { tasks: {}, team: {}, users: {} };
 
 /**
- * Gets the current application state.
+ * Returns the current in-memory app state.
  * @export
- * @return {Object} The current state object containing tasks, team, and users.
+ * @return {Object} State object with tasks, team, and users.
  */
 export const getState = () => state;
 
 /* ==========================================================================
-    INITIALIZATION 
-   ========================================================================== */
+     INITIALIZATION
+     ========================================================================== */
 
 /**
  * @description Initializes the data service by loading cached data or fetching fresh data if no cache exists.
@@ -34,8 +34,8 @@ export async function initState() {
 }
 
 /* ==========================================================================
-    DATA REFRESH 
-   ========================================================================== */
+    DATA LOADING
+    ========================================================================== */
 
 /**
  * @description Fetches the latest data for tasks, team, and users from the backend and updates the state and cache.
@@ -56,11 +56,11 @@ export async function refreshAllData() {
 }
 
 /* ==========================================================================
-   CACHE MANAGEMENT
-   ========================================================================== */
+    CACHE & NOTIFICATION
+    ========================================================================== */
 
 /**
- * @description Saves the current state to session storage.
+ * @description Saves the current state to session storage and notifies listeners.
  * @export
  */
 export function saveToCache() {
@@ -69,8 +69,8 @@ export function saveToCache() {
 }
 
 /* ==========================================================================
-   INTERNAL UTILS & HELPERS
-   ========================================================================== */
+    UTILS
+    ========================================================================== */
 
 /**
  * @description Converts a Firebase object into an array of objects.

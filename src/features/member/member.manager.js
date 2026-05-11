@@ -26,8 +26,8 @@ export class MemberManager {
     }
 
     /* ==========================================================================
-         INITIALIZATION
-       ========================================================================== */
+             EDIT FLOW
+             ========================================================================== */
 
     /**
      * @description Handle the click event for editing a member.
@@ -112,8 +112,8 @@ export class MemberManager {
     }
 
     /* ==========================================================================
-       DELETE MEMBER
-       ========================================================================== */
+         DELETE FLOW
+         ========================================================================== */
 
     /**
      * @description Handle the delete action for a member, showing a confirmation dialog first.
@@ -138,8 +138,8 @@ export class MemberManager {
     }
 
     /* ==========================================================================
-       ADD MEMBER
-       ========================================================================== */
+         ADD FLOW
+         ========================================================================== */
 
     /**
      * @description Handle the click event for adding a new member, opening the add member modal.
@@ -188,8 +188,8 @@ export class MemberManager {
     }
 
     /* ==========================================================================
-        UI HELPERS & INTERACTION BINDING
-        ========================================================================== */
+       MODAL INTERACTIONS
+       ========================================================================== */
 
     /**
      * @description Set up interactions for the modal, including action buttons and field behaviors.

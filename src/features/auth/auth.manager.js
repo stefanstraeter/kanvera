@@ -33,7 +33,7 @@ export function initSliderLogic() {
 }
 
 /* ==========================================================================
-   HEADER ELEMENTS TOGGLE & DROPDOWN LOGIC
+   HEADER DROPDOWN FLOW  
    ========================================================================== */
 
 /**
@@ -121,7 +121,7 @@ export function initPasswordToggles() {
 }
 
 /* ==========================================================================
-   AUTH FLOW SLIDER & CARD HEIGHT ADJUSTMENT
+   AUTH FLOW UI  
    ========================================================================== */
 
 /**

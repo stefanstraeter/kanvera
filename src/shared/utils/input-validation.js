@@ -1,6 +1,6 @@
 
 /* ==========================================================================
-   PURE VALIDATION LOGIC
+   VALIDATION RULES  
    ========================================================================== */
 /**
  * @description Validates that the input value is not empty (after trimming whitespace).
@@ -64,7 +64,7 @@ export function validatePhoneFormat(value) {
 }
 
 /* ==========================================================================
-   DOM UTILITIES - UI UPDATE
+   DOM HELPERS  
    ========================================================================== */
 /**
  * @description Get the value of an input element, handling different input types.
@@ -106,7 +106,7 @@ export function toggleError(inputElement, isValid, message = "") {
 }
 
 /* ==========================================================================
-   INTERACTIVE VALIDATION - EVENT LISTENERS
+   LIVE VALIDATION  
    ========================================================================== */
 /**
  * @description Attach live validation to an input element, providing immediate feedback as the user interacts with it.

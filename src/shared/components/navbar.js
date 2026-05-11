@@ -9,7 +9,7 @@ import { getCurrentUser } from '../../features/auth/auth.service.js';
  */
 export class Navbar {
     /* ==========================================================================
-       INITIALIZATION & RENDERING
+       LIFECYCLE      
        ========================================================================== */
     constructor() {
         this.templatePath = './templates/sidebar.html';

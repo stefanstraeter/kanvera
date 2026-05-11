@@ -1,6 +1,6 @@
 
 /* ==========================================================================
-   THEME UI HELPERS
+   THEME HELPERS  
    ========================================================================== */
 /**
  * @description Updates the logos based on the current theme.
@@ -37,7 +37,7 @@ function syncToggles(theme) {
 }
 
 /* ==========================================================================
-   THEME CORE LOGIC
+   THEME FLOW  
    ========================================================================== */
 /**
  * @description Applies the specified theme to the application by setting a data attribute on the document root, updating logos, and synchronizing toggle states.

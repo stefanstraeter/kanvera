@@ -71,8 +71,8 @@ export class TeamManager {
     }
 
     /* ==========================================================================
-       AVATAR LOGIC UI Task
-       ========================================================================= */
+       AVATAR UI      
+       ========================================================================== */
 
     /**
      * @description Sets up avatar image loading with fallbacks for all avatar images within the given scope.

@@ -6,7 +6,7 @@ import { setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
 import { AUTH_ERRORS, UI_AUTH_BUTTON_TEXT } from '../../shared/utils/constants.js';
 
 /* ==========================================================================
-   SIGN UP LOGIC
+   SIGN-UP FLOW  
    ========================================================================== */
 /**
  * @description Handles the sign-up form submission by validating the input, showing loading state, checking for existing email, creating a new user, and handling success or error outcomes.
@@ -40,7 +40,7 @@ export async function handleSignUp(event) {
 }
 
 /* ==========================================================================
-   HELPERS FOR SIGN-UP FORM
+   FORM HELPERS  
    ========================================================================== */
 /**
  * @description Retrieves the current values from the sign-up form input fields.

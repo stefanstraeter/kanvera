@@ -28,7 +28,7 @@ export class AssigneeManager {
     }
 
     /* ==========================================================================
-       DATA LOGIC - STATE MANAGEMENT
+       DATA LOGIC - STATE STORE      
        ========================================================================== */
     /**
      * @description Determines the current list of assigned member IDs based on whether we're in Add or Edit mode.
@@ -72,7 +72,7 @@ export class AssigneeManager {
     }
 
     /* ==========================================================================
-       CORE CONTROL - DROPDOWN TOGGLING & RENDERING
+       DROPDOWN FLOW      
        ========================================================================== */
 
     /**

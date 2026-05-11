@@ -5,8 +5,8 @@ import { toggleError, validateNotEmpty, validateEmailFormat, validatePhoneFormat
 import { VALIDATION_ERRORS } from '../../shared/utils/constants.js';
 
 /* ==========================================================================
-    MEMBER SERVICE READ AND WRITE
-   ========================================================================== */
+    READ ACCESS
+    ========================================================================== */
 
 /**
  * @description Get a member by ID
@@ -19,6 +19,10 @@ export function getMemberById(memberId) {
 
     return state.team[memberId] || null;
 }
+
+/* ==========================================================================
+   WRITE OPERATIONS
+   ========================================================================== */
 
 /**
  * @description Updates a member's data locally in the state and cache.
@@ -76,6 +80,10 @@ export function createMemberLocallyFromForm(formData) {
     updateMemberLocally(newId, newMember);
 }
 
+/* ==========================================================================
+   INLINE VALIDATION
+   ========================================================================== */
+
 /**
  * @description Shows or hides an inline validation error message.
  * @export
@@ -120,8 +128,8 @@ export function validateInlineMemberFields() {
 }
 
 /* ==========================================================================
-   FORM VALIDATION AND BEHAVIORS
-   ========================================================================== */
+    ADD FORM VALIDATION
+    ========================================================================== */
 
 export function initAddMemberValidation() {
     const form = document.getElementById('js-add-member-form');

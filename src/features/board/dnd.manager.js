@@ -35,7 +35,7 @@ function setupDropZone(dropZone, columnId, onUpdate) {
 }
 
 /* ==========================================================================
-   EVENT HANDLER FOR DRAG AND DROP
+   DRAG & DROP EVENTS  
    ========================================================================== */
 
 /**

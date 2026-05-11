@@ -4,14 +4,14 @@ import { toggleError, validateNotEmpty, attachLiveValidation, validateNotPastDat
 import { VALIDATION_ERRORS } from '../../shared/utils/constants.js';
 
 /* ==========================================================================
-   SORTING HELPERS FOR TASKS
+   SORT HELPERS  
    ========================================================================== */
 
 const sortByPosition = (a, b) => a.id.localeCompare(b.id);
 const sortByUpdatedDate = (a, b) => (a.updatedAt || 0) - (b.updatedAt || 0);
 
 /* ==========================================================================
-   TASKS SERVICE READ
+   READ OPERATIONS  
    ========================================================================== */
 
 /**
@@ -48,7 +48,7 @@ export function getTaskById(taskId) {
 }
 
 /* ==========================================================================
-   TASKS SERVICE WRITE
+   WRITE OPERATIONS  
    ========================================================================== */
 
 /**
@@ -119,7 +119,7 @@ export function createTaskLocally(taskId, taskData) {
 
 
 /* ==========================================================================
-   SUBTASKS SERVICE
+   SUBTASK OPERATIONS  
    ========================================================================== */
 
 /**
@@ -173,8 +173,8 @@ export function updateSubtaskTitle(taskId, index, newTitle) {
 }
 
 /* ==========================================================================
-    VALIDATION & LIVE LISTENERS FOR ADD TASK FORM
-   ========================================================================== */
+    ADD FORM VALIDATION  
+    ========================================================================== */
 
 /**
  * @description Validates the add task form.
@@ -218,8 +218,8 @@ export function initAddTaskValidation() {
 }
 
 /* ==========================================================================
-    VALIDATION HELPERS FOR ADD TASK FORM
-   ========================================================================== */
+    VALIDATION HELPERS  
+    ========================================================================== */
 
 /**
  * @description Checks if the due date is valid and returns an appropriate error message if it is not.

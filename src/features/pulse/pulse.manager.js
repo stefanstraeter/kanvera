@@ -3,7 +3,7 @@ import { getGreetingConfig, formatDeadline } from './pulse.utils.js';
 import { getInitials } from '../../shared/utils/ui-helpers.js';
 
 /**
- * @description
+ * @description Handles rendering and live updates for the Pulse page.
  * @export
  * @class PulseManager
  */
@@ -13,10 +13,10 @@ export class PulseManager {
     }
 
     /* ==========================================================================
-        INITIALIZATION 
+       LIFECYCLE
        ========================================================================== */
     /**
-     * @description Initializes the Pulse Manager by setting up the user greeting, rendering initial stats, and attaching event listeners for state changes.
+        * @description Initializes greeting, widgets, event listeners, and page visibility.
      * @memberof PulseManager
      */
     init() {
@@ -26,7 +26,7 @@ export class PulseManager {
         this.showContent();
     }
     /**
-     * @description Sets up event listeners for the Pulse Manager.
+        * @description Registers page-level event listeners.
      * @memberof PulseManager
      */
     setupEventListeners() {
@@ -34,20 +34,20 @@ export class PulseManager {
     }
 
     /* ==========================================================================
-        MAIN RENDERING LOGIC
-       ========================================================================== */
+             STATE UPDATE FLOW
+             ========================================================================== */
 
     /**
-  * @description Handles state changes by updating the Pulse Dashboard widgets with the latest statistics.
-  * @return {void}
-  * @memberof PulseManager
-  */
+         * @description Handles state changes by refreshing Pulse widgets.
+         * @return {void}
+         * @memberof PulseManager
+         */
     onStateChanged() {
         this.updatePulseWidgets();
     }
 
     /**
-     * @description Updates the Pulse Dashboard widgets with the latest statistics.
+         * @description Refreshes all widget areas using latest statistics.
      * @memberof PulseManager
      */
     updatePulseWidgets() {
@@ -60,11 +60,11 @@ export class PulseManager {
     }
 
     /* ==========================================================================
-       RENDERING METHODS
-       ========================================================================== */
+         RENDERING
+         ========================================================================== */
 
     /**
-     * @description Sets up the user greeting on the Pulse Dashboard based on the logged-in user's information, including their name, a personalized title, symbol, and subline.
+        * @description Renders greeting text based on the logged-in user.
      * @memberof PulseManager
      */
     setupUserGreeting() {
@@ -78,8 +78,8 @@ export class PulseManager {
     }
 
     /**
-     * @description Renders the counter statistics on the Pulse Dashboard, including total tasks, urgent tasks, and counts for each status category (To Do, Doing, Awaiting Review, Done).
-     * @param {Object} stats - An object containing all relevant stats for the Pulse Dashboard
+        * @description Renders all numeric counter values.
+        * @param {Object} stats - Pulse statistics object.
      * @memberof PulseManager
      */
     renderCounterStats(stats) {
@@ -96,8 +96,8 @@ export class PulseManager {
     }
 
     /**
-     * @description Renders the next deadline on the Pulse Dashboard.
-     * @param {Date|string} date - The date of the next deadline
+        * @description Renders the next urgent deadline label.
+        * @param {Date|string} date - Next deadline date value.
      * @memberof PulseManager
      */
     renderDeadline(date) {
@@ -105,8 +105,8 @@ export class PulseManager {
     }
 
     /**
-     * @description Renders the productivity percentage on the Pulse Dashboard.
-     * @param {number} percent - The productivity percentage
+        * @description Renders productivity percentage and gauge progress.
+        * @param {number} percent - Productivity percentage.
      * @memberof PulseManager
      */
     renderProductivity(percent) {
@@ -118,8 +118,8 @@ export class PulseManager {
     }
 
     /**
-     * @description Renders the busiest team members on the Pulse Dashboard, showing their avatars, names, and workload counts. If there are no active workloads, displays a placeholder message.
-     * @param {Array} members - An array of member objects containing id, name, imageUrl, color, and count properties
+        * @description Renders the top busy members list or empty state.
+        * @param {Array} members - Member rows with avatar and count data.
      * @return {void}
      * @memberof PulseManager
      */
@@ -136,13 +136,13 @@ export class PulseManager {
     }
 
     /* ==========================================================================
-       HTML TEMPLATES
-       ========================================================================== */
+         TEMPLATES
+         ========================================================================== */
 
     /**
-     * @description Creates the HTML string for a single busiest team member item, including their avatar (with fallback to initials), name, and workload count.
-     * @param {Object} member - An object containing id, name, imageUrl, color, and count properties
-     * @return {string} The HTML string for a member item
+        * @description Builds HTML for one busy-member row.
+        * @param {Object} member - Member with name, avatar, and count.
+        * @return {string} HTML string for a list row.
      * @memberof PulseManager
      */
     createMemberItemHtml(member) {
@@ -167,23 +167,23 @@ export class PulseManager {
     }
 
     /* ==========================================================================
-       HELPERS
-       ========================================================================== */
+             DOM HELPERS
+             ========================================================================== */
     /**
-     * @description Updates the inner text of an HTML element with a given ID. If the element is not found, it does nothing.
-     * @param {string} id - The ID of the HTML element to update
-     * @param {string|number} value - The value to set as the inner text of the element
-      * @return {void}
-      * @memberof PulseManager
-      */
+         * @description Updates text content of an element by id.
+         * @param {string} id - Target element id.
+         * @param {string|number} value - Text value to render.
+         * @return {void}
+         * @memberof PulseManager
+         */
     updateText(id, value) {
         const el = document.getElementById(id);
         if (el) el.innerText = value ?? '';
     }
 
     /**
-     * @description Shows the Pulse Dashboard content by adding the 'is-visible' class to the wrapper element. This method is called after the initial setup to reveal the dashboard to the user.
-      * @return {void}
+         * @description Makes the Pulse content visible.
+         * @return {void}
      * @memberof PulseManager
      */
     showContent() {

@@ -8,7 +8,7 @@ import { VALIDATION_ERRORS } from '../../shared/utils/constants.js';
 
 /* ==========================================================================
     TEAM MEMBER SERVICE 
-   ========================================================================== */
+    ========================================================================== */
 
 /**
  * @description Get a list of all team members, including the current user if they are not already in the team list. 

@@ -48,7 +48,7 @@ export function getMemberDataFromModal() {
 
 /* ==========================================================================
     MEMBER OBJECT CREATION
-   ========================================================================== */
+    ========================================================================== */
 /**
  * @description Creates a structured member object from raw form data (used for new members).
  * @export

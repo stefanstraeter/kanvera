@@ -26,7 +26,7 @@ export function initSignInLogic() {
 }
 
 /* ==========================================================================
-   FORM SUBMISSION HANDLING
+   FORM SUBMISSION  
    ========================================================================== */
 /**
  * @description Handles the sign-in form submission by validating the input, showing loading state, attempting to sign in the user, and handling success or error outcomes.
@@ -98,7 +98,7 @@ function setupAllLiveValidations() {
 }
 
 /* ==========================================================================
-   HELPERS FOR FORM HANDLING
+   FORM HELPERS  
    ========================================================================== */
 /**
  * @description Retrieves the email and password values from the login form input fields.

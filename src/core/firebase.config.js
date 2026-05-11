@@ -2,7 +2,7 @@
 const BASE_URL = "https://kanvera-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /* ==========================================================================
-   FIREBASE API ACTIONS
+   FIREBASE API  
    ========================================================================== */
 
 /**

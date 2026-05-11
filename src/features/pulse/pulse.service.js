@@ -2,8 +2,8 @@ import { getAllTasks } from '../task/task.service.js';
 import { getAllTeamMembers } from '../team/team.service.js';
 
 /* ==========================================================================
-   CONFIG & CONSTANTS
-   ========================================================================== */
+    CONFIGURATION
+    ========================================================================== */
 
 const CATEGORIES = {
     TODO: ['up next'],
@@ -14,14 +14,14 @@ const CATEGORIES = {
 
 
 /* ==========================================================================
-   PUBLIC SERVICE FUNCTIONS
-   ========================================================================== */
+    PUBLIC API
+    ========================================================================== */
 
 /**
- * @description Gathers and calculates all necessary statistics for the Pulse Dashboard, including task counts, productivity, and busiest team members.
+ * @description Returns top busy members based on in-progress assignments.
  * @export
- * @param {number} [limit=3] - Optional limit for the number of busiest members to return
- * @return {Object} An object containing all relevant stats for the Pulse Dashboard
+ * @param {number} [limit=3] - Maximum number of members to return.
+ * @return {Array} List of member workload rows.
  */
 export function getBusiestMembers(limit = 3) {
     const tasks = getAllTasks();
@@ -42,9 +42,9 @@ export function getBusiestMembers(limit = 3) {
 }
 
 /**
- * @description Gathers all relevant statistics for the Pulse Dashboard, including task counts by category, productivity percentage, next deadline, and busiest team members.
+ * @description Returns all statistics needed by the Pulse page.
  * @export
- * @return {Object} An object containing all relevant stats for the Pulse Dashboard
+ * @return {Object} Pulse stats object.
  */
 export function getPulseStats() {
     const tasks = getAllTasks();
@@ -65,30 +65,30 @@ export function getPulseStats() {
 }
 
 /* ==========================================================================
-   HELPERS & INTERNAL LOGIC 
-   ========================================================================== */
+    PRIVATE HELPERS
+    ========================================================================== */
 /**
- * @description Filters tasks by their status category.
- * @param {Array} tasks - The list of tasks to filter.
- * @param {Array} statusList - The list of status categories to filter by.
- * @return {Array} The filtered list of tasks.
+ * @description Filters tasks by category values.
+ * @param {Array} tasks - Source task list.
+ * @param {Array} statusList - Allowed category values.
+ * @return {Array} Filtered task list.
  */
 const filterByStatus = (tasks, statusList) =>
     tasks.filter(t => statusList.includes(t.category));
 
 /**
- * @description Filters tasks by their urgency.
- * @param {Array} tasks - The list of tasks to filter.
- * @return {Array} The filtered list of urgent tasks.
+ * @description Filters urgent tasks.
+ * @param {Array} tasks - Source task list.
+ * @return {Array} Urgent tasks.
  */
 const filterUrgent = (tasks) =>
     tasks.filter(t => t.priority === 'urgent');
 
 /**
- * @description Calculates the productivity percentage based on the total number of tasks and the number of completed tasks.
- * @param {number} total - The total number of tasks.
- * @param {number} done - The number of completed tasks.
- * @return {number} The productivity percentage.
+ * @description Calculates productivity percent.
+ * @param {number} total - Total task count.
+ * @param {number} done - Done task count.
+ * @return {number} Percent value.
  */
 function calculateProductivity(total, done) {
     if (total === 0) return 0;
@@ -96,9 +96,9 @@ function calculateProductivity(total, done) {
 }
 
 /**
- * @description Finds the next upcoming deadline among urgent tasks.
- * @param {Array} tasks - The list of tasks to check.
- * @return {string|null} The next deadline date as a string, or null if none found.
+ * @description Finds next urgent task deadline.
+ * @param {Array} tasks - Source task list.
+ * @return {string|null} Next date or null.
  */
 function findNextDeadline(tasks) {
     const urgentWithDate = filterUrgent(tasks).filter(t => t.dueDate);
@@ -110,9 +110,9 @@ function findNextDeadline(tasks) {
 }
 
 /**
- * @description Generates a workload map for team members based on their assigned tasks.
- * @param {Array} tasks - The list of tasks to process.
- * @return {Object} A map of member IDs to their respective workload counts.
+ * @description Builds workload map from in-progress tasks.
+ * @param {Array} tasks - Source task list.
+ * @return {Object} Member id to count map.
  */
 function getWorkloadMap(tasks) {
     const workload = {};

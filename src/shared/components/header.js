@@ -44,7 +44,7 @@ export class Header {
     }
 
     /* ==========================================================================
-       UPDATING HEADER CONTENT
+       HEADER CONTENT      
        ========================================================================== */
     /**
      * @description Gets the current URL path to determine which page the user is on.
@@ -113,7 +113,7 @@ export class Header {
     }
 
     /* ==========================================================================
-       DROPDOWN MENU
+       DROPDOWN      
        ========================================================================== */
     /**
      * @description Initializes the dropdown menu by setting up event listeners for toggling the menu visibility.
@@ -187,7 +187,7 @@ export class Header {
     }
 
     /* ==========================================================================
-       USER AVATAR
+       AVATAR      
        ========================================================================== */
     /**
       * @description Updates the user avatar in the header based on the current user's initials.
