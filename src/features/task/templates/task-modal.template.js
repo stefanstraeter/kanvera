@@ -40,7 +40,7 @@ export const createTaskDetailCardHtml = (task, assigneeHtml) => {
 
             <div class="inline-field u-mb-md">
                 <div class="inline-edit-wrapper">
-                    <label class="modal-label">Description</label>
+                    <label class="modal-label u-mb-xs">Description</label>
                     <p class="task-detail__description modal-edit-field js-edit-field" data-field="description" contenteditable="true" spellcheck="false">
                         ${task.description || 'No description yet'}
                     </p>
