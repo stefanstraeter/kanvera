@@ -114,7 +114,6 @@
   margin: var(--space-md);
 }
 
-/* Aktivierung des Toggles auf Mobile/Tablet */
 @media (max-width: 950px) {
   .menu-dropdown__theme-toggle {
     display: block;

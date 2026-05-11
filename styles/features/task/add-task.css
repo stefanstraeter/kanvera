@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PRIORITY SELECTOR - CORE CONTAINER
+   PRIORITY SELECTOR
    ========================================================================== */
 .priority-select-container {
   position: relative;
@@ -13,7 +13,7 @@
 }
 
 /* ==========================================================================
-   MODIFIERS - FORM & INLINE
+  MODIFIERS & INLINE
    ========================================================================== */
 .priority-select--form .priority-trigger {
   height: 3rem;
