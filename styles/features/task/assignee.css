@@ -44,7 +44,7 @@
 }
 
 .assignee-name {
-  font-size: var(--font-size-body-l);
+  font-size: var(--font-size-m);
   color: var(--color-text-main);
 }
 
@@ -57,7 +57,7 @@
 }
 
 .check-icon {
-  font-size: var(--font-size-body-m);
+  font-size: var(--font-size-s);
   color: var(--color-main);
 }
 
