@@ -27,7 +27,7 @@ export function renderSubtaskSection(subtasks = [], taskId = null, isFormStyle =
 
     return `
         <label class="modal-label u-mb-xs">Subtasks</label>
-        <div class="subtask-list u-mb-sm">
+        <div class="subtask-list">
             ${renderSubtasksList(subtasks, taskId)}
         </div>
         <button type="button" class="btn btn--s btn--full btn--secondary js-add-subtask-btn">
