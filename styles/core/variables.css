@@ -4,6 +4,7 @@
    ========================================================================== */
   --color-main: #635fc7;
   --color-main-hover: #9791ee;
+  --color-main-rgb: 99, 95, 199;
 
   --color-white: #ffffff;
   --color-ghost-white: #eaeff8;
@@ -45,12 +46,19 @@
   --color-text-heading: var(--color-anthracite);
   --color-text-main: var(--color-anthracite);
   --color-text-inverse: var(--color-anthracite);
+  --color-text-muted: var(--color-medium-grey);
+  --color-text-disabled: color-mix(in srgb, var(--color-medium-grey) 65%, var(--color-white));
+  --color-text-link: var(--color-main);
   --color-lines: var(--color-lines-light);
+  --color-border-default: var(--color-lines-light);
+  --color-border-strong: var(--color-medium-grey);
+  --color-border: var(--color-border-default);
   --color-progress-bar: var(--color-very-light-grey);
   --color-subtask-bg: var(--color-very-light-grey);
   --color-subtask-bg-hover: var(--color-light-grey);
   --color-priority-menu-bg: var(--color-very-light-grey);
   --color-priority-menu-bg-hover: var(--color-light-grey);
+  --color-bg-secondary: var(--bg-input);
 
   --color-btn-secondary-bg: var(--color-greyish-violett);
   --color-btn-secondary-hover: var(--color-main-hover);
@@ -85,11 +93,9 @@
   --font-size-l: 1.125rem;
   --font-size-m: 1rem;
   --font-size-s: 0.875rem;
-  --letter-spacing-s: 0.15rem;
+  --font-size-xs: 0.75rem;
 
-  --font-size-body-l: 0.9375rem;
-  --font-size-body-m: 0.875rem;
-  --font-size-body-s: 0.75rem;
+  --letter-spacing-s: 0.15rem;
 
   /* ==========================================================================
      LAYOUT & SPACING
@@ -127,7 +133,10 @@
   --radius-input: 0.75rem;
   --radius-task-category: 0.5rem;
 
-  --transition: 200ms ease-in-out;
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease-in-out;
+  --transition-slow: 320ms ease;
+  --transition: var(--transition-base);
 
   --shadow-sidebar: 0px 10px 20px rgba(0, 0, 0, 0.1);
   --shadow-card: 0 4px 6px rgba(54, 78, 126, 0.1);
@@ -146,6 +155,10 @@
   --z-modal: 400;
   --z-popover: 500;
   --z-splash-screen: 9999;
+
+  --z-header: var(--z-sticky);
+  --z-overlay: var(--z-fixed);
+  --z-toast: var(--z-popover);
 }
 
 /* ==========================================================================
@@ -161,12 +174,19 @@
   --color-text-main: var(--color-beige);
   --color-text-heading: var(--color-beige);
   --color-text-inverse: var(--color-beige);
+  --color-text-muted: var(--color-greyish-violett);
+  --color-text-disabled: color-mix(in srgb, var(--color-greyish-violett) 65%, var(--color-dark-grey));
+  --color-text-link: var(--color-main-hover);
   --color-lines: var(--color-lines-dark);
+  --color-border-default: var(--color-lines-dark);
+  --color-border-strong: var(--color-greyish-violett);
+  --color-border: var(--color-border-default);
   --color-progress-bar: var(--color-medium-grey);
   --color-subtask-bg: var(--color-very-dark-grey);
   --color-subtask-bg-hover: var(--color-dark-greyish-violett);
   --color-priority-menu-bg: var(--color-very-dark-grey);
   --color-priority-menu-bg-hover: var(--color-dark-greyish-violett);
+  --color-bg-secondary: var(--bg-input);
 
   --color-btn-secondary-bg: var(--color-main-hover);
   --color-btn-secondary-hover: var(--color-beige);
