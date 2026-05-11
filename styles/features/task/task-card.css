@@ -60,7 +60,7 @@
 
 .task-card__description {
   color: var(--color-medium-grey);
-  font-size: var(--font-size-body-m);
+  font-size: var(--font-size-s);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -92,7 +92,7 @@
 }
 
 .progress-text {
-  font-size: var(--font-size-body-m);
+  font-size: var(--font-size-s);
   color: var(--color-medium-grey);
   font-weight: var(--font-weight-bold);
   min-width: 80px;
