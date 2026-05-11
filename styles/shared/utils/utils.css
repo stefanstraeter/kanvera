@@ -10,6 +10,10 @@
   padding-top: var(--space-lg);
 }
 
+.u-pt-xs {
+  padding-top: var(--space-xs);
+}
+
 .u-pl-md {
   padding-left: var(--space-md);
 }
