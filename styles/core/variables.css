@@ -27,6 +27,10 @@
   --status-review: #ea7564;
   --status-done: #62c4b7;
 
+  --task-category-feature: #918eea;
+  --task-category-bug-fix: #f67bd5;
+  --task-category-ui-ux: #4cdbb5;
+
   /* ==========================================================================
    LIGHT MODE (DEFAULT)
    ========================================================================== */
