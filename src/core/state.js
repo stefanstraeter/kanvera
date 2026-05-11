@@ -65,6 +65,7 @@ export async function refreshAllData() {
  */
 export function saveToCache() {
     sessionStorage.setItem(DATA_CACHE_KEY, JSON.stringify(state));
+    window.dispatchEvent(new Event('kanvera:state-changed'));
 }
 
 /* ==========================================================================
