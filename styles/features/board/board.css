@@ -41,8 +41,8 @@
 
 .board-columns {
   display: grid;
-  grid-template-columns: repeat(4, 280px);
-  gap: var(--space-lg);
+  grid-template-columns: repeat(4, 320px);
+  gap: var(--space-md);
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-gutter: stable;
@@ -168,6 +168,12 @@
 /* ==========================================================================
    RESPONSIVE OVERRIDES
    ========================================================================== */
+@media (max-width: 1024px) {
+  .board-columns {
+    grid-template-columns: repeat(4, 280px);
+  }
+}
+
 @media (max-width: 950px) {
   .board-wrapper {
     padding: 0;
