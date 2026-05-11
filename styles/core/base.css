@@ -25,7 +25,7 @@ body {
   overflow: hidden;
   line-height: var(--line-height-body);
   font-family: var(--font-primary);
-  font-size: var(--font-size-body-l);
+  font-size: var(--font-size-m);
   background-color: var(--bg-app-body);
   color: var(--color-text-main);
   transition:
