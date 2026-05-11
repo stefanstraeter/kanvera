@@ -18,9 +18,9 @@ export class BoardManager {
         this.taskManager = new TaskManager(() => this.updateBoard());
         this.addTaskManager = new AddTaskManager(() => this.updateBoard());
         this.columns = [
-            { id: 'to do', title: 'To do', cssClass: 'todo' },
-            { id: 'in progress', title: 'In progress', cssClass: 'inprogress' },
-            { id: 'await feedback', title: 'Await feedback', cssClass: 'awaitfeedback' },
+            { id: 'up next', title: 'Up Next', cssClass: 'up-next' },
+            { id: 'in progress', title: 'In Progress', cssClass: 'in-progress' },
+            { id: 'review', title: 'Review', cssClass: 'review' },
             { id: 'done', title: 'Done', cssClass: 'done' }
         ];
     }
