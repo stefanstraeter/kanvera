@@ -1,0 +1,177 @@
+/* ==========================================================================
+  MY DESK LAYOUT
+  ========================================================================== */
+.my-desk-wrapper {
+  padding: var(--space-lg);
+  max-width: 70rem;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.15s ease-in;
+}
+
+.my-desk-wrapper.is-visible {
+  opacity: 1;
+}
+
+.my-desk-header {
+  margin-bottom: var(--space-lg);
+}
+
+/* ==========================================================================
+   FILTER BAR
+   ========================================================================== */
+.my-desk-filter {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+}
+
+.my-desk-filter__btn {
+  border: 1px solid var(--color-lines);
+  background-color: var(--bg-app-card);
+  color: var(--color-medium-grey);
+  border-radius: var(--radius-pill);
+  padding: 0.45rem 0.85rem;
+  font-size: var(--font-size-s);
+  cursor: pointer;
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+}
+
+.my-desk-filter__btn.is-active,
+.my-desk-filter__btn:hover {
+  background-color: var(--color-main-hover);
+  color: var(--color-white);
+}
+
+/* ==========================================================================
+   TASK LIST
+   ========================================================================== */
+.my-desk-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr));
+  gap: var(--space-md);
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.my-task-card {
+  cursor: default;
+  user-select: auto;
+}
+
+.my-task-card:active {
+  cursor: default;
+}
+
+.my-task-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.my-task-card__type {
+  margin-right: var(--space-xs);
+}
+
+.my-task-card__priority {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.my-task-card__title {
+  margin: 0 0 var(--space-2xs) 0;
+}
+
+.my-task-card__description {
+  color: var(--color-medium-grey);
+  font-size: var(--font-size-s);
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.my-task-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  color: var(--color-medium-grey);
+  font-size: var(--font-size-s);
+  flex-wrap: wrap;
+}
+
+.my-task-card__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-s);
+  font-size: var(--font-size-xs);
+}
+
+.my-task-card__due {
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-s);
+}
+
+.my-task-card__link {
+  color: var(--color-main);
+  text-decoration: none;
+  white-space: nowrap;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-s);
+  text-transform: uppercase;
+  font-size: var(--font-size-xs);
+}
+
+.my-task-card__link:hover {
+  color: var(--color-main-hover);
+}
+
+/* ==========================================================================
+   EMPTY STATE
+   ========================================================================== */
+.my-desk-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  color: var(--color-medium-grey);
+}
+
+.my-desk-empty.is-hidden {
+  display: none;
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 650px) {
+  .my-desk-wrapper {
+    padding: 0;
+  }
+
+  .my-task-card__meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
