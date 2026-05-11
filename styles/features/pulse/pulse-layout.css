@@ -36,8 +36,8 @@
    ========================================================================== */
 .pulse-row {
   display: grid;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-lg);
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-2xl);
 }
 
 .pulse-row--main {
