@@ -275,6 +275,7 @@ export class MemberManager {
      */
     bindRoleToggle(menu) {
         const toggle = document.querySelector('.js-member-role-toggle');
+
         toggle?.addEventListener('click', (event) => {
             event.stopPropagation();
             menu.classList.toggle('is-hidden');
