@@ -24,10 +24,15 @@ export const getState = () => state;
  * @export
  */
 export async function initState() {
-    const cached = sessionStorage.getItem(DATA_CACHE_KEY);
+    const cached = safeSessionGetItem(DATA_CACHE_KEY);
 
     if (cached) {
-        state = JSON.parse(cached);
+        try {
+            state = JSON.parse(cached);
+        } catch (error) {
+            state = { tasks: {}, team: {}, users: {} };
+            await refreshAllData();
+        }
     } else {
         await refreshAllData();
     }
@@ -64,7 +69,7 @@ export async function refreshAllData() {
  * @export
  */
 export function saveToCache() {
-    sessionStorage.setItem(DATA_CACHE_KEY, JSON.stringify(state));
+    safeSessionSetItem(DATA_CACHE_KEY, JSON.stringify(state));
     window.dispatchEvent(new Event('kanvera:state-changed'));
 }
 
@@ -84,4 +89,31 @@ export function convertToArrayList(firebaseObject) {
         id,
         ...firebaseObject[id]
     }));
+}
+
+/**
+ * Safely reads a session storage value. Safari private mode or strict policies can throw.
+ * @param {string} key
+ * @return {string|null}
+ */
+function safeSessionGetItem(key) {
+    try {
+        return sessionStorage.getItem(key);
+    } catch (error) {
+        return null;
+    }
+}
+
+/**
+ * Safely writes a session storage value. Rendering must continue even when storage is unavailable.
+ * @param {string} key
+ * @param {string} value
+ * @return {void}
+ */
+function safeSessionSetItem(key, value) {
+    try {
+        sessionStorage.setItem(key, value);
+    } catch (error) {
+        // Ignore storage write failures so app state remains usable in-memory.
+    }
 }

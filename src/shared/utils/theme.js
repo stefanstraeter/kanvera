@@ -46,10 +46,11 @@ function syncToggles(theme) {
  * @param {string} [theme=null] - The theme to apply ('light' or 'dark').
  */
 export function applyTheme(theme = null) {
-    const activeTheme = theme || localStorage.getItem('theme') || 'light';
+    const storedTheme = getStoredTheme();
+    const activeTheme = theme || storedTheme || 'light';
 
     document.documentElement.setAttribute('data-theme', activeTheme);
-    localStorage.setItem('theme', activeTheme);
+    setStoredTheme(activeTheme);
 
     updateLogos(activeTheme);
     syncToggles(activeTheme);
@@ -69,4 +70,29 @@ export function initThemeListeners() {
         }
     });
     applyTheme();
+}
+
+/**
+ * @description Reads the persisted theme safely.
+ * @return {string|null}
+ */
+function getStoredTheme() {
+    try {
+        return localStorage.getItem('theme');
+    } catch (error) {
+        return null;
+    }
+}
+
+/**
+ * @description Persists the active theme safely.
+ * @param {string} theme
+ * @return {void}
+ */
+function setStoredTheme(theme) {
+    try {
+        localStorage.setItem('theme', theme);
+    } catch (error) {
+        // Ignore storage failures to keep theme switching functional.
+    }
 }

@@ -87,7 +87,11 @@ export async function checkIfEmailExists(email) {
  * @param {Object} user - The user data to be saved in session storage.
  */
 function saveToSession(user) {
-    sessionStorage.setItem(AUTH_SESSION_KEY, JSON.stringify(user));
+    try {
+        sessionStorage.setItem(AUTH_SESSION_KEY, JSON.stringify(user));
+    } catch (error) {
+        // Ignore unavailable storage; caller flow should not crash.
+    }
 }
 
 /**
@@ -96,8 +100,12 @@ function saveToSession(user) {
  * @return {Object|null} - Returns the user data if a user is logged in, or null if no user is logged in.
  */
 export function getCurrentUser() {
-    const userData = sessionStorage.getItem(AUTH_SESSION_KEY);
-    return userData ? JSON.parse(userData) : null;
+    try {
+        const userData = sessionStorage.getItem(AUTH_SESSION_KEY);
+        return userData ? JSON.parse(userData) : null;
+    } catch (error) {
+        return null;
+    }
 }
 
 /**
@@ -105,8 +113,18 @@ export function getCurrentUser() {
  * @export
  */
 export function performLogout() {
-    sessionStorage.clear();
-    localStorage.removeItem("kanvera_data");
+    try {
+        sessionStorage.clear();
+    } catch (error) {
+        // no-op
+    }
+
+    try {
+        localStorage.removeItem("kanvera_data");
+    } catch (error) {
+        // no-op
+    }
+
     window.location.replace('index.html');
 }
 
