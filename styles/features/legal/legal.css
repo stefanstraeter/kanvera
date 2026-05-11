@@ -42,7 +42,7 @@
    SPECIFIC TEXT STYLES
    ========================================================================== */
 .article-view__text {
-  font-size: var(--font-size-body-l);
+  font-size: var(--font-size-m);
   line-height: 1.5;
   color: var(--color-text-main);
   margin-bottom: var(--space-xs);
