@@ -152,14 +152,14 @@
   border-radius: 50%;
 }
 
-.status-dot--todo {
-  background-color: var(--status-todo);
+.status-dot--up-next {
+  background-color: var(--status-up-next);
 }
-.status-dot--inprogress {
-  background-color: var(--status-doing);
+.status-dot--in-progress {
+  background-color: var(--status-in-progress);
 }
-.status-dot--awaitfeedback {
-  background-color: var(--status-await-feedback);
+.status-dot--review {
+  background-color: var(--status-review);
 }
 .status-dot--done {
   background-color: var(--status-done);
