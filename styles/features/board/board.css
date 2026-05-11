@@ -2,7 +2,7 @@
    BOARD LAYOUT
    ========================================================================== */
 .board-wrapper {
-  padding: var(--space-lg) 0 0 var(--space-lg);
+  padding: var(--space-md) 0 0 var(--space-md);
   display: flex;
   flex-direction: column;
   flex: 1;
