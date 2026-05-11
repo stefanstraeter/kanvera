@@ -209,32 +209,5 @@
       "taskType": "ui/ux",
       "title": "Cart UI: Add-to-Cart Feedback"
     }
-  },
-  "users": {
-    "userId1": {
-      "email": "anna@test.de",
-      "name": "Anna Schmidt",
-      "password": "Sunshine!42"
-    },
-    "userId2": {
-      "email": "maximilian@test.de",
-      "name": "Maximilian Schmidt",
-      "password": "Rocket#99"
-    },
-    "userId3": {
-      "email": "jonas@test.de",
-      "name": "Jonas Becker",
-      "password": "Pixel*77"
-    },
-    "userId4": {
-      "email": "sophie@test.de",
-      "name": "Sophie Müller",
-      "password": "Lunar@88"
-    },
-    "userId5": {
-      "email": "claudia@test.de",
-      "name": "Claudia Seidel",
-      "password": "Neon$55"
-    }
   }
 }
