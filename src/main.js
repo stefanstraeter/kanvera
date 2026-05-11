@@ -1,4 +1,3 @@
-// src/main.js
 
 import { initState } from './core/state.js';
 
@@ -14,10 +13,15 @@ import { initSignInLogic } from './features/auth/sign-in.js';
 import { PulseManager } from './features/pulse/pulse.manager.js';
 import { TeamManager } from './features/team/team.manager.js';
 import { BoardManager } from './features/board/board.manager.js';
+import { MyDeskManager } from './features/my-desk/my-desk.manager.js';
 
 /* ==========================================================================
    ROUTE GUARD
    ========================================================================== */
+/**
+ * @description Guards routes by checking if the user is authenticated.
+ * @return {void} 
+ */
 function guardRoute() {
     const isAuthPage = document.getElementById('authFlowStage');
     const isStaticPage = document.body.dataset.page === 'static';
@@ -32,6 +36,11 @@ function guardRoute() {
 /* ==========================================================================
    APP INITIALIZATION
    ========================================================================== */
+
+/**
+ * @description Initializes the application by setting up route guards, theme listeners, loading layout components, and initializing feature managers based on the current page.
+ * @return {Promise<void>} A promise that resolves when initialization is complete.
+ */
 async function init() {
     guardRoute();
 
@@ -69,11 +78,20 @@ async function init() {
         const boardManager = new BoardManager();
         boardManager.init();
     }
+
+    if (document.getElementById('js-my-desk-list')) {
+        const myDeskManager = new MyDeskManager();
+        myDeskManager.init();
+    }
 }
 
 /* ==========================================================================
    LAYOUT RENDERING
    ========================================================================== */
+
+/**
+ * @description Initializes the layout by rendering the navbar and header components if their respective anchor elements are present in the DOM.
+ */
 async function initLayout() {
     const sidebarAnchor = document.getElementById('js-sidebar-anchor');
     const headerAnchor = document.getElementById('js-header-anchor');
