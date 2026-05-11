@@ -32,7 +32,7 @@ export const createEditModalHtml = (member, initials, displayRole, hideDeletion 
 
         <div class="modal-inline-edit-body">
             <div class="inline-field">
-                <i class="fa-regular fa-user field-icon"></i>
+                <i class="fa-regular fa-user field-icon u-pt-xs"></i>
                 <div class="inline-edit-wrapper">
                     <label class="modal-label">Role</label>
                     <span class="modal-edit-field js-edit-field" data-field="role" contenteditable="true" spellcheck="false">${displayRole}</span>
@@ -41,7 +41,7 @@ export const createEditModalHtml = (member, initials, displayRole, hideDeletion 
             </div>
 
             <div class="inline-field">
-                <i class="fa-regular fa-envelope field-icon"></i>
+                <i class="fa-regular fa-envelope field-icon u-pt-xs"></i>
                 <div class="inline-edit-wrapper">
                     <label class="modal-label">Email Address</label>
                     <span class="modal-edit-field js-edit-field" data-field="email" contenteditable="true" spellcheck="false">${member.email}</span>
@@ -50,7 +50,7 @@ export const createEditModalHtml = (member, initials, displayRole, hideDeletion 
             </div>
 
             <div class="inline-field">
-                <i class="fa-solid fa-phone field-icon"></i>
+                <i class="fa-solid fa-phone field-icon u-pt-xs"></i>
                 <div class="inline-edit-wrapper">
                     <label class="modal-label">Phone Number</label>
                     <span class="modal-edit-field js-edit-field" data-field="phone" contenteditable="true" spellcheck="false">${member.phone || 'No Number'}</span>
