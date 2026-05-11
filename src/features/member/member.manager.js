@@ -1,12 +1,18 @@
 
-import { getMemberById, updateMemberLocally, deleteMemberLocally, initAddMemberValidation, validateMemberForm } from './member.service.js';
-import { getMemberDataFromModal, createNewMemberObject } from './member.utils.js';
+import {
+    getMemberById,
+    deleteMemberLocally,
+    initAddMemberValidation,
+    validateMemberForm,
+    validateInlineMemberFields,
+    updateMemberFromModal,
+    createMemberLocallyFromForm
+} from './member.service.js';
 
 import { openModal, closeModal } from '../../shared/components/modal.js';
 
-import { validateEmailFormat, validatePhoneFormat } from '../../shared/utils/input-validation.js';
 import { getInitials, setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
-import { UI_MEMBER_BUTTON_TEXT, VALIDATION_ERRORS } from '../../shared/utils/constants.js';
+import { UI_MEMBER_BUTTON_TEXT } from '../../shared/utils/constants.js';
 import { getCurrentUser } from '../../features/auth/auth.service.js';
 
 import { createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './templates/member.template.js';
@@ -20,7 +26,7 @@ export class MemberManager {
     }
 
     /* ==========================================================================
-       EDIT MEMBER FLOW
+         INITIALIZATION
        ========================================================================== */
 
     /**
@@ -79,7 +85,7 @@ export class MemberManager {
     async saveChanges(memberId) {
         const saveBtn = document.querySelector('.js-save-inline');
 
-        if (!this.validateInlineFields()) {
+        if (!validateInlineMemberFields()) {
             return;
         }
 
@@ -96,60 +102,17 @@ export class MemberManager {
     }
 
     /**
-     * @description Validates inline-edit fields (email, phone) before saving.
-     * @return {boolean} True if all fields are valid.
-     * @memberof MemberManager
-     */
-    validateInlineFields() {
-        const emailSpan = document.querySelector('[data-field="email"]');
-        const phoneSpan = document.querySelector('[data-field="phone"]');
-        const emailError = document.querySelector('[data-error="email"]');
-        const phoneError = document.querySelector('[data-error="phone"]');
-
-        const emailValue = emailSpan?.innerText.trim() || '';
-        const phoneValue = phoneSpan?.innerText.trim() || '';
-
-        const isEmailValid = validateEmailFormat(emailValue);
-        const isPhoneValid = validatePhoneFormat(phoneValue);
-
-        this.toggleInlineError(emailError, isEmailValid, VALIDATION_ERRORS.EMAIL_INVALID);
-        this.toggleInlineError(phoneError, isPhoneValid, VALIDATION_ERRORS.PHONE_INVALID);
-
-        return isEmailValid && isPhoneValid;
-    }
-
-    /**
-     * @description Shows or hides an inline error message.
-     * @param {HTMLElement} errorEl
-     * @param {boolean} isValid
-     * @param {string} message
-     * @memberof MemberManager
-     */
-    toggleInlineError(errorEl, isValid, message) {
-        if (!errorEl) return;
-        if (!isValid) {
-            errorEl.textContent = message;
-            errorEl.classList.add('show');
-        } else {
-            errorEl.textContent = '';
-            errorEl.classList.remove('show');
-        }
-    }
-
-    /**
      * @description Process the update of a member's data.
      * @param {string} memberId - ID of the member to update
      * @memberof MemberManager
      */
     async processUpdate(memberId) {
         await new Promise(resolve => setTimeout(resolve, 1500));
-        const updatedData = getMemberDataFromModal();
-
-        updateMemberLocally(memberId, updatedData);
+        updateMemberFromModal(memberId);
     }
 
     /* ==========================================================================
-       DELETE MEMBER FLOW
+       DELETE MEMBER
        ========================================================================== */
 
     /**
@@ -175,7 +138,7 @@ export class MemberManager {
     }
 
     /* ==========================================================================
-       ADD MEMBER FLOW
+       ADD MEMBER
        ========================================================================== */
 
     /**
@@ -221,11 +184,7 @@ export class MemberManager {
      */
     async processCreation(formData) {
         await new Promise(resolve => setTimeout(resolve, 1500));
-
-        const newMember = createNewMemberObject(formData);
-        const newId = `member-${Date.now()}`;
-
-        updateMemberLocally(newId, newMember);
+        createMemberLocallyFromForm(formData);
     }
 
     /* ==========================================================================
