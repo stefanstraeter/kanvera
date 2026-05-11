@@ -1,6 +1,11 @@
 
 import { getAllTasks } from '../task/task.service.js';
 
+const TODO_CATEGORIES = ['up next'];
+const DOING_CATEGORIES = ['in progress'];
+const REVIEW_CATEGORIES = ['review'];
+const DONE_CATEGORIES = ['done'];
+
 /* ==========================================================================
    PULSE STATS
    ========================================================================== */
@@ -14,13 +19,17 @@ export function getPulseStats() {
     const tasks = getAllTasks();
     return {
         total: tasks.length,
-        todo: tasks.filter(task => task.category === 'to do').length,
-        doing: tasks.filter(task => task.category === 'in progress').length,
-        await: tasks.filter(task => task.category === 'await feedback').length,
-        done: tasks.filter(task => task.category === 'done').length,
+        todo: countTasksByCategories(tasks, TODO_CATEGORIES),
+        doing: countTasksByCategories(tasks, DOING_CATEGORIES),
+        await: countTasksByCategories(tasks, REVIEW_CATEGORIES),
+        done: countTasksByCategories(tasks, DONE_CATEGORIES),
         urgent: tasks.filter(task => task.priority === 'urgent').length,
         nextDeadline: tasks
             .filter(task => task.priority === 'urgent' && task.dueDate)
             .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))[0]?.dueDate || null
     };
+}
+
+function countTasksByCategories(tasks, categories) {
+    return tasks.filter(task => categories.includes(task.category)).length;
 }
