@@ -79,9 +79,8 @@
 
 .inline-field {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-md);
-  padding: 0 var(--space-xs);
   border-radius: var(--radius-input);
   transition: background-color var(--transition);
 }
