@@ -5,6 +5,7 @@ import { AddTaskManager } from '../task/components/add-task.manager.js';
 
 import { initDragAndDrop, attachDragEventToCard } from './dnd.manager.js';
 import { renderSingleTask, showBoardWrapper } from './board.utils.js';
+import { BoardSearchManager } from './board-search.manager.js';
 
 import { renderColumnHtml } from './templates/board.templates.js';
 
@@ -17,6 +18,7 @@ export class BoardManager {
     constructor() {
         this.taskManager = new TaskManager(() => this.updateBoard());
         this.addTaskManager = new AddTaskManager(() => this.updateBoard());
+        this.searchManager = new BoardSearchManager();
         this.columns = [
             { id: 'up next', title: 'Up Next', cssClass: 'up-next' },
             { id: 'in progress', title: 'In Progress', cssClass: 'in-progress' },
@@ -32,6 +34,7 @@ export class BoardManager {
     init() {
         this.updateBoard();
         this.registerInteractions();
+        this.searchManager.init();
         showBoardWrapper();
     }
 
@@ -46,7 +49,19 @@ export class BoardManager {
     updateBoard() {
         this.renderBoardColumns();
         this.renderAllTasks();
+        this.applyActiveSearchFilter();
         this.initDragLogic();
+    }
+
+    /**
+     * @description Reapplies the current search term after board rerenders so the filter stays active.
+     * @memberof BoardManager
+     */
+    applyActiveSearchFilter() {
+        const searchTerm = this.searchManager.getSearchTerm();
+        if (searchTerm) {
+            this.searchManager.performSearch(searchTerm);
+        }
     }
 
     /**
