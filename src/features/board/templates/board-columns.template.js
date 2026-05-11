@@ -17,7 +17,7 @@ export function renderColumnHtml(data) {
                     <span class="column-count">(${data.taskCount})</span>
                 </h2>
             </div>
-            <div class="board-column__drop-zone js-drop-zone" id="${data.id}"></div>
+            <div class="board-column__drop-zone js-drop-zone" id="${data.id}" data-column-id="${data.id}"></div>
         </section>
     `;
 }
