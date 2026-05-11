@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PULSE CARD STYLING - BASE
+   PULSE CARD BASE 
    ========================================================================== */
 .pulse-card {
   background-color: var(--bg-app-card);
@@ -20,9 +20,10 @@
     box-shadow var(--transition);
 }
 
-.pulse-card:hover {
-  background-color: var(--color-main-hover);
-  transform: translateY(-3px);
+.pulse-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pulse-card .pulse-number {
@@ -40,19 +41,8 @@
   transition: color 0.2s ease;
 }
 
-.pulse-card:hover .pulse-number,
-.pulse-card:hover .pulse-label {
-  color: var(--color-white);
-}
-
-.pulse-stats {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 /* ==========================================================================
-   PULSE CARD STYLING - URGENT 
+   2. PULSE CARD URGENT 
    ========================================================================== */
 .pulse-card--urgent {
   flex-direction: row;
@@ -72,20 +62,20 @@
   align-items: center;
 }
 
+.urgent-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
 .urgent-deadline {
   display: flex;
   flex-direction: column;
 }
 
 .deadline-date {
-  font-size: var(--space-xl);
+  font-size: var(--font-size-2xl);
   line-height: var(--line-height-heading);
-}
-
-.urgent-badge {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
 }
 
 .pulse-divider {
@@ -99,6 +89,132 @@
 .pulse-card--urgent .pulse-label,
 .pulse-card--urgent .deadline-date {
   color: var(--color-white);
+}
+
+/* ==========================================================================
+   PERSONAL WIDGETS GAUGE 
+   ========================================================================== */
+.pulse-card--gauge {
+  gap: var(--space-md);
+}
+
+.pulse-gauge {
+  --progress: 0%;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  background: conic-gradient(var(--color-main) var(--progress), var(--color-lines) 0%);
+  display: grid;
+  place-items: center;
+}
+
+.pulse-gauge__inner {
+  height: 8rem;
+  width: 8rem;
+  border-radius: 50%;
+  background-color: var(--bg-app-sidebar);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  transition: background-color var(--transition);
+}
+
+.pulse-card--gauge .pulse-number {
+  line-height: 1;
+}
+
+/* ==========================================================================
+   PERSONAL WIDGETS BUSY
+   ========================================================================== */
+.pulse-card--busy {
+  align-items: stretch;
+  justify-content: flex-start;
+  text-align: left;
+  gap: var(--space-md);
+}
+
+.busy-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.busy-subline {
+  font-size: var(--font-size-xs);
+}
+
+.busy-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.busy-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-xs) 0;
+  border-top: 1px solid var(--color-lines);
+}
+
+.busy-item:first-child {
+  border-top: 0;
+}
+
+.busy-member {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+.busy-name {
+  font-size: var(--font-size-m);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.busy-count {
+  min-width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background-color: var(--color-main);
+  color: var(--color-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  padding: 0 var(--space-xs);
+}
+
+.busy-empty {
+  margin: 0;
+  font-size: var(--font-size-s);
+}
+
+/* ==========================================================================
+   INTERACTION STATES 
+   ========================================================================== */
+.pulse-card:hover {
+  background-color: var(--color-main-hover);
+  transform: translateY(-3px);
+}
+
+.pulse-card:hover .pulse-number,
+.pulse-card:hover .pulse-label {
+  color: var(--color-white);
+}
+
+.pulse-card--gauge:hover .pulse-gauge__inner {
+  background-color: var(--color-main-hover);
 }
 
 /* ==========================================================================
@@ -119,6 +235,14 @@
     gap: var(--space-lg);
     align-items: center;
     text-align: center;
+  }
+
+  .pulse-card--busy {
+    text-align: center;
+  }
+
+  .busy-member {
+    justify-content: center;
   }
 
   .urgent-info {
