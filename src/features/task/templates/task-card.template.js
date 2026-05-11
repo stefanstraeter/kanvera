@@ -12,7 +12,7 @@ import { formatTaskTypeLabel } from '../task.utils.js';
  */
 export function createTaskCardHtml(task) {
     return `
-        <article class="task-card" draggable="true" id="${task.id}">
+        <article class="task-card" draggable="true" id="${task.id}" data-task-id="${task.id}">
             <div class="task-card__category badge" data-type="${task.taskType}">${formatTaskTypeLabel(task.taskType)}</div>
             <div class="task-card__content">
                 <h3 class="task-card__title">${task.title}</h3>
