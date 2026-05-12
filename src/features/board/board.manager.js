@@ -2,10 +2,13 @@
 import { getTasksByCategory } from '../task/task.service.js';
 import { TaskManager } from '../task/task.manager.js';
 import { AddTaskManager } from '../task/components/add-task.manager.js';
+import { updateTaskCategory } from '../task/task.service.js';
 
 import { initDragAndDrop, attachDragEventToCard } from './dnd.manager.js';
 import { renderSingleTask, showBoardWrapper } from './board.utils.js';
 import { BoardSearchManager } from './board-search.manager.js';
+import { openModal, closeModal } from '../../shared/components/modal.js';
+import { showToast } from '../../shared/utils/ui-helpers.js';
 
 import { renderColumnHtml } from './templates/board.templates.js';
 
@@ -142,10 +145,84 @@ export class BoardManager {
      * @memberof BoardManager
      */
     handleBoardClick(event) {
+        const moveBtn = event.target.closest('.js-mobile-move-task');
+        if (moveBtn) {
+            event.preventDefault();
+            event.stopPropagation();
+            this.openMobileMoveDialog(moveBtn);
+            return;
+        }
+
         const card = event.target.closest('.task-card');
         if (card) {
             this.taskManager.openTaskDetail(card.id);
         }
+    }
+
+    /**
+     * @description Opens a simple status picker modal for mobile task moves.
+     * @param {HTMLElement} moveBtn - The tapped move button on a card.
+     * @memberof BoardManager
+     */
+    openMobileMoveDialog(moveBtn) {
+        const taskId = moveBtn.dataset.taskId;
+        const currentCategory = moveBtn.dataset.taskCategory;
+        if (!taskId || !currentCategory) return;
+
+        const bodyHtml = this.createMoveOptionsHtml(currentCategory);
+        openModal('Move task to', bodyHtml, null);
+        this.bindMoveOptions(taskId, currentCategory);
+    }
+
+    /**
+     * @description Creates modal body HTML with one move button per board column.
+     * @param {string} currentCategory - Current task category.
+     * @return {string}
+     * @memberof BoardManager
+     */
+    createMoveOptionsHtml(currentCategory) {
+        return `
+            <div class="mobile-move-list">
+                ${this.columns.map(col => `
+                    <button
+                        type="button"
+                        class="mobile-move-list__btn js-move-task-option${col.id === currentCategory ? ' is-current' : ''}"
+                        data-category="${col.id}"
+                        ${col.id === currentCategory ? 'disabled' : ''}
+                    >
+                        ${col.title}
+                    </button>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    /**
+     * @description Binds move option buttons and updates task category on selection.
+     * @param {string} taskId - Task ID to move.
+     * @param {string} currentCategory - Current task category.
+     * @memberof BoardManager
+     */
+    bindMoveOptions(taskId, currentCategory) {
+        const optionButtons = document.querySelectorAll('.js-move-task-option');
+
+        optionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetCategory = button.dataset.category;
+                if (!targetCategory || targetCategory === currentCategory) return;
+
+                updateTaskCategory(taskId, targetCategory);
+                closeModal();
+                this.updateBoard();
+
+                const targetTitle = this.columns.find(col => col.id === targetCategory)?.title || 'Updated';
+                showToast(`Moved to ${targetTitle}`);
+
+                if (navigator.vibrate) {
+                    navigator.vibrate(20);
+                }
+            });
+        });
     }
 
     /**
