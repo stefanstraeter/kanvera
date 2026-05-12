@@ -49,7 +49,7 @@ async function init() {
     const isAuthPage = document.getElementById('authFlowStage');
 
     if (isAuthPage) {
-        initSplashScreen();
+        await initSplashScreen();
         initSliderLogic();
         initPasswordToggles();
         initSignInLogic();
