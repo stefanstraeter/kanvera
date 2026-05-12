@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta id="theme-meta" name="theme-color" content="#20212c" />
+    <meta id="theme-meta" name="theme-color" content="#eaeff8" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="assets/favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
@@ -16,14 +16,7 @@
 
     <script>
       (function () {
-        const savedTheme = localStorage.getItem("theme") || "light";
-
-        document.documentElement.setAttribute("data-theme", savedTheme);
-        if (savedTheme === "light") {
-          setTimeout(() => {
-            document.getElementById("theme-meta").setAttribute("content", "#eaeff8");
-          }, 1000);
-        }
+        document.documentElement.setAttribute("data-theme", "light");
       })();
     </script>
 
