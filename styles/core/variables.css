@@ -101,8 +101,8 @@
      LAYOUT & SPACING
      ========================================================================== */
   --sidebar-width: 18.75rem;
-  --header-height: 5rem;
-  --navbar-height-mobile: 5rem;
+  --header-height: 4rem;
+  --navbar-height-mobile: 4rem;
   --action-item-height: 3rem;
   --app-content-margin-bottom: calc(var(--navbar-height-mobile) + var(--space-xl));
 
