@@ -47,7 +47,7 @@
   outline: none;
   min-width: 0;
   font-family: var(--font-primary);
-  font-size: var(--font-size-m);
+  font-size: var(--font-size-s);
   color: var(--color-text-main);
   background: transparent;
   caret-color: var(--color-focus);
@@ -57,14 +57,14 @@
   color: var(--color-text-muted);
   opacity: 1;
   font-family: var(--font-primary);
-  font-size: var(--font-size-m);
+  font-size: var(--font-size-s);
 }
 
 .placeholder-text {
   color: var(--color-text-muted);
   opacity: 1;
   font-family: var(--font-primary);
-  font-size: var(--font-size-m);
+  font-size: var(--font-size-s);
 }
 
 .field-input::-moz-placeholder {
