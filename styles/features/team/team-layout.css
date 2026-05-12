@@ -42,3 +42,8 @@
     padding: 0;
   }
 }
+@media (max-width: 450px) {
+  .team-grid {
+    gap: var(--space-md);
+  }
+}
