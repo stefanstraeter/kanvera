@@ -9,8 +9,8 @@ import { getTaskDataFromModal, generateAvatarsHtml } from '../board/board.utils.
 
 import { openModal, closeModal } from '../../shared/components/modal.js';
 
-import { handleAsyncButtonAction } from '../../shared/utils/ui-helpers.js';
-import { UI_TASK_BUTTON_TEXT } from '../../shared/utils/constants.js';
+import { handleAsyncButtonAction, showToast } from '../../shared/utils/ui-helpers.js';
+import { UI_TASK_BUTTON_TEXT, ACTION_SUCCESS_MESSAGES } from '../../shared/utils/constants.js';
 
 import { createTaskDetailCardHtml, createConfirmDeleteTaskHtml, createAddTaskModalHtml } from './templates/task.template.js';
 
@@ -225,6 +225,7 @@ export class TaskManager {
      */
     processDeletion(taskId) {
         deleteTaskLocally(taskId);
+        showToast(ACTION_SUCCESS_MESSAGES.TASK_DELETED);
         this.notifyUpdate();
     }
 
