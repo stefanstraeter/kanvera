@@ -60,7 +60,9 @@ export async function initSplashScreen() {
 
     if (!elements.splashScreen || !elements.splashScreenLogo || !elements.finalLogo) return;
 
-    elements.finalLogo.src = getTargetLogoSrc();
+    const logoSrc = getTargetLogoSrc();
+    elements.splashScreenLogo.src = logoSrc;
+    elements.finalLogo.src = logoSrc;
 
     await delay(800);
     runExitSequence(elements);
