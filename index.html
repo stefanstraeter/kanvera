@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#eaeff8" />
+    <meta id="theme-meta" name="theme-color" content="#20212c" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="assets/favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
@@ -16,23 +16,14 @@
 
     <script>
       (function () {
-        const colors = window.THEME_COLORS || {
-          light: "#eaeff8",
-          dark: "#20212c",
-        };
-
-        let savedTheme = "light";
-
-        try {
-          savedTheme = localStorage.getItem("theme") || "light";
-        } catch (error) {
-          savedTheme = "light";
-        }
-
-        const themeColor = colors[savedTheme] || colors.light;
+        const savedTheme = localStorage.getItem("theme") || "light";
 
         document.documentElement.setAttribute("data-theme", savedTheme);
-        document.querySelector('meta[name="theme-color"]')?.setAttribute("content", themeColor);
+        if (savedTheme === "light") {
+          setTimeout(() => {
+            document.getElementById("theme-meta").setAttribute("content", "#eaeff8");
+          }, 1000);
+        }
       })();
     </script>
 
