@@ -3,13 +3,13 @@
    ========================================================================== */
 .app-toast {
   position: fixed;
+  text-align: center;
   left: 50%;
   bottom: calc(var(--space-lg) + env(safe-area-inset-bottom, 0px));
   transform: translate(-50%, 1rem);
   opacity: 0;
-  background-color: var(--color-btn-main-bg);
+  background-color: var(----color-btn-main-bg);
   color: var(--color-btn-main-text);
-  border: 1px solid var(--color-btn-main-bg);
   border-radius: var(--radius-pill);
   padding: 0.55rem 0.9rem;
   font-size: var(--font-size-s);
@@ -24,7 +24,7 @@
 }
 
 .app-toast.is-visible {
-  opacity: 0.96;
+  opacity: 1;
   transform: translate(-50%, 0);
 }
 
