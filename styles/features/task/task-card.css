@@ -25,6 +25,16 @@
 }
 
 /* ==========================================================================
+   TASK CARD HEADER
+   ========================================================================== */
+.task-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* ==========================================================================
    TASK CARD CONTENT
    ========================================================================== */
 .task-card__title {
@@ -111,4 +121,70 @@
 .task-card__priority-icon {
   width: 1rem;
   height: auto;
+}
+
+/* ==========================================================================
+   MOBILE MOVE BUTTON
+   ========================================================================== */
+.task-card__move-mobile {
+  display: none;
+  border: none;
+  background-color: transparent;
+  color: var(--color-medium-grey);
+  padding: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+  transition: all var(--transition);
+  flex-shrink: 0;
+}
+
+.task-card__move-mobile:hover {
+  background-color: var(--bg-input);
+  color: var(--color-main);
+}
+
+.task-card__move-mobile:active {
+  transform: scale(0.92);
+}
+
+/* ==========================================================================
+   MOBILE MOVE MODAL
+   ========================================================================== */
+.mobile-move-list {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.mobile-move-list__btn {
+  border: 1px solid var(--color-lines);
+  background-color: var(--bg-app-card);
+  color: var(--color-medium-grey);
+  border-radius: var(--radius-card);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.mobile-move-list__btn.is-current {
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 950px) {
+  .task-card {
+    cursor: default;
+  }
+
+  .task-card:active {
+    cursor: default;
+  }
+
+  .task-card__move-mobile {
+    display: flex;
+  }
 }
