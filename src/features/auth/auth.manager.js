@@ -132,10 +132,7 @@ export function initPasswordToggles() {
 function adjustCardHeight(authFlow, wrapper) {
     if (!wrapper || !authFlow) return;
 
-    const contentHeight = wrapper.offsetHeight;
-    const offset = window.innerWidth < 600 ? 10 : 0;
-
-    authFlow.style.height = `${contentHeight + offset}px`;
+    authFlow.style.height = `${wrapper.getBoundingClientRect().height}px`;
 }
 
 /**
