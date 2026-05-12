@@ -11,8 +11,8 @@ import {
 
 import { openModal, closeModal } from '../../shared/components/modal.js';
 
-import { getInitials, setLoadingStateBtn } from '../../shared/utils/ui-helpers.js';
-import { UI_MEMBER_BUTTON_TEXT } from '../../shared/utils/constants.js';
+import { getInitials, setLoadingStateBtn, showToast } from '../../shared/utils/ui-helpers.js';
+import { UI_MEMBER_BUTTON_TEXT, ACTION_SUCCESS_MESSAGES } from '../../shared/utils/constants.js';
 import { getCurrentUser } from '../../features/auth/auth.service.js';
 
 import { createEditModalHtml, createConfirmDeleteHtml, createAddMemberModalHtml } from './templates/member.template.js';
@@ -134,6 +134,7 @@ export class MemberManager {
      */
     processDeletion(memberId) {
         deleteMemberLocally(memberId);
+        showToast(ACTION_SUCCESS_MESSAGES.MEMBER_DELETED);
         this.notifyUpdate();
     }
 
