@@ -50,6 +50,7 @@ export const createAddTaskModalHtml = (assigneeOptionsHtml) => {
             <div class="field-wrapper">
                 <label class="modal-label u-mb-xs">Task Type</label>
                 ${renderTaskTypeSelector('feature')}
+                 <div class="error-msg"></div>
             </div>
 
             <div class="field-wrapper u-flex">
