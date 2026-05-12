@@ -31,6 +31,7 @@
    ========================================================================== */
 .sidebar__nav {
   flex-grow: 1;
+  padding-top: var(--space-lg);
 }
 
 .sidebar__list {
@@ -115,17 +116,15 @@
   }
 
   .sidebar__nav {
+    padding-top: 0;
     display: flex;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 5rem;
     background-color: var(--bg-app-sidebar);
     z-index: var(--z-fixed);
     pointer-events: auto;
-    border-top: 1px solid var(--color-lines);
-    padding-bottom: env(safe-area-inset-bottom);
   }
 
   .sidebar__list {
