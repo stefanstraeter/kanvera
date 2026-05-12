@@ -88,7 +88,7 @@
   --line-height-body: 1.5;
 
   --font-size-3xl: clamp(2.25rem, 5vw, 2.9rem);
-  --font-size-2xl: clamp(1.75rem, 4vw, 2.5rem);
+  --font-size-2xl: clamp(1.4rem, 4vw, 2.5rem);
   --font-size-xl: clamp(1.25rem, 3vw, 1.75rem);
   --font-size-l: 1.125rem;
   --font-size-m: 1rem;
