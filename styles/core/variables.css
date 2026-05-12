@@ -40,7 +40,6 @@
   --bg-app-header: transparent;
   --bg-app-content: transparent;
   --bg-app-card: var(--color-white);
-  --bg-splash-screen: var(--color-ghost-white);
   --bg-theme-switch: var(--color-white);
   --bg-input: var(--color-white);
 
@@ -169,7 +168,6 @@
   --bg-app-body: var(--color-very-dark-grey);
   --bg-app-sidebar: var(--color-dark-grey);
   --bg-app-card: var(--color-dark-grey);
-  --bg-splash-screen: var(--color-very-dark-grey);
   --bg-theme-switch: var(--color-dark-grey);
   --bg-input: var(--color-dark-grey);
 
