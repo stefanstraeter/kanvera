@@ -144,12 +144,12 @@ export const VALIDATION_ERRORS = {
  */
 export const GREETING_MESSAGES = {
     MORNING: {
-        title: "Start your day",
-        subline: "Ready to tackle your tasks?"
+        title: "Crush your goals",
+        subline: "Let's see the game plan for today!"
     },
     AFTERNOON: {
-        title: "Stay in the flow",
-        subline: "You're making great progress!"
+        title: "Peak Performance",
+        subline: "You're in the zone. Keep that momentum going!"
     },
     EVENING: {
         title: "Finish strong",
