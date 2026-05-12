@@ -13,7 +13,12 @@ import { formatTaskTypeLabel } from '../task.utils.js';
 export function createTaskCardHtml(task) {
     return `
         <article class="task-card" draggable="true" id="${task.id}" data-task-id="${task.id}">
-            <div class="task-card__category badge" data-type="${task.taskType}">${formatTaskTypeLabel(task.taskType)}</div>
+            <div class="task-card__header">
+                <div class="task-card__category badge" data-type="${task.taskType}">${formatTaskTypeLabel(task.taskType)}</div>
+                <button class="task-card__move-mobile js-mobile-move-task" type="button" data-task-id="${task.id}" data-task-category="${task.category}" aria-label="Move task">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                </button>
+            </div>
             <div class="task-card__content">
                 <h3 class="task-card__title">${task.title}</h3>
                 <p class="task-card__description">${task.description}</p>
