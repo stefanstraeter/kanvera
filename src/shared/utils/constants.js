@@ -169,29 +169,25 @@ export const GREETING_MESSAGES = {
  * @description User feedback messages for successful actions, displayed as toast notifications.
  */
 export const ACTION_SUCCESS_MESSAGES = {
-    // Task actions
+
     TASK_CREATED: "Task created successfully",
     TASK_UPDATED: "Task updated",
     TASK_DELETED: "Task deleted",
     TASK_MOVED: "Moved to {category}",
     TASK_MARKED_COMPLETE: "Task marked as complete",
 
-    // Member actions
-    MEMBER_ADDED: "Member added to team",
+    MEMBER_ADDED: "Member added",
     MEMBER_UPDATED: "Member updated",
-    MEMBER_DELETED: "Member removed from team",
+    MEMBER_DELETED: "Member removed",
 
-    // Subtask actions
     SUBTASK_CREATED: "Subtask added",
     SUBTASK_COMPLETED: "Subtask completed",
     SUBTASK_DELETED: "Subtask deleted",
 
-    // Auth actions
     SIGNIN_SUCCESS: "Logged in successfully",
     SIGNUP_SUCCESS: "Account created successfully",
     SIGNOUT_SUCCESS: "Logged out",
 
-    // General actions
     CHANGES_SAVED: "Changes saved",
     COPIED_TO_CLIPBOARD: "Copied to clipboard"
 };
