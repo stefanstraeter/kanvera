@@ -34,7 +34,7 @@
 
 .board-search-input {
   width: 100%;
-  padding: var(--space-sm) var(--space-md);
+  padding: 0 var(--space-md);
   font-size: var(--font-size-m);
   transition:
     border-color 0.2s ease,
