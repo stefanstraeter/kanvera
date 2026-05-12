@@ -52,9 +52,10 @@ export const createTaskDetailCardHtml = (task, assigneeHtml) => {
                     ${renderSubtaskSection(task.subtasks, task.id)}
                 </div>
             </div>
-
-            ${renderAssigneeSelector(assigneeHtml)}
-
+            
+            <div>
+              ${renderAssigneeSelector(assigneeHtml)}
+            </div>
         </div>
 
         <div class="modal__actions">

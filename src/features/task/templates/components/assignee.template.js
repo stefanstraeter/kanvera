@@ -31,7 +31,7 @@ export function renderAssigneeSelector(assigneeHtml = '', isFormStyle = false) {
            </div>`;
 
     return `
-        <label class="${labelClass}">Assignees</label>
+        <label class="${labelClass} u-mb-xs">Assignees</label>
         ${triggerHtml}
     `;
 }
