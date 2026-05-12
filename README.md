@@ -10,9 +10,7 @@ Plan, organize, and execute work across Board, Inbox, Team, and Pulse views with
 
 ## Preview
 
-> Add your app screenshot or GIF here (recommended: board + mobile modal flow)
->
-> Example path: `assets/img/kanvera-preview.gif`
+![Kanvera Preview](assets/img/kanvera-preview.gif)
 
 ---
 
