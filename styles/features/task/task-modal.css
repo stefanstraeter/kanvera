@@ -21,16 +21,33 @@
   DATE PICKER
   ========================================================================== */
 .task-detail__date-input::-webkit-calendar-picker-indicator {
-  background: transparent;
-  bottom: 0;
-  color: transparent;
+  color: var(--color-text-muted);
   cursor: pointer;
-  height: auto;
-  left: 0;
+  height: 1.1rem;
+  width: 1.1rem;
+  opacity: 0.9;
   position: absolute;
-  right: 0;
-  top: 0;
-  width: auto;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.task-detail__date-input::-webkit-date-and-time-value {
+  text-align: left;
+}
+
+.task-detail__date-input::-webkit-datetime-edit {
+  padding: 0;
+}
+
+.task-detail__date-input::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+.task-detail__date-input::-webkit-clear-button,
+.task-detail__date-input::-webkit-inner-spin-button {
+  display: none;
 }
 
 .task-detail__date-input {
@@ -38,12 +55,24 @@
   cursor: pointer;
   width: 100%;
   min-height: 2.5rem;
+  padding-right: 2.2rem;
   font-size: var(--font-size-m);
+  line-height: 1.2;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .task-detail__date-input:focus {
   outline: none;
   border-color: var(--color-main);
+}
+
+/* Keep native picker behavior on iOS while improving alignment */
+@supports (-webkit-touch-callout: none) {
+  .task-detail__date-input {
+    min-height: 2.6rem;
+    font-size: 16px;
+  }
 }
 
 /* ==========================================================================
