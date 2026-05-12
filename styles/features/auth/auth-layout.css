@@ -4,8 +4,9 @@
 .auth-viewport {
   min-height: 100dvh;
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: var(--space-md);
+  padding: calc(var(--header-height) + var(--space-md)) var(--space-md) var(--space-md);
   overflow-y: auto;
 }
 
@@ -29,6 +30,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: calc(100dvh - var(--header-height) - (var(--space-md) * 2));
 }
 
 /* ==========================================================================
@@ -87,6 +89,10 @@
    ========================================================================== */
 
 @media (max-width: 768px) {
+  .auth-viewport {
+    align-items: flex-start;
+  }
+
   .auth-header {
     padding: 0 var(--space-md);
   }
