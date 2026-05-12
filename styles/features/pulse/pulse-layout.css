@@ -13,7 +13,7 @@
 }
 
 .pulse-header {
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-lg);
 }
 
 .pulse-content {
@@ -36,8 +36,8 @@
    ========================================================================== */
 .pulse-row {
   display: grid;
-  gap: var(--space-2xl);
-  margin-bottom: var(--space-2xl);
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xl);
 }
 
 .pulse-row--main {
@@ -73,6 +73,11 @@
 }
 
 @media (max-width: 450px) {
+  .pulse-row {
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
   .pulse-row--stats {
     display: flex;
     flex-direction: column;
