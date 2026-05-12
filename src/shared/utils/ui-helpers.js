@@ -82,3 +82,43 @@ export function calculateProgressPercent(done, total) {
     if (!total || total <= 0) return 0;
     return (done / total) * 100;
 }
+
+/* ==========================================================================
+   TOAST FEEDBACK
+   ========================================================================== */
+
+/**
+ * @description Shows a temporary toast message and removes it automatically.
+ * @export
+ * @param {string} message - Message to show.
+ * @param {Object} [options={}] - Optional toast settings.
+ * @param {number} [options.duration=1800] - Auto close time in milliseconds.
+ * @param {string} [options.type='success'] - Visual style modifier (success|info|warning).
+ * @return {void}
+ */
+export function showToast(message, options = {}) {
+    if (!message) return;
+
+    const { duration = 1800, type = 'success' } = options;
+    const existingToast = document.querySelector('.app-toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `app-toast app-toast--${type}`;
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.textContent = message;
+
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => {
+        toast.classList.add('is-visible');
+    });
+
+    window.setTimeout(() => {
+        toast.classList.remove('is-visible');
+        window.setTimeout(() => toast.remove(), 220);
+    }, duration);
+}
