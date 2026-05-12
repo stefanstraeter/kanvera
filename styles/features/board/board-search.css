@@ -24,10 +24,12 @@
   transform-origin: left;
   transition: transform 0.22s ease;
   pointer-events: none;
+  margin-left: var(--space-sm);
 }
 
 .search-input-wrapper:focus-within::after {
   transform: scaleX(1);
+  margin-left: var(--space-sm);
 }
 
 .board-search-input {
