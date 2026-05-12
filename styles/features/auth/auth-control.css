@@ -46,14 +46,13 @@
 .auth-flow__form {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
 }
 
 .auth-flow__actions {
   display: flex;
   justify-content: center;
   gap: var(--space-lg);
-  margin-top: var(--space-xs);
+  margin-top: var(--space-md);
 }
 
 /* ==========================================================================
