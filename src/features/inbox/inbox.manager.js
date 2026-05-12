@@ -1,16 +1,16 @@
 import { AddTaskManager } from '../task/components/add-task.manager.js';
-import { getMyDeskTasks, createMyDeskTaskCardHtml } from './my-desk.service.js';
+import { getInboxTasks, createInboxTaskCardHtml } from './inbox.service.js';
 
 /* ==========================================================================
-   MY DESK MANAGER
+   INBOX MANAGER
    ========================================================================== */
 
 /**
- * @description Manages UI interactions and rendering flow for the My Desk page.
+ * @description Manages UI interactions and rendering flow for the Inbox page.
  * @export
- * @class MyDeskManager
+ * @class InboxManager
  */
-export class MyDeskManager {
+export class InboxManager {
     /* ==========================================================================
        INITIALIZATION
        ========================================================================== */
@@ -39,7 +39,7 @@ export class MyDeskManager {
      * @return {void}
      */
     showWrapper() {
-        const wrapper = document.querySelector('.my-desk-wrapper');
+        const wrapper = document.querySelector('.inbox-wrapper');
         if (wrapper) {
             wrapper.classList.add('is-visible');
         }
@@ -54,7 +54,7 @@ export class MyDeskManager {
      * @return {void}
      */
     bindFilterButtons() {
-        const buttons = document.querySelectorAll('.my-desk-filter__btn');
+        const buttons = document.querySelectorAll('.inbox-filter__btn');
 
         buttons.forEach(button => {
             button.addEventListener('click', () => {
@@ -70,7 +70,7 @@ export class MyDeskManager {
      * @return {void}
      */
     bindCreateButtons() {
-        const emptyStateBtn = document.querySelector('.js-my-desk-add-task');
+        const emptyStateBtn = document.querySelector('.js-inbox-add-task');
         const headerBtn = document.getElementById('js-header-action');
 
         emptyStateBtn?.addEventListener('click', () => this.addTaskManager.init());
@@ -100,11 +100,11 @@ export class MyDeskManager {
      * @return {void}
      */
     render() {
-        const list = document.getElementById('js-my-desk-list');
-        const emptyState = document.getElementById('js-my-desk-empty');
+        const list = document.getElementById('js-inbox-list');
+        const emptyState = document.getElementById('js-inbox-empty');
         if (!list || !emptyState) return;
 
-        const tasks = getMyDeskTasks(this.activeStatus);
+        const tasks = getInboxTasks(this.activeStatus);
 
         if (!tasks.length) {
             list.innerHTML = '';
@@ -113,6 +113,6 @@ export class MyDeskManager {
         }
 
         emptyState.classList.add('is-hidden');
-        list.innerHTML = tasks.map(task => createMyDeskTaskCardHtml(task)).join('');
+        list.innerHTML = tasks.map(task => createInboxTaskCardHtml(task)).join('');
     }
 }

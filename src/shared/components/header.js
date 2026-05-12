@@ -70,8 +70,8 @@ export class Header {
             titleElement.textContent = 'Daily Standup';
         } else if (path.includes('team')) {
             titleElement.textContent = 'The Collective';
-        } else if (path.includes('my-desk')) {
-            titleElement.textContent = 'My Desk';
+        } else if (path.includes('inbox')) {
+            titleElement.textContent = 'Inbox';
         } else if (path.includes('board')) {
             titleElement.textContent = 'Development Sprint';
         } else if (path.includes('legal')) {
@@ -105,7 +105,7 @@ export class Header {
         } else if (path.includes('board')) {
             actionText.textContent = 'Add Task';
             actionBtn.classList.add('js-header-add-task');
-        } else if (path.includes('my-desk')) {
+        } else if (path.includes('inbox')) {
             actionBtn.style.display = 'none';
         } else {
             actionBtn.style.display = 'none';

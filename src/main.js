@@ -13,7 +13,7 @@ import { initSignInLogic } from './features/auth/sign-in.js';
 import { PulseManager } from './features/pulse/pulse.manager.js';
 import { TeamManager } from './features/team/team.manager.js';
 import { BoardManager } from './features/board/board.manager.js';
-import { MyDeskManager } from './features/my-desk/my-desk.manager.js';
+import { InboxManager } from './features/inbox/inbox.manager.js';
 
 /* ==========================================================================
    ROUTE GUARD
@@ -79,9 +79,9 @@ async function init() {
         boardManager.init();
     }
 
-    if (document.getElementById('js-my-desk-list')) {
-        const myDeskManager = new MyDeskManager();
-        myDeskManager.init();
+    if (document.getElementById('js-inbox-list')) {
+        const inboxManager = new InboxManager();
+        inboxManager.init();
     }
 }
 

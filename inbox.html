@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="assets/favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
 
-    <title>My Desk</title>
+    <title>Inbox</title>
 
     <link rel="stylesheet" href="./styles/main.css" />
 
@@ -28,23 +28,22 @@
     <aside class="l-sidebar" id="js-sidebar-anchor"></aside>
     <header class="l-header" id="js-header-anchor"></header>
     <main class="l-content" id="js-content-anchor">
-      <div class="my-desk-wrapper l-content-spacer">
-        <header class="my-desk-header">
-          <h1 class="heading-l">Assigned to Me</h1>
-          <p class="color-medium-grey">A snapshot of your current work</p>
+      <div class="inbox-wrapper l-content-spacer">
+        <header class="inbox-header">
+          <h1 class="heading-l">Stay on top of your incoming work</h1>
         </header>
 
-        <section class="my-desk-filter" aria-label="Task status filter">
-          <button class="my-desk-filter__btn is-active" data-status="all" type="button">All</button>
-          <button class="my-desk-filter__btn" data-status="up next" type="button">Up Next</button>
-          <button class="my-desk-filter__btn" data-status="in progress" type="button">In Progress</button>
-          <button class="my-desk-filter__btn" data-status="review" type="button">Review</button>
-          <button class="my-desk-filter__btn" data-status="done" type="button">Done</button>
+        <section class="inbox-filter" aria-label="Task status filter">
+          <button class="inbox-filter__btn is-active" data-status="all" type="button">All</button>
+          <button class="inbox-filter__btn" data-status="up next" type="button">Up Next</button>
+          <button class="inbox-filter__btn" data-status="in progress" type="button">In Progress</button>
+          <button class="inbox-filter__btn" data-status="review" type="button">Review</button>
+          <button class="inbox-filter__btn" data-status="done" type="button">Done</button>
         </section>
 
-        <section class="my-desk-list" id="js-my-desk-list" aria-live="polite"></section>
+        <section class="inbox-list" id="js-inbox-list" aria-live="polite"></section>
 
-        <section class="my-desk-empty is-hidden" id="js-my-desk-empty">
+        <section class="inbox-empty is-hidden" id="js-inbox-empty">
           <p class="color-medium-grey">All caught up!</p>
         </section>
       </div>

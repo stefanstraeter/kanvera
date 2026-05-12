@@ -7,12 +7,12 @@ import { getCurrentUser } from '../auth/auth.service.js';
    ========================================================================== */
 
 /**
- * @description Returns desk tasks for the current user filtered by status and sorted by due date.
+ * @description Returns inbox tasks for the current user filtered by status and sorted by due date.
  * @export
  * @param {string} activeStatus - Selected filter value.
  * @return {Array} Filtered task list.
  */
-export function getMyDeskTasks(activeStatus) {
+export function getInboxTasks(activeStatus) {
     const user = getCurrentUser();
     const userId = user?.id || 'guest-id';
 
@@ -33,12 +33,12 @@ export function getMyDeskTasks(activeStatus) {
 }
 
 /**
- * @description Creates the My Desk task card markup for one task.
+ * @description Creates the Inbox task card markup for one task.
  * @export
  * @param {Object} task - Task item.
  * @return {string} HTML string.
  */
-export function createMyDeskTaskCardHtml(task) {
+export function createInboxTaskCardHtml(task) {
     const dueLabel = formatDate(task.dueDate);
     const taskType = task.taskType || 'feature';
     const statusClass = getStatusDotClass(task.category);
@@ -46,19 +46,19 @@ export function createMyDeskTaskCardHtml(task) {
     const priority = task.priority || 'medium';
 
     return `
-        <article class="task-card my-task-card">
-            <div class="my-task-card__top">
-                <span class="task-card__category my-task-card__type" data-type="${taskType}">${formatTaskType(taskType)}</span>
-                <div class="my-task-card__priority">
+        <article class="task-card inbox-task-card">
+            <div class="inbox-task-card__top">
+                <span class="task-card__category inbox-task-card__type" data-type="${taskType}">${formatTaskType(taskType)}</span>
+                <div class="inbox-task-card__priority">
                     <img src="assets/icons/priority/${priority}.svg" alt="${priority}" class="task-card__priority-icon">
                 </div>
             </div>
-            <h3 class="my-task-card__title">${task.title}</h3>
-            <p class="my-task-card__description">${task.description || 'No description yet.'}</p>
-            <div class="my-task-card__meta">
-                <span class="my-task-card__status"><span class="status-dot ${statusClass}"></span>${statusLabel}</span>
-                <span class="my-task-card__due">Due: ${dueLabel}</span>
-                <a href="board.html" class="my-task-card__link">Open in Board</a>
+            <h3 class="inbox-task-card__title">${task.title}</h3>
+            <p class="inbox-task-card__description">${task.description || 'No description yet.'}</p>
+            <div class="inbox-task-card__meta">
+                <span class="inbox-task-card__status"><span class="status-dot ${statusClass}"></span>${statusLabel}</span>
+                <span class="inbox-task-card__due">Due: ${dueLabel}</span>
+                <a href="board.html" class="inbox-task-card__link">Open in Board</a>
             </div>
         </article>
     `;
