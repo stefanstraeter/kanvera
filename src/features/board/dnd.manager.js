@@ -3,6 +3,8 @@ import { updateTaskCategory } from '../task/task.service.js';
 
 let currentDraggedId = null;
 
+const isTouchDevice = () => window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+
 /* ==========================================================================
    INITIALIZATION
    ========================================================================== */
@@ -79,6 +81,11 @@ async function onDrop(event, element, newCategory, onUpdate) {
  * @param {HTMLElement} cardElement - The task card element.
  */
 export function attachDragEventToCard(cardElement) {
+    if (isTouchDevice()) {
+        cardElement.setAttribute('draggable', 'false');
+        return;
+    }
+
     cardElement.addEventListener('dragstart', () => {
         currentDraggedId = cardElement.id;
         cardElement.classList.add('task-card--dragging');
