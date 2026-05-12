@@ -161,11 +161,13 @@
 
 .mobile-move-list__btn {
   border: 1px solid var(--color-lines);
-  background-color: var(--bg-app-card);
-  color: var(--color-medium-grey);
   border-radius: var(--radius-card);
   padding: 0.75rem;
-  text-align: left;
+  color: var(--color-medium-grey);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-s);
+  font-size: var(--font-size-xs);
 }
 
 .mobile-move-list__btn.is-current {
