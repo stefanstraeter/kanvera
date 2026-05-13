@@ -25,12 +25,15 @@ import { InboxManager } from './features/inbox/inbox.manager.js';
 function guardRoute() {
     const isAuthPage = document.getElementById('authFlowStage');
     const isStaticPage = document.body.dataset.page === 'static';
-    if (isAuthPage || isStaticPage) return;
+    if (isAuthPage || isStaticPage) return false;
 
     const user = getCurrentUser();
     if (!user) {
         window.location.replace('index.html');
+        return true;
     }
+
+    return false;
 }
 
 /* ==========================================================================
@@ -42,7 +45,8 @@ function guardRoute() {
  * @return {Promise<void>} A promise that resolves when initialization is complete.
  */
 async function init() {
-    guardRoute();
+    const didRedirect = guardRoute();
+    if (didRedirect) return;
 
     initThemeListeners();
 

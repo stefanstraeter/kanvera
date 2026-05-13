@@ -53,9 +53,12 @@ export async function refreshAllData() {
         fetchData("users")
     ]);
 
-    state.tasks = tasks || {};
-    state.team = team || {};
-    state.users = users || {};
+    const hasAnyResponse = tasks !== null || team !== null || users !== null;
+    if (!hasAnyResponse) return;
+
+    state.tasks = tasks ?? state.tasks ?? {};
+    state.team = team ?? state.team ?? {};
+    state.users = users ?? state.users ?? {};
 
     saveToCache();
 }
