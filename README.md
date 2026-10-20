@@ -1,155 +1,125 @@
+<div align="center">
+
 # KANVERA
 
-A modern productivity workspace built with Vanilla JavaScript, modular architecture, and multi-page UI flows.
+**Plan, organize and execute work in one place: Board, Inbox, Team and Pulse.**
 
-Plan, organize, and execute work across Board, Inbox, Team, and Pulse views with responsive interactions and clean component structure.
+Vanilla JavaScript · ES6 Modules · Firebase Realtime Database · CSS
 
-🔗 **Live Demo:** https://stefanstraeter.github.io/kanvera/
+[Live demo](https://stefanstraeter.github.io/kanvera/) · [Report a bug](https://github.com/stefanstraeter/kanvera/issues)
 
----
+<br />
 
-## Preview
+![Kanvera mockup](assets/readme/mock-up.jpg)
 
-![Kanvera Preview](assets/img/kanvera-preview.gif)
-
----
-
-## Features
-
-- Kanban-style board with drag-and-drop task management (desktop)
-- Mobile-friendly task moving via modal action sheet (touch devices)
-- Task detail modal with inline editing, subtasks, assignees, and priority controls
-- Dedicated Inbox page for personal assigned tasks with filtering
-- Pulse dashboard with overview metrics and time-based greetings
-- Team management with member add/edit/delete flows
-- Auth flow with sign-in, sign-up, guest access, and route guarding
-- Light/Dark theme switching with persistent preference
-- Toast feedback system and tactile mobile feedback (`navigator.vibrate`)
-- Resilient storage layer for environments with blocked Web Storage
+</div>
 
 ---
 
-## Purpose
+## About
 
-This project was developed as part of a frontend training program at the Developer Akademie.
+Kanvera is a project management app built without a framework. Tasks move across a Kanban board, personal work lands in the Inbox, the team is managed in one directory and Pulse shows how the day is going.
 
-It demonstrates how to build a scalable project management application from scratch using only Vanilla JavaScript and modular ES6 architecture.
-
-Focus areas include:
-
-- modular feature architecture (manager/service/template separation)
-- reusable shared components and utility layers
-- robust state handling with cache and fallback strategies
-- responsive UX patterns for desktop and mobile interactions
+It started as a training project at the Developer Akademie and shows how far plain JavaScript gets you with a clean modular structure: feature folders, a central state and shared components.
 
 ---
 
-## Getting Started
+## Highlights
 
-Clone the repository:
+- **Kanban board** – Drag and drop on desktop, a modal action sheet to move tasks on touch devices.
+- **Task details** – Inline editing, subtasks, assignees and priority controls in one modal.
+- **Personal Inbox** – A filterable list of the tasks assigned to you.
+- **Pulse dashboard** – Overview metrics and a time-based greeting.
+- **Team management** – Add, edit and delete members.
+- **Auth flow** – Sign in, sign up, guest access and route guarding.
+- **Light and dark theme** – Token-based colors, the preference is remembered.
+- **Tactile feedback** – Toasts everywhere, `navigator.vibrate` on mobile.
+- **Resilient storage** – Works even where Web Storage is blocked, for example Safari Private Mode.
 
-```bash
-git clone https://github.com/stefanstraeter/kanvera.git
-cd kanvera
-```
-
-Run the project with a local development server (for example VS Code Live Server).
-
-Open `index.html` to start the auth flow.
+![Kanvera in action](assets/readme/kanvera-preview.gif)
 
 ---
 
 ## Tech Stack
 
-- HTML5
-- CSS3 (modular architecture + theme variables)
-- Vanilla JavaScript (ES6 Modules)
-- Firebase Realtime Database (data backend)
-- Web Storage APIs (session/local storage with safe fallbacks)
+- **Vanilla JavaScript** with ES6 Modules
+- **HTML5** with shared fragments in `templates/`
+- **CSS3** with a layered structure and theme variables
+- **Firebase Realtime Database** as the data backend
+- **Web Storage APIs** with safe fallbacks
 
 ---
 
-## Project Structure
+## Getting Started
+
+```bash
+git clone https://github.com/stefanstraeter/kanvera.git && cd kanvera
+# serve the folder with any local server, e.g. VS Code Live Server
+# then open index.html to start the auth flow
+```
+
+There is no build step and no dependency to install.
+
+<details>
+<summary><strong>Main views</strong></summary>
+
+<br />
+
+| Page         | View                                               |
+| ------------ | -------------------------------------------------- |
+| `board.html` | Task pipeline: Up Next, In Progress, Review, Done  |
+| `inbox.html` | Personal task list focused on assigned work        |
+| `team.html`  | Member directory and profile management            |
+| `pulse.html` | KPI-style overview and daily momentum              |
+| `index.html` | Entry point with sign in, sign up and guest access |
+
+</details>
+
+<details>
+<summary><strong>Project structure</strong></summary>
+
+<br />
 
 ```text
 src/
-  core/
-    firebase.config.js
-    state.js
-  features/
-    auth/
-    board/
-    inbox/
-    member/
-    pulse/
-    task/
-    team/
-  shared/
-    components/
-    utils/
-styles/
-  core/
-  features/
-  shared/
-templates/
+├── core/                 # State initialization, Firebase access, global data flow
+├── features/             # One folder per domain
+│   ├── auth/
+│   ├── board/
+│   ├── inbox/
+│   ├── member/
+│   ├── pulse/
+│   ├── task/
+│   └── team/
+└── shared/
+    ├── components/       # Header, Navbar, Modal
+    └── utils/            # Theme, validation, UI helpers, constants
+styles/                   # Layered CSS: core, features, shared
+templates/                # Static HTML fragments for layout composition
 ```
 
-- **src/core** – State initialization, backend connectivity, global data flow
-- **src/features** – Domain-specific modules (auth, board, task, team, inbox, pulse)
-- **src/shared/components** – Shared UI components (header, navbar, modal)
-- **src/shared/utils** – Shared helpers (theme, validation, UI utilities, constants)
-- **styles/** – Layered CSS architecture by core, feature, and shared concerns
-- **templates/** – Shared static HTML fragments for layout composition
+Every feature is split into focused files (`*.manager.js`, `*.service.js`, `*.template.js`) with clear responsibilities. A single app entry initializes only the managers the active page needs.
+
+</details>
 
 ---
 
-## Architecture Highlights
+## Under the hood
 
-- **Feature-Driven ES6 Modules**  
-  Every domain is split into focused files (`*.manager.js`, `*.service.js`, `*.template.js`) for clear responsibilities.
-
-- **Route-Aware Bootstrapping**  
-  A single app entry initializes only the managers required for the active page.
-
-- **State + Cache Strategy**  
-  Centralized in-memory state with synchronized session cache and change notifications.
-
-- **Cross-Device Interaction Design**  
-  Desktop uses drag-and-drop, while mobile uses tap-first modal movement for better usability.
+- **Multi-page, shared logic** – Header, sidebar, theme and auth guard are shared across standalone HTML pages.
+- **State and cache** – A central in-memory state with a synchronized session cache and change notifications.
+- **Two ways to move a task** – Drag and drop on desktop, tap-first modal on mobile, because native touch drag is unreliable.
+- **Storage that never breaks the app** – Safe fallbacks for restricted browser environments.
+- **One design language** – A token-based color system across pages, components and feedback.
 
 ---
 
-## Technical Challenges
+## Good to know
 
-### Multi-Page App With Shared Logic
-
-Coordinating common UI systems (header, sidebar, theme, auth guard) across several standalone HTML pages.
-
-### Mobile-Friendly Board Interactions
-
-Replacing native touch drag limitations with a robust modal-based move flow while preserving desktop DnD.
-
-### Storage Reliability Across Browsers
-
-Handling Safari Private Mode and restricted storage environments without breaking app behavior.
-
-### Theming and Visual Consistency
-
-Applying a unified token-based color system across pages, components, and dynamic UI feedback.
-
----
-
-## Main Views
-
-- **Board** – Task pipeline with categories: Up Next, In Progress, Review, Done
-- **Inbox** – Personal task list focused on assigned work
-- **Team** – Member directory and profile management
-- **Pulse** – KPI-style overview and daily momentum dashboard
+This is a demo. The Firebase database is open and the sign-in is not a real security layer. Do not use it as is for sensitive data.
 
 ---
 
 ## Author
 
-**Stefan Straeter**
-
-GitHub: https://github.com/stefanstraeter/
+**Stefan Sträter** · [github.com/stefanstraeter](https://github.com/stefanstraeter/)
