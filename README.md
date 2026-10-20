@@ -10,7 +10,7 @@ Vanilla JavaScript · ES6 Modules · Firebase Realtime Database · CSS
 
 <br />
 
-![Kanvera mockup](assets/readme/mock-up.jpg)
+![Kanvera mockup](assets/readme/kanvera-mock-up.png)
 
 </div>
 
